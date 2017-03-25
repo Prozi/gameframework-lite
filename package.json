@@ -1,0 +1,15 @@
+{
+  "name": "gameframework",
+  "version": "1.0.0",
+  "description": "game framework for 2d games and physics",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test"
+  },
+  "author": "Jacek Pietal <prozi85@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "fmath": "^1.0.1",
+    "pixi.js": "^4.4.3"
+  }
+}
