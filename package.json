@@ -19,5 +19,9 @@
     "md5": "^2.2.1",
     "pixi.js": "^4.4.3",
     "webpack": "^2.3.2"
+  },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/Prozi/gameframework.git"
   }
 }
