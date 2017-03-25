@@ -1,6 +1,6 @@
 {
   "name": "gameframework",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "game framework for 2d games and physics",
   "main": "index.js",
   "scripts": {
@@ -21,7 +21,7 @@
     "webpack": "^2.3.2"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/Prozi/gameframework.git"
+    "type": "git",
+    "url": "https://github.com/Prozi/gameframework.git"
   }
 }
