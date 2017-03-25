@@ -1,5 +1,6 @@
 'use strict';
 
+const md5 = require('md5');
 const FMath = require('fmath');
 const fmath = new FMath();
 
@@ -18,6 +19,9 @@ class Game {
 	}
 	loop () {
 		DEFER(this.tick.bind(this));
+		if (this.postMessage) {
+			DEFER(this.postMessage.bind(this));
+		}
 		setTimeout(this.loop.bind(this), this.interval);	
 	}
 	tick () {
@@ -61,6 +65,15 @@ class Level {
 			DEFER(hero.tick.bind(hero, { level: this, delta }));
 		})
 	}
+	toArray () {
+		return [
+			this.heros.map((hero) => hero.toArray());
+		]
+	}
+	fromArray (array = []) {
+		const heros = array[0];
+		heros.forEach(())
+	}
 }
 
 class Hero {
@@ -75,6 +88,25 @@ class Hero {
 		}, props);
 		// for drawing
 		this.sprite = null;
+		this.id = randomId();
+	}
+	toArray () {
+		return [
+			this.id,
+			this.body.x,
+			this.body.y,
+			this.body.atan2
+		];
+	}
+	fromArray (array = [], force = false) {
+		if (force) {
+			this.id = array[0];
+		}
+		if (force || (this.id === array[0])) {
+			this.body.x = array[1];
+			this.body.y = array[2];
+			this.body.atan2 = array[3];
+		}
 	}
 	tick ({ level, delta }) {
 		if (this.body.speed) {
@@ -115,6 +147,10 @@ function atan2 (y, x) {
 			return -HALF_PI;
 		}
 	}
+}
+
+function randomId () {
+	return md5(Math.random()).slice(0, 7);
 }
 
 if (typeof module !== 'undefined') {	
