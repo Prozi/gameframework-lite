@@ -26,8 +26,16 @@ console.log('test Level()');
 const level = new Level({ heros, blocks });
 game.levels.push(level);
 
-game.postMessage = function () {
+game.onUpdate = function () {
 	postMessage(level.toArray());
+	level.eachHero((hero) => {
+		if (Math.random() < 0.1) {
+			hero.goto({
+				x: (Math.random() - 0.5) * 1024,
+				y: (Math.random() - 0.5) * 1024,
+			});
+		}
+	});
 }
 
 game.loop();

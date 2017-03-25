@@ -16,15 +16,15 @@ const HERO_Y = 2;
 const HERO_ATAN2 = 3;
 
 class Game {
-	constructor (interval) {
+	constructor (interval = 10) {
 		this.levels = [];
-		this.interval = 100;
+		this.interval = interval;
 		this.now = NOW();
 	}
 	loop () {
 		DEFER(this.tick.bind(this));
-		if (this.postMessage) {
-			DEFER(this.postMessage.bind(this));
+		if (this.onUpdate) {
+			DEFER(this.onUpdate.bind(this));
 		}
 		setTimeout(this.loop.bind(this), this.interval);	
 	}
@@ -58,6 +58,9 @@ class Level {
 		this.blocks = props.blocks || {};
 	}
 	isFreeCell (x, y) {
+		// todo this is just for tests
+		return true;
+		// todo this is ok
 		const block = this.blocks[`${x}:${y}`];
 		if (block) {
 			return !block.body.blocked;
@@ -80,21 +83,26 @@ class Level {
 		return array;
 	}
 	fromArray (array = []) {
-		array[0].map((heroArray) => heroArray[HERO_ID]).forEach((upstreamId) => {
-			if (!this.heros[upstreamId]) {
-				// todo clean sprites
-				// todo clean emitters
+		this.eachHero((hero) => {
+			if (!array[0].find((heroArray) => heroArray.id === hero.id)) {
+				if (this.onRemoveHero) {
+					this.onRemoveHero(hero);
+				}
+				delete this.heros[hero.id];
 			}
 		});
 		array[0].forEach((heroArray) => {
 			const id = heroArray[HERO_ID];
 			if (this.heros[id]) {
 				this.heros[id].fromArray(heroArray);
+				if (this.onUpdateHero) {
+					this.onUpdateHero(this.heros[id]);
+				}
 			} else {
 				this.heros[id] = new Hero({}, id);
 				this.heros[id].fromArray(heroArray);
 				if (this.onCreateHero) {
-					this.onCreateHero(this.heros[id].body);
+					this.onCreateHero(this.heros[id]);
 				}
 			}
 		});
@@ -142,13 +150,13 @@ class Hero {
 				this.body.x = x;
 				this.body.y = y;
 			} else {
-				this.speed = 0;
+				this.body.speed = 0;
 			}
 		}
 	}
 	goto ({ x, y }) {
 		this.body.atan2 = atan2(y, x);
-		this.body.speed = 1;
+		this.body.speed = 100;
 	}
 }
 

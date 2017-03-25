@@ -14,24 +14,34 @@ class View {
 			resolution: Math.ceil(this.scale)
 		});
 		this.camera = new PIXI.Container();
-		this.pixi.stage.addChild(this.camera);
-		document.body.appendChild(this.pixi.view);
-
-		this.level = new Level();
-		this.level.onCreateHero = this.onCreateHero.bind(this);
 		this.cameraLookAt = {
 			x: window.innerWidth / 2,
 			y: window.innerHeight / 2
 		};
-
+		this.pixi.stage.addChild(this.camera);
+		this.level = new Level();
+		this.level.onUpdateHero = this.onUpdateHero.bind(this);
+		this.level.onCreateHero = this.onCreateHero.bind(this);
+		this.level.onRemoveHero = this.onRemoveHero.bind(this);
+		document.body.appendChild(this.pixi.view);
 		window.addEventListener('resize', this.onResize.bind(this), true);
+		this.pixi.start();
+	}
+	onUpdateHero (hero) {
+		hero.sprite.x = hero.x;
+		hero.sprite.y = hero.y;
 	}
 	onCreateHero (hero) {
 		hero.sprite = PIXI.Sprite.fromImage('bunny.png');
 		hero.sprite.anchor.set(0.5);
-		hero.sprite.x = hero.x;
-		hero.sprite.y = hero.y;
+		hero.sprite.x = hero.body.x;
+		hero.sprite.y = hero.body.y;
 		this.camera.addChild(hero.sprite);
+	}
+	onRemoveHero (hero) {
+		if (hero.sprite && hero.sprite.parent) {
+			hero.sprite.parent.removeChild(hero.sprite);
+		}
 	}
 	onResize (event) {
 		this.scale = this.getScale();
