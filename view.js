@@ -1,6 +1,7 @@
 'use strict';
 
 const PIXI = require('pixi.js');
+const Level = require('.').Level;
 
 class View {
 	constructor (screenSize = 480) {
@@ -13,19 +14,28 @@ class View {
 			resolution: Math.ceil(this.scale)
 		});
 		this.camera = new PIXI.Container();
+		this.pixi.stage.addChild(this.camera);
+		document.body.appendChild(this.pixi.view);
+
+		this.level = new Level();
+		this.level.onCreateHero = this.onCreateHero.bind(this);
 		this.cameraLookAt = {
 			x: window.innerWidth / 2,
 			y: window.innerHeight / 2
 		};
-		this.pixi.stage.addChild(this.camera);
-		document.body.appendChild(this.pixi.view);
+
 		window.addEventListener('resize', this.onResize.bind(this), true);
+	}
+	onCreateHero (hero) {
+		hero.sprite = PIXI.Sprite.fromImage('bunny.png');
+		hero.sprite.anchor.set(0.5);
+		hero.sprite.x = hero.x;
+		hero.sprite.y = hero.y;
+		this.camera.addChild(hero.sprite);
 	}
 	onResize (event) {
 		this.scale = this.getScale();
 		this.pixi.renderer.resize(window.innerWidth, window.innerHeight);
-		this.camera.x = this.pixi.renderer.width / 2 - this.cameraLookAt.x;
-		this.camera.y = this.pixi.renderer.height / 2 - this.cameraLookAt.x;
 	}
 	getScale () {
 	    return +(Math.sqrt(window.innerWidth * window.innerHeight) / this.screenSize).toFixed(2);

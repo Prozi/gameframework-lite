@@ -10,6 +10,10 @@ const NOW = (typeof performance !== 'undefined') ? performance.now.bind(performa
 
 // variable constants
 const HALF_PI = Math.PI / 2;
+const HERO_ID = 0;
+const HERO_X = 1;
+const HERO_Y = 2;
+const HERO_ATAN2 = 3;
 
 class Game {
 	constructor (interval) {
@@ -50,7 +54,7 @@ class Block {
 
 class Level {
 	constructor (props = {}) {		
-		this.heros = props.heros || [];
+		this.heros = props.heros || {};
 		this.blocks = props.blocks || {};
 	}
 	isFreeCell (x, y) {
@@ -60,24 +64,46 @@ class Level {
 		}
 		return false;
 	}
+	eachHero (callback) {
+		for (let hero in this.heros) {
+			if (this.heros.hasOwnProperty(hero)) {
+				callback(this.heros[hero]);
+			}
+		}
+	}
 	tick ({ delta }) {
-		this.heros.forEach((hero) => {
-			DEFER(hero.tick.bind(hero, { level: this, delta }));
-		})
+		this.eachHero((hero) => DEFER(hero.tick.bind(hero, { level: this, delta })));
 	}
 	toArray () {
-		return [
-			this.heros.map((hero) => hero.toArray());
-		]
+		const array = [[]];
+		this.eachHero((hero) => array[0].push(hero.toArray()));
+		return array;
 	}
 	fromArray (array = []) {
-		const heros = array[0];
-		heros.forEach(())
+		array[0].map((heroArray) => heroArray[HERO_ID]).forEach((upstreamId) => {
+			if (!this.heros[upstreamId]) {
+				// todo clean sprites
+				// todo clean emitters
+			}
+		});
+		array[0].forEach((heroArray) => {
+			const id = heroArray[HERO_ID];
+			if (this.heros[id]) {
+				this.heros[id].fromArray(heroArray);
+			} else {
+				this.heros[id] = new Hero({}, id);
+				this.heros[id].fromArray(heroArray);
+				if (this.onCreateHero) {
+					this.onCreateHero(this.heros[id].body);
+				}
+			}
+		});
 	}
 }
 
 class Hero {
-	constructor (props = {}) {
+	constructor (props = {}, id = randomId()) {
+		this.id = id;
 		// for moving
 		this.body = Object.assign({ 
 			speed: 0,
@@ -88,7 +114,6 @@ class Hero {
 		}, props);
 		// for drawing
 		this.sprite = null;
-		this.id = randomId();
 	}
 	toArray () {
 		return [
@@ -100,13 +125,14 @@ class Hero {
 	}
 	fromArray (array = [], force = false) {
 		if (force) {
-			this.id = array[0];
+			this.id = array[HERO_ID];
 		}
-		if (force || (this.id === array[0])) {
-			this.body.x = array[1];
-			this.body.y = array[2];
-			this.body.atan2 = array[3];
+		if (force || (this.id === array[HERO_ID])) {
+			this.body.x = array[HERO_X];
+			this.body.y = array[HERO_Y];
+			this.body.atan2 = array[HERO_ATAN2];
 		}
+		return this;
 	}
 	tick ({ level, delta }) {
 		if (this.body.speed) {
