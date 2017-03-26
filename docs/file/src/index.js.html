@@ -38,6 +38,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/view.js~View.html">View</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-atan2">atan2</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomId">randomId</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-BOTTOM">BOTTOM</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-DEFER">DEFER</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-FMath">FMath</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HALF_PI">HALF_PI</a></span></span></li>
@@ -65,12 +66,15 @@ const fmath = new FMath();
 const DEFER = (typeof process !== &apos;undefined&apos;) ? process.nextTick : setTimeout;
 const NOW = (typeof performance !== &apos;undefined&apos;) ? performance.now.bind(performance) : Date.now.bind(Date);
 
-// variable constants
+// just constants
 const HALF_PI = Math.PI / 2;
+
 const HERO_ID = 0;
 const HERO_X = 1;
 const HERO_Y = 2;
 const HERO_ATAN2 = 3;
+
+const BOTTOM = atan2(10, 0);
 
 class Game {
 	constructor (interval = 10) {
@@ -87,7 +91,7 @@ class Game {
 	}
 	tick () {
 		const now = NOW();
-		this.delta = (now - this.now) / 1000;
+		this.delta = (now - this.now) / 10;
 		this.now = now;
 		this.levels.forEach((map) =&gt; {
 			DEFER(map.tick.bind(map, this));
@@ -99,13 +103,22 @@ class Level {
 	constructor (props = {}) {		
 		this.heros = props.heros || {};
 		this.blocks = props.blocks || {};
-		this.accuracy = 10; // default
+		// defaults
+		this.accuracy = 10;
+		this.gravity = 0;
+	}
+	spawn ({ body }) {
+		body.x = Math.random() * this.width;
+		body.y = 0;
 	}
 	isFreeCell (x, y) {
 		// use override since
 		// map not compatible
 		if (!this.stops) {
 			return true;
+		}
+		if (x &lt; 0 || y &lt; 0 || x + 1 &gt; this.width || y + 1 &gt; this.height) {
+			return false;
 		}
 		// map imported fromTiled()
 		// and it has stop there
@@ -183,11 +196,11 @@ class Hero {
 	constructor (props = {}, id = randomId()) {
 		this.id = id;
 		// for moving
-		this.body = Object.assign({ 
-			speed: 0,
+		this.body = Object.assign({
+			g: 0,
 			x: undefined,
 			y: undefined,
-			atan2: undefined,
+			atan2: BOTTOM,
 		// extend with props
 		}, props);
 		// for drawing
@@ -216,20 +229,32 @@ class Hero {
 		if (this.onTick) {
 			this.onTick();
 		}
-		if (this.body.speed) {
-			const x = this.body.x + this.body.speed * fmath.cos(this.body.atan2) * delta / level.accuracy;
-			const y = this.body.y + this.body.speed * fmath.sin(this.body.atan2) * delta / level.accuracy;
-			if (level.isFreeCell(Math.floor(x), Math.floor(y))) {
-				this.body.x = x;
-				this.body.y = y;
-			} else {
-				this.body.speed = 0;
-			}
+		let fall = true;
+		const d = delta / level.accuracy;
+		const x = this.body.x + fmath.cos(this.body.atan2) * d;
+		const y = this.body.y + (this.body.g + fmath.sin(this.body.atan2)) * d
+		if (level.isFreeCell(Math.floor(x), Math.floor(y))) {
+			// exact
+			this.body.x = x;
+			this.body.y = y;
+		} else if (level.isFreeCell(Math.floor(this.body.x), Math.floor(y))) {
+			// vertical
+			this.body.y = y;
+		} else if (level.isFreeCell(Math.floor(x), Math.floor(this.body.y))) {
+			// horizontal
+			this.body.x = x;
+			fall = false;
+		} else {
+			fall = false;
+		}
+		if (fall &amp;&amp; level.gravity) {
+			this.body.g += level.gravity * d;
+		} else {
+			this.body.g = 0;
 		}
 	}
 	goto ({ x, y }) {
 		this.body.atan2 = atan2(y, x);
-		this.body.speed = 1;
 	}
 }
 

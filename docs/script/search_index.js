@@ -1,5 +1,11 @@
 window.esdocSearchIndex = [
   [
+    "gameframework/src/index.js~bottom",
+    "variable/index.html#static-variable-BOTTOM",
+    "<span>BOTTOM</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
+    "variable"
+  ],
+  [
     "gameframework/src/index.js~defer",
     "variable/index.html#static-variable-DEFER",
     "<span>DEFER</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
@@ -570,6 +576,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/index.js~level#gravity",
+    "class/src/index.js~Level.html#instance-member-gravity",
+    "src/index.js~Level#gravity",
+    "member"
+  ],
+  [
     "src/index.js~level#height",
     "class/src/index.js~Level.html#instance-member-height",
     "src/index.js~Level#height",
@@ -585,6 +597,12 @@ window.esdocSearchIndex = [
     "src/index.js~level#isfreecell",
     "class/src/index.js~Level.html#instance-method-isFreeCell",
     "src/index.js~Level#isFreeCell",
+    "method"
+  ],
+  [
+    "src/index.js~level#spawn",
+    "class/src/index.js~Level.html#instance-method-spawn",
+    "src/index.js~Level#spawn",
     "method"
   ],
   [
@@ -666,10 +684,10 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/view.js~view#cameralookat",
-    "class/src/view.js~View.html#instance-member-cameraLookAt",
-    "src/view.js~View#cameraLookAt",
-    "member"
+    "src/view.js~view#cameratohero",
+    "class/src/view.js~View.html#instance-method-cameraToHero",
+    "src/view.js~View#cameraToHero",
+    "method"
   ],
   [
     "src/view.js~view#constructor",
