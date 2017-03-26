@@ -558,6 +558,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/index.js~level#accuracy",
+    "class/src/index.js~Level.html#instance-member-accuracy",
+    "src/index.js~Level#accuracy",
+    "member"
+  ],
+  [
     "src/index.js~level#blocks",
     "class/src/index.js~Level.html#instance-member-blocks",
     "src/index.js~Level#blocks",
@@ -582,6 +588,18 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/index.js~level#fromtiled",
+    "class/src/index.js~Level.html#instance-method-fromTiled",
+    "src/index.js~Level#fromTiled",
+    "method"
+  ],
+  [
+    "src/index.js~level#height",
+    "class/src/index.js~Level.html#instance-member-height",
+    "src/index.js~Level#height",
+    "member"
+  ],
+  [
     "src/index.js~level#heros",
     "class/src/index.js~Level.html#instance-member-heros",
     "src/index.js~Level#heros",
@@ -594,16 +612,34 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/index.js~level#stops",
+    "class/src/index.js~Level.html#instance-member-stops",
+    "src/index.js~Level#stops",
+    "member"
+  ],
+  [
     "src/index.js~level#tick",
     "class/src/index.js~Level.html#instance-method-tick",
     "src/index.js~Level#tick",
     "method"
   ],
   [
+    "src/index.js~level#tileset",
+    "class/src/index.js~Level.html#instance-member-tileset",
+    "src/index.js~Level#tileset",
+    "member"
+  ],
+  [
     "src/index.js~level#toarray",
     "class/src/index.js~Level.html#instance-method-toArray",
     "src/index.js~Level#toArray",
     "method"
+  ],
+  [
+    "src/index.js~level#width",
+    "class/src/index.js~Level.html#instance-member-width",
+    "src/index.js~Level#width",
+    "member"
   ],
   [
     "src/view.js",

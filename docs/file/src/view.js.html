@@ -91,8 +91,8 @@ class View {
 	_onUpdateHero (hero) {
 		this.onUpdateHero(hero);
 		if (hero.sprite) {
-			hero.sprite.x = hero.body.x;
-			hero.sprite.y = hero.body.y;
+			hero.sprite.x = hero.body.x * this.level.accuracy;
+			hero.sprite.y = hero.body.y * this.level.accuracy;
 		}
 	}
 	// this is what you should override

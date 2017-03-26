@@ -84,7 +84,7 @@ class Game {
 		if (this.onUpdate) {
 			DEFER(this.onUpdate.bind(this));
 		}
-		setTimeout(this.loop.bind(this), this.interval);	
+		setTimeout(() =&gt; DEFER(this.loop.bind(this)), this.interval);	
 	}
 	tick () {
 		const now = NOW();
@@ -114,16 +114,21 @@ class Level {
 	constructor (props = {}) {		
 		this.heros = props.heros || {};
 		this.blocks = props.blocks || {};
+		this.accuracy = 10; // default
 	}
 	isFreeCell (x, y) {
-		// todo this is just for tests
-		return true;
-		// todo this is ok
-		const block = this.blocks[`${x}:${y}`];
-		if (block) {
-			return !block.body.blocked;
+		// use override since
+		// map not compatible
+		if (!this.stops) {
+			return true;
 		}
-		return false;
+		// map imported fromTiled()
+		// and it has stop there
+		if (this.stops[`${x}:${y}`]) {
+			return false;
+		}
+		// otherwise its ok
+		return true;
 	}
 	eachHero (callback) {
 		for (let hero in this.heros) {
@@ -165,6 +170,28 @@ class Level {
 			}
 		});
 	}
+	fromTiled (tiled = {}) {
+		this.width  = tiled.width;
+		this.height = tiled.height;
+		this.blocks = {};
+		this.stops  = {};
+		this.tileset = {
+			tilewidth: tiled.tilesets[0].tilewidth,
+			imagewidth: tiled.tilesets[0].imagewidth,
+		};
+		this.accuracy = this.tileset.tilewidth;
+		for (let y = 0; y &lt; this.height; y++) {
+			for (let x = 0; x &lt; this.width; x++) {
+				const pos = y * this.width + x;
+				const offset = `${x}:${y}`;
+				this.blocks[offset] = [
+					tiled.layers[0].data[pos], 
+					tiled.layers[1].data[pos]
+				];
+				this.stops[offset] = tiled.layers[2].data[pos];
+			}
+		}
+	}
 }
 
 class Hero {
@@ -202,9 +229,9 @@ class Hero {
 	}
 	tick ({ level, delta }) {
 		if (this.body.speed) {
-			const x = this.body.x + this.body.speed * fmath.cos(this.body.atan2) * delta;
-			const y = this.body.y + this.body.speed * fmath.sin(this.body.atan2) * delta;
-			if (level.isFreeCell(x, y)) {
+			const x = this.body.x + this.body.speed * fmath.cos(this.body.atan2) * delta / level.accuracy;
+			const y = this.body.y + this.body.speed * fmath.sin(this.body.atan2) * delta / level.accuracy;
+			if (level.isFreeCell(Math.floor(x), Math.floor(y))) {
 				this.body.x = x;
 				this.body.y = y;
 			} else {
