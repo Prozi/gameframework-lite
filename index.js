@@ -14,10 +14,9 @@ const HALF_PI = Math.PI / 2;
 const HERO_ID = 0;
 const HERO_X = 1;
 const HERO_Y = 2;
-const HERO_ATAN2 = 3;
 
 const BOTTOM = atan2(10, 0);
-const SPREAD_HEROS = 1;
+const SPREAD_HEROS = 2;
 
 class Game {
 	constructor (interval = 10) {
@@ -182,10 +181,14 @@ class Hero {
 		this.id = id;
 		// for moving
 		this.body = Object.assign({
-			g: 0,
+			// position
 			x: undefined,
 			y: undefined,
+			// direction
 			atan2: BOTTOM,
+			// acceleration
+			vx: 0,
+			vy: 0,
 		// extend with props
 		}, props);
 		// for drawing
@@ -196,7 +199,6 @@ class Hero {
 			this.id,
 			this.body.x,
 			this.body.y,
-			this.body.atan2
 		];
 	}
 	fromArray (array = [], force = false) {
@@ -206,7 +208,6 @@ class Hero {
 		if (force || (this.id === array[HERO_ID])) {
 			this.body.x = array[HERO_X];
 			this.body.y = array[HERO_Y];
-			this.body.atan2 = array[HERO_ATAN2];
 		}
 		return this;
 	}
@@ -215,8 +216,8 @@ class Hero {
 			this.onTick();
 		}
 		const d = delta / level.accuracy;
-		const x = this.body.x + fmath.cos(this.body.atan2) * d;
-		const y = this.body.y + (this.body.g + fmath.sin(this.body.atan2)) * d;
+		const x = this.body.x + this.body.vx * d;
+		const y = this.body.y + this.body.vy * d;
 		this.move({ level, x, y, d });
 	}
 	move ({ level, x, y, d }) {
@@ -231,18 +232,19 @@ class Hero {
 		} else if (level.isFreeCell(Math.floor(x), Math.floor(this.body.y))) {
 			// horizontal
 			this.body.x = x;
-			fall = false;
 		} else {
 			fall = false;
 		}
 		if (fall && level.gravity) {
-			this.body.g += level.gravity * d;
+			this.body.vy += level.gravity * d;
 		} else {
-			this.body.g = 0;
+			this.body.vy = 0;
 		}		
 	}
 	goto ({ x, y }) {
 		this.body.atan2 = atan2(y, x);
+		this.body.vx = fmath.cos(this.body.atan2);
+		this.body.vy = fmath.sin(this.body.atan2);
 	}
 }
 

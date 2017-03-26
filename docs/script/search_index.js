@@ -30,12 +30,6 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
-    "gameframework/src/index.js~hero_atan2",
-    "variable/index.html#static-variable-HERO_ATAN2",
-    "<span>HERO_ATAN2</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
-    "variable"
-  ],
-  [
     "gameframework/src/index.js~hero_id",
     "variable/index.html#static-variable-HERO_ID",
     "<span>HERO_ID</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
