@@ -84,7 +84,7 @@ class Level {
 	}
 	fromArray (array = []) {
 		this.eachHero((hero) => {
-			if (!array[0].find((heroArray) => heroArray.id === hero.id)) {
+			if (!array[0].find((heroArray) => heroArray[HERO_ID] === hero.id)) {
 				if (this.onRemoveHero) {
 					this.onRemoveHero(hero);
 				}
@@ -156,7 +156,7 @@ class Hero {
 	}
 	goto ({ x, y }) {
 		this.body.atan2 = atan2(y, x);
-		this.body.speed = 100;
+		this.body.speed = 1;
 	}
 }
 

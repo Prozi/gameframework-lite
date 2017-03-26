@@ -3,19 +3,19 @@
 const { Game, Level, Hero, Block } = require('..');
 
 class MyGame extends Game {
-	constructor () {
-		super();
+	constructor (interval = null) {
+		super(interval);
 		console.log('test Blocks()');
 		const blocks = {};
-		for (let y = 0; y < 100; y++) {
-			for (let x = 0; x < 100; x++) {
+		for (let y = 0; y < 99; y++) {
+			for (let x = 0; x < 99; x++) {
 				blocks[`${x}:${y}`] = new Block({ x, y, blocked: false })
 			}
 		}
 
 		console.log('test Hero()');
 		const heros = {};
-		for (let x = 0; x < 20; x++) {
+		for (let x = 0; x < 99; x++) {
 			const bunny = new Hero({
 				x: Math.random() * 1024,
 				y: Math.random() * 1024,

@@ -33,8 +33,8 @@ class View {
 	_onUpdateHero (hero) {
 		this.onUpdateHero(hero);
 		if (hero.sprite) {
-			hero.sprite.x = hero.x;
-			hero.sprite.y = hero.y;
+			hero.sprite.x = hero.body.x;
+			hero.sprite.y = hero.body.y;
 		}
 	}
 	// this is what you should override
@@ -43,17 +43,20 @@ class View {
 		hero.sprite.anchor.set(0.5);		
 	}
 	_onCreateHero (hero) {
-		this.onCreateHero(hero);
-		if (hero.sprite) {
-			hero.sprite.x = hero.body.x;
-			hero.sprite.y = hero.body.y;
-			this.camera.addChild(hero.sprite);
+		if (!hero.sprite) {
+			this.onCreateHero(hero);
+			if (hero.sprite) {
+				hero.sprite.x = hero.body.x;
+				hero.sprite.y = hero.body.y;
+				this.camera.addChild(hero.sprite);
+			}
 		}
 	}
 	onRemoveHero (hero) {
 		// this is what you should override
 	}
 	_onRemoveHero (hero) {
+		this.onRemoveHero(hero);
 		if (hero.sprite && hero.sprite.parent) {
 			hero.sprite.parent.removeChild(hero.sprite);
 		}
