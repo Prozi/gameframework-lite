@@ -1,10 +1,20 @@
 ## gameframework
 
+### installation
+
+`npm install gameframework --save`
+
+or
+
+`yarn add gameframework --save`
+
+### testing
 
 `use yarn test to test`
 
+### usage
 
-require index.js for:
+require 'gameframework' for:
 
 - DEFER,
 - Game,
@@ -12,6 +22,13 @@ require index.js for:
 - Block,
 - Hero,
 - atan2
+
+
+require 'gameframework/view' for:
+
+- View
+
+### examples
 
 ```javascript
 const View = require('gameframework/view');
@@ -49,7 +66,7 @@ new MyGame();
 ```
 
 
-`view index.html to see benchmark/test`
+`view example/index.html to see benchmark/test`
 
 
 License MIT
