@@ -14,7 +14,7 @@ let plugins = [
 ];
 
 let entries = {};
-['index', 'view', 'game', 'testserver'].forEach((file) => {
+['view', 'example/game', 'example/testserver'].forEach((file) => {
   entries[file] = ['babel-polyfill', path.join(__dirname, `${file}.js`)]
 });
 

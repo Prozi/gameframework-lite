@@ -1,12 +1,12 @@
 'use strict';
 
-const View = require('./view');
+const View = require('../view');
 const view = new View();
 
 let server;
 
 if (typeof Worker !== 'undefined') {
-	server = new Worker('dist/testserver.js');
+	server = new Worker('../dist/example/testserver.js');
 	server.onmessage = (event) => {
 		view.level.fromArray(event.data);
 	};

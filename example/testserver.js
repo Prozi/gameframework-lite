@@ -1,6 +1,6 @@
 'use strict';
 
-const { Game, Level, Hero, Block } = require('.');
+const { Game, Level, Hero, Block } = require('..');
 
 const game = new Game();
 

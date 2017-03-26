@@ -166,9 +166,9 @@ function atan2 (y, x) {
 	}
 	if (x < 0) {
 		if (y >= 0) {
-			return fmath.atan(y / x) + PI;
+			return fmath.atan(y / x) + Math.PI;
 		}
-		return fmath.atan(y / x) - PI;
+		return fmath.atan(y / x) - Math.PI;
 	}
 	if (x === 0) {
 		if (y === 0) {
