@@ -1,11 +1,11 @@
 {
   "name": "gameframework",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "game framework for 2d games and physics",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
-    "build:dev": "WEBPACK_SUBMODULE=view webpack",
+    "build": "PRODUCTION=true webpack",
+    "build:dev": "PRODUCTIOn= webpack",
     "test": "node test"
   },
   "author": "Jacek Pietal <prozi85@gmail.com>",
