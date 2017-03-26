@@ -6,12 +6,11 @@ const Level = require('.').Level;
 class View {
 	constructor (screenSize = 480) {
 		this.screenSize = screenSize;
-		this.scale = this.getScale();
 		this.pixi = new PIXI.Application(window.innerWidth, window.innerHeight, {
 			autoResize: false,
 			roundPixels: true,
 			clearBeforeRender: false,
-			resolution: Math.ceil(this.scale)
+			resolution: 1
 		});
 		this.camera = new PIXI.Container();
 		this.cameraLookAt = {
@@ -25,6 +24,7 @@ class View {
 		this.level.onRemoveHero = this._onRemoveHero.bind(this);
 		document.body.appendChild(this.pixi.view);
 		window.addEventListener('resize', this.onResize.bind(this), true);
+		this.onResize();
 		this.pixi.start();
 	}
 	get hero () {
@@ -64,7 +64,7 @@ class View {
 			hero.sprite.parent.removeChild(hero.sprite);
 		}
 	}
-	onResize (event) {
+	onResize () {
 		this.scale = this.getScale();
 		this.pixi.renderer.resize(window.innerWidth, window.innerHeight);
 		this.pixi.stage.scale.set(this.scale);

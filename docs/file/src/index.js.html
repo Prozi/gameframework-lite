@@ -213,6 +213,9 @@ class Hero {
 		return this;
 	}
 	tick ({ level, delta }) {
+		if (this.onTick) {
+			this.onTick();
+		}
 		if (this.body.speed) {
 			const x = this.body.x + this.body.speed * fmath.cos(this.body.atan2) * delta / level.accuracy;
 			const y = this.body.y + this.body.speed * fmath.sin(this.body.atan2) * delta / level.accuracy;

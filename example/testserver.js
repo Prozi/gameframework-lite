@@ -9,11 +9,11 @@ class MyGame extends Game {
 		console.log('test Hero()');
 		const heros = {};
 		for (let x = 0; x < 99; x++) {
-			const bunny = new Hero({
-				x: Math.random() * 1024,
-				y: Math.random() * 1024,
+			const hero = new Hero({
+				x: Math.random() * 64,
+				y: Math.random() * 48,
 			});
-			heros[bunny.id] = bunny;
+			heros[hero.id] = hero;
 		}
 
 		console.log('test Level()');
@@ -29,8 +29,8 @@ class MyGame extends Game {
 		level.eachHero((hero) => {
 			if (Math.random() < 0.1) {
 				hero.goto({
-					x: (Math.random() - 0.5) * 1024,
-					y: (Math.random() - 0.5) * 1024,
+					x: Math.random() * 64,
+					y: Math.random() * 48,
 				});
 			}
 		});		

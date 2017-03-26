@@ -8,7 +8,6 @@ class MyView extends View {
 	onCreateHero (hero) {
 		hero.sprite = PIXI.Sprite.fromImage('bunny.png');
 		hero.sprite.anchor.set(0.5);
-		hero.sprite.scale.set(3);
 	}
 }
 
@@ -17,6 +16,7 @@ class MyView extends View {
 // node example/testserver
 if (typeof Worker !== 'undefined') {
 	if (!window.server) {
+		window.server = true;
 		window.server = new Worker('../dist/example/testserver.js');
 		window.server.onmessage = (event) => {
 			view.level.fromArray(event.data);
