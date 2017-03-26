@@ -14,6 +14,7 @@ const HERO_ID = 0;
 const HERO_X = 1;
 const HERO_Y = 2;
 const HERO_ATAN2 = 3;
+const BOTTOM = Math.atan2(1, 0);
 
 class Game {
 	constructor (interval = 10) {
@@ -30,7 +31,7 @@ class Game {
 	}
 	tick () {
 		const now = NOW();
-		this.delta = (now - this.now) / 1000;
+		this.delta = now - this.now;
 		this.now = now;
 		this.levels.forEach((map) => {
 			DEFER(map.tick.bind(map, this));
@@ -43,6 +44,7 @@ class Level {
 		this.heros = props.heros || {};
 		this.blocks = props.blocks || {};
 		this.accuracy = 10; // default
+		this.gravity = 0;
 	}
 	spawn ({ body }) {
 		body.x = Math.random() * this.width;
@@ -137,7 +139,7 @@ class Hero {
 			speed: 0,
 			x: undefined,
 			y: undefined,
-			atan2: undefined,
+			atan2: BOTTOM,
 		// extend with props
 		}, props);
 		// for drawing
@@ -166,20 +168,19 @@ class Hero {
 		if (this.onTick) {
 			this.onTick();
 		}
-		if (this.body.speed) {
-			const x = this.body.x + this.body.speed * fmath.cos(this.body.atan2) * delta / level.accuracy;
-			const y = this.body.y + this.body.speed * fmath.sin(this.body.atan2) * delta / level.accuracy;
-			if (level.isFreeCell(Math.floor(x), Math.floor(y))) {
-				this.body.x = x;
-				this.body.y = y;
-			} else {
-				this.body.speed = 0;
-			}
+		if (level.gravity) {
+			this.body.atan2 = level.gravity * BOTTOM + (1 - level.gravity) * this.body.atan2;
+		}
+		const d = delta / level.accuracy;
+		const x = this.body.x + fmath.cos(this.body.atan2) * d;
+		const y = this.body.y + fmath.sin(this.body.atan2) * d;
+		if (level.isFreeCell(Math.floor(x), Math.floor(y))) {
+			this.body.x = x;
+			this.body.y = y;
 		}
 	}
 	goto ({ x, y }) {
 		this.body.atan2 = atan2(y, x);
-		this.body.speed = 1;
 	}
 }
 
