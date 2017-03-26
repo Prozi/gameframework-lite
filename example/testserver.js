@@ -29,8 +29,8 @@ class MyGame extends Game {
 		level.eachHero((hero) => {
 			if (Math.random() < 0.1) {
 				hero.goto({
-					x: Math.random() * 64,
-					y: Math.random() * 48,
+					x: Math.random() - 0.5,
+					y: Math.random() - 0.5,
 				});
 			}
 		});		
