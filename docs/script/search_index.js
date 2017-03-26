@@ -630,6 +630,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/view.js~view#_onmousemove",
+    "class/src/view.js~View.html#instance-method-_onMouseMove",
+    "src/view.js~View#_onMouseMove",
+    "method"
+  ],
+  [
     "src/view.js~view#_onremovehero",
     "class/src/view.js~View.html#instance-method-_onRemoveHero",
     "src/view.js~View#_onRemoveHero",
@@ -639,6 +645,18 @@ window.esdocSearchIndex = [
     "src/view.js~view#_onupdatehero",
     "class/src/view.js~View.html#instance-method-_onUpdateHero",
     "src/view.js~View#_onUpdateHero",
+    "method"
+  ],
+  [
+    "src/view.js~view#addblock",
+    "class/src/view.js~View.html#instance-method-addBlock",
+    "src/view.js~View#addBlock",
+    "method"
+  ],
+  [
+    "src/view.js~view#addblocks",
+    "class/src/view.js~View.html#instance-method-addBlocks",
+    "src/view.js~View#addBlocks",
     "method"
   ],
   [
@@ -660,15 +678,51 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/view.js~view#createlevel",
+    "class/src/view.js~View.html#instance-method-createLevel",
+    "src/view.js~View#createLevel",
+    "method"
+  ],
+  [
+    "src/view.js~view#createsprite",
+    "class/src/view.js~View.html#instance-method-createSprite",
+    "src/view.js~View#createSprite",
+    "method"
+  ],
+  [
     "src/view.js~view#getscale",
     "class/src/view.js~View.html#instance-method-getScale",
     "src/view.js~View#getScale",
     "method"
   ],
   [
+    "src/view.js~view#gettexture",
+    "class/src/view.js~View.html#instance-method-getTexture",
+    "src/view.js~View#getTexture",
+    "method"
+  ],
+  [
+    "src/view.js~view#hero",
+    "class/src/view.js~View.html#instance-get-hero",
+    "src/view.js~View#hero",
+    "member"
+  ],
+  [
+    "src/view.js~view#layers",
+    "class/src/view.js~View.html#instance-member-layers",
+    "src/view.js~View#layers",
+    "member"
+  ],
+  [
     "src/view.js~view#level",
     "class/src/view.js~View.html#instance-member-level",
     "src/view.js~View#level",
+    "member"
+  ],
+  [
+    "src/view.js~view#mouse",
+    "class/src/view.js~View.html#instance-member-mouse",
+    "src/view.js~View#mouse",
     "member"
   ],
   [
@@ -712,5 +766,23 @@ window.esdocSearchIndex = [
     "class/src/view.js~View.html#instance-member-screenSize",
     "src/view.js~View#screenSize",
     "member"
+  ],
+  [
+    "src/view.js~view#texturecache",
+    "class/src/view.js~View.html#instance-member-textureCache",
+    "src/view.js~View#textureCache",
+    "member"
+  ],
+  [
+    "src/view.js~view#tileset",
+    "class/src/view.js~View.html#instance-member-tileset",
+    "src/view.js~View#tileset",
+    "member"
+  ],
+  [
+    "src/view.js~view#usemouse",
+    "class/src/view.js~View.html#instance-method-useMouse",
+    "src/view.js~View#useMouse",
+    "method"
   ]
 ]

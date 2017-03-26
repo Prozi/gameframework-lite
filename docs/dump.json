@@ -1291,7 +1291,7 @@
     "__docId__": 49,
     "kind": "file",
     "name": "src/view.js",
-    "content": "'use strict';\n\nconst PIXI = require('pixi.js');\nconst Level = require('.').Level;\n\nclass View {\n\tconstructor (screenSize = 480) {\n\t\tthis.screenSize = screenSize;\n\t\tthis.scale = this.getScale();\n\t\tthis.pixi = new PIXI.Application(window.innerWidth, window.innerHeight, {\n\t\t\tautoResize: false,\n\t\t\troundPixels: true,\n\t\t\tclearBeforeRender: false,\n\t\t\tresolution: Math.ceil(this.scale)\n\t\t});\n\t\tthis.camera = new PIXI.Container();\n\t\tthis.cameraLookAt = {\n\t\t\tx: window.innerWidth / 2,\n\t\t\ty: window.innerHeight / 2\n\t\t};\n\t\tthis.pixi.stage.addChild(this.camera);\n\t\tthis.level = new Level();\n\t\tthis.level.onUpdateHero = this._onUpdateHero.bind(this);\n\t\tthis.level.onCreateHero = this._onCreateHero.bind(this);\n\t\tthis.level.onRemoveHero = this._onRemoveHero.bind(this);\n\t\tdocument.body.appendChild(this.pixi.view);\n\t\twindow.addEventListener('resize', this.onResize.bind(this), true);\n\t\tthis.pixi.start();\n\t}\n\tonUpdateHero (hero) {\n\t\t// this is what you should override\n\t}\n\t_onUpdateHero (hero) {\n\t\tthis.onUpdateHero(hero);\n\t\tif (hero.sprite) {\n\t\t\thero.sprite.x = hero.body.x * this.level.accuracy;\n\t\t\thero.sprite.y = hero.body.y * this.level.accuracy;\n\t\t}\n\t}\n\t// this is what you should override\n\tonCreateHero (hero) {\n\t\thero.sprite = PIXI.Sprite.fromImage('bunny.png');\n\t\thero.sprite.anchor.set(0.5);\t\t\n\t}\n\t_onCreateHero (hero) {\n\t\tif (!hero.sprite) {\n\t\t\tthis.onCreateHero(hero);\n\t\t\tif (hero.sprite) {\n\t\t\t\thero.sprite.x = hero.body.x;\n\t\t\t\thero.sprite.y = hero.body.y;\n\t\t\t\tthis.camera.addChild(hero.sprite);\n\t\t\t}\n\t\t}\n\t}\n\tonRemoveHero (hero) {\n\t\t// this is what you should override\n\t}\n\t_onRemoveHero (hero) {\n\t\tthis.onRemoveHero(hero);\n\t\tif (hero.sprite && hero.sprite.parent) {\n\t\t\thero.sprite.parent.removeChild(hero.sprite);\n\t\t}\n\t}\n\tonResize (event) {\n\t\tthis.scale = this.getScale();\n\t\tthis.pixi.renderer.resize(window.innerWidth, window.innerHeight);\n\t}\n\tgetScale () {\n\t    return +(Math.sqrt(window.innerWidth * window.innerHeight) / this.screenSize).toFixed(2);\n\t}\n}\n\nif (typeof module !== 'undefined') {\t\n\tmodule.exports = View;\n}\n",
+    "content": "'use strict';\n\nconst PIXI = require('pixi.js');\nconst Level = require('.').Level;\n\nclass View {\n\tconstructor (screenSize = 480) {\n\t\tthis.screenSize = screenSize;\n\t\tthis.scale = this.getScale();\n\t\tthis.pixi = new PIXI.Application(window.innerWidth, window.innerHeight, {\n\t\t\tautoResize: false,\n\t\t\troundPixels: true,\n\t\t\tclearBeforeRender: false,\n\t\t\tresolution: Math.ceil(this.scale)\n\t\t});\n\t\tthis.camera = new PIXI.Container();\n\t\tthis.cameraLookAt = {\n\t\t\tx: window.innerWidth / 2,\n\t\t\ty: window.innerHeight / 2\n\t\t};\n\t\tthis.pixi.stage.addChild(this.camera);\n\t\tthis.level = new Level();\n\t\tthis.level.onUpdateHero = this._onUpdateHero.bind(this);\n\t\tthis.level.onCreateHero = this._onCreateHero.bind(this);\n\t\tthis.level.onRemoveHero = this._onRemoveHero.bind(this);\n\t\tdocument.body.appendChild(this.pixi.view);\n\t\twindow.addEventListener('resize', this.onResize.bind(this), true);\n\t\tthis.pixi.start();\n\t}\n\tget hero () {\n\t\treturn this.level.heros[this.id];\n\t}\n\tonUpdateHero (hero) {\n\t\t// this is what you should override\n\t}\n\t_onUpdateHero (hero) {\n\t\tthis.onUpdateHero(hero);\n\t\tif (hero.sprite) {\n\t\t\thero.sprite.x = hero.body.x * this.level.accuracy;\n\t\t\thero.sprite.y = hero.body.y * this.level.accuracy;\n\t\t}\n\t}\n\t// this is what you should override\n\tonCreateHero (hero) {\n\t\thero.sprite = PIXI.Sprite.fromImage('bunny.png');\n\t\thero.sprite.anchor.set(0.5);\t\t\n\t}\n\t_onCreateHero (hero) {\n\t\tif (!hero.sprite) {\n\t\t\tthis.onCreateHero(hero);\n\t\t\tif (hero.sprite) {\n\t\t\t\thero.sprite.x = hero.body.x;\n\t\t\t\thero.sprite.y = hero.body.y;\n\t\t\t\tthis.camera.addChild(hero.sprite);\n\t\t\t}\n\t\t}\n\t}\n\tonRemoveHero (hero) {\n\t\t// this is what you should override\n\t}\n\t_onRemoveHero (hero) {\n\t\tthis.onRemoveHero(hero);\n\t\tif (hero.sprite && hero.sprite.parent) {\n\t\t\thero.sprite.parent.removeChild(hero.sprite);\n\t\t}\n\t}\n\tonResize (event) {\n\t\tthis.scale = this.getScale();\n\t\tthis.pixi.renderer.resize(window.innerWidth, window.innerHeight);\n\t}\n\tgetScale () {\n\t    return +(Math.sqrt(window.innerWidth * window.innerHeight) / this.screenSize).toFixed(2);\n\t}\n\tgetTexture (frame) {\n\t\tif (!this.textureCache[frame]) {\n\t\t\t// <-- tiled firstgid === 1\n\t\t\tconst size = this.level.tileset.tilewidth,\n\t\t\t\twidth = (this.level.tileset.imagewidth / this.level.tileset.tilewidth),\n\t\t\t\tx = ((frame - 1) % width) * size,\n\t\t\t\ty = Math.floor((frame - 1) / width) * size;\n\t\t\tthis.textureCache[frame] = new PIXI.Texture(\n\t\t\t\tthis.tileset, new PIXI.Rectangle(x, y, size, size)\n\t\t\t);\n\t\t\tthis.textureCache[frame].baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;\n\t\t}\n\t\treturn this.textureCache[frame];\n\t}\n\tcreateSprite (frame, nearest = PIXI.SCALE_MODES.NEAREST) {\n\t\tlet sprite;\n\t\tif (isFinite(frame)) {\n\t\t\tsprite = new PIXI.Sprite(this.getTexture(parseInt(frame, 10)));\n\t\t} else {\n\t\t\tsprite = PIXI.Sprite.fromFrame(frame);\n\t\t}\n\t\tsprite.texture.baseTexture.scaleMode = nearest;\n\t\treturn sprite;\n\t}\n\taddBlock (x, y, block, layer = this.layers.blocks, nearest = PIXI.SCALE_MODES.NEAREST) {\n\t\tconst sprite = this.createSprite(block, nearest);\n\t\tsprite.width = sprite.height = this.level.tileset.tilewidth;\n\t\tsprite.x = Math.floor(this.level.tileset.tilewidth * x);\n\t\tsprite.y = Math.floor(this.level.tileset.tilewidth * y);\n\t\tlayer.addChild(sprite);\n\t}\n\taddBlocks () {\n\t\tfor (let y = 0; y < this.level.height; y++) {\n\t\t\tfor (let x = 0; x < this.level.width; x++) {\n\t\t\t\tconst block = this.level.blocks[`${x}:${y}`];\n\t\t\t\tif (block && Array.isArray(block)) {\n\t\t\t\t\tfor (let i = 0; i < block.length; i++) {\n\t\t\t\t\t\tif (parseInt(block[i], 10)) {\n\t\t\t\t\t\t\tthis.addBlock(x, y, block[i]);\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\tcreateLevel (tiled) {\n\t\tthis.textureCache = {};\n\t\tthis.layers = {\n\t\t\tblocks: new PIXI.Container(),\n\t\t\theros: new PIXI.Container(),\n\t\t};\n\t\tthis.tileset = PIXI.Texture.fromImage('assets/img/MagicCloud/tileset.png', false, PIXI.SCALE_MODES.NEAREST);\n\t\tthis.camera.addChild(this.layers.blocks);\n\t\tthis.camera.addChild(this.layers.heros);\n\t\tthis.level.fromTiled(tiled);\n\t\tthis.addBlocks();\n\t}\n\t_onMouseMove (event) {\n\t\tconst e = event.touches ? event.touches[0] : event;\n\t\tthis.mouse = {\n\t\t\tx: e.clientX,\n\t\t\ty: e.clientY,\n\t\t};\n\t\tif (this.onMouseMove) {\n\t\t\tthis.onMouseMove();\n\t\t}\n\t}\n\tuseMouse () {\n\t\twindow.addEventListener('mousemove', this._onMouseMove.bind(this));\n\t}\n}\n\nif (typeof module !== 'undefined') {\t\n\tmodule.exports = View;\n}\n",
     "static": true,
     "longname": "src/view.js",
     "access": null,
@@ -1543,13 +1543,13 @@
   },
   {
     "__docId__": 60,
-    "kind": "method",
-    "name": "onUpdateHero",
+    "kind": "get",
+    "name": "hero",
     "memberof": "src/view.js~View",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "src/view.js~View#onUpdateHero",
+    "longname": "src/view.js~View#hero",
     "access": null,
     "description": null,
     "lineNumber": 30,
@@ -1560,24 +1560,21 @@
         "tagValue": ""
       }
     ],
-    "params": [
-      {
-        "name": "hero",
-        "types": [
-          "*"
-        ]
-      }
-    ]
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
   },
   {
     "__docId__": 61,
     "kind": "method",
-    "name": "_onUpdateHero",
+    "name": "onUpdateHero",
     "memberof": "src/view.js~View",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "src/view.js~View#_onUpdateHero",
+    "longname": "src/view.js~View#onUpdateHero",
     "access": null,
     "description": null,
     "lineNumber": 33,
@@ -1600,15 +1597,15 @@
   {
     "__docId__": 62,
     "kind": "method",
-    "name": "onCreateHero",
+    "name": "_onUpdateHero",
     "memberof": "src/view.js~View",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "src/view.js~View#onCreateHero",
+    "longname": "src/view.js~View#_onUpdateHero",
     "access": null,
     "description": null,
-    "lineNumber": 41,
+    "lineNumber": 36,
     "undocument": true,
     "unknown": [
       {
@@ -1628,15 +1625,15 @@
   {
     "__docId__": 63,
     "kind": "method",
-    "name": "_onCreateHero",
+    "name": "onCreateHero",
     "memberof": "src/view.js~View",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "src/view.js~View#_onCreateHero",
+    "longname": "src/view.js~View#onCreateHero",
     "access": null,
     "description": null,
-    "lineNumber": 45,
+    "lineNumber": 44,
     "undocument": true,
     "unknown": [
       {
@@ -1656,15 +1653,15 @@
   {
     "__docId__": 64,
     "kind": "method",
-    "name": "onRemoveHero",
+    "name": "_onCreateHero",
     "memberof": "src/view.js~View",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "src/view.js~View#onRemoveHero",
+    "longname": "src/view.js~View#_onCreateHero",
     "access": null,
     "description": null,
-    "lineNumber": 55,
+    "lineNumber": 48,
     "undocument": true,
     "unknown": [
       {
@@ -1684,12 +1681,12 @@
   {
     "__docId__": 65,
     "kind": "method",
-    "name": "_onRemoveHero",
+    "name": "onRemoveHero",
     "memberof": "src/view.js~View",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "src/view.js~View#_onRemoveHero",
+    "longname": "src/view.js~View#onRemoveHero",
     "access": null,
     "description": null,
     "lineNumber": 58,
@@ -1712,6 +1709,34 @@
   {
     "__docId__": 66,
     "kind": "method",
+    "name": "_onRemoveHero",
+    "memberof": "src/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view.js~View#_onRemoveHero",
+    "access": null,
+    "description": null,
+    "lineNumber": 61,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "hero",
+        "types": [
+          "*"
+        ]
+      }
+    ]
+  },
+  {
+    "__docId__": 67,
+    "kind": "method",
     "name": "onResize",
     "memberof": "src/view.js~View",
     "generator": false,
@@ -1720,7 +1745,7 @@
     "longname": "src/view.js~View#onResize",
     "access": null,
     "description": null,
-    "lineNumber": 64,
+    "lineNumber": 67,
     "undocument": true,
     "unknown": [
       {
@@ -1738,7 +1763,7 @@
     ]
   },
   {
-    "__docId__": 67,
+    "__docId__": 68,
     "kind": "member",
     "name": "scale",
     "memberof": "src/view.js~View",
@@ -1746,7 +1771,7 @@
     "longname": "src/view.js~View#scale",
     "access": null,
     "description": null,
-    "lineNumber": 65,
+    "lineNumber": 68,
     "undocument": true,
     "unknown": [
       {
@@ -1761,7 +1786,7 @@
     }
   },
   {
-    "__docId__": 68,
+    "__docId__": 69,
     "kind": "method",
     "name": "getScale",
     "memberof": "src/view.js~View",
@@ -1771,7 +1796,7 @@
     "longname": "src/view.js~View#getScale",
     "access": null,
     "description": null,
-    "lineNumber": 68,
+    "lineNumber": 71,
     "undocument": true,
     "unknown": [
       {
@@ -1788,6 +1813,323 @@
   },
   {
     "__docId__": 70,
+    "kind": "method",
+    "name": "getTexture",
+    "memberof": "src/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view.js~View#getTexture",
+    "access": null,
+    "description": null,
+    "lineNumber": 74,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "frame",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 71,
+    "kind": "method",
+    "name": "createSprite",
+    "memberof": "src/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view.js~View#createSprite",
+    "access": null,
+    "description": null,
+    "lineNumber": 88,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "frame",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "nearest",
+        "optional": true,
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 72,
+    "kind": "method",
+    "name": "addBlock",
+    "memberof": "src/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view.js~View#addBlock",
+    "access": null,
+    "description": null,
+    "lineNumber": 98,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "x",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "y",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "block",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "layer",
+        "optional": true,
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "nearest",
+        "optional": true,
+        "types": [
+          "*"
+        ]
+      }
+    ]
+  },
+  {
+    "__docId__": 73,
+    "kind": "method",
+    "name": "addBlocks",
+    "memberof": "src/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view.js~View#addBlocks",
+    "access": null,
+    "description": null,
+    "lineNumber": 105,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": []
+  },
+  {
+    "__docId__": 74,
+    "kind": "method",
+    "name": "createLevel",
+    "memberof": "src/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view.js~View#createLevel",
+    "access": null,
+    "description": null,
+    "lineNumber": 119,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "tiled",
+        "types": [
+          "*"
+        ]
+      }
+    ]
+  },
+  {
+    "__docId__": 75,
+    "kind": "member",
+    "name": "textureCache",
+    "memberof": "src/view.js~View",
+    "static": false,
+    "longname": "src/view.js~View#textureCache",
+    "access": null,
+    "description": null,
+    "lineNumber": 120,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "{}"
+      ]
+    }
+  },
+  {
+    "__docId__": 76,
+    "kind": "member",
+    "name": "layers",
+    "memberof": "src/view.js~View",
+    "static": false,
+    "longname": "src/view.js~View#layers",
+    "access": null,
+    "description": null,
+    "lineNumber": 121,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "{\"blocks\": *, \"heros\": *}"
+      ]
+    }
+  },
+  {
+    "__docId__": 77,
+    "kind": "member",
+    "name": "tileset",
+    "memberof": "src/view.js~View",
+    "static": false,
+    "longname": "src/view.js~View#tileset",
+    "access": null,
+    "description": null,
+    "lineNumber": 125,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 78,
+    "kind": "method",
+    "name": "_onMouseMove",
+    "memberof": "src/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view.js~View#_onMouseMove",
+    "access": null,
+    "description": null,
+    "lineNumber": 131,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "event",
+        "types": [
+          "*"
+        ]
+      }
+    ]
+  },
+  {
+    "__docId__": 79,
+    "kind": "member",
+    "name": "mouse",
+    "memberof": "src/view.js~View",
+    "static": false,
+    "longname": "src/view.js~View#mouse",
+    "access": null,
+    "description": null,
+    "lineNumber": 133,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "{\"x\": *, \"y\": *}"
+      ]
+    }
+  },
+  {
+    "__docId__": 80,
+    "kind": "method",
+    "name": "useMouse",
+    "memberof": "src/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/view.js~View#useMouse",
+    "access": null,
+    "description": null,
+    "lineNumber": 141,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": []
+  },
+  {
+    "__docId__": 82,
     "kind": "external",
     "name": "Infinity",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
@@ -1799,7 +2141,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 71,
+    "__docId__": 83,
     "kind": "external",
     "name": "NaN",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
@@ -1811,7 +2153,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 72,
+    "__docId__": 84,
     "kind": "external",
     "name": "undefined",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
@@ -1823,7 +2165,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 73,
+    "__docId__": 85,
     "kind": "external",
     "name": "null",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
@@ -1835,7 +2177,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 74,
+    "__docId__": 86,
     "kind": "external",
     "name": "Object",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
@@ -1847,7 +2189,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 75,
+    "__docId__": 87,
     "kind": "external",
     "name": "object",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
@@ -1859,7 +2201,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 76,
+    "__docId__": 88,
     "kind": "external",
     "name": "Function",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
@@ -1871,7 +2213,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 77,
+    "__docId__": 89,
     "kind": "external",
     "name": "function",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
@@ -1883,7 +2225,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 78,
+    "__docId__": 90,
     "kind": "external",
     "name": "Boolean",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
@@ -1895,7 +2237,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 79,
+    "__docId__": 91,
     "kind": "external",
     "name": "boolean",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
@@ -1907,7 +2249,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 80,
+    "__docId__": 92,
     "kind": "external",
     "name": "Symbol",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
@@ -1919,7 +2261,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 81,
+    "__docId__": 93,
     "kind": "external",
     "name": "Error",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
@@ -1931,7 +2273,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 82,
+    "__docId__": 94,
     "kind": "external",
     "name": "EvalError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
@@ -1943,7 +2285,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 83,
+    "__docId__": 95,
     "kind": "external",
     "name": "InternalError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
@@ -1955,7 +2297,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 84,
+    "__docId__": 96,
     "kind": "external",
     "name": "RangeError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
@@ -1967,7 +2309,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 85,
+    "__docId__": 97,
     "kind": "external",
     "name": "ReferenceError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
@@ -1979,7 +2321,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 86,
+    "__docId__": 98,
     "kind": "external",
     "name": "SyntaxError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
@@ -1991,7 +2333,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 87,
+    "__docId__": 99,
     "kind": "external",
     "name": "TypeError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
@@ -2003,7 +2345,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 88,
+    "__docId__": 100,
     "kind": "external",
     "name": "URIError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
@@ -2015,7 +2357,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 89,
+    "__docId__": 101,
     "kind": "external",
     "name": "Number",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
@@ -2027,7 +2369,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 90,
+    "__docId__": 102,
     "kind": "external",
     "name": "number",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
@@ -2039,7 +2381,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 91,
+    "__docId__": 103,
     "kind": "external",
     "name": "Date",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
@@ -2051,7 +2393,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 92,
+    "__docId__": 104,
     "kind": "external",
     "name": "String",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
@@ -2063,7 +2405,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 93,
+    "__docId__": 105,
     "kind": "external",
     "name": "string",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
@@ -2075,7 +2417,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 94,
+    "__docId__": 106,
     "kind": "external",
     "name": "RegExp",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
@@ -2087,7 +2429,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 95,
+    "__docId__": 107,
     "kind": "external",
     "name": "Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
@@ -2099,7 +2441,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 96,
+    "__docId__": 108,
     "kind": "external",
     "name": "Int8Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
@@ -2111,7 +2453,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 97,
+    "__docId__": 109,
     "kind": "external",
     "name": "Uint8Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
@@ -2123,7 +2465,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 98,
+    "__docId__": 110,
     "kind": "external",
     "name": "Uint8ClampedArray",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
@@ -2135,7 +2477,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 99,
+    "__docId__": 111,
     "kind": "external",
     "name": "Int16Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
@@ -2147,7 +2489,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 100,
+    "__docId__": 112,
     "kind": "external",
     "name": "Uint16Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
@@ -2159,7 +2501,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 101,
+    "__docId__": 113,
     "kind": "external",
     "name": "Int32Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
@@ -2171,7 +2513,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 102,
+    "__docId__": 114,
     "kind": "external",
     "name": "Uint32Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
@@ -2183,7 +2525,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 103,
+    "__docId__": 115,
     "kind": "external",
     "name": "Float32Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
@@ -2195,7 +2537,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 104,
+    "__docId__": 116,
     "kind": "external",
     "name": "Float64Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
@@ -2207,7 +2549,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 105,
+    "__docId__": 117,
     "kind": "external",
     "name": "Map",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
@@ -2219,7 +2561,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 106,
+    "__docId__": 118,
     "kind": "external",
     "name": "Set",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
@@ -2231,7 +2573,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 107,
+    "__docId__": 119,
     "kind": "external",
     "name": "WeakMap",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
@@ -2243,7 +2585,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 108,
+    "__docId__": 120,
     "kind": "external",
     "name": "WeakSet",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
@@ -2255,7 +2597,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 109,
+    "__docId__": 121,
     "kind": "external",
     "name": "ArrayBuffer",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
@@ -2267,7 +2609,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 110,
+    "__docId__": 122,
     "kind": "external",
     "name": "DataView",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
@@ -2279,7 +2621,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 111,
+    "__docId__": 123,
     "kind": "external",
     "name": "JSON",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
@@ -2291,7 +2633,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 112,
+    "__docId__": 124,
     "kind": "external",
     "name": "Promise",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
@@ -2303,7 +2645,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 113,
+    "__docId__": 125,
     "kind": "external",
     "name": "Generator",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
@@ -2315,7 +2657,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 114,
+    "__docId__": 126,
     "kind": "external",
     "name": "GeneratorFunction",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
@@ -2327,7 +2669,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 115,
+    "__docId__": 127,
     "kind": "external",
     "name": "Reflect",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
@@ -2339,7 +2681,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 116,
+    "__docId__": 128,
     "kind": "external",
     "name": "Proxy",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
@@ -2352,7 +2694,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 118,
+    "__docId__": 130,
     "kind": "external",
     "name": "CanvasRenderingContext2D",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D",
@@ -2364,7 +2706,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 119,
+    "__docId__": 131,
     "kind": "external",
     "name": "DocumentFragment",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment",
@@ -2376,7 +2718,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 120,
+    "__docId__": 132,
     "kind": "external",
     "name": "Element",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Element",
@@ -2388,7 +2730,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 121,
+    "__docId__": 133,
     "kind": "external",
     "name": "Event",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Event",
@@ -2400,7 +2742,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 122,
+    "__docId__": 134,
     "kind": "external",
     "name": "Node",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Node",
@@ -2412,7 +2754,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 123,
+    "__docId__": 135,
     "kind": "external",
     "name": "NodeList",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/NodeList",
@@ -2424,7 +2766,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 124,
+    "__docId__": 136,
     "kind": "external",
     "name": "XMLHttpRequest",
     "externalLink": "https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest",
@@ -2436,7 +2778,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 125,
+    "__docId__": 137,
     "kind": "external",
     "name": "AudioContext",
     "externalLink": "https://developer.mozilla.org/en/docs/Web/API/AudioContext",
