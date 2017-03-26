@@ -26,7 +26,7 @@ class Game {
 		if (this.onUpdate) {
 			DEFER(this.onUpdate.bind(this));
 		}
-		setTimeout(this.loop.bind(this), this.interval);	
+		setTimeout(() => DEFER(this.loop.bind(this)), this.interval);	
 	}
 	tick () {
 		const now = NOW();
