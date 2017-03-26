@@ -14,6 +14,7 @@ const HERO_ID = 0;
 const HERO_X = 1;
 const HERO_Y = 2;
 const HERO_ATAN2 = 3;
+const ACCURACY = 10;
 
 class Game {
 	constructor (interval = 10) {
@@ -119,7 +120,7 @@ class Level {
 		for (let y = 0; y < this.height; y++) {
 			for (let x = 0; x < this.width; x++) {
 				const pos = y * this.width + x;
-				const offset = `${x}:{y}`;
+				const offset = `${x}:${y}`;
 				this.blocks[offset] = [
 					tiled.layers[0].data[pos], 
 					tiled.layers[1].data[pos]
@@ -167,7 +168,7 @@ class Hero {
 		if (this.body.speed) {
 			const x = this.body.x + this.body.speed * fmath.cos(this.body.atan2) * delta;
 			const y = this.body.y + this.body.speed * fmath.sin(this.body.atan2) * delta;
-			if (level.isFreeCell(x, y)) {
+			if (level.isFreeCell(Math.floor(x / ACCURACY), Math.floor(y / ACCURACY))) {
 				this.body.x = x;
 				this.body.y = y;
 			} else {
@@ -211,6 +212,7 @@ function randomId () {
 if (typeof module !== 'undefined') {	
 	module.exports = {
 		DEFER,
+		ACCURACY,
 		Game,
 		Level,
 		Block,
