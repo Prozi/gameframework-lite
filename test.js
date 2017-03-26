@@ -4,7 +4,7 @@ console.log('require');
 const { Game, Level, Hero, Block } = require('.');
 
 console.log('test Game()');
-const g = new Game();
+const game = new Game();
 
 console.log('test Block()');
 const blocks = {};
@@ -16,12 +16,16 @@ for (let y = 0; y < 999; y++) {
 
 console.log('test Hero()');
 for (let l = 0; l < 99; l++) {
-	const h = new Hero();
-	h.goto(0, 0);
-	const heros = [h];
+	const heros = {};
+	const hero = new Hero();
+	hero.goto(0, 0);
+	heros[hero.id] = hero;
 	const level = new Level({ heros, blocks });
-	g.levels.push(level);
+	game.levels.push(level);
 }
 
 console.log('test loop()');
-g.loop();
+game.onUpdate = () => {
+	console.log('loop works');
+};
+game.loop();
