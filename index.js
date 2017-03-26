@@ -8,13 +8,15 @@ const fmath = new FMath();
 const DEFER = (typeof process !== 'undefined') ? process.nextTick : setTimeout;
 const NOW = (typeof performance !== 'undefined') ? performance.now.bind(performance) : Date.now.bind(Date);
 
-// variable constants
+// just constants
 const HALF_PI = Math.PI / 2;
+
 const HERO_ID = 0;
 const HERO_X = 1;
 const HERO_Y = 2;
 const HERO_ATAN2 = 3;
-const BOTTOM = Math.atan2(1, 0);
+
+const BOTTOM = atan2(10, 0);
 
 class Game {
 	constructor (interval = 10) {
@@ -31,7 +33,7 @@ class Game {
 	}
 	tick () {
 		const now = NOW();
-		this.delta = now - this.now;
+		this.delta = (now - this.now) / 10;
 		this.now = now;
 		this.levels.forEach((map) => {
 			DEFER(map.tick.bind(map, this));
@@ -43,7 +45,8 @@ class Level {
 	constructor (props = {}) {		
 		this.heros = props.heros || {};
 		this.blocks = props.blocks || {};
-		this.accuracy = 10; // default
+		// defaults
+		this.accuracy = 10;
 		this.gravity = 0;
 	}
 	spawn ({ body }) {
@@ -135,8 +138,8 @@ class Hero {
 	constructor (props = {}, id = randomId()) {
 		this.id = id;
 		// for moving
-		this.body = Object.assign({ 
-			speed: 0,
+		this.body = Object.assign({
+			g: 0,
 			x: undefined,
 			y: undefined,
 			atan2: BOTTOM,
@@ -168,15 +171,28 @@ class Hero {
 		if (this.onTick) {
 			this.onTick();
 		}
-		if (level.gravity) {
-			this.body.atan2 = level.gravity * BOTTOM + (1 - level.gravity) * this.body.atan2;
-		}
+		let fall = true;
 		const d = delta / level.accuracy;
 		const x = this.body.x + fmath.cos(this.body.atan2) * d;
-		const y = this.body.y + fmath.sin(this.body.atan2) * d;
+		const y = this.body.y + (this.body.g + fmath.sin(this.body.atan2)) * d
 		if (level.isFreeCell(Math.floor(x), Math.floor(y))) {
+			// exact
 			this.body.x = x;
 			this.body.y = y;
+		} else if (level.isFreeCell(Math.floor(this.body.x), Math.floor(y))) {
+			// vertical
+			this.body.y = y;
+		} else if (level.isFreeCell(Math.floor(x), Math.floor(this.body.y))) {
+			// horizontal
+			this.body.x = x;
+			fall = false;
+		} else {
+			fall = false;
+		}
+		if (fall && level.gravity) {
+			this.body.g += level.gravity * d;
+		} else {
+			this.body.g = 0;
 		}
 	}
 	goto ({ x, y }) {
