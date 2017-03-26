@@ -67,6 +67,7 @@ class View {
 	onResize (event) {
 		this.scale = this.getScale();
 		this.pixi.renderer.resize(window.innerWidth, window.innerHeight);
+		this.pixi.stage.scale.set(this.scale);
 	}
 	getScale () {
 	    return +(Math.sqrt(window.innerWidth * window.innerHeight) / this.screenSize).toFixed(2);
