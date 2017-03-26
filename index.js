@@ -58,14 +58,18 @@ class Level {
 		this.blocks = props.blocks || {};
 	}
 	isFreeCell (x, y) {
-		// todo this is just for tests
-		return true;
-		// todo this is ok
-		const block = this.blocks[`${x}:${y}`];
-		if (block) {
-			return !block.body.blocked;
+		// use override since
+		// map not compatible
+		if (!this.stops) {
+			return true;
 		}
-		return false;
+		// map imported fromTiled()
+		// and it has stop there
+		if (this.stops[`${x}:${y}`]) {
+			return false;
+		}
+		// otherwise its ok
+		return true;
 	}
 	eachHero (callback) {
 		for (let hero in this.heros) {
@@ -106,6 +110,23 @@ class Level {
 				}
 			}
 		});
+	}
+	fromTiled (tiled = {}) {
+		this.width  = tiled.width;
+		this.height = tiled.height;
+		this.blocks = {};
+		this.stops  = {};
+		for (let y = 0; y < this.height; y++) {
+			for (let x = 0; x < this.width; x++) {
+				const pos = y * this.width + x;
+				const offset = `${x}:{y}`;
+				this.blocks[offset] = [
+					tiled.layers[0].data[pos], 
+					tiled.layers[1].data[pos]
+				];
+				this.stops[offset] = tiled.layers[2].data[pos];
+			}
+		}
 	}
 }
 
