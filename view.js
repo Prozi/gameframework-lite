@@ -12,7 +12,7 @@ class View {
 			clearBeforeRender: false,
 			resolution: 1
 		});
-		this.camera = new PIXI.Container();;
+		this.camera = new PIXI.Container();
 		this.pixi.stage.addChild(this.camera);
 		this.level = new Level();
 		this.level.onUpdateHero = this._onUpdateHero.bind(this);
@@ -51,7 +51,7 @@ class View {
 			if (hero.sprite) {
 				hero.sprite.x = hero.body.x;
 				hero.sprite.y = hero.body.y;
-				this.camera.addChild(hero.sprite);
+				(this.layers ? this.layers.heros : this.camera).addChild(hero.sprite);
 			}
 		}
 	}
