@@ -15,7 +15,7 @@
 
 <header>
   <a href="./">Home</a>
-  <a href="./manual/index.html" data-ice="manualHeaderLink">Manual</a>
+  
   <a href="identifiers.html">Reference</a>
   <a href="source.html">Source</a>
   
@@ -142,7 +142,7 @@ class Level {
 	}
 	fromArray (array = []) {
 		this.eachHero((hero) =&gt; {
-			if (!array[0].find((heroArray) =&gt; heroArray.id === hero.id)) {
+			if (!array[0].find((heroArray) =&gt; heroArray[HERO_ID] === hero.id)) {
 				if (this.onRemoveHero) {
 					this.onRemoveHero(hero);
 				}
@@ -214,7 +214,7 @@ class Hero {
 	}
 	goto ({ x, y }) {
 		this.body.atan2 = atan2(y, x);
-		this.body.speed = 100;
+		this.body.speed = 1;
 	}
 }
 
