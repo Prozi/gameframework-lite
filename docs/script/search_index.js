@@ -1,11 +1,5 @@
 window.esdocSearchIndex = [
   [
-    "gameframework/src/index.js~block",
-    "class/src/index.js~Block.html",
-    "<span>Block</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
-    "class"
-  ],
-  [
     "gameframework/src/index.js~defer",
     "variable/index.html#static-variable-DEFER",
     "<span>DEFER</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
@@ -448,24 +442,6 @@ window.esdocSearchIndex = [
     "file/src/index.js.html",
     "src/index.js",
     "file"
-  ],
-  [
-    "src/index.js~block#body",
-    "class/src/index.js~Block.html#instance-member-body",
-    "src/index.js~Block#body",
-    "member"
-  ],
-  [
-    "src/index.js~block#constructor",
-    "class/src/index.js~Block.html#instance-constructor-constructor",
-    "src/index.js~Block#constructor",
-    "method"
-  ],
-  [
-    "src/index.js~block#sprite",
-    "class/src/index.js~Block.html#instance-member-sprite",
-    "src/index.js~Block#sprite",
-    "member"
   ],
   [
     "src/index.js~game#constructor",

@@ -1,17 +1,10 @@
 'use strict';
 
-const { Game, Level, Hero, Block } = require('..');
+const { Game, Level, Hero } = require('..');
 
 class MyGame extends Game {
 	constructor (interval = null) {
 		super(interval);
-		console.log('test Blocks()');
-		const blocks = {};
-		for (let y = 0; y < 99; y++) {
-			for (let x = 0; x < 99; x++) {
-				blocks[`${x}:${y}`] = new Block({ x, y, blocked: false })
-			}
-		}
 
 		console.log('test Hero()');
 		const heros = {};
@@ -24,7 +17,7 @@ class MyGame extends Game {
 		}
 
 		console.log('test Level()');
-		const level = new Level({ heros, blocks });
+		const level = new Level({ heros });
 		this.levels.push(level);
 
 		// start game

@@ -38,20 +38,6 @@ class Game {
 	}
 }
 
-class Block {
-	constructor (props = {}) {
-		// for moving
-		this.body = Object.assign({ 
-			x: undefined,
-			y: undefined,
-			blocked: undefined
-		// extend with props
-		}, props);
-		// for drawing
-		this.sprite = null;
-	}
-}
-
 class Level {
 	constructor (props = {}) {		
 		this.heros = props.heros || {};
@@ -219,7 +205,6 @@ if (typeof module !== 'undefined') {
 		DEFER,
 		Game,
 		Level,
-		Block,
 		Hero,
 		atan2
 	};
