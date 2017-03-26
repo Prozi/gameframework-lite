@@ -1,5 +1,9 @@
 ## gameframework
 
+### documentation
+
+[https://prozi.github.io/gameframework/](https://prozi.github.io/gameframework/)
+
 ### installation
 
 `npm install gameframework@latest --save`
