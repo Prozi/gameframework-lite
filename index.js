@@ -44,9 +44,9 @@ class Level {
 		this.blocks = props.blocks || {};
 		this.accuracy = 10; // default
 	}
-	spawn (hero) {
-		hero.x = Math.random() * this.width;
-		hero.y = 0;
+	spawn ({ body }) {
+		body.x = Math.random() * this.width;
+		body.y = 0;
 	}
 	isFreeCell (x, y) {
 		// use override since
