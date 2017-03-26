@@ -47,6 +47,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HERO_X">HERO_X</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HERO_Y">HERO_Y</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-NOW">NOW</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SPREAD_HEROS">SPREAD_HEROS</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-fmath">fmath</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-md5">md5</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Level">Level</a></span></span></li>
@@ -70,7 +71,7 @@ class View {
 			clearBeforeRender: false,
 			resolution: 1
 		});
-		this.camera = new PIXI.Container();;
+		this.camera = new PIXI.Container();
 		this.pixi.stage.addChild(this.camera);
 		this.level = new Level();
 		this.level.onUpdateHero = this._onUpdateHero.bind(this);
@@ -109,7 +110,7 @@ class View {
 			if (hero.sprite) {
 				hero.sprite.x = hero.body.x;
 				hero.sprite.y = hero.body.y;
-				this.camera.addChild(hero.sprite);
+				(this.layers ? this.layers.heros : this.camera).addChild(hero.sprite);
 			}
 		}
 	}

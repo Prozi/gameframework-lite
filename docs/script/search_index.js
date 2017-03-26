@@ -84,6 +84,12 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "gameframework/src/index.js~spread_heros",
+    "variable/index.html#static-variable-SPREAD_HEROS",
+    "<span>SPREAD_HEROS</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
+    "variable"
+  ],
+  [
     "gameframework/src/view.js~view",
     "class/src/view.js~View.html",
     "<span>View</span> <span class=\"search-result-import-path\">gameframework/src/view.js</span>",
@@ -522,6 +528,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/index.js~hero#move",
+    "class/src/index.js~Hero.html#instance-method-move",
+    "src/index.js~Hero#move",
+    "method"
+  ],
+  [
     "src/index.js~hero#sprite",
     "class/src/index.js~Hero.html#instance-member-sprite",
     "src/index.js~Hero#sprite",
@@ -556,6 +568,18 @@ window.esdocSearchIndex = [
     "class/src/index.js~Level.html#instance-constructor-constructor",
     "src/index.js~Level#constructor",
     "method"
+  ],
+  [
+    "src/index.js~level#distance",
+    "class/src/index.js~Level.html#instance-method-distance",
+    "src/index.js~Level#distance",
+    "method"
+  ],
+  [
+    "src/index.js~level#distances",
+    "class/src/index.js~Level.html#instance-member-distances",
+    "src/index.js~Level#distances",
+    "member"
   ],
   [
     "src/index.js~level#eachhero",
@@ -597,6 +621,12 @@ window.esdocSearchIndex = [
     "src/index.js~level#isfreecell",
     "class/src/index.js~Level.html#instance-method-isFreeCell",
     "src/index.js~Level#isFreeCell",
+    "method"
+  ],
+  [
+    "src/index.js~level#physics",
+    "class/src/index.js~Level.html#instance-method-physics",
+    "src/index.js~Level#physics",
     "method"
   ],
   [

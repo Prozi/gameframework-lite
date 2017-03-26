@@ -17,6 +17,7 @@ const HERO_Y = 2;
 const HERO_ATAN2 = 3;
 
 const BOTTOM = atan2(10, 0);
+const SPREAD_HEROS = 1;
 
 class Game {
 	constructor (interval = 10) {
@@ -79,6 +80,48 @@ class Level {
 	}
 	tick ({ delta }) {
 		this.eachHero((hero) => DEFER(hero.tick.bind(hero, { level: this, delta })));
+		this.physics();
+	}
+	distance (dx, dy) {
+		return Math.sqrt(dx * dx + dy * dy);
+	}
+	physics () {
+		this.distances = {};
+		this.eachHero((hero1) => {
+			this.eachHero((hero2) => {
+				if (hero1.id !== hero2.id) {
+					const key = [hero1.id, hero2.id].sort().join(':');
+					if (!this.distances[key]) {
+						this.distances[key] = this.distance(
+							hero1.body.x - hero2.body.x, 
+							hero1.body.y - hero2.body.y
+						);
+					}
+				}
+			});
+		});
+		// spread heros
+		for (let key in this.distances) {
+			if (this.distances.hasOwnProperty(key)) {
+				const distance = this.distances[key];
+				if (distance < SPREAD_HEROS) {
+					const split = key.split(':');
+					const hero1 = this.heros[split[0]];
+					const hero2 = this.heros[split[1]];
+					if (hero1 && hero2) {
+						const r = Math.atan2(
+							hero1.body.y - hero2.body.y, 
+							hero1.body.x - hero2.body.x
+						);
+						const diff = (distance - SPREAD_HEROS) / 2;
+						const cos = diff * fmath.cos(r);
+						const sin = diff * fmath.sin(r);
+						hero1.move({ level: this, x: hero1.body.x - cos, y: hero1.body.y - sin, d: 1 });
+						hero2.move({ level: this, x: hero2.body.x + cos, y: hero2.body.y + sin, d: 1 });
+					}
+				}
+			}
+		}
 	}
 	toArray () {
 		const array = [[]];
@@ -171,10 +214,13 @@ class Hero {
 		if (this.onTick) {
 			this.onTick();
 		}
-		let fall = true;
 		const d = delta / level.accuracy;
 		const x = this.body.x + fmath.cos(this.body.atan2) * d;
-		const y = this.body.y + (this.body.g + fmath.sin(this.body.atan2)) * d
+		const y = this.body.y + (this.body.g + fmath.sin(this.body.atan2)) * d;
+		this.move({ level, x, y, d });
+	}
+	move ({ level, x, y, d }) {
+		let fall = true;
 		if (level.isFreeCell(Math.floor(x), Math.floor(y))) {
 			// exact
 			this.body.x = x;
@@ -193,7 +239,7 @@ class Hero {
 			this.body.g += level.gravity * d;
 		} else {
 			this.body.g = 0;
-		}
+		}		
 	}
 	goto ({ x, y }) {
 		this.body.atan2 = atan2(y, x);
