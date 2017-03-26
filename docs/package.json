@@ -1,0 +1,29 @@
+{
+  "name": "gameframework",
+  "version": "1.0.11",
+  "description": "game framework for 2d games and physics",
+  "main": "index.js",
+  "scripts": {
+    "build": "PRODUCTION=true webpack",
+    "build:dev": "PRODUCTION= webpack",
+    "test": "node test"
+  },
+  "author": "Jacek Pietal <prozi85@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "fmath": "^1.0.1",
+    "md5": "^2.2.1",
+    "pixi.js": "^4.4.3"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-es2015": "^6.24.0",
+    "webpack": "^2.3.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Prozi/gameframework.git"
+  }
+}

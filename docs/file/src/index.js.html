@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">src/index.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  <a href="./manual/index.html" data-ice="manualHeaderLink">Manual</a>
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <a data-ice="repoURL" href="https://github.com/Prozi/gameframework.git" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~Block.html">Block</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~Game.html">Game</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~Hero.html">Hero</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~Level.html">Level</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/view.js~View.html">View</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-atan2">atan2</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomId">randomId</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-DEFER">DEFER</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-FMath">FMath</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HALF_PI">HALF_PI</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HERO_ATAN2">HERO_ATAN2</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HERO_ID">HERO_ID</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HERO_X">HERO_X</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HERO_Y">HERO_Y</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-NOW">NOW</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-fmath">fmath</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-md5">md5</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Level">Level</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-PIXI">PIXI</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/index.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
+
+const md5 = require(&apos;md5&apos;);
+const FMath = require(&apos;fmath&apos;);
+const fmath = new FMath();
+
+// function constants
+const DEFER = (typeof process !== &apos;undefined&apos;) ? process.nextTick : setTimeout;
+const NOW = (typeof performance !== &apos;undefined&apos;) ? performance.now.bind(performance) : Date.now.bind(Date);
+
+// variable constants
+const HALF_PI = Math.PI / 2;
+const HERO_ID = 0;
+const HERO_X = 1;
+const HERO_Y = 2;
+const HERO_ATAN2 = 3;
+
+class Game {
+	constructor (interval = 10) {
+		this.levels = [];
+		this.interval = interval;
+		this.now = NOW();
+	}
+	loop () {
+		DEFER(this.tick.bind(this));
+		if (this.onUpdate) {
+			DEFER(this.onUpdate.bind(this));
+		}
+		setTimeout(this.loop.bind(this), this.interval);	
+	}
+	tick () {
+		const now = NOW();
+		this.delta = (now - this.now) / 1000;
+		this.now = now;
+		this.levels.forEach((map) =&gt; {
+			DEFER(map.tick.bind(map, this));
+		});
+	}
+}
+
+class Block {
+	constructor (props = {}) {
+		// for moving
+		this.body = Object.assign({ 
+			x: undefined,
+			y: undefined,
+			blocked: undefined
+		// extend with props
+		}, props);
+		// for drawing
+		this.sprite = null;
+	}
+}
+
+class Level {
+	constructor (props = {}) {		
+		this.heros = props.heros || {};
+		this.blocks = props.blocks || {};
+	}
+	isFreeCell (x, y) {
+		// todo this is just for tests
+		return true;
+		// todo this is ok
+		const block = this.blocks[`${x}:${y}`];
+		if (block) {
+			return !block.body.blocked;
+		}
+		return false;
+	}
+	eachHero (callback) {
+		for (let hero in this.heros) {
+			if (this.heros.hasOwnProperty(hero)) {
+				callback(this.heros[hero]);
+			}
+		}
+	}
+	tick ({ delta }) {
+		this.eachHero((hero) =&gt; DEFER(hero.tick.bind(hero, { level: this, delta })));
+	}
+	toArray () {
+		const array = [[]];
+		this.eachHero((hero) =&gt; array[0].push(hero.toArray()));
+		return array;
+	}
+	fromArray (array = []) {
+		this.eachHero((hero) =&gt; {
+			if (!array[0].find((heroArray) =&gt; heroArray.id === hero.id)) {
+				if (this.onRemoveHero) {
+					this.onRemoveHero(hero);
+				}
+				delete this.heros[hero.id];
+			}
+		});
+		array[0].forEach((heroArray) =&gt; {
+			const id = heroArray[HERO_ID];
+			if (this.heros[id]) {
+				this.heros[id].fromArray(heroArray);
+				if (this.onUpdateHero) {
+					this.onUpdateHero(this.heros[id]);
+				}
+			} else {
+				this.heros[id] = new Hero({}, id);
+				this.heros[id].fromArray(heroArray);
+				if (this.onCreateHero) {
+					this.onCreateHero(this.heros[id]);
+				}
+			}
+		});
+	}
+}
+
+class Hero {
+	constructor (props = {}, id = randomId()) {
+		this.id = id;
+		// for moving
+		this.body = Object.assign({ 
+			speed: 0,
+			x: undefined,
+			y: undefined,
+			atan2: undefined,
+		// extend with props
+		}, props);
+		// for drawing
+		this.sprite = null;
+	}
+	toArray () {
+		return [
+			this.id,
+			this.body.x,
+			this.body.y,
+			this.body.atan2
+		];
+	}
+	fromArray (array = [], force = false) {
+		if (force) {
+			this.id = array[HERO_ID];
+		}
+		if (force || (this.id === array[HERO_ID])) {
+			this.body.x = array[HERO_X];
+			this.body.y = array[HERO_Y];
+			this.body.atan2 = array[HERO_ATAN2];
+		}
+		return this;
+	}
+	tick ({ level, delta }) {
+		if (this.body.speed) {
+			const x = this.body.x + this.body.speed * fmath.cos(this.body.atan2) * delta;
+			const y = this.body.y + this.body.speed * fmath.sin(this.body.atan2) * delta;
+			if (level.isFreeCell(x, y)) {
+				this.body.x = x;
+				this.body.y = y;
+			} else {
+				this.body.speed = 0;
+			}
+		}
+	}
+	goto ({ x, y }) {
+		this.body.atan2 = atan2(y, x);
+		this.body.speed = 100;
+	}
+}
+
+function atan2 (y, x) {
+	if (x &gt; 0) {
+		return fmath.atan(y / x);
+	}
+	if (x &lt; 0) {
+		if (y &gt;= 0) {
+			return fmath.atan(y / x) + Math.PI;
+		}
+		return fmath.atan(y / x) - Math.PI;
+	}
+	if (x === 0) {
+		if (y === 0) {
+			return undefined;
+		}
+		if (y &gt; 0) {
+			return HALF_PI;
+		}
+		if (y &lt; 0) {
+			return -HALF_PI;
+		}
+	}
+}
+
+function randomId () {
+	return md5(Math.random()).slice(0, 7);
+}
+
+if (typeof module !== &apos;undefined&apos;) {	
+	module.exports = {
+		DEFER,
+		Game,
+		Level,
+		Block,
+		Hero,
+		atan2
+	};
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.5.2)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

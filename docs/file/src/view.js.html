@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">src/view.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  <a href="./manual/index.html" data-ice="manualHeaderLink">Manual</a>
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <a data-ice="repoURL" href="https://github.com/Prozi/gameframework.git" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~Block.html">Block</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~Game.html">Game</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~Hero.html">Hero</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~Level.html">Level</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/view.js~View.html">View</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-atan2">atan2</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomId">randomId</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-DEFER">DEFER</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-FMath">FMath</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HALF_PI">HALF_PI</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HERO_ATAN2">HERO_ATAN2</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HERO_ID">HERO_ID</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HERO_X">HERO_X</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HERO_Y">HERO_Y</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-NOW">NOW</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-fmath">fmath</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-md5">md5</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Level">Level</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-PIXI">PIXI</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/view.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
+
+const PIXI = require(&apos;pixi.js&apos;);
+const Level = require(&apos;.&apos;).Level;
+
+class View {
+	constructor (screenSize = 480) {
+		this.screenSize = screenSize;
+		this.scale = this.getScale();
+		this.pixi = new PIXI.Application(window.innerWidth, window.innerHeight, {
+			autoResize: false,
+			roundPixels: true,
+			clearBeforeRender: false,
+			resolution: Math.ceil(this.scale)
+		});
+		this.camera = new PIXI.Container();
+		this.cameraLookAt = {
+			x: window.innerWidth / 2,
+			y: window.innerHeight / 2
+		};
+		this.pixi.stage.addChild(this.camera);
+		this.level = new Level();
+		this.level.onUpdateHero = this._onUpdateHero.bind(this);
+		this.level.onCreateHero = this._onCreateHero.bind(this);
+		this.level.onRemoveHero = this._onRemoveHero.bind(this);
+		document.body.appendChild(this.pixi.view);
+		window.addEventListener(&apos;resize&apos;, this.onResize.bind(this), true);
+		this.pixi.start();
+	}
+	onUpdateHero (hero) {
+		// this is what you should override
+	}
+	_onUpdateHero (hero) {
+		this.onUpdateHero(hero);
+		if (hero.sprite) {
+			hero.sprite.x = hero.x;
+			hero.sprite.y = hero.y;
+		}
+	}
+	// this is what you should override
+	onCreateHero (hero) {
+		hero.sprite = PIXI.Sprite.fromImage(&apos;bunny.png&apos;);
+		hero.sprite.anchor.set(0.5);		
+	}
+	_onCreateHero (hero) {
+		this.onCreateHero(hero);
+		if (hero.sprite) {
+			hero.sprite.x = hero.body.x;
+			hero.sprite.y = hero.body.y;
+			this.camera.addChild(hero.sprite);
+		}
+	}
+	onRemoveHero (hero) {
+		// this is what you should override
+	}
+	_onRemoveHero (hero) {
+		if (hero.sprite &amp;&amp; hero.sprite.parent) {
+			hero.sprite.parent.removeChild(hero.sprite);
+		}
+	}
+	onResize (event) {
+		this.scale = this.getScale();
+		this.pixi.renderer.resize(window.innerWidth, window.innerHeight);
+	}
+	getScale () {
+	    return +(Math.sqrt(window.innerWidth * window.innerHeight) / this.screenSize).toFixed(2);
+	}
+}
+
+if (typeof module !== &apos;undefined&apos;) {	
+	module.exports = View;
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.5.2)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
