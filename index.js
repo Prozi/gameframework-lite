@@ -14,7 +14,6 @@ const HERO_ID = 0;
 const HERO_X = 1;
 const HERO_Y = 2;
 const HERO_ATAN2 = 3;
-const ACCURACY = 10;
 
 class Game {
 	constructor (interval = 10) {
@@ -57,6 +56,7 @@ class Level {
 	constructor (props = {}) {		
 		this.heros = props.heros || {};
 		this.blocks = props.blocks || {};
+		this.accuracy = 10; // default
 	}
 	isFreeCell (x, y) {
 		// use override since
@@ -117,6 +117,11 @@ class Level {
 		this.height = tiled.height;
 		this.blocks = {};
 		this.stops  = {};
+		this.tileset = {
+			tilewidth: tiled.tilesets[0].tilewidth,
+			imagewidth: tiled.tilesets[0].imagewidth,
+		};
+		this.accuracy = this.tileset.tilewidth;
 		for (let y = 0; y < this.height; y++) {
 			for (let x = 0; x < this.width; x++) {
 				const pos = y * this.width + x;
@@ -166,9 +171,9 @@ class Hero {
 	}
 	tick ({ level, delta }) {
 		if (this.body.speed) {
-			const x = this.body.x + this.body.speed * fmath.cos(this.body.atan2) * delta;
-			const y = this.body.y + this.body.speed * fmath.sin(this.body.atan2) * delta;
-			if (level.isFreeCell(Math.floor(x / ACCURACY), Math.floor(y / ACCURACY))) {
+			const x = this.body.x + this.body.speed * fmath.cos(this.body.atan2) * delta / level.accuracy;
+			const y = this.body.y + this.body.speed * fmath.sin(this.body.atan2) * delta / level.accuracy;
+			if (level.isFreeCell(Math.floor(x), Math.floor(y))) {
 				this.body.x = x;
 				this.body.y = y;
 			} else {
@@ -212,7 +217,6 @@ function randomId () {
 if (typeof module !== 'undefined') {	
 	module.exports = {
 		DEFER,
-		ACCURACY,
 		Game,
 		Level,
 		Block,

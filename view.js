@@ -1,7 +1,7 @@
 'use strict';
 
 const PIXI = require('pixi.js');
-const { Level, ACCURACY } = require('.');
+const Level = require('.').Level;
 
 class View {
 	constructor (screenSize = 480) {
@@ -33,8 +33,8 @@ class View {
 	_onUpdateHero (hero) {
 		this.onUpdateHero(hero);
 		if (hero.sprite) {
-			hero.sprite.x = hero.body.x * ACCURACY;
-			hero.sprite.y = hero.body.y * ACCURACY;
+			hero.sprite.x = hero.body.x * this.level.accuracy;
+			hero.sprite.y = hero.body.y * this.level.accuracy;
 		}
 	}
 	// this is what you should override
