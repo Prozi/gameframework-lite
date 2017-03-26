@@ -12,11 +12,7 @@ class View {
 			clearBeforeRender: false,
 			resolution: 1
 		});
-		this.camera = new PIXI.Container();
-		this.cameraLookAt = {
-			x: window.innerWidth / 2,
-			y: window.innerHeight / 2
-		};
+		this.camera = new PIXI.Container();;
 		this.pixi.stage.addChild(this.camera);
 		this.level = new Level();
 		this.level.onUpdateHero = this._onUpdateHero.bind(this);
@@ -29,6 +25,10 @@ class View {
 	}
 	get hero () {
 		return this.level.heros[this.id];
+	}
+	cameraToHero (hero) {
+		this.camera.x = Math.floor(-hero.sprite.x + window.innerWidth / 2 / this.scale);
+		this.camera.y = Math.floor(-hero.sprite.y + window.innerHeight / 2 / this.scale);
 	}
 	onUpdateHero (hero) {
 		// this is what you should override

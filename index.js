@@ -50,6 +50,9 @@ class Level {
 		if (!this.stops) {
 			return true;
 		}
+		if (x < 0 || y < 0 || x + 1 > this.width || y + 1 > this.height) {
+			return false;
+		}
 		// map imported fromTiled()
 		// and it has stop there
 		if (this.stops[`${x}:${y}`]) {
