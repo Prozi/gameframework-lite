@@ -2,11 +2,11 @@
 
 ### installation
 
-`npm install gameframework --save`
+`npm install gameframework@latest --save`
 
 or
 
-`yarn add gameframework --save`
+`yarn add gameframework@latest --save`
 
 ### testing
 
