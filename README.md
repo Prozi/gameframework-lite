@@ -29,6 +29,25 @@ class MyView extends View {
 new MyView();
 ```
 
+```javascript
+const { Level, Game } = require('gameframework');
+
+// this is how you should use Game
+class MyGame extends Game {
+	// one room game example
+	constructor () {
+		super();
+		this.levels.push(new Level());
+	}
+	// override what you need
+	onUpdate () {
+		console.log('tick');
+	}
+}
+
+new MyGame();
+```
+
 
 `view index.html to see benchmark/test`
 
