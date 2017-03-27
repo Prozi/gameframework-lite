@@ -81,9 +81,6 @@ class Level {
 		this.eachHero((hero) => DEFER(hero.tick.bind(hero, { level: this, delta })));
 		this.physics();
 	}
-	distance (dx, dy) {
-		return Math.sqrt(dx * dx + dy * dy);
-	}
 	physics () {
 		this.distances = {};
 		this.eachHero((hero1) => {
@@ -91,7 +88,7 @@ class Level {
 				if (hero1.id !== hero2.id) {
 					const key = [hero1.id, hero2.id].sort().join(':');
 					if (!this.distances[key]) {
-						this.distances[key] = this.distance(
+						this.distances[key] = distance(
 							hero1.body.x - hero2.body.x, 
 							hero1.body.y - hero2.body.y
 						);
@@ -102,8 +99,8 @@ class Level {
 		// spread heros
 		for (let key in this.distances) {
 			if (this.distances.hasOwnProperty(key)) {
-				const distance = this.distances[key];
-				if (distance < SPREAD_HEROS) {
+				const dist = this.distances[key];
+				if (dist < SPREAD_HEROS) {
 					const split = key.split(':');
 					const hero1 = this.heros[split[0]];
 					const hero2 = this.heros[split[1]];
@@ -112,7 +109,7 @@ class Level {
 							hero1.body.y - hero2.body.y, 
 							hero1.body.x - hero2.body.x
 						);
-						const diff = (distance - SPREAD_HEROS) / 2;
+						const diff = (dist - SPREAD_HEROS) / 2;
 						const cos = diff * fmath.cos(r);
 						const sin = diff * fmath.sin(r);
 						hero1.move({ level: this, x: hero1.body.x - cos, y: hero1.body.y - sin, d: 1 });
@@ -184,8 +181,6 @@ class Hero {
 			// position
 			x: undefined,
 			y: undefined,
-			// direction
-			atan2: BOTTOM,
 			// acceleration
 			vx: 0,
 			vy: 0,
@@ -232,6 +227,7 @@ class Hero {
 		} else if (level.isFreeCell(Math.floor(x), Math.floor(this.body.y))) {
 			// horizontal
 			this.body.x = x;
+			fall = false;
 		} else {
 			fall = false;
 		}
@@ -242,9 +238,9 @@ class Hero {
 		}		
 	}
 	goto ({ x, y }) {
-		this.body.atan2 = atan2(y, x);
-		this.body.vx = fmath.cos(this.body.atan2);
-		this.body.vy = fmath.sin(this.body.atan2);
+		const r = atan2(y, x);
+		this.body.vx = Math.min(distance(x, 0), fmath.cos(r));
+		this.body.vy = fmath.sin(r);
 	}
 }
 
@@ -275,12 +271,18 @@ function randomId () {
 	return md5(Math.random()).slice(0, 7);
 }
 
+function distance (dx, dy) {
+	return Math.sqrt(dx * dx + dy * dy);
+}
+
 if (typeof module !== 'undefined') {	
 	module.exports = {
 		DEFER,
 		Game,
 		Level,
 		Hero,
-		atan2
+		atan2,
+		randomId,
+		distance,
 	};
 }

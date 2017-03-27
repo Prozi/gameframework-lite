@@ -96,6 +96,12 @@ window.esdocSearchIndex = [
     "function"
   ],
   [
+    "gameframework/src/index.js~distance",
+    "function/index.html#static-function-distance",
+    "<span>distance</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
+    "function"
+  ],
+  [
     "gameframework/src/index.js~fmath",
     "variable/index.html#static-variable-fmath",
     "<span>fmath</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
@@ -561,12 +567,6 @@ window.esdocSearchIndex = [
     "src/index.js~level#constructor",
     "class/src/index.js~Level.html#instance-constructor-constructor",
     "src/index.js~Level#constructor",
-    "method"
-  ],
-  [
-    "src/index.js~level#distance",
-    "class/src/index.js~Level.html#instance-method-distance",
-    "src/index.js~Level#distance",
     "method"
   ],
   [

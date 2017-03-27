@@ -37,6 +37,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~Level.html">Level</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/view.js~View.html">View</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-atan2">atan2</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-distance">distance</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomId">randomId</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-BOTTOM">BOTTOM</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-DEFER">DEFER</a></span></span></li>
@@ -139,9 +140,6 @@ class Level {
 		this.eachHero((hero) =&gt; DEFER(hero.tick.bind(hero, { level: this, delta })));
 		this.physics();
 	}
-	distance (dx, dy) {
-		return Math.sqrt(dx * dx + dy * dy);
-	}
 	physics () {
 		this.distances = {};
 		this.eachHero((hero1) =&gt; {
@@ -149,7 +147,7 @@ class Level {
 				if (hero1.id !== hero2.id) {
 					const key = [hero1.id, hero2.id].sort().join(&apos;:&apos;);
 					if (!this.distances[key]) {
-						this.distances[key] = this.distance(
+						this.distances[key] = distance(
 							hero1.body.x - hero2.body.x, 
 							hero1.body.y - hero2.body.y
 						);
@@ -160,8 +158,8 @@ class Level {
 		// spread heros
 		for (let key in this.distances) {
 			if (this.distances.hasOwnProperty(key)) {
-				const distance = this.distances[key];
-				if (distance &lt; SPREAD_HEROS) {
+				const dist = this.distances[key];
+				if (dist &lt; SPREAD_HEROS) {
 					const split = key.split(&apos;:&apos;);
 					const hero1 = this.heros[split[0]];
 					const hero2 = this.heros[split[1]];
@@ -170,7 +168,7 @@ class Level {
 							hero1.body.y - hero2.body.y, 
 							hero1.body.x - hero2.body.x
 						);
-						const diff = (distance - SPREAD_HEROS) / 2;
+						const diff = (dist - SPREAD_HEROS) / 2;
 						const cos = diff * fmath.cos(r);
 						const sin = diff * fmath.sin(r);
 						hero1.move({ level: this, x: hero1.body.x - cos, y: hero1.body.y - sin, d: 1 });
@@ -242,8 +240,6 @@ class Hero {
 			// position
 			x: undefined,
 			y: undefined,
-			// direction
-			atan2: BOTTOM,
 			// acceleration
 			vx: 0,
 			vy: 0,
@@ -290,6 +286,7 @@ class Hero {
 		} else if (level.isFreeCell(Math.floor(x), Math.floor(this.body.y))) {
 			// horizontal
 			this.body.x = x;
+			fall = false;
 		} else {
 			fall = false;
 		}
@@ -300,9 +297,9 @@ class Hero {
 		}		
 	}
 	goto ({ x, y }) {
-		this.body.atan2 = atan2(y, x);
-		this.body.vx = fmath.cos(this.body.atan2);
-		this.body.vy = fmath.sin(this.body.atan2);
+		const r = atan2(y, x);
+		this.body.vx = Math.min(distance(x, 0), fmath.cos(r));
+		this.body.vy = fmath.sin(r);
 	}
 }
 
@@ -333,13 +330,19 @@ function randomId () {
 	return md5(Math.random()).slice(0, 7);
 }
 
+function distance (dx, dy) {
+	return Math.sqrt(dx * dx + dy * dy);
+}
+
 if (typeof module !== &apos;undefined&apos;) {	
 	module.exports = {
 		DEFER,
 		Game,
 		Level,
 		Hero,
-		atan2
+		atan2,
+		randomId,
+		distance,
 	};
 }
 </code></pre>

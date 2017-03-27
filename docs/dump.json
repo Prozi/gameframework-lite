@@ -3,7 +3,7 @@
     "__docId__": 0,
     "kind": "file",
     "name": "src/index.js",
-    "content": "'use strict';\n\nconst md5 = require('md5');\nconst FMath = require('fmath');\nconst fmath = new FMath();\n\n// function constants\nconst DEFER = (typeof process !== 'undefined') ? process.nextTick : setTimeout;\nconst NOW = (typeof performance !== 'undefined') ? performance.now.bind(performance) : Date.now.bind(Date);\n\n// just constants\nconst HALF_PI = Math.PI / 2;\n\nconst HERO_ID = 0;\nconst HERO_X = 1;\nconst HERO_Y = 2;\n\nconst BOTTOM = atan2(10, 0);\nconst SPREAD_HEROS = 2;\n\nclass Game {\n\tconstructor (interval = 10) {\n\t\tthis.levels = [];\n\t\tthis.interval = interval;\n\t\tthis.now = NOW();\n\t}\n\tloop () {\n\t\tDEFER(this.tick.bind(this));\n\t\tif (this.onUpdate) {\n\t\t\tDEFER(this.onUpdate.bind(this));\n\t\t}\n\t\tsetTimeout(() => DEFER(this.loop.bind(this)), this.interval);\t\n\t}\n\ttick () {\n\t\tconst now = NOW();\n\t\tthis.delta = (now - this.now) / 10;\n\t\tthis.now = now;\n\t\tthis.levels.forEach((map) => {\n\t\t\tDEFER(map.tick.bind(map, this));\n\t\t});\n\t}\n}\n\nclass Level {\n\tconstructor (props = {}) {\t\t\n\t\tthis.heros = props.heros || {};\n\t\tthis.blocks = props.blocks || {};\n\t\t// defaults\n\t\tthis.accuracy = 10;\n\t\tthis.gravity = 0;\n\t}\n\tspawn ({ body }) {\n\t\tbody.x = Math.random() * this.width;\n\t\tbody.y = 0;\n\t}\n\tisFreeCell (x, y) {\n\t\t// use override since\n\t\t// map not compatible\n\t\tif (!this.stops) {\n\t\t\treturn true;\n\t\t}\n\t\tif (x < 0 || y < 0 || x + 1 > this.width || y + 1 > this.height) {\n\t\t\treturn false;\n\t\t}\n\t\t// map imported fromTiled()\n\t\t// and it has stop there\n\t\tif (this.stops[`${x}:${y}`]) {\n\t\t\treturn false;\n\t\t}\n\t\t// otherwise its ok\n\t\treturn true;\n\t}\n\teachHero (callback) {\n\t\tfor (let hero in this.heros) {\n\t\t\tif (this.heros.hasOwnProperty(hero)) {\n\t\t\t\tcallback(this.heros[hero]);\n\t\t\t}\n\t\t}\n\t}\n\ttick ({ delta }) {\n\t\tthis.eachHero((hero) => DEFER(hero.tick.bind(hero, { level: this, delta })));\n\t\tthis.physics();\n\t}\n\tdistance (dx, dy) {\n\t\treturn Math.sqrt(dx * dx + dy * dy);\n\t}\n\tphysics () {\n\t\tthis.distances = {};\n\t\tthis.eachHero((hero1) => {\n\t\t\tthis.eachHero((hero2) => {\n\t\t\t\tif (hero1.id !== hero2.id) {\n\t\t\t\t\tconst key = [hero1.id, hero2.id].sort().join(':');\n\t\t\t\t\tif (!this.distances[key]) {\n\t\t\t\t\t\tthis.distances[key] = this.distance(\n\t\t\t\t\t\t\thero1.body.x - hero2.body.x, \n\t\t\t\t\t\t\thero1.body.y - hero2.body.y\n\t\t\t\t\t\t);\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t});\n\t\t});\n\t\t// spread heros\n\t\tfor (let key in this.distances) {\n\t\t\tif (this.distances.hasOwnProperty(key)) {\n\t\t\t\tconst distance = this.distances[key];\n\t\t\t\tif (distance < SPREAD_HEROS) {\n\t\t\t\t\tconst split = key.split(':');\n\t\t\t\t\tconst hero1 = this.heros[split[0]];\n\t\t\t\t\tconst hero2 = this.heros[split[1]];\n\t\t\t\t\tif (hero1 && hero2) {\n\t\t\t\t\t\tconst r = Math.atan2(\n\t\t\t\t\t\t\thero1.body.y - hero2.body.y, \n\t\t\t\t\t\t\thero1.body.x - hero2.body.x\n\t\t\t\t\t\t);\n\t\t\t\t\t\tconst diff = (distance - SPREAD_HEROS) / 2;\n\t\t\t\t\t\tconst cos = diff * fmath.cos(r);\n\t\t\t\t\t\tconst sin = diff * fmath.sin(r);\n\t\t\t\t\t\thero1.move({ level: this, x: hero1.body.x - cos, y: hero1.body.y - sin, d: 1 });\n\t\t\t\t\t\thero2.move({ level: this, x: hero2.body.x + cos, y: hero2.body.y + sin, d: 1 });\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\ttoArray () {\n\t\tconst array = [[]];\n\t\tthis.eachHero((hero) => array[0].push(hero.toArray()));\n\t\treturn array;\n\t}\n\tfromArray (array = []) {\n\t\tthis.eachHero((hero) => {\n\t\t\tif (!array[0].find((heroArray) => heroArray[HERO_ID] === hero.id)) {\n\t\t\t\tif (this.onRemoveHero) {\n\t\t\t\t\tthis.onRemoveHero(hero);\n\t\t\t\t}\n\t\t\t\tdelete this.heros[hero.id];\n\t\t\t}\n\t\t});\n\t\tarray[0].forEach((heroArray) => {\n\t\t\tconst id = heroArray[HERO_ID];\n\t\t\tif (this.heros[id]) {\n\t\t\t\tthis.heros[id].fromArray(heroArray);\n\t\t\t\tif (this.onUpdateHero) {\n\t\t\t\t\tthis.onUpdateHero(this.heros[id]);\n\t\t\t\t}\n\t\t\t} else {\n\t\t\t\tthis.heros[id] = new Hero({}, id);\n\t\t\t\tthis.heros[id].fromArray(heroArray);\n\t\t\t\tif (this.onCreateHero) {\n\t\t\t\t\tthis.onCreateHero(this.heros[id]);\n\t\t\t\t}\n\t\t\t}\n\t\t});\n\t}\n\tfromTiled (tiled = {}) {\n\t\tthis.width  = tiled.width;\n\t\tthis.height = tiled.height;\n\t\tthis.blocks = {};\n\t\tthis.stops  = {};\n\t\tthis.tileset = {\n\t\t\ttilewidth: tiled.tilesets[0].tilewidth,\n\t\t\timagewidth: tiled.tilesets[0].imagewidth,\n\t\t};\n\t\tthis.accuracy = this.tileset.tilewidth;\n\t\tfor (let y = 0; y < this.height; y++) {\n\t\t\tfor (let x = 0; x < this.width; x++) {\n\t\t\t\tconst pos = y * this.width + x;\n\t\t\t\tconst offset = `${x}:${y}`;\n\t\t\t\tthis.blocks[offset] = [\n\t\t\t\t\ttiled.layers[0].data[pos], \n\t\t\t\t\ttiled.layers[1].data[pos]\n\t\t\t\t];\n\t\t\t\tthis.stops[offset] = tiled.layers[2].data[pos];\n\t\t\t}\n\t\t}\n\t}\n}\n\nclass Hero {\n\tconstructor (props = {}, id = randomId()) {\n\t\tthis.id = id;\n\t\t// for moving\n\t\tthis.body = Object.assign({\n\t\t\t// position\n\t\t\tx: undefined,\n\t\t\ty: undefined,\n\t\t\t// direction\n\t\t\tatan2: BOTTOM,\n\t\t\t// acceleration\n\t\t\tvx: 0,\n\t\t\tvy: 0,\n\t\t// extend with props\n\t\t}, props);\n\t\t// for drawing\n\t\tthis.sprite = null;\n\t}\n\ttoArray () {\n\t\treturn [\n\t\t\tthis.id,\n\t\t\tthis.body.x,\n\t\t\tthis.body.y,\n\t\t];\n\t}\n\tfromArray (array = [], force = false) {\n\t\tif (force) {\n\t\t\tthis.id = array[HERO_ID];\n\t\t}\n\t\tif (force || (this.id === array[HERO_ID])) {\n\t\t\tthis.body.x = array[HERO_X];\n\t\t\tthis.body.y = array[HERO_Y];\n\t\t}\n\t\treturn this;\n\t}\n\ttick ({ level, delta }) {\n\t\tif (this.onTick) {\n\t\t\tthis.onTick();\n\t\t}\n\t\tconst d = delta / level.accuracy;\n\t\tconst x = this.body.x + this.body.vx * d;\n\t\tconst y = this.body.y + this.body.vy * d;\n\t\tthis.move({ level, x, y, d });\n\t}\n\tmove ({ level, x, y, d }) {\n\t\tlet fall = true;\n\t\tif (level.isFreeCell(Math.floor(x), Math.floor(y))) {\n\t\t\t// exact\n\t\t\tthis.body.x = x;\n\t\t\tthis.body.y = y;\n\t\t} else if (level.isFreeCell(Math.floor(this.body.x), Math.floor(y))) {\n\t\t\t// vertical\n\t\t\tthis.body.y = y;\n\t\t} else if (level.isFreeCell(Math.floor(x), Math.floor(this.body.y))) {\n\t\t\t// horizontal\n\t\t\tthis.body.x = x;\n\t\t} else {\n\t\t\tfall = false;\n\t\t}\n\t\tif (fall && level.gravity) {\n\t\t\tthis.body.vy += level.gravity * d;\n\t\t} else {\n\t\t\tthis.body.vy = 0;\n\t\t}\t\t\n\t}\n\tgoto ({ x, y }) {\n\t\tthis.body.atan2 = atan2(y, x);\n\t\tthis.body.vx = fmath.cos(this.body.atan2);\n\t\tthis.body.vy = fmath.sin(this.body.atan2);\n\t}\n}\n\nfunction atan2 (y, x) {\n\tif (x > 0) {\n\t\treturn fmath.atan(y / x);\n\t}\n\tif (x < 0) {\n\t\tif (y >= 0) {\n\t\t\treturn fmath.atan(y / x) + Math.PI;\n\t\t}\n\t\treturn fmath.atan(y / x) - Math.PI;\n\t}\n\tif (x === 0) {\n\t\tif (y === 0) {\n\t\t\treturn undefined;\n\t\t}\n\t\tif (y > 0) {\n\t\t\treturn HALF_PI;\n\t\t}\n\t\tif (y < 0) {\n\t\t\treturn -HALF_PI;\n\t\t}\n\t}\n}\n\nfunction randomId () {\n\treturn md5(Math.random()).slice(0, 7);\n}\n\nif (typeof module !== 'undefined') {\t\n\tmodule.exports = {\n\t\tDEFER,\n\t\tGame,\n\t\tLevel,\n\t\tHero,\n\t\tatan2\n\t};\n}\n",
+    "content": "'use strict';\n\nconst md5 = require('md5');\nconst FMath = require('fmath');\nconst fmath = new FMath();\n\n// function constants\nconst DEFER = (typeof process !== 'undefined') ? process.nextTick : setTimeout;\nconst NOW = (typeof performance !== 'undefined') ? performance.now.bind(performance) : Date.now.bind(Date);\n\n// just constants\nconst HALF_PI = Math.PI / 2;\n\nconst HERO_ID = 0;\nconst HERO_X = 1;\nconst HERO_Y = 2;\n\nconst BOTTOM = atan2(10, 0);\nconst SPREAD_HEROS = 2;\n\nclass Game {\n\tconstructor (interval = 10) {\n\t\tthis.levels = [];\n\t\tthis.interval = interval;\n\t\tthis.now = NOW();\n\t}\n\tloop () {\n\t\tDEFER(this.tick.bind(this));\n\t\tif (this.onUpdate) {\n\t\t\tDEFER(this.onUpdate.bind(this));\n\t\t}\n\t\tsetTimeout(() => DEFER(this.loop.bind(this)), this.interval);\t\n\t}\n\ttick () {\n\t\tconst now = NOW();\n\t\tthis.delta = (now - this.now) / 10;\n\t\tthis.now = now;\n\t\tthis.levels.forEach((map) => {\n\t\t\tDEFER(map.tick.bind(map, this));\n\t\t});\n\t}\n}\n\nclass Level {\n\tconstructor (props = {}) {\t\t\n\t\tthis.heros = props.heros || {};\n\t\tthis.blocks = props.blocks || {};\n\t\t// defaults\n\t\tthis.accuracy = 10;\n\t\tthis.gravity = 0;\n\t}\n\tspawn ({ body }) {\n\t\tbody.x = Math.random() * this.width;\n\t\tbody.y = 0;\n\t}\n\tisFreeCell (x, y) {\n\t\t// use override since\n\t\t// map not compatible\n\t\tif (!this.stops) {\n\t\t\treturn true;\n\t\t}\n\t\tif (x < 0 || y < 0 || x + 1 > this.width || y + 1 > this.height) {\n\t\t\treturn false;\n\t\t}\n\t\t// map imported fromTiled()\n\t\t// and it has stop there\n\t\tif (this.stops[`${x}:${y}`]) {\n\t\t\treturn false;\n\t\t}\n\t\t// otherwise its ok\n\t\treturn true;\n\t}\n\teachHero (callback) {\n\t\tfor (let hero in this.heros) {\n\t\t\tif (this.heros.hasOwnProperty(hero)) {\n\t\t\t\tcallback(this.heros[hero]);\n\t\t\t}\n\t\t}\n\t}\n\ttick ({ delta }) {\n\t\tthis.eachHero((hero) => DEFER(hero.tick.bind(hero, { level: this, delta })));\n\t\tthis.physics();\n\t}\n\tphysics () {\n\t\tthis.distances = {};\n\t\tthis.eachHero((hero1) => {\n\t\t\tthis.eachHero((hero2) => {\n\t\t\t\tif (hero1.id !== hero2.id) {\n\t\t\t\t\tconst key = [hero1.id, hero2.id].sort().join(':');\n\t\t\t\t\tif (!this.distances[key]) {\n\t\t\t\t\t\tthis.distances[key] = distance(\n\t\t\t\t\t\t\thero1.body.x - hero2.body.x, \n\t\t\t\t\t\t\thero1.body.y - hero2.body.y\n\t\t\t\t\t\t);\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t});\n\t\t});\n\t\t// spread heros\n\t\tfor (let key in this.distances) {\n\t\t\tif (this.distances.hasOwnProperty(key)) {\n\t\t\t\tconst dist = this.distances[key];\n\t\t\t\tif (dist < SPREAD_HEROS) {\n\t\t\t\t\tconst split = key.split(':');\n\t\t\t\t\tconst hero1 = this.heros[split[0]];\n\t\t\t\t\tconst hero2 = this.heros[split[1]];\n\t\t\t\t\tif (hero1 && hero2) {\n\t\t\t\t\t\tconst r = Math.atan2(\n\t\t\t\t\t\t\thero1.body.y - hero2.body.y, \n\t\t\t\t\t\t\thero1.body.x - hero2.body.x\n\t\t\t\t\t\t);\n\t\t\t\t\t\tconst diff = (dist - SPREAD_HEROS) / 2;\n\t\t\t\t\t\tconst cos = diff * fmath.cos(r);\n\t\t\t\t\t\tconst sin = diff * fmath.sin(r);\n\t\t\t\t\t\thero1.move({ level: this, x: hero1.body.x - cos, y: hero1.body.y - sin, d: 1 });\n\t\t\t\t\t\thero2.move({ level: this, x: hero2.body.x + cos, y: hero2.body.y + sin, d: 1 });\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\ttoArray () {\n\t\tconst array = [[]];\n\t\tthis.eachHero((hero) => array[0].push(hero.toArray()));\n\t\treturn array;\n\t}\n\tfromArray (array = []) {\n\t\tthis.eachHero((hero) => {\n\t\t\tif (!array[0].find((heroArray) => heroArray[HERO_ID] === hero.id)) {\n\t\t\t\tif (this.onRemoveHero) {\n\t\t\t\t\tthis.onRemoveHero(hero);\n\t\t\t\t}\n\t\t\t\tdelete this.heros[hero.id];\n\t\t\t}\n\t\t});\n\t\tarray[0].forEach((heroArray) => {\n\t\t\tconst id = heroArray[HERO_ID];\n\t\t\tif (this.heros[id]) {\n\t\t\t\tthis.heros[id].fromArray(heroArray);\n\t\t\t\tif (this.onUpdateHero) {\n\t\t\t\t\tthis.onUpdateHero(this.heros[id]);\n\t\t\t\t}\n\t\t\t} else {\n\t\t\t\tthis.heros[id] = new Hero({}, id);\n\t\t\t\tthis.heros[id].fromArray(heroArray);\n\t\t\t\tif (this.onCreateHero) {\n\t\t\t\t\tthis.onCreateHero(this.heros[id]);\n\t\t\t\t}\n\t\t\t}\n\t\t});\n\t}\n\tfromTiled (tiled = {}) {\n\t\tthis.width  = tiled.width;\n\t\tthis.height = tiled.height;\n\t\tthis.blocks = {};\n\t\tthis.stops  = {};\n\t\tthis.tileset = {\n\t\t\ttilewidth: tiled.tilesets[0].tilewidth,\n\t\t\timagewidth: tiled.tilesets[0].imagewidth,\n\t\t};\n\t\tthis.accuracy = this.tileset.tilewidth;\n\t\tfor (let y = 0; y < this.height; y++) {\n\t\t\tfor (let x = 0; x < this.width; x++) {\n\t\t\t\tconst pos = y * this.width + x;\n\t\t\t\tconst offset = `${x}:${y}`;\n\t\t\t\tthis.blocks[offset] = [\n\t\t\t\t\ttiled.layers[0].data[pos], \n\t\t\t\t\ttiled.layers[1].data[pos]\n\t\t\t\t];\n\t\t\t\tthis.stops[offset] = tiled.layers[2].data[pos];\n\t\t\t}\n\t\t}\n\t}\n}\n\nclass Hero {\n\tconstructor (props = {}, id = randomId()) {\n\t\tthis.id = id;\n\t\t// for moving\n\t\tthis.body = Object.assign({\n\t\t\t// position\n\t\t\tx: undefined,\n\t\t\ty: undefined,\n\t\t\t// acceleration\n\t\t\tvx: 0,\n\t\t\tvy: 0,\n\t\t// extend with props\n\t\t}, props);\n\t\t// for drawing\n\t\tthis.sprite = null;\n\t}\n\ttoArray () {\n\t\treturn [\n\t\t\tthis.id,\n\t\t\tthis.body.x,\n\t\t\tthis.body.y,\n\t\t];\n\t}\n\tfromArray (array = [], force = false) {\n\t\tif (force) {\n\t\t\tthis.id = array[HERO_ID];\n\t\t}\n\t\tif (force || (this.id === array[HERO_ID])) {\n\t\t\tthis.body.x = array[HERO_X];\n\t\t\tthis.body.y = array[HERO_Y];\n\t\t}\n\t\treturn this;\n\t}\n\ttick ({ level, delta }) {\n\t\tif (this.onTick) {\n\t\t\tthis.onTick();\n\t\t}\n\t\tconst d = delta / level.accuracy;\n\t\tconst x = this.body.x + this.body.vx * d;\n\t\tconst y = this.body.y + this.body.vy * d;\n\t\tthis.move({ level, x, y, d });\n\t}\n\tmove ({ level, x, y, d }) {\n\t\tlet fall = true;\n\t\tif (level.isFreeCell(Math.floor(x), Math.floor(y))) {\n\t\t\t// exact\n\t\t\tthis.body.x = x;\n\t\t\tthis.body.y = y;\n\t\t} else if (level.isFreeCell(Math.floor(this.body.x), Math.floor(y))) {\n\t\t\t// vertical\n\t\t\tthis.body.y = y;\n\t\t} else if (level.isFreeCell(Math.floor(x), Math.floor(this.body.y))) {\n\t\t\t// horizontal\n\t\t\tthis.body.x = x;\n\t\t\tfall = false;\n\t\t} else {\n\t\t\tfall = false;\n\t\t}\n\t\tif (fall && level.gravity) {\n\t\t\tthis.body.vy += level.gravity * d;\n\t\t} else {\n\t\t\tthis.body.vy = 0;\n\t\t}\t\t\n\t}\n\tgoto ({ x, y }) {\n\t\tconst r = atan2(y, x);\n\t\tthis.body.vx = Math.min(distance(x, 0), fmath.cos(r));\n\t\tthis.body.vy = fmath.sin(r);\n\t}\n}\n\nfunction atan2 (y, x) {\n\tif (x > 0) {\n\t\treturn fmath.atan(y / x);\n\t}\n\tif (x < 0) {\n\t\tif (y >= 0) {\n\t\t\treturn fmath.atan(y / x) + Math.PI;\n\t\t}\n\t\treturn fmath.atan(y / x) - Math.PI;\n\t}\n\tif (x === 0) {\n\t\tif (y === 0) {\n\t\t\treturn undefined;\n\t\t}\n\t\tif (y > 0) {\n\t\t\treturn HALF_PI;\n\t\t}\n\t\tif (y < 0) {\n\t\t\treturn -HALF_PI;\n\t\t}\n\t}\n}\n\nfunction randomId () {\n\treturn md5(Math.random()).slice(0, 7);\n}\n\nfunction distance (dx, dy) {\n\treturn Math.sqrt(dx * dx + dy * dy);\n}\n\nif (typeof module !== 'undefined') {\t\n\tmodule.exports = {\n\t\tDEFER,\n\t\tGame,\n\t\tLevel,\n\t\tHero,\n\t\tatan2,\n\t\trandomId,\n\t\tdistance,\n\t};\n}\n",
     "static": true,
     "longname": "src/index.js",
     "access": null,
@@ -785,12 +785,12 @@
   {
     "__docId__": 31,
     "kind": "method",
-    "name": "distance",
+    "name": "physics",
     "memberof": "src/index.js~Level",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "src/index.js~Level#distance",
+    "longname": "src/index.js~Level#physics",
     "access": null,
     "description": null,
     "lineNumber": 84,
@@ -801,49 +801,10 @@
         "tagValue": ""
       }
     ],
-    "params": [
-      {
-        "name": "dx",
-        "types": [
-          "*"
-        ]
-      },
-      {
-        "name": "dy",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 32,
-    "kind": "method",
-    "name": "physics",
-    "memberof": "src/index.js~Level",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/index.js~Level#physics",
-    "access": null,
-    "description": null,
-    "lineNumber": 87,
-    "undocument": true,
-    "unknown": [
-      {
-        "tagName": "@_undocument",
-        "tagValue": ""
-      }
-    ],
     "params": []
   },
   {
-    "__docId__": 33,
+    "__docId__": 32,
     "kind": "member",
     "name": "distances",
     "memberof": "src/index.js~Level",
@@ -851,7 +812,7 @@
     "longname": "src/index.js~Level#distances",
     "access": null,
     "description": null,
-    "lineNumber": 88,
+    "lineNumber": 85,
     "undocument": true,
     "unknown": [
       {
@@ -866,7 +827,7 @@
     }
   },
   {
-    "__docId__": 34,
+    "__docId__": 33,
     "kind": "method",
     "name": "toArray",
     "memberof": "src/index.js~Level",
@@ -876,7 +837,7 @@
     "longname": "src/index.js~Level#toArray",
     "access": null,
     "description": null,
-    "lineNumber": 125,
+    "lineNumber": 122,
     "undocument": true,
     "unknown": [
       {
@@ -892,7 +853,7 @@
     }
   },
   {
-    "__docId__": 35,
+    "__docId__": 34,
     "kind": "method",
     "name": "fromArray",
     "memberof": "src/index.js~Level",
@@ -902,7 +863,7 @@
     "longname": "src/index.js~Level#fromArray",
     "access": null,
     "description": null,
-    "lineNumber": 130,
+    "lineNumber": 127,
     "undocument": true,
     "unknown": [
       {
@@ -923,7 +884,7 @@
     ]
   },
   {
-    "__docId__": 36,
+    "__docId__": 35,
     "kind": "method",
     "name": "fromTiled",
     "memberof": "src/index.js~Level",
@@ -933,7 +894,7 @@
     "longname": "src/index.js~Level#fromTiled",
     "access": null,
     "description": null,
-    "lineNumber": 155,
+    "lineNumber": 152,
     "undocument": true,
     "unknown": [
       {
@@ -954,7 +915,7 @@
     ]
   },
   {
-    "__docId__": 37,
+    "__docId__": 36,
     "kind": "member",
     "name": "width",
     "memberof": "src/index.js~Level",
@@ -962,7 +923,30 @@
     "longname": "src/index.js~Level#width",
     "access": null,
     "description": null,
-    "lineNumber": 156,
+    "lineNumber": 153,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 37,
+    "kind": "member",
+    "name": "height",
+    "memberof": "src/index.js~Level",
+    "static": false,
+    "longname": "src/index.js~Level#height",
+    "access": null,
+    "description": null,
+    "lineNumber": 154,
     "undocument": true,
     "unknown": [
       {
@@ -979,13 +963,13 @@
   {
     "__docId__": 38,
     "kind": "member",
-    "name": "height",
+    "name": "blocks",
     "memberof": "src/index.js~Level",
     "static": false,
-    "longname": "src/index.js~Level#height",
+    "longname": "src/index.js~Level#blocks",
     "access": null,
     "description": null,
-    "lineNumber": 157,
+    "lineNumber": 155,
     "undocument": true,
     "unknown": [
       {
@@ -995,20 +979,20 @@
     ],
     "type": {
       "types": [
-        "*"
+        "{}"
       ]
     }
   },
   {
     "__docId__": 39,
     "kind": "member",
-    "name": "blocks",
+    "name": "stops",
     "memberof": "src/index.js~Level",
     "static": false,
-    "longname": "src/index.js~Level#blocks",
+    "longname": "src/index.js~Level#stops",
     "access": null,
     "description": null,
-    "lineNumber": 158,
+    "lineNumber": 156,
     "undocument": true,
     "unknown": [
       {
@@ -1025,36 +1009,13 @@
   {
     "__docId__": 40,
     "kind": "member",
-    "name": "stops",
-    "memberof": "src/index.js~Level",
-    "static": false,
-    "longname": "src/index.js~Level#stops",
-    "access": null,
-    "description": null,
-    "lineNumber": 159,
-    "undocument": true,
-    "unknown": [
-      {
-        "tagName": "@_undocument",
-        "tagValue": ""
-      }
-    ],
-    "type": {
-      "types": [
-        "{}"
-      ]
-    }
-  },
-  {
-    "__docId__": 41,
-    "kind": "member",
     "name": "tileset",
     "memberof": "src/index.js~Level",
     "static": false,
     "longname": "src/index.js~Level#tileset",
     "access": null,
     "description": null,
-    "lineNumber": 160,
+    "lineNumber": 157,
     "undocument": true,
     "unknown": [
       {
@@ -1069,7 +1030,7 @@
     }
   },
   {
-    "__docId__": 42,
+    "__docId__": 41,
     "kind": "member",
     "name": "accuracy",
     "memberof": "src/index.js~Level",
@@ -1077,7 +1038,7 @@
     "longname": "src/index.js~Level#accuracy",
     "access": null,
     "description": null,
-    "lineNumber": 164,
+    "lineNumber": 161,
     "undocument": true,
     "unknown": [
       {
@@ -1092,7 +1053,7 @@
     }
   },
   {
-    "__docId__": 43,
+    "__docId__": 42,
     "kind": "class",
     "name": "Hero",
     "memberof": "src/index.js",
@@ -1103,7 +1064,7 @@
     "importPath": "gameframework/src/index.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 179,
+    "lineNumber": 176,
     "undocument": true,
     "unknown": [
       {
@@ -1114,7 +1075,7 @@
     "interface": false
   },
   {
-    "__docId__": 44,
+    "__docId__": 43,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/index.js~Hero",
@@ -1124,7 +1085,7 @@
     "longname": "src/index.js~Hero#constructor",
     "access": null,
     "description": null,
-    "lineNumber": 180,
+    "lineNumber": 177,
     "undocument": true,
     "unknown": [
       {
@@ -1152,7 +1113,7 @@
     ]
   },
   {
-    "__docId__": 45,
+    "__docId__": 44,
     "kind": "member",
     "name": "id",
     "memberof": "src/index.js~Hero",
@@ -1160,7 +1121,30 @@
     "longname": "src/index.js~Hero#id",
     "access": null,
     "description": null,
-    "lineNumber": 181,
+    "lineNumber": 178,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 45,
+    "kind": "member",
+    "name": "body",
+    "memberof": "src/index.js~Hero",
+    "static": false,
+    "longname": "src/index.js~Hero#body",
+    "access": null,
+    "description": null,
+    "lineNumber": 180,
     "undocument": true,
     "unknown": [
       {
@@ -1177,13 +1161,13 @@
   {
     "__docId__": 46,
     "kind": "member",
-    "name": "body",
+    "name": "sprite",
     "memberof": "src/index.js~Hero",
     "static": false,
-    "longname": "src/index.js~Hero#body",
+    "longname": "src/index.js~Hero#sprite",
     "access": null,
     "description": null,
-    "lineNumber": 183,
+    "lineNumber": 190,
     "undocument": true,
     "unknown": [
       {
@@ -1199,29 +1183,6 @@
   },
   {
     "__docId__": 47,
-    "kind": "member",
-    "name": "sprite",
-    "memberof": "src/index.js~Hero",
-    "static": false,
-    "longname": "src/index.js~Hero#sprite",
-    "access": null,
-    "description": null,
-    "lineNumber": 195,
-    "undocument": true,
-    "unknown": [
-      {
-        "tagName": "@_undocument",
-        "tagValue": ""
-      }
-    ],
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 48,
     "kind": "method",
     "name": "toArray",
     "memberof": "src/index.js~Hero",
@@ -1231,7 +1192,7 @@
     "longname": "src/index.js~Hero#toArray",
     "access": null,
     "description": null,
-    "lineNumber": 197,
+    "lineNumber": 192,
     "undocument": true,
     "unknown": [
       {
@@ -1247,7 +1208,7 @@
     }
   },
   {
-    "__docId__": 49,
+    "__docId__": 48,
     "kind": "method",
     "name": "fromArray",
     "memberof": "src/index.js~Hero",
@@ -1257,7 +1218,7 @@
     "longname": "src/index.js~Hero#fromArray",
     "access": null,
     "description": null,
-    "lineNumber": 204,
+    "lineNumber": 199,
     "undocument": true,
     "unknown": [
       {
@@ -1292,7 +1253,7 @@
     }
   },
   {
-    "__docId__": 50,
+    "__docId__": 49,
     "kind": "member",
     "name": "id",
     "memberof": "src/index.js~Hero",
@@ -1300,7 +1261,7 @@
     "longname": "src/index.js~Hero#id",
     "access": null,
     "description": null,
-    "lineNumber": 206,
+    "lineNumber": 201,
     "undocument": true,
     "unknown": [
       {
@@ -1315,7 +1276,7 @@
     }
   },
   {
-    "__docId__": 51,
+    "__docId__": 50,
     "kind": "method",
     "name": "tick",
     "memberof": "src/index.js~Hero",
@@ -1325,7 +1286,7 @@
     "longname": "src/index.js~Hero#tick",
     "access": null,
     "description": null,
-    "lineNumber": 214,
+    "lineNumber": 209,
     "undocument": true,
     "unknown": [
       {
@@ -1348,7 +1309,7 @@
     ]
   },
   {
-    "__docId__": 52,
+    "__docId__": 51,
     "kind": "method",
     "name": "move",
     "memberof": "src/index.js~Hero",
@@ -1358,7 +1319,7 @@
     "longname": "src/index.js~Hero#move",
     "access": null,
     "description": null,
-    "lineNumber": 223,
+    "lineNumber": 218,
     "undocument": true,
     "unknown": [
       {
@@ -1383,7 +1344,7 @@
     ]
   },
   {
-    "__docId__": 53,
+    "__docId__": 52,
     "kind": "method",
     "name": "goto",
     "memberof": "src/index.js~Hero",
@@ -1393,7 +1354,7 @@
     "longname": "src/index.js~Hero#goto",
     "access": null,
     "description": null,
-    "lineNumber": 244,
+    "lineNumber": 240,
     "undocument": true,
     "unknown": [
       {
@@ -1416,7 +1377,7 @@
     ]
   },
   {
-    "__docId__": 54,
+    "__docId__": 53,
     "kind": "function",
     "name": "atan2",
     "memberof": "src/index.js",
@@ -1429,7 +1390,7 @@
     "importPath": "gameframework/src/index.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 251,
+    "lineNumber": 247,
     "undocument": true,
     "unknown": [
       {
@@ -1458,7 +1419,7 @@
     }
   },
   {
-    "__docId__": 55,
+    "__docId__": 54,
     "kind": "function",
     "name": "randomId",
     "memberof": "src/index.js",
@@ -1466,6 +1427,35 @@
     "async": false,
     "static": true,
     "longname": "src/index.js~randomId",
+    "access": null,
+    "export": false,
+    "importPath": "gameframework/src/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 270,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 55,
+    "kind": "function",
+    "name": "distance",
+    "memberof": "src/index.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/index.js~distance",
     "access": null,
     "export": false,
     "importPath": "gameframework/src/index.js",
@@ -1479,7 +1469,20 @@
         "tagValue": ""
       }
     ],
-    "params": [],
+    "params": [
+      {
+        "name": "dx",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "dy",
+        "types": [
+          "*"
+        ]
+      }
+    ],
     "return": {
       "types": [
         "*"
