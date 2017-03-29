@@ -1,3 +1,4 @@
+(function () {
 'use strict';
 
 const PIXI = require('pixi.js');
@@ -36,8 +37,8 @@ class View {
 	_onUpdateHero (hero) {
 		this.onUpdateHero(hero);
 		if (hero.sprite) {
-			hero.sprite.x = hero.body.x * this.level.accuracy;
-			hero.sprite.y = hero.body.y * this.level.accuracy;
+			hero.sprite.x = hero.x * this.level.accuracy;
+			hero.sprite.y = hero.y * this.level.accuracy;
 		}
 	}
 	// this is what you should override
@@ -49,8 +50,8 @@ class View {
 		if (!hero.sprite) {
 			this.onCreateHero(hero);
 			if (hero.sprite) {
-				hero.sprite.x = hero.body.x;
-				hero.sprite.y = hero.body.y;
+				hero.sprite.x = hero.x * this.level.accuracy;
+				hero.sprite.y = hero.y * this.level.accuracy;
 				(this.layers ? this.layers.heros : this.camera).addChild(hero.sprite);
 			}
 		}
@@ -147,3 +148,5 @@ class View {
 if (typeof module !== 'undefined') {	
 	module.exports = View;
 }
+
+})();

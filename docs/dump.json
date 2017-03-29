@@ -3,7 +3,7 @@
     "__docId__": 0,
     "kind": "file",
     "name": "src/index.js",
-    "content": "'use strict';\n\nconst md5 = require('md5');\nconst FMath = require('fmath');\nconst fmath = new FMath();\n\n// function constants\nconst DEFER = (typeof process !== 'undefined') ? process.nextTick : setTimeout;\nconst NOW = (typeof performance !== 'undefined') ? performance.now.bind(performance) : Date.now.bind(Date);\n\n// just constants\nconst HALF_PI = Math.PI / 2;\n\nconst HERO_ID = 0;\nconst HERO_X = 1;\nconst HERO_Y = 2;\n\nconst BOTTOM = atan2(10, 0);\nconst SPREAD_HEROS = 2;\n\nclass Game {\n\tconstructor (interval = 10) {\n\t\tthis.levels = [];\n\t\tthis.interval = interval;\n\t\tthis.now = NOW();\n\t}\n\tloop () {\n\t\tDEFER(this.tick.bind(this));\n\t\tif (this.onUpdate) {\n\t\t\tDEFER(this.onUpdate.bind(this));\n\t\t}\n\t\tsetTimeout(() => DEFER(this.loop.bind(this)), this.interval);\t\n\t}\n\ttick () {\n\t\tconst now = NOW();\n\t\tthis.delta = (now - this.now) / 10;\n\t\tthis.now = now;\n\t\tthis.levels.forEach((map) => {\n\t\t\tDEFER(map.tick.bind(map, this));\n\t\t});\n\t}\n}\n\nclass Level {\n\tconstructor (props = {}) {\t\t\n\t\tthis.heros = props.heros || {};\n\t\tthis.blocks = props.blocks || {};\n\t\t// defaults\n\t\tthis.accuracy = 10;\n\t\tthis.gravity = 0;\n\t}\n\tspawn ({ body }) {\n\t\tbody.x = Math.random() * this.width;\n\t\tbody.y = 0;\n\t}\n\tisFreeCell (x, y) {\n\t\t// use override since\n\t\t// map not compatible\n\t\tif (!this.stops) {\n\t\t\treturn true;\n\t\t}\n\t\tif (x < 0 || y < 0 || x + 1 > this.width || y + 1 > this.height) {\n\t\t\treturn false;\n\t\t}\n\t\t// map imported fromTiled()\n\t\t// and it has stop there\n\t\tif (this.stops[`${x}:${y}`]) {\n\t\t\treturn false;\n\t\t}\n\t\t// otherwise its ok\n\t\treturn true;\n\t}\n\teachHero (callback) {\n\t\tfor (let hero in this.heros) {\n\t\t\tif (this.heros.hasOwnProperty(hero)) {\n\t\t\t\tcallback(this.heros[hero]);\n\t\t\t}\n\t\t}\n\t}\n\ttick ({ delta }) {\n\t\tthis.eachHero((hero) => DEFER(hero.tick.bind(hero, { level: this, delta })));\n\t\tthis.physics();\n\t}\n\tphysics () {\n\t\tthis.distances = {};\n\t\tthis.eachHero((hero1) => {\n\t\t\tthis.eachHero((hero2) => {\n\t\t\t\tif (hero1.id !== hero2.id) {\n\t\t\t\t\tconst key = [hero1.id, hero2.id].sort().join(':');\n\t\t\t\t\tif (!this.distances[key]) {\n\t\t\t\t\t\tthis.distances[key] = distance(\n\t\t\t\t\t\t\thero1.body.x - hero2.body.x, \n\t\t\t\t\t\t\thero1.body.y - hero2.body.y\n\t\t\t\t\t\t);\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t});\n\t\t});\n\t\t// spread heros\n\t\tfor (let key in this.distances) {\n\t\t\tif (this.distances.hasOwnProperty(key)) {\n\t\t\t\tconst dist = this.distances[key];\n\t\t\t\tif (dist < SPREAD_HEROS) {\n\t\t\t\t\tconst split = key.split(':');\n\t\t\t\t\tconst hero1 = this.heros[split[0]];\n\t\t\t\t\tconst hero2 = this.heros[split[1]];\n\t\t\t\t\tif (hero1 && hero2) {\n\t\t\t\t\t\tconst r = Math.atan2(\n\t\t\t\t\t\t\thero1.body.y - hero2.body.y, \n\t\t\t\t\t\t\thero1.body.x - hero2.body.x\n\t\t\t\t\t\t);\n\t\t\t\t\t\tconst diff = (dist - SPREAD_HEROS) / 2;\n\t\t\t\t\t\tconst cos = diff * fmath.cos(r);\n\t\t\t\t\t\tconst sin = diff * fmath.sin(r);\n\t\t\t\t\t\thero1.move({ level: this, x: hero1.body.x - cos, y: hero1.body.y - sin, d: 1 });\n\t\t\t\t\t\thero2.move({ level: this, x: hero2.body.x + cos, y: hero2.body.y + sin, d: 1 });\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\ttoArray () {\n\t\tconst array = [[]];\n\t\tthis.eachHero((hero) => array[0].push(hero.toArray()));\n\t\treturn array;\n\t}\n\tfromArray (array = []) {\n\t\tthis.eachHero((hero) => {\n\t\t\tif (!array[0].find((heroArray) => heroArray[HERO_ID] === hero.id)) {\n\t\t\t\tif (this.onRemoveHero) {\n\t\t\t\t\tthis.onRemoveHero(hero);\n\t\t\t\t}\n\t\t\t\tdelete this.heros[hero.id];\n\t\t\t}\n\t\t});\n\t\tarray[0].forEach((heroArray) => {\n\t\t\tconst id = heroArray[HERO_ID];\n\t\t\tif (this.heros[id]) {\n\t\t\t\tthis.heros[id].fromArray(heroArray);\n\t\t\t\tif (this.onUpdateHero) {\n\t\t\t\t\tthis.onUpdateHero(this.heros[id]);\n\t\t\t\t}\n\t\t\t} else {\n\t\t\t\tthis.heros[id] = new Hero({}, id);\n\t\t\t\tthis.heros[id].fromArray(heroArray);\n\t\t\t\tif (this.onCreateHero) {\n\t\t\t\t\tthis.onCreateHero(this.heros[id]);\n\t\t\t\t}\n\t\t\t}\n\t\t});\n\t}\n\tfromTiled (tiled = {}) {\n\t\tthis.width  = tiled.width;\n\t\tthis.height = tiled.height;\n\t\tthis.blocks = {};\n\t\tthis.stops  = {};\n\t\tthis.tileset = {\n\t\t\ttilewidth: tiled.tilesets[0].tilewidth,\n\t\t\timagewidth: tiled.tilesets[0].imagewidth,\n\t\t};\n\t\tthis.accuracy = this.tileset.tilewidth;\n\t\tfor (let y = 0; y < this.height; y++) {\n\t\t\tfor (let x = 0; x < this.width; x++) {\n\t\t\t\tconst pos = y * this.width + x;\n\t\t\t\tconst offset = `${x}:${y}`;\n\t\t\t\tthis.blocks[offset] = [\n\t\t\t\t\ttiled.layers[0].data[pos], \n\t\t\t\t\ttiled.layers[1].data[pos]\n\t\t\t\t];\n\t\t\t\tthis.stops[offset] = tiled.layers[2].data[pos];\n\t\t\t}\n\t\t}\n\t}\n}\n\nclass Hero {\n\tconstructor (props = {}, id = randomId()) {\n\t\tthis.id = id;\n\t\t// for moving\n\t\tthis.body = Object.assign({\n\t\t\t// position\n\t\t\tx: undefined,\n\t\t\ty: undefined,\n\t\t\t// acceleration\n\t\t\tvx: 0,\n\t\t\tvy: 0,\n\t\t// extend with props\n\t\t}, props);\n\t\t// for drawing\n\t\tthis.sprite = null;\n\t}\n\ttoArray () {\n\t\treturn [\n\t\t\tthis.id,\n\t\t\tthis.body.x,\n\t\t\tthis.body.y,\n\t\t];\n\t}\n\tfromArray (array = [], force = false) {\n\t\tif (force) {\n\t\t\tthis.id = array[HERO_ID];\n\t\t}\n\t\tif (force || (this.id === array[HERO_ID])) {\n\t\t\tthis.body.x = array[HERO_X];\n\t\t\tthis.body.y = array[HERO_Y];\n\t\t}\n\t\treturn this;\n\t}\n\ttick ({ level, delta }) {\n\t\tif (this.onTick) {\n\t\t\tthis.onTick();\n\t\t}\n\t\tconst d = delta / level.accuracy;\n\t\tconst x = this.body.x + this.body.vx * d;\n\t\tconst y = this.body.y + this.body.vy * d;\n\t\tthis.move({ level, x, y, d });\n\t}\n\tmove ({ level, x, y, d }) {\n\t\tlet fall = true;\n\t\tif (level.isFreeCell(Math.floor(x), Math.floor(y))) {\n\t\t\t// exact\n\t\t\tthis.body.x = x;\n\t\t\tthis.body.y = y;\n\t\t} else if (level.isFreeCell(Math.floor(this.body.x), Math.floor(y))) {\n\t\t\t// vertical\n\t\t\tthis.body.y = y;\n\t\t} else if (level.isFreeCell(Math.floor(x), Math.floor(this.body.y))) {\n\t\t\t// horizontal\n\t\t\tthis.body.x = x;\n\t\t\tfall = false;\n\t\t} else {\n\t\t\tfall = false;\n\t\t}\n\t\tif (fall && level.gravity) {\n\t\t\tthis.body.vy += level.gravity * d;\n\t\t} else {\n\t\t\tthis.body.vy = 0;\n\t\t}\t\t\n\t}\n\tgoto ({ x, y }) {\n\t\tconst r = atan2(y, x);\n\t\tthis.body.vx = Math.min(distance(x, 0), fmath.cos(r));\n\t\tthis.body.vy = fmath.sin(r);\n\t}\n}\n\nfunction atan2 (y, x) {\n\tif (x > 0) {\n\t\treturn fmath.atan(y / x);\n\t}\n\tif (x < 0) {\n\t\tif (y >= 0) {\n\t\t\treturn fmath.atan(y / x) + Math.PI;\n\t\t}\n\t\treturn fmath.atan(y / x) - Math.PI;\n\t}\n\tif (x === 0) {\n\t\tif (y === 0) {\n\t\t\treturn undefined;\n\t\t}\n\t\tif (y > 0) {\n\t\t\treturn HALF_PI;\n\t\t}\n\t\tif (y < 0) {\n\t\t\treturn -HALF_PI;\n\t\t}\n\t}\n}\n\nfunction randomId () {\n\treturn md5(Math.random()).slice(0, 7);\n}\n\nfunction distance (dx, dy) {\n\treturn Math.sqrt(dx * dx + dy * dy);\n}\n\nif (typeof module !== 'undefined') {\t\n\tmodule.exports = {\n\t\tDEFER,\n\t\tGame,\n\t\tLevel,\n\t\tHero,\n\t\tatan2,\n\t\trandomId,\n\t\tdistance,\n\t};\n}\n",
+    "content": "// (function () {\n'use strict';\n\nconst { Physics, Body, b2Vec2 } = require('./physics');\nconst FMath = require('fmath');\nconst md5 = require('md5');\n\nconst fmath = new FMath();\n\n// function constants\nconst DEFER = (typeof process !== 'undefined') ? process.nextTick.bind(process) : setTimeout;\nconst NOW = (typeof performance !== 'undefined') ? performance.now.bind(performance) : Date.now.bind(Date);\n\n// just constants\nconst HALF_PI = Math.PI / 2;\n\nconst HERO_ID = 0;\nconst HERO_X = 1;\nconst HERO_Y = 2;\n\nconst BOTTOM = atan2(10, 0);\nconst SPREAD_HEROS = 2;\n\nclass Game {\n\tconstructor (interval = 10) {\n\t\tthis.levels = [];\n\t\tthis.interval = interval;\n\t\tthis.now = NOW();\n\t}\n\tloop () {\n\t\tDEFER(this.tick.bind(this));\n\t\tif (this.onUpdate) {\n\t\t\tDEFER(this.onUpdate.bind(this));\n\t\t}\n\t\tsetTimeout(() => DEFER(this.loop.bind(this)), this.interval);\t\n\t}\n\ttick () {\n\t\tconst now = NOW();\n\t\tthis.delta = (now - this.now) / 1000;\n\t\tthis.now = now;\n\t\tthis.levels.forEach((map) => {\n\t\t\tDEFER(map.tick.bind(map, this.delta));\n\t\t});\n\t}\n}\n\nclass Level {\n\tconstructor (props = {}) {\t\t\n\t\tconst options = {};\n\t\tif (props.gravity) {\n\t\t\toptions.gravity = props.gravity;\n\t\t}\n\t\tthis.physics = new Physics(props);\n\t\tthis.heros = props.heros || {};\n\t\tthis.blocks = props.blocks || {};\n\t\tthis.accuracy = 10;\n\t}\n\tspawn ({ body }) {\n\t\tbody.x = Math.random() * this.width;\n\t\tbody.y = 0;\n\t}\n\teachHero (callback) {\n\t\tfor (let hero in this.heros) {\n\t\t\tif (this.heros.hasOwnProperty(hero)) {\n\t\t\t\tcallback(this.heros[hero]);\n\t\t\t}\n\t\t}\n\t}\n\ttick (delta) {\n\t\tthis.physics.step(delta);\n\t}\n\ttoArray () {\n\t\tconst array = [[]];\n\t\tthis.eachHero((hero) => array[0].push(hero.toArray()));\n\t\treturn array;\n\t}\n\tfromArray (array = []) {\n\t\tthis.eachHero((hero) => {\n\t\t\tif (!array[0].find((heroArray) => heroArray[HERO_ID] === hero.id)) {\n\t\t\t\tif (this.onRemoveHero) {\n\t\t\t\t\tthis.onRemoveHero(hero);\n\t\t\t\t}\n\t\t\t\tdelete this.heros[hero.id];\n\t\t\t}\n\t\t});\n\t\tarray[0].forEach((heroArray) => {\n\t\t\tconst id = heroArray[HERO_ID];\n\t\t\tif (this.heros[id]) {\n\t\t\t\tthis.updateHero(id, heroArray);\n\t\t\t} else {\n\t\t\t\tthis.addHero(heroArray);\n\t\t\t}\n\t\t});\n\t}\n\tupdateHero (id, heroArray = []) {\n\t\tthis.heros[id].fromArray(heroArray);\n\t\tif (this.onUpdateHero) {\n\t\t\tthis.onUpdateHero(this.heros[id]);\n\t\t}\n\t}\n\taddHero (heroArray = []) {\n\t\tconst id = heroArray[HERO_ID] || randomId();\n\t\tthis.heros[id] = new Hero({}, id);\n\t\tthis.heros[id].addBody(this.physics, { \n\t\t\tx: heroArray[HERO_X],\n\t\t\ty: heroArray[HERO_Y],\n\t\t});\n\t\tthis.heros[id].fromArray(heroArray);\n\t\tif (this.onCreateHero) {\n\t\t\tthis.onCreateHero(this.heros[id]);\n\t\t}\n\t\treturn this.heros[id];\n\t}\n\tfromTiled (tiled = {}) {\n\t\tthis.width  = tiled.width;\n\t\tthis.height = tiled.height;\n\t\tthis.blocks = {};\n\t\tthis.stops  = {};\n\t\tthis.tileset = {\n\t\t\ttilewidth: tiled.tilesets[0].tilewidth,\n\t\t\timagewidth: tiled.tilesets[0].imagewidth,\n\t\t};\n\t\tthis.accuracy = this.tileset.tilewidth;\n\t\tfor (let y = 0; y < this.height; y++) {\n\t\t\tfor (let x = 0; x < this.width; x++) {\n\t\t\t\tconst pos = y * this.width + x;\n\t\t\t\tconst offset = `${x}:${y}`;\n\t\t\t\tthis.blocks[offset] = [\n\t\t\t\t\ttiled.layers[0].data[pos], \n\t\t\t\t\ttiled.layers[1].data[pos]\n\t\t\t\t];\n\t\t\t\tthis.stops[offset] = tiled.layers[2].data[pos];\n\t\t\t}\n\t\t}\n\t}\n}\n\nclass Hero {\n\tconstructor (props = {}, id = randomId()) {\n\t\tthis.id = id;\n\t\t// for drawing\n\t\tthis.sprite = null;\n\t}\n\tget x () {\n\t\treturn this.body ? this.body.GetPosition().x : undefined;\n\t}\n\tget y () {\n\t\treturn this.body ? this.body.GetPosition().y : undefined;\n\t}\n\taddBody (physics, details = {}) {\n\t\tthis.body = new Body(physics, details);\n\t}\n\ttoArray () {\n\t\treturn [\n\t\t\tthis.id,\n\t\t\tthis.x,\n\t\t\tthis.y,\n\t\t];\n\t}\n\tfromArray (array = [], force = false) {\n\t\tif (force) {\n\t\t\tthis.id = array[HERO_ID];\n\t\t}\n\t\tif (force || (this.id === array[HERO_ID])) {\n\t\t\tthis.move(array[HERO_X], array[HERO_Y]);\n\t\t}\n\t}\n\tmove (x, y) {\n\t\tif (this.body) {\n\t\t\tthis.body.SetPosition(new b2Vec2(x, y));\n\t\t}\n\t}\n\tgoto ({ x, y }) {\n\t\tthis.body.ApplyImpulse({ x, y }, this.body.GetWorldCenter());\n\t}\n}\n\nfunction atan2 (y, x) {\n\tif (x > 0) {\n\t\treturn fmath.atan(y / x);\n\t}\n\tif (x < 0) {\n\t\tif (y >= 0) {\n\t\t\treturn fmath.atan(y / x) + Math.PI;\n\t\t}\n\t\treturn fmath.atan(y / x) - Math.PI;\n\t}\n\tif (x === 0) {\n\t\tif (y === 0) {\n\t\t\treturn undefined;\n\t\t}\n\t\tif (y > 0) {\n\t\t\treturn HALF_PI;\n\t\t}\n\t\tif (y < 0) {\n\t\t\treturn -HALF_PI;\n\t\t}\n\t}\n}\n\nfunction randomId () {\n\treturn md5(Math.random()).slice(0, 7);\n}\n\nfunction distance (dx, dy) {\n\treturn Math.sqrt(dx * dx + dy * dy);\n}\n\nif (typeof module !== 'undefined') {\n\tmodule.exports = {\n\t\tDEFER,\n\t\tGame,\n\t\tLevel,\n\t\tHero,\n\t\tatan2,\n\t\trandomId,\n\t\tdistance,\n\t};\n}\n\n// })();\n",
     "static": true,
     "longname": "src/index.js",
     "access": null,
@@ -13,16 +13,16 @@
   {
     "__docId__": 1,
     "kind": "variable",
-    "name": "md5",
+    "name": "Physics",
     "memberof": "src/index.js",
     "static": true,
-    "longname": "src/index.js~md5",
+    "longname": "src/index.js~Physics",
     "access": null,
     "export": false,
     "importPath": "gameframework/src/index.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 3,
+    "lineNumber": 4,
     "undocument": true,
     "unknown": [
       {
@@ -48,7 +48,7 @@
     "importPath": "gameframework/src/index.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 4,
+    "lineNumber": 5,
     "undocument": true,
     "unknown": [
       {
@@ -65,16 +65,16 @@
   {
     "__docId__": 3,
     "kind": "variable",
-    "name": "fmath",
+    "name": "md5",
     "memberof": "src/index.js",
     "static": true,
-    "longname": "src/index.js~fmath",
+    "longname": "src/index.js~md5",
     "access": null,
     "export": false,
     "importPath": "gameframework/src/index.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 5,
+    "lineNumber": 6,
     "undocument": true,
     "unknown": [
       {
@@ -84,17 +84,17 @@
     ],
     "type": {
       "types": [
-        "FMath"
+        "*"
       ]
     }
   },
   {
     "__docId__": 4,
     "kind": "variable",
-    "name": "DEFER",
+    "name": "fmath",
     "memberof": "src/index.js",
     "static": true,
-    "longname": "src/index.js~DEFER",
+    "longname": "src/index.js~fmath",
     "access": null,
     "export": false,
     "importPath": "gameframework/src/index.js",
@@ -110,23 +110,23 @@
     ],
     "type": {
       "types": [
-        "*"
+        "FMath"
       ]
     }
   },
   {
     "__docId__": 5,
     "kind": "variable",
-    "name": "NOW",
+    "name": "DEFER",
     "memberof": "src/index.js",
     "static": true,
-    "longname": "src/index.js~NOW",
+    "longname": "src/index.js~DEFER",
     "access": null,
     "export": false,
     "importPath": "gameframework/src/index.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 9,
+    "lineNumber": 11,
     "undocument": true,
     "unknown": [
       {
@@ -143,10 +143,10 @@
   {
     "__docId__": 6,
     "kind": "variable",
-    "name": "HALF_PI",
+    "name": "NOW",
     "memberof": "src/index.js",
     "static": true,
-    "longname": "src/index.js~HALF_PI",
+    "longname": "src/index.js~NOW",
     "access": null,
     "export": false,
     "importPath": "gameframework/src/index.js",
@@ -169,16 +169,16 @@
   {
     "__docId__": 7,
     "kind": "variable",
-    "name": "HERO_ID",
+    "name": "HALF_PI",
     "memberof": "src/index.js",
     "static": true,
-    "longname": "src/index.js~HERO_ID",
+    "longname": "src/index.js~HALF_PI",
     "access": null,
     "export": false,
     "importPath": "gameframework/src/index.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 14,
+    "lineNumber": 15,
     "undocument": true,
     "unknown": [
       {
@@ -188,23 +188,23 @@
     ],
     "type": {
       "types": [
-        "number"
+        "*"
       ]
     }
   },
   {
     "__docId__": 8,
     "kind": "variable",
-    "name": "HERO_X",
+    "name": "HERO_ID",
     "memberof": "src/index.js",
     "static": true,
-    "longname": "src/index.js~HERO_X",
+    "longname": "src/index.js~HERO_ID",
     "access": null,
     "export": false,
     "importPath": "gameframework/src/index.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 15,
+    "lineNumber": 17,
     "undocument": true,
     "unknown": [
       {
@@ -221,16 +221,16 @@
   {
     "__docId__": 9,
     "kind": "variable",
-    "name": "HERO_Y",
+    "name": "HERO_X",
     "memberof": "src/index.js",
     "static": true,
-    "longname": "src/index.js~HERO_Y",
+    "longname": "src/index.js~HERO_X",
     "access": null,
     "export": false,
     "importPath": "gameframework/src/index.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 16,
+    "lineNumber": 18,
     "undocument": true,
     "unknown": [
       {
@@ -247,36 +247,10 @@
   {
     "__docId__": 10,
     "kind": "variable",
-    "name": "BOTTOM",
+    "name": "HERO_Y",
     "memberof": "src/index.js",
     "static": true,
-    "longname": "src/index.js~BOTTOM",
-    "access": null,
-    "export": false,
-    "importPath": "gameframework/src/index.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 18,
-    "undocument": true,
-    "unknown": [
-      {
-        "tagName": "@_undocument",
-        "tagValue": ""
-      }
-    ],
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 11,
-    "kind": "variable",
-    "name": "SPREAD_HEROS",
-    "memberof": "src/index.js",
-    "static": true,
-    "longname": "src/index.js~SPREAD_HEROS",
+    "longname": "src/index.js~HERO_Y",
     "access": null,
     "export": false,
     "importPath": "gameframework/src/index.js",
@@ -297,12 +271,12 @@
     }
   },
   {
-    "__docId__": 12,
-    "kind": "class",
-    "name": "Game",
+    "__docId__": 11,
+    "kind": "variable",
+    "name": "BOTTOM",
     "memberof": "src/index.js",
     "static": true,
-    "longname": "src/index.js~Game",
+    "longname": "src/index.js~BOTTOM",
     "access": null,
     "export": false,
     "importPath": "gameframework/src/index.js",
@@ -316,10 +290,62 @@
         "tagValue": ""
       }
     ],
-    "interface": false
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 12,
+    "kind": "variable",
+    "name": "SPREAD_HEROS",
+    "memberof": "src/index.js",
+    "static": true,
+    "longname": "src/index.js~SPREAD_HEROS",
+    "access": null,
+    "export": false,
+    "importPath": "gameframework/src/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 22,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "number"
+      ]
+    }
   },
   {
     "__docId__": 13,
+    "kind": "class",
+    "name": "Game",
+    "memberof": "src/index.js",
+    "static": true,
+    "longname": "src/index.js~Game",
+    "access": null,
+    "export": false,
+    "importPath": "gameframework/src/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 24,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "interface": false
+  },
+  {
+    "__docId__": 14,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/index.js~Game",
@@ -329,7 +355,7 @@
     "longname": "src/index.js~Game#constructor",
     "access": null,
     "description": null,
-    "lineNumber": 22,
+    "lineNumber": 25,
     "undocument": true,
     "unknown": [
       {
@@ -350,7 +376,7 @@
     ]
   },
   {
-    "__docId__": 14,
+    "__docId__": 15,
     "kind": "member",
     "name": "levels",
     "memberof": "src/index.js~Game",
@@ -358,7 +384,7 @@
     "longname": "src/index.js~Game#levels",
     "access": null,
     "description": null,
-    "lineNumber": 23,
+    "lineNumber": 26,
     "undocument": true,
     "unknown": [
       {
@@ -373,7 +399,7 @@
     }
   },
   {
-    "__docId__": 15,
+    "__docId__": 16,
     "kind": "member",
     "name": "interval",
     "memberof": "src/index.js~Game",
@@ -381,30 +407,7 @@
     "longname": "src/index.js~Game#interval",
     "access": null,
     "description": null,
-    "lineNumber": 24,
-    "undocument": true,
-    "unknown": [
-      {
-        "tagName": "@_undocument",
-        "tagValue": ""
-      }
-    ],
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 16,
-    "kind": "member",
-    "name": "now",
-    "memberof": "src/index.js~Game",
-    "static": false,
-    "longname": "src/index.js~Game#now",
-    "access": null,
-    "description": null,
-    "lineNumber": 25,
+    "lineNumber": 27,
     "undocument": true,
     "unknown": [
       {
@@ -420,56 +423,14 @@
   },
   {
     "__docId__": 17,
-    "kind": "method",
-    "name": "loop",
-    "memberof": "src/index.js~Game",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/index.js~Game#loop",
-    "access": null,
-    "description": null,
-    "lineNumber": 27,
-    "undocument": true,
-    "unknown": [
-      {
-        "tagName": "@_undocument",
-        "tagValue": ""
-      }
-    ],
-    "params": []
-  },
-  {
-    "__docId__": 18,
-    "kind": "method",
-    "name": "tick",
-    "memberof": "src/index.js~Game",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/index.js~Game#tick",
-    "access": null,
-    "description": null,
-    "lineNumber": 34,
-    "undocument": true,
-    "unknown": [
-      {
-        "tagName": "@_undocument",
-        "tagValue": ""
-      }
-    ],
-    "params": []
-  },
-  {
-    "__docId__": 19,
     "kind": "member",
-    "name": "delta",
+    "name": "now",
     "memberof": "src/index.js~Game",
     "static": false,
-    "longname": "src/index.js~Game#delta",
+    "longname": "src/index.js~Game#now",
     "access": null,
     "description": null,
-    "lineNumber": 36,
+    "lineNumber": 28,
     "undocument": true,
     "unknown": [
       {
@@ -484,15 +445,57 @@
     }
   },
   {
-    "__docId__": 20,
-    "kind": "member",
-    "name": "now",
+    "__docId__": 18,
+    "kind": "method",
+    "name": "loop",
     "memberof": "src/index.js~Game",
+    "generator": false,
+    "async": false,
     "static": false,
-    "longname": "src/index.js~Game#now",
+    "longname": "src/index.js~Game#loop",
+    "access": null,
+    "description": null,
+    "lineNumber": 30,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": []
+  },
+  {
+    "__docId__": 19,
+    "kind": "method",
+    "name": "tick",
+    "memberof": "src/index.js~Game",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/index.js~Game#tick",
     "access": null,
     "description": null,
     "lineNumber": 37,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": []
+  },
+  {
+    "__docId__": 20,
+    "kind": "member",
+    "name": "delta",
+    "memberof": "src/index.js~Game",
+    "static": false,
+    "longname": "src/index.js~Game#delta",
+    "access": null,
+    "description": null,
+    "lineNumber": 39,
     "undocument": true,
     "unknown": [
       {
@@ -508,6 +511,29 @@
   },
   {
     "__docId__": 21,
+    "kind": "member",
+    "name": "now",
+    "memberof": "src/index.js~Game",
+    "static": false,
+    "longname": "src/index.js~Game#now",
+    "access": null,
+    "description": null,
+    "lineNumber": 40,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 22,
     "kind": "class",
     "name": "Level",
     "memberof": "src/index.js",
@@ -518,7 +544,7 @@
     "importPath": "gameframework/src/index.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 44,
+    "lineNumber": 47,
     "undocument": true,
     "unknown": [
       {
@@ -529,7 +555,7 @@
     "interface": false
   },
   {
-    "__docId__": 22,
+    "__docId__": 23,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/index.js~Level",
@@ -539,7 +565,7 @@
     "longname": "src/index.js~Level#constructor",
     "access": null,
     "description": null,
-    "lineNumber": 45,
+    "lineNumber": 48,
     "undocument": true,
     "unknown": [
       {
@@ -560,38 +586,15 @@
     ]
   },
   {
-    "__docId__": 23,
-    "kind": "member",
-    "name": "heros",
-    "memberof": "src/index.js~Level",
-    "static": false,
-    "longname": "src/index.js~Level#heros",
-    "access": null,
-    "description": null,
-    "lineNumber": 46,
-    "undocument": true,
-    "unknown": [
-      {
-        "tagName": "@_undocument",
-        "tagValue": ""
-      }
-    ],
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
     "__docId__": 24,
     "kind": "member",
-    "name": "blocks",
+    "name": "physics",
     "memberof": "src/index.js~Level",
     "static": false,
-    "longname": "src/index.js~Level#blocks",
+    "longname": "src/index.js~Level#physics",
     "access": null,
     "description": null,
-    "lineNumber": 47,
+    "lineNumber": 53,
     "undocument": true,
     "unknown": [
       {
@@ -608,13 +611,13 @@
   {
     "__docId__": 25,
     "kind": "member",
-    "name": "accuracy",
+    "name": "heros",
     "memberof": "src/index.js~Level",
     "static": false,
-    "longname": "src/index.js~Level#accuracy",
+    "longname": "src/index.js~Level#heros",
     "access": null,
     "description": null,
-    "lineNumber": 49,
+    "lineNumber": 54,
     "undocument": true,
     "unknown": [
       {
@@ -624,20 +627,43 @@
     ],
     "type": {
       "types": [
-        "number"
+        "*"
       ]
     }
   },
   {
     "__docId__": 26,
     "kind": "member",
-    "name": "gravity",
+    "name": "blocks",
     "memberof": "src/index.js~Level",
     "static": false,
-    "longname": "src/index.js~Level#gravity",
+    "longname": "src/index.js~Level#blocks",
     "access": null,
     "description": null,
-    "lineNumber": 50,
+    "lineNumber": 55,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 27,
+    "kind": "member",
+    "name": "accuracy",
+    "memberof": "src/index.js~Level",
+    "static": false,
+    "longname": "src/index.js~Level#accuracy",
+    "access": null,
+    "description": null,
+    "lineNumber": 56,
     "undocument": true,
     "unknown": [
       {
@@ -652,7 +678,7 @@
     }
   },
   {
-    "__docId__": 27,
+    "__docId__": 28,
     "kind": "method",
     "name": "spawn",
     "memberof": "src/index.js~Level",
@@ -662,7 +688,7 @@
     "longname": "src/index.js~Level#spawn",
     "access": null,
     "description": null,
-    "lineNumber": 52,
+    "lineNumber": 58,
     "undocument": true,
     "unknown": [
       {
@@ -684,45 +710,6 @@
     ]
   },
   {
-    "__docId__": 28,
-    "kind": "method",
-    "name": "isFreeCell",
-    "memberof": "src/index.js~Level",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/index.js~Level#isFreeCell",
-    "access": null,
-    "description": null,
-    "lineNumber": 56,
-    "undocument": true,
-    "unknown": [
-      {
-        "tagName": "@_undocument",
-        "tagValue": ""
-      }
-    ],
-    "params": [
-      {
-        "name": "x",
-        "types": [
-          "*"
-        ]
-      },
-      {
-        "name": "y",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": {
-      "types": [
-        "boolean"
-      ]
-    }
-  },
-  {
     "__docId__": 29,
     "kind": "method",
     "name": "eachHero",
@@ -733,7 +720,7 @@
     "longname": "src/index.js~Level#eachHero",
     "access": null,
     "description": null,
-    "lineNumber": 73,
+    "lineNumber": 62,
     "undocument": true,
     "unknown": [
       {
@@ -761,7 +748,7 @@
     "longname": "src/index.js~Level#tick",
     "access": null,
     "description": null,
-    "lineNumber": 80,
+    "lineNumber": 69,
     "undocument": true,
     "unknown": [
       {
@@ -771,63 +758,15 @@
     ],
     "params": [
       {
-        "name": "objectPattern",
+        "name": "delta",
         "types": [
-          "{\"delta\": *}"
-        ],
-        "defaultRaw": {
-          "delta": null
-        },
-        "defaultValue": "{\"delta\":null}"
+          "*"
+        ]
       }
     ]
   },
   {
     "__docId__": 31,
-    "kind": "method",
-    "name": "physics",
-    "memberof": "src/index.js~Level",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/index.js~Level#physics",
-    "access": null,
-    "description": null,
-    "lineNumber": 84,
-    "undocument": true,
-    "unknown": [
-      {
-        "tagName": "@_undocument",
-        "tagValue": ""
-      }
-    ],
-    "params": []
-  },
-  {
-    "__docId__": 32,
-    "kind": "member",
-    "name": "distances",
-    "memberof": "src/index.js~Level",
-    "static": false,
-    "longname": "src/index.js~Level#distances",
-    "access": null,
-    "description": null,
-    "lineNumber": 85,
-    "undocument": true,
-    "unknown": [
-      {
-        "tagName": "@_undocument",
-        "tagValue": ""
-      }
-    ],
-    "type": {
-      "types": [
-        "{}"
-      ]
-    }
-  },
-  {
-    "__docId__": 33,
     "kind": "method",
     "name": "toArray",
     "memberof": "src/index.js~Level",
@@ -837,7 +776,7 @@
     "longname": "src/index.js~Level#toArray",
     "access": null,
     "description": null,
-    "lineNumber": 122,
+    "lineNumber": 72,
     "undocument": true,
     "unknown": [
       {
@@ -853,7 +792,7 @@
     }
   },
   {
-    "__docId__": 34,
+    "__docId__": 32,
     "kind": "method",
     "name": "fromArray",
     "memberof": "src/index.js~Level",
@@ -863,7 +802,7 @@
     "longname": "src/index.js~Level#fromArray",
     "access": null,
     "description": null,
-    "lineNumber": 127,
+    "lineNumber": 77,
     "undocument": true,
     "unknown": [
       {
@@ -884,6 +823,79 @@
     ]
   },
   {
+    "__docId__": 33,
+    "kind": "method",
+    "name": "updateHero",
+    "memberof": "src/index.js~Level",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/index.js~Level#updateHero",
+    "access": null,
+    "description": null,
+    "lineNumber": 95,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "id",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "heroArray",
+        "optional": true,
+        "types": [
+          "*[]"
+        ],
+        "defaultRaw": [],
+        "defaultValue": "[]"
+      }
+    ]
+  },
+  {
+    "__docId__": 34,
+    "kind": "method",
+    "name": "addHero",
+    "memberof": "src/index.js~Level",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/index.js~Level#addHero",
+    "access": null,
+    "description": null,
+    "lineNumber": 101,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "heroArray",
+        "optional": true,
+        "types": [
+          "*[]"
+        ],
+        "defaultRaw": [],
+        "defaultValue": "[]"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
     "__docId__": 35,
     "kind": "method",
     "name": "fromTiled",
@@ -894,7 +906,7 @@
     "longname": "src/index.js~Level#fromTiled",
     "access": null,
     "description": null,
-    "lineNumber": 152,
+    "lineNumber": 114,
     "undocument": true,
     "unknown": [
       {
@@ -923,7 +935,7 @@
     "longname": "src/index.js~Level#width",
     "access": null,
     "description": null,
-    "lineNumber": 153,
+    "lineNumber": 115,
     "undocument": true,
     "unknown": [
       {
@@ -946,7 +958,7 @@
     "longname": "src/index.js~Level#height",
     "access": null,
     "description": null,
-    "lineNumber": 154,
+    "lineNumber": 116,
     "undocument": true,
     "unknown": [
       {
@@ -969,7 +981,7 @@
     "longname": "src/index.js~Level#blocks",
     "access": null,
     "description": null,
-    "lineNumber": 155,
+    "lineNumber": 117,
     "undocument": true,
     "unknown": [
       {
@@ -992,7 +1004,7 @@
     "longname": "src/index.js~Level#stops",
     "access": null,
     "description": null,
-    "lineNumber": 156,
+    "lineNumber": 118,
     "undocument": true,
     "unknown": [
       {
@@ -1015,7 +1027,7 @@
     "longname": "src/index.js~Level#tileset",
     "access": null,
     "description": null,
-    "lineNumber": 157,
+    "lineNumber": 119,
     "undocument": true,
     "unknown": [
       {
@@ -1038,7 +1050,7 @@
     "longname": "src/index.js~Level#accuracy",
     "access": null,
     "description": null,
-    "lineNumber": 161,
+    "lineNumber": 123,
     "undocument": true,
     "unknown": [
       {
@@ -1064,7 +1076,7 @@
     "importPath": "gameframework/src/index.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 176,
+    "lineNumber": 138,
     "undocument": true,
     "unknown": [
       {
@@ -1085,7 +1097,7 @@
     "longname": "src/index.js~Hero#constructor",
     "access": null,
     "description": null,
-    "lineNumber": 177,
+    "lineNumber": 139,
     "undocument": true,
     "unknown": [
       {
@@ -1121,7 +1133,7 @@
     "longname": "src/index.js~Hero#id",
     "access": null,
     "description": null,
-    "lineNumber": 178,
+    "lineNumber": 140,
     "undocument": true,
     "unknown": [
       {
@@ -1138,13 +1150,13 @@
   {
     "__docId__": 45,
     "kind": "member",
-    "name": "body",
+    "name": "sprite",
     "memberof": "src/index.js~Hero",
     "static": false,
-    "longname": "src/index.js~Hero#body",
+    "longname": "src/index.js~Hero#sprite",
     "access": null,
     "description": null,
-    "lineNumber": 180,
+    "lineNumber": 142,
     "undocument": true,
     "unknown": [
       {
@@ -1160,14 +1172,16 @@
   },
   {
     "__docId__": 46,
-    "kind": "member",
-    "name": "sprite",
+    "kind": "get",
+    "name": "x",
     "memberof": "src/index.js~Hero",
+    "generator": false,
+    "async": false,
     "static": false,
-    "longname": "src/index.js~Hero#sprite",
+    "longname": "src/index.js~Hero#x",
     "access": null,
     "description": null,
-    "lineNumber": 190,
+    "lineNumber": 144,
     "undocument": true,
     "unknown": [
       {
@@ -1183,6 +1197,91 @@
   },
   {
     "__docId__": 47,
+    "kind": "get",
+    "name": "y",
+    "memberof": "src/index.js~Hero",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/index.js~Hero#y",
+    "access": null,
+    "description": null,
+    "lineNumber": 147,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 48,
+    "kind": "method",
+    "name": "addBody",
+    "memberof": "src/index.js~Hero",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/index.js~Hero#addBody",
+    "access": null,
+    "description": null,
+    "lineNumber": 150,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "physics",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "details",
+        "optional": true,
+        "types": [
+          "{}"
+        ],
+        "defaultRaw": {},
+        "defaultValue": "{}"
+      }
+    ]
+  },
+  {
+    "__docId__": 49,
+    "kind": "member",
+    "name": "body",
+    "memberof": "src/index.js~Hero",
+    "static": false,
+    "longname": "src/index.js~Hero#body",
+    "access": null,
+    "description": null,
+    "lineNumber": 151,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 50,
     "kind": "method",
     "name": "toArray",
     "memberof": "src/index.js~Hero",
@@ -1192,7 +1291,7 @@
     "longname": "src/index.js~Hero#toArray",
     "access": null,
     "description": null,
-    "lineNumber": 192,
+    "lineNumber": 153,
     "undocument": true,
     "unknown": [
       {
@@ -1208,7 +1307,7 @@
     }
   },
   {
-    "__docId__": 48,
+    "__docId__": 51,
     "kind": "method",
     "name": "fromArray",
     "memberof": "src/index.js~Hero",
@@ -1218,7 +1317,7 @@
     "longname": "src/index.js~Hero#fromArray",
     "access": null,
     "description": null,
-    "lineNumber": 199,
+    "lineNumber": 160,
     "undocument": true,
     "unknown": [
       {
@@ -1245,15 +1344,10 @@
         "defaultRaw": false,
         "defaultValue": "false"
       }
-    ],
-    "return": {
-      "types": [
-        "*"
-      ]
-    }
+    ]
   },
   {
-    "__docId__": 49,
+    "__docId__": 52,
     "kind": "member",
     "name": "id",
     "memberof": "src/index.js~Hero",
@@ -1261,7 +1355,7 @@
     "longname": "src/index.js~Hero#id",
     "access": null,
     "description": null,
-    "lineNumber": 201,
+    "lineNumber": 162,
     "undocument": true,
     "unknown": [
       {
@@ -1276,40 +1370,7 @@
     }
   },
   {
-    "__docId__": 50,
-    "kind": "method",
-    "name": "tick",
-    "memberof": "src/index.js~Hero",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "src/index.js~Hero#tick",
-    "access": null,
-    "description": null,
-    "lineNumber": 209,
-    "undocument": true,
-    "unknown": [
-      {
-        "tagName": "@_undocument",
-        "tagValue": ""
-      }
-    ],
-    "params": [
-      {
-        "name": "objectPattern",
-        "types": [
-          "{\"level\": *, \"delta\": *}"
-        ],
-        "defaultRaw": {
-          "level": null,
-          "delta": null
-        },
-        "defaultValue": "{\"level\":null,\"delta\":null}"
-      }
-    ]
-  },
-  {
-    "__docId__": 51,
+    "__docId__": 53,
     "kind": "method",
     "name": "move",
     "memberof": "src/index.js~Hero",
@@ -1319,7 +1380,7 @@
     "longname": "src/index.js~Hero#move",
     "access": null,
     "description": null,
-    "lineNumber": 218,
+    "lineNumber": 168,
     "undocument": true,
     "unknown": [
       {
@@ -1329,22 +1390,21 @@
     ],
     "params": [
       {
-        "name": "objectPattern",
+        "name": "x",
         "types": [
-          "{\"level\": *, \"x\": *, \"y\": *, \"d\": *}"
-        ],
-        "defaultRaw": {
-          "level": null,
-          "x": null,
-          "y": null,
-          "d": null
-        },
-        "defaultValue": "{\"level\":null,\"x\":null,\"y\":null,\"d\":null}"
+          "*"
+        ]
+      },
+      {
+        "name": "y",
+        "types": [
+          "*"
+        ]
       }
     ]
   },
   {
-    "__docId__": 52,
+    "__docId__": 54,
     "kind": "method",
     "name": "goto",
     "memberof": "src/index.js~Hero",
@@ -1354,7 +1414,7 @@
     "longname": "src/index.js~Hero#goto",
     "access": null,
     "description": null,
-    "lineNumber": 240,
+    "lineNumber": 173,
     "undocument": true,
     "unknown": [
       {
@@ -1377,7 +1437,7 @@
     ]
   },
   {
-    "__docId__": 53,
+    "__docId__": 55,
     "kind": "function",
     "name": "atan2",
     "memberof": "src/index.js",
@@ -1390,7 +1450,7 @@
     "importPath": "gameframework/src/index.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 247,
+    "lineNumber": 178,
     "undocument": true,
     "unknown": [
       {
@@ -1419,7 +1479,7 @@
     }
   },
   {
-    "__docId__": 54,
+    "__docId__": 56,
     "kind": "function",
     "name": "randomId",
     "memberof": "src/index.js",
@@ -1432,7 +1492,7 @@
     "importPath": "gameframework/src/index.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 270,
+    "lineNumber": 201,
     "undocument": true,
     "unknown": [
       {
@@ -1448,7 +1508,7 @@
     }
   },
   {
-    "__docId__": 55,
+    "__docId__": 57,
     "kind": "function",
     "name": "distance",
     "memberof": "src/index.js",
@@ -1461,7 +1521,7 @@
     "importPath": "gameframework/src/index.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 274,
+    "lineNumber": 205,
     "undocument": true,
     "unknown": [
       {
@@ -1490,29 +1550,29 @@
     }
   },
   {
-    "__docId__": 56,
+    "__docId__": 58,
     "kind": "file",
-    "name": "src/view.js",
-    "content": "'use strict';\n\nconst PIXI = require('pixi.js');\nconst Level = require('.').Level;\n\nclass View {\n\tconstructor (screenSize = 480) {\n\t\tthis.screenSize = screenSize;\n\t\tthis.pixi = new PIXI.Application(window.innerWidth, window.innerHeight, {\n\t\t\tautoResize: false,\n\t\t\troundPixels: true,\n\t\t\tclearBeforeRender: false,\n\t\t\tresolution: 1\n\t\t});\n\t\tthis.camera = new PIXI.Container();\n\t\tthis.pixi.stage.addChild(this.camera);\n\t\tthis.level = new Level();\n\t\tthis.level.onUpdateHero = this._onUpdateHero.bind(this);\n\t\tthis.level.onCreateHero = this._onCreateHero.bind(this);\n\t\tthis.level.onRemoveHero = this._onRemoveHero.bind(this);\n\t\tdocument.body.appendChild(this.pixi.view);\n\t\twindow.addEventListener('resize', this.onResize.bind(this), true);\n\t\tthis.onResize();\n\t\tthis.pixi.start();\n\t}\n\tget hero () {\n\t\treturn this.level.heros[this.id];\n\t}\n\tcameraToHero (hero) {\n\t\tthis.camera.x = Math.floor(-hero.sprite.x + window.innerWidth / 2 / this.scale);\n\t\tthis.camera.y = Math.floor(-hero.sprite.y + window.innerHeight / 2 / this.scale);\n\t}\n\tonUpdateHero (hero) {\n\t\t// this is what you should override\n\t}\n\t_onUpdateHero (hero) {\n\t\tthis.onUpdateHero(hero);\n\t\tif (hero.sprite) {\n\t\t\thero.sprite.x = hero.body.x * this.level.accuracy;\n\t\t\thero.sprite.y = hero.body.y * this.level.accuracy;\n\t\t}\n\t}\n\t// this is what you should override\n\tonCreateHero (hero) {\n\t\thero.sprite = PIXI.Sprite.fromImage('bunny.png');\n\t\thero.sprite.anchor.set(0.5);\t\t\n\t}\n\t_onCreateHero (hero) {\n\t\tif (!hero.sprite) {\n\t\t\tthis.onCreateHero(hero);\n\t\t\tif (hero.sprite) {\n\t\t\t\thero.sprite.x = hero.body.x;\n\t\t\t\thero.sprite.y = hero.body.y;\n\t\t\t\t(this.layers ? this.layers.heros : this.camera).addChild(hero.sprite);\n\t\t\t}\n\t\t}\n\t}\n\tonRemoveHero (hero) {\n\t\t// this is what you should override\n\t}\n\t_onRemoveHero (hero) {\n\t\tthis.onRemoveHero(hero);\n\t\tif (hero.sprite && hero.sprite.parent) {\n\t\t\thero.sprite.parent.removeChild(hero.sprite);\n\t\t}\n\t}\n\tonResize () {\n\t\tthis.scale = this.getScale();\n\t\tthis.pixi.renderer.resize(window.innerWidth, window.innerHeight);\n\t\tthis.pixi.stage.scale.set(this.scale);\n\t}\n\tgetScale () {\n\t    return +(Math.sqrt(window.innerWidth * window.innerHeight) / this.screenSize).toFixed(2);\n\t}\n\tgetTexture (frame) {\n\t\tif (!this.textureCache[frame]) {\n\t\t\t// <-- tiled firstgid === 1\n\t\t\tconst size = this.level.tileset.tilewidth,\n\t\t\t\twidth = (this.level.tileset.imagewidth / this.level.tileset.tilewidth),\n\t\t\t\tx = ((frame - 1) % width) * size,\n\t\t\t\ty = Math.floor((frame - 1) / width) * size;\n\t\t\tthis.textureCache[frame] = new PIXI.Texture(\n\t\t\t\tthis.tileset, new PIXI.Rectangle(x, y, size, size)\n\t\t\t);\n\t\t\tthis.textureCache[frame].baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;\n\t\t}\n\t\treturn this.textureCache[frame];\n\t}\n\tcreateSprite (frame, nearest = PIXI.SCALE_MODES.NEAREST) {\n\t\tlet sprite;\n\t\tif (isFinite(frame)) {\n\t\t\tsprite = new PIXI.Sprite(this.getTexture(parseInt(frame, 10)));\n\t\t} else {\n\t\t\tsprite = PIXI.Sprite.fromFrame(frame);\n\t\t}\n\t\tsprite.texture.baseTexture.scaleMode = nearest;\n\t\treturn sprite;\n\t}\n\taddBlock (x, y, block, layer = this.layers.blocks, nearest = PIXI.SCALE_MODES.NEAREST) {\n\t\tconst sprite = this.createSprite(block, nearest);\n\t\tsprite.width = sprite.height = this.level.tileset.tilewidth;\n\t\tsprite.x = Math.floor(this.level.tileset.tilewidth * x);\n\t\tsprite.y = Math.floor(this.level.tileset.tilewidth * y);\n\t\tlayer.addChild(sprite);\n\t}\n\taddBlocks () {\n\t\tfor (let y = 0; y < this.level.height; y++) {\n\t\t\tfor (let x = 0; x < this.level.width; x++) {\n\t\t\t\tconst block = this.level.blocks[`${x}:${y}`];\n\t\t\t\tif (block && Array.isArray(block)) {\n\t\t\t\t\tfor (let i = 0; i < block.length; i++) {\n\t\t\t\t\t\tif (parseInt(block[i], 10)) {\n\t\t\t\t\t\t\tthis.addBlock(x, y, block[i]);\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\tcreateLevel (tiled) {\n\t\tthis.textureCache = {};\n\t\tthis.layers = {\n\t\t\tblocks: new PIXI.Container(),\n\t\t\theros: new PIXI.Container(),\n\t\t};\n\t\tthis.tileset = PIXI.Texture.fromImage('assets/img/MagicCloud/tileset.png', false, PIXI.SCALE_MODES.NEAREST);\n\t\tthis.camera.addChild(this.layers.blocks);\n\t\tthis.camera.addChild(this.layers.heros);\n\t\tthis.level.fromTiled(tiled);\n\t\tthis.addBlocks();\n\t}\n\t_onMouseMove (event) {\n\t\tconst e = event.touches ? event.touches[0] : event;\n\t\tthis.mouse = {\n\t\t\tx: e.clientX,\n\t\t\ty: e.clientY,\n\t\t};\n\t\tif (this.onMouseMove) {\n\t\t\tthis.onMouseMove();\n\t\t}\n\t}\n\tuseMouse () {\n\t\twindow.addEventListener('mousemove', this._onMouseMove.bind(this));\n\t}\n}\n\nif (typeof module !== 'undefined') {\t\n\tmodule.exports = View;\n}\n",
+    "name": "src/physics.js",
+    "content": "// special thanks to\n// http://buildnewgames.com/box2dweb/\n// wrapped up by me Jacek Pietal <prozi85@gmail.com>\n\n// (function () {\n'use strict';\n\nconst Box2D = require('box2dweb');\n\n// box2d\nconst b2Vec2 = Box2D.Common.Math.b2Vec2;\nconst b2BodyDef = Box2D.Dynamics.b2BodyDef;\nconst b2Body = Box2D.Dynamics.b2Body;\nconst b2FixtureDef = Box2D.Dynamics.b2FixtureDef;\nconst b2Fixture = Box2D.Dynamics.b2Fixture;\nconst b2World = Box2D.Dynamics.b2World;\nconst b2MassData = Box2D.Collision.Shapes.b2MassData;\nconst b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape;\nconst b2CircleShape = Box2D.Collision.Shapes.b2CircleShape;\nconst b2DebugDraw = Box2D.Dynamics.b2DebugDraw;\t\n\nconst GRAVITY = 9.8;\nconst BODIES_SLEEP = true;\n\nclass Physics {\n\tconstructor ({ scale = 30, gravity = GRAVITY }) {\n\t\tthis.gravity = new b2Vec2(0, gravity);\n\t\tthis.world = new b2World(this.gravity, BODIES_SLEEP);\n\t\tthis.scale = scale;\n\t\tthis.dtRemaining = 0;\n\t\tthis.stepAmount = 1 / 60;\n\t}\n\tstep (dt = 0.01) {\n\t\tthis.dtRemaining += dt;\n\t\twhile (this.dtRemaining > this.stepAmount) {\n\t\t\tthis.dtRemaining -= this.stepAmount;\n\t\t\tthis.world.Step(this.stepAmount,\n\t\t\t8, // velocity iterations\n\t\t\t3); // position iterations\n\t\t}\n\t\tif (this.debugDraw) {\n\t\t\tthis.world.DrawDebugData();\n\t\t}\n\t}\n\tdebug (context) {\n\t\tif (context) {\n\t\t\tthis.debugDraw = new b2DebugDraw();\n\t\t\tthis.debugDraw.SetSprite(context);\n\t\t\tthis.debugDraw.SetDrawScale(this.scale);\n\t\t\tthis.debugDraw.SetFillAlpha(0.3);\n\t\t\tthis.debugDraw.SetLineThickness(1.0);\n\t\t\tthis.debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);\n\t\t\tthis.world.SetDebugDraw(this.debugDraw);\n\t\t}\n\t};\n};\n\nconst BODY_DEFAULTS = {\n\tshape: \"block\",\n\twidth: 1,\n\theight: 1,\n\tradius: 0.5\n};\n\nconst BODY_FIXTURE_DEFAULTS = {\n\tdensity: 2,\n\tfriction: 1,\n\trestitution: 0.2\n};\n\nconst BODY_DEFINITION_DEFAULTS = {\n\tactive: true,\n\tallowSleep: true,\n\tangle: 0,\n\tangularVelocity: 0,\n\tawake: true,\n\tbullet: false,\n\tfixedRotation: false\n};\n\nclass Body {\n\tconstructor (physics, details = {}) {\n\n\t\t// Create the definition\n\t\tconst definition = new b2BodyDef();\n\n\t\t// Set up the definition\n\t\tfor (let k in BODY_DEFINITION_DEFAULTS) {\n\t\t\tdefinition[k] = details[k] || BODY_DEFINITION_DEFAULTS[k];\n\t\t}\n\t\tdefinition.position = new b2Vec2(details.x || 0, details.y || 0);\n\t\tdefinition.linearVelocity = new b2Vec2(details.vx || 0, details.vy || 0);\n\t\tdefinition.userData = {};\n\t\tdefinition.type = details.type == \"static\" ? b2Body.b2_staticBody : b2Body.b2_dynamicBody;\n\n\t\t// Create the Body\n\t\tconst body = physics.world.CreateBody(definition);\n\n\t\t// Create the fixture\n\t\tconst fixtureDef = new b2FixtureDef();\n\t\tfor (let l in BODY_FIXTURE_DEFAULTS) {\n\t\t\tfixtureDef[l] = details[l] || BODY_FIXTURE_DEFAULTS[l];\n\t\t}\n\n\t\tdetails.shape = details.shape || BODY_DEFAULTS.shape;\n\n\t\tswitch (details.shape) {\n\t\t\tcase \"circle\":\n\t\t\t\tdetails.radius = details.radius || BODY_DEFAULTS.radius;\n\t\t\t\tfixtureDef.shape = new b2CircleShape(details.radius);\n\t\t\t\tbreak;\n\t\t\tcase \"polygon\":\n\t\t\t\tfixtureDef.shape = new b2PolygonShape();\n\t\t\t\tfixtureDef.shape.SetAsArray(details.points, details.points.length);\n\t\t\t\tbreak;\n\t\t\tcase \"block\":\n\t\t\tdefault:\n\t\t\t\tdetails.width = details.width || BODY_DEFAULTS.width;\n\t\t\t\tdetails.height = details.height || BODY_DEFAULTS.height;\n\n\t\t\t\tfixtureDef.shape = new b2PolygonShape();\n\t\t\t\tfixtureDef.shape.SetAsBox(\n\t\t\t\t\tdetails.width / 2,\n\t\t\t\t\tdetails.height / 2\n\t\t\t\t);\n\t\t\t\tbreak;\n\t\t}\n\n\t\tbody.CreateFixture(fixtureDef);\n\n\t\treturn body;\n\t}\n};\n\nif (typeof module !== 'undefined') {\n\tmodule.exports = {\n\t\tPhysics,\n\t\tBody,\n\t\tb2Vec2\n\t};\n}\n\n// })();\n",
     "static": true,
-    "longname": "src/view.js",
+    "longname": "src/physics.js",
     "access": null,
     "description": null,
     "lineNumber": 1
   },
   {
-    "__docId__": 57,
+    "__docId__": 59,
     "kind": "variable",
-    "name": "PIXI",
-    "memberof": "src/view.js",
+    "name": "Box2D",
+    "memberof": "src/physics.js",
     "static": true,
-    "longname": "src/view.js~PIXI",
+    "longname": "src/physics.js~Box2D",
     "access": null,
     "export": false,
-    "importPath": "gameframework/src/view.js",
+    "importPath": "gameframework/src/physics.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 3,
+    "lineNumber": 8,
     "undocument": true,
     "unknown": [
       {
@@ -1527,12 +1587,770 @@
     }
   },
   {
-    "__docId__": 58,
+    "__docId__": 60,
     "kind": "variable",
-    "name": "Level",
+    "name": "b2Vec2",
+    "memberof": "src/physics.js",
+    "static": true,
+    "longname": "src/physics.js~b2Vec2",
+    "access": null,
+    "export": false,
+    "importPath": "gameframework/src/physics.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 11,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 61,
+    "kind": "variable",
+    "name": "b2BodyDef",
+    "memberof": "src/physics.js",
+    "static": true,
+    "longname": "src/physics.js~b2BodyDef",
+    "access": null,
+    "export": false,
+    "importPath": "gameframework/src/physics.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 12,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 62,
+    "kind": "variable",
+    "name": "b2Body",
+    "memberof": "src/physics.js",
+    "static": true,
+    "longname": "src/physics.js~b2Body",
+    "access": null,
+    "export": false,
+    "importPath": "gameframework/src/physics.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 13,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 63,
+    "kind": "variable",
+    "name": "b2FixtureDef",
+    "memberof": "src/physics.js",
+    "static": true,
+    "longname": "src/physics.js~b2FixtureDef",
+    "access": null,
+    "export": false,
+    "importPath": "gameframework/src/physics.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 14,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 64,
+    "kind": "variable",
+    "name": "b2Fixture",
+    "memberof": "src/physics.js",
+    "static": true,
+    "longname": "src/physics.js~b2Fixture",
+    "access": null,
+    "export": false,
+    "importPath": "gameframework/src/physics.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 15,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 65,
+    "kind": "variable",
+    "name": "b2World",
+    "memberof": "src/physics.js",
+    "static": true,
+    "longname": "src/physics.js~b2World",
+    "access": null,
+    "export": false,
+    "importPath": "gameframework/src/physics.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 16,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 66,
+    "kind": "variable",
+    "name": "b2MassData",
+    "memberof": "src/physics.js",
+    "static": true,
+    "longname": "src/physics.js~b2MassData",
+    "access": null,
+    "export": false,
+    "importPath": "gameframework/src/physics.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 17,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 67,
+    "kind": "variable",
+    "name": "b2PolygonShape",
+    "memberof": "src/physics.js",
+    "static": true,
+    "longname": "src/physics.js~b2PolygonShape",
+    "access": null,
+    "export": false,
+    "importPath": "gameframework/src/physics.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 18,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 68,
+    "kind": "variable",
+    "name": "b2CircleShape",
+    "memberof": "src/physics.js",
+    "static": true,
+    "longname": "src/physics.js~b2CircleShape",
+    "access": null,
+    "export": false,
+    "importPath": "gameframework/src/physics.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 19,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 69,
+    "kind": "variable",
+    "name": "b2DebugDraw",
+    "memberof": "src/physics.js",
+    "static": true,
+    "longname": "src/physics.js~b2DebugDraw",
+    "access": null,
+    "export": false,
+    "importPath": "gameframework/src/physics.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 20,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 70,
+    "kind": "variable",
+    "name": "GRAVITY",
+    "memberof": "src/physics.js",
+    "static": true,
+    "longname": "src/physics.js~GRAVITY",
+    "access": null,
+    "export": false,
+    "importPath": "gameframework/src/physics.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 22,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "number"
+      ]
+    }
+  },
+  {
+    "__docId__": 71,
+    "kind": "variable",
+    "name": "BODIES_SLEEP",
+    "memberof": "src/physics.js",
+    "static": true,
+    "longname": "src/physics.js~BODIES_SLEEP",
+    "access": null,
+    "export": false,
+    "importPath": "gameframework/src/physics.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 23,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "boolean"
+      ]
+    }
+  },
+  {
+    "__docId__": 72,
+    "kind": "class",
+    "name": "Physics",
+    "memberof": "src/physics.js",
+    "static": true,
+    "longname": "src/physics.js~Physics",
+    "access": null,
+    "export": false,
+    "importPath": "gameframework/src/physics.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 25,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "interface": false
+  },
+  {
+    "__docId__": 73,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/physics.js~Physics",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/physics.js~Physics#constructor",
+    "access": null,
+    "description": null,
+    "lineNumber": 26,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "objectPattern",
+        "types": [
+          "{\"scale\": *, \"gravity\": *}"
+        ],
+        "defaultRaw": {
+          "scale": null,
+          "gravity": null
+        },
+        "defaultValue": "{\"scale\":null,\"gravity\":null}"
+      }
+    ]
+  },
+  {
+    "__docId__": 74,
+    "kind": "member",
+    "name": "gravity",
+    "memberof": "src/physics.js~Physics",
+    "static": false,
+    "longname": "src/physics.js~Physics#gravity",
+    "access": null,
+    "description": null,
+    "lineNumber": 27,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 75,
+    "kind": "member",
+    "name": "world",
+    "memberof": "src/physics.js~Physics",
+    "static": false,
+    "longname": "src/physics.js~Physics#world",
+    "access": null,
+    "description": null,
+    "lineNumber": 28,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 76,
+    "kind": "member",
+    "name": "scale",
+    "memberof": "src/physics.js~Physics",
+    "static": false,
+    "longname": "src/physics.js~Physics#scale",
+    "access": null,
+    "description": null,
+    "lineNumber": 29,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 77,
+    "kind": "member",
+    "name": "dtRemaining",
+    "memberof": "src/physics.js~Physics",
+    "static": false,
+    "longname": "src/physics.js~Physics#dtRemaining",
+    "access": null,
+    "description": null,
+    "lineNumber": 30,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "number"
+      ]
+    }
+  },
+  {
+    "__docId__": 78,
+    "kind": "member",
+    "name": "stepAmount",
+    "memberof": "src/physics.js~Physics",
+    "static": false,
+    "longname": "src/physics.js~Physics#stepAmount",
+    "access": null,
+    "description": null,
+    "lineNumber": 31,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 79,
+    "kind": "method",
+    "name": "step",
+    "memberof": "src/physics.js~Physics",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/physics.js~Physics#step",
+    "access": null,
+    "description": null,
+    "lineNumber": 33,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "dt",
+        "optional": true,
+        "types": [
+          "number"
+        ],
+        "defaultRaw": 0.01,
+        "defaultValue": "0.01"
+      }
+    ]
+  },
+  {
+    "__docId__": 80,
+    "kind": "member",
+    "name": "dtRemaining",
+    "memberof": "src/physics.js~Physics",
+    "static": false,
+    "longname": "src/physics.js~Physics#dtRemaining",
+    "access": null,
+    "description": null,
+    "lineNumber": 34,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 81,
+    "kind": "member",
+    "name": "dtRemaining",
+    "memberof": "src/physics.js~Physics",
+    "static": false,
+    "longname": "src/physics.js~Physics#dtRemaining",
+    "access": null,
+    "description": null,
+    "lineNumber": 36,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 82,
+    "kind": "method",
+    "name": "debug",
+    "memberof": "src/physics.js~Physics",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/physics.js~Physics#debug",
+    "access": null,
+    "description": null,
+    "lineNumber": 45,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "context",
+        "types": [
+          "*"
+        ]
+      }
+    ]
+  },
+  {
+    "__docId__": 83,
+    "kind": "member",
+    "name": "debugDraw",
+    "memberof": "src/physics.js~Physics",
+    "static": false,
+    "longname": "src/physics.js~Physics#debugDraw",
+    "access": null,
+    "description": null,
+    "lineNumber": 47,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 84,
+    "kind": "variable",
+    "name": "BODY_DEFAULTS",
+    "memberof": "src/physics.js",
+    "static": true,
+    "longname": "src/physics.js~BODY_DEFAULTS",
+    "access": null,
+    "export": false,
+    "importPath": "gameframework/src/physics.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 58,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "{\"shape\": string, \"width\": number, \"height\": number, \"radius\": number}"
+      ]
+    }
+  },
+  {
+    "__docId__": 85,
+    "kind": "variable",
+    "name": "BODY_FIXTURE_DEFAULTS",
+    "memberof": "src/physics.js",
+    "static": true,
+    "longname": "src/physics.js~BODY_FIXTURE_DEFAULTS",
+    "access": null,
+    "export": false,
+    "importPath": "gameframework/src/physics.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 65,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "{\"density\": number, \"friction\": number, \"restitution\": number}"
+      ]
+    }
+  },
+  {
+    "__docId__": 86,
+    "kind": "variable",
+    "name": "BODY_DEFINITION_DEFAULTS",
+    "memberof": "src/physics.js",
+    "static": true,
+    "longname": "src/physics.js~BODY_DEFINITION_DEFAULTS",
+    "access": null,
+    "export": false,
+    "importPath": "gameframework/src/physics.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 71,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "{\"active\": boolean, \"allowSleep\": boolean, \"angle\": *, \"angularVelocity\": *, \"awake\": boolean, \"bullet\": *, \"fixedRotation\": *}"
+      ]
+    }
+  },
+  {
+    "__docId__": 87,
+    "kind": "class",
+    "name": "Body",
+    "memberof": "src/physics.js",
+    "static": true,
+    "longname": "src/physics.js~Body",
+    "access": null,
+    "export": false,
+    "importPath": "gameframework/src/physics.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 81,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "interface": false
+  },
+  {
+    "__docId__": 88,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/physics.js~Body",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/physics.js~Body#constructor",
+    "access": null,
+    "description": null,
+    "lineNumber": 82,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "params": [
+      {
+        "name": "physics",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "details",
+        "optional": true,
+        "types": [
+          "{}"
+        ],
+        "defaultRaw": {},
+        "defaultValue": "{}"
+      }
+    ]
+  },
+  {
+    "__docId__": 89,
+    "kind": "file",
+    "name": "src/view.js",
+    "content": "// (function () {\n'use strict';\n\nconst PIXI = require('pixi.js');\nconst Level = require('.').Level;\n\nclass View {\n\tconstructor (screenSize = 480) {\n\t\tthis.screenSize = screenSize;\n\t\tthis.pixi = new PIXI.Application(window.innerWidth, window.innerHeight, {\n\t\t\tautoResize: false,\n\t\t\troundPixels: true,\n\t\t\tclearBeforeRender: false,\n\t\t\tresolution: 1\n\t\t});\n\t\tthis.camera = new PIXI.Container();\n\t\tthis.pixi.stage.addChild(this.camera);\n\t\tthis.level = new Level();\n\t\tthis.level.onUpdateHero = this._onUpdateHero.bind(this);\n\t\tthis.level.onCreateHero = this._onCreateHero.bind(this);\n\t\tthis.level.onRemoveHero = this._onRemoveHero.bind(this);\n\t\tdocument.body.appendChild(this.pixi.view);\n\t\twindow.addEventListener('resize', this.onResize.bind(this), true);\n\t\tthis.onResize();\n\t\tthis.pixi.start();\n\t}\n\tget hero () {\n\t\treturn this.level.heros[this.id];\n\t}\n\tcameraToHero (hero) {\n\t\tthis.camera.x = Math.floor(-hero.sprite.x + window.innerWidth / 2 / this.scale);\n\t\tthis.camera.y = Math.floor(-hero.sprite.y + window.innerHeight / 2 / this.scale);\n\t}\n\tonUpdateHero (hero) {\n\t\t// this is what you should override\n\t}\n\t_onUpdateHero (hero) {\n\t\tthis.onUpdateHero(hero);\n\t\tif (hero.sprite) {\n\t\t\thero.sprite.x = hero.x * this.level.accuracy;\n\t\t\thero.sprite.y = hero.y * this.level.accuracy;\n\t\t}\n\t}\n\t// this is what you should override\n\tonCreateHero (hero) {\n\t\thero.sprite = PIXI.Sprite.fromImage('bunny.png');\n\t\thero.sprite.anchor.set(0.5);\t\t\n\t}\n\t_onCreateHero (hero) {\n\t\tif (!hero.sprite) {\n\t\t\tthis.onCreateHero(hero);\n\t\t\tif (hero.sprite) {\n\t\t\t\thero.sprite.x = hero.x * this.level.accuracy;\n\t\t\t\thero.sprite.y = hero.y * this.level.accuracy;\n\t\t\t\t(this.layers ? this.layers.heros : this.camera).addChild(hero.sprite);\n\t\t\t}\n\t\t}\n\t}\n\tonRemoveHero (hero) {\n\t\t// this is what you should override\n\t}\n\t_onRemoveHero (hero) {\n\t\tthis.onRemoveHero(hero);\n\t\tif (hero.sprite && hero.sprite.parent) {\n\t\t\thero.sprite.parent.removeChild(hero.sprite);\n\t\t}\n\t}\n\tonResize () {\n\t\tthis.scale = this.getScale();\n\t\tthis.pixi.renderer.resize(window.innerWidth, window.innerHeight);\n\t\tthis.pixi.stage.scale.set(this.scale);\n\t}\n\tgetScale () {\n\t    return +(Math.sqrt(window.innerWidth * window.innerHeight) / this.screenSize).toFixed(2);\n\t}\n\tgetTexture (frame) {\n\t\tif (!this.textureCache[frame]) {\n\t\t\t// <-- tiled firstgid === 1\n\t\t\tconst size = this.level.tileset.tilewidth,\n\t\t\t\twidth = (this.level.tileset.imagewidth / this.level.tileset.tilewidth),\n\t\t\t\tx = ((frame - 1) % width) * size,\n\t\t\t\ty = Math.floor((frame - 1) / width) * size;\n\t\t\tthis.textureCache[frame] = new PIXI.Texture(\n\t\t\t\tthis.tileset, new PIXI.Rectangle(x, y, size, size)\n\t\t\t);\n\t\t\tthis.textureCache[frame].baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;\n\t\t}\n\t\treturn this.textureCache[frame];\n\t}\n\tcreateSprite (frame, nearest = PIXI.SCALE_MODES.NEAREST) {\n\t\tlet sprite;\n\t\tif (isFinite(frame)) {\n\t\t\tsprite = new PIXI.Sprite(this.getTexture(parseInt(frame, 10)));\n\t\t} else {\n\t\t\tsprite = PIXI.Sprite.fromFrame(frame);\n\t\t}\n\t\tsprite.texture.baseTexture.scaleMode = nearest;\n\t\treturn sprite;\n\t}\n\taddBlock (x, y, block, layer = this.layers.blocks, nearest = PIXI.SCALE_MODES.NEAREST) {\n\t\tconst sprite = this.createSprite(block, nearest);\n\t\tsprite.width = sprite.height = this.level.tileset.tilewidth;\n\t\tsprite.x = Math.floor(this.level.tileset.tilewidth * x);\n\t\tsprite.y = Math.floor(this.level.tileset.tilewidth * y);\n\t\tlayer.addChild(sprite);\n\t}\n\taddBlocks () {\n\t\tfor (let y = 0; y < this.level.height; y++) {\n\t\t\tfor (let x = 0; x < this.level.width; x++) {\n\t\t\t\tconst block = this.level.blocks[`${x}:${y}`];\n\t\t\t\tif (block && Array.isArray(block)) {\n\t\t\t\t\tfor (let i = 0; i < block.length; i++) {\n\t\t\t\t\t\tif (parseInt(block[i], 10)) {\n\t\t\t\t\t\t\tthis.addBlock(x, y, block[i]);\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\tcreateLevel (tiled) {\n\t\tthis.textureCache = {};\n\t\tthis.layers = {\n\t\t\tblocks: new PIXI.Container(),\n\t\t\theros: new PIXI.Container(),\n\t\t};\n\t\tthis.tileset = PIXI.Texture.fromImage('assets/img/MagicCloud/tileset.png', false, PIXI.SCALE_MODES.NEAREST);\n\t\tthis.camera.addChild(this.layers.blocks);\n\t\tthis.camera.addChild(this.layers.heros);\n\t\tthis.level.fromTiled(tiled);\n\t\tthis.addBlocks();\n\t}\n\t_onMouseMove (event) {\n\t\tconst e = event.touches ? event.touches[0] : event;\n\t\tthis.mouse = {\n\t\t\tx: e.clientX,\n\t\t\ty: e.clientY,\n\t\t};\n\t\tif (this.onMouseMove) {\n\t\t\tthis.onMouseMove();\n\t\t}\n\t}\n\tuseMouse () {\n\t\twindow.addEventListener('mousemove', this._onMouseMove.bind(this));\n\t}\n}\n\nif (typeof module !== 'undefined') {\t\n\tmodule.exports = View;\n}\n\n// })();\n",
+    "static": true,
+    "longname": "src/view.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 90,
+    "kind": "variable",
+    "name": "PIXI",
     "memberof": "src/view.js",
     "static": true,
-    "longname": "src/view.js~Level",
+    "longname": "src/view.js~PIXI",
     "access": null,
     "export": false,
     "importPath": "gameframework/src/view.js",
@@ -1553,7 +2371,33 @@
     }
   },
   {
-    "__docId__": 59,
+    "__docId__": 91,
+    "kind": "variable",
+    "name": "Level",
+    "memberof": "src/view.js",
+    "static": true,
+    "longname": "src/view.js~Level",
+    "access": null,
+    "export": false,
+    "importPath": "gameframework/src/view.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 92,
     "kind": "class",
     "name": "View",
     "memberof": "src/view.js",
@@ -1564,7 +2408,7 @@
     "importPath": "gameframework/src/view.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 6,
+    "lineNumber": 7,
     "undocument": true,
     "unknown": [
       {
@@ -1575,7 +2419,7 @@
     "interface": false
   },
   {
-    "__docId__": 60,
+    "__docId__": 93,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/view.js~View",
@@ -1585,7 +2429,7 @@
     "longname": "src/view.js~View#constructor",
     "access": null,
     "description": null,
-    "lineNumber": 7,
+    "lineNumber": 8,
     "undocument": true,
     "unknown": [
       {
@@ -1606,35 +2450,12 @@
     ]
   },
   {
-    "__docId__": 61,
+    "__docId__": 94,
     "kind": "member",
     "name": "screenSize",
     "memberof": "src/view.js~View",
     "static": false,
     "longname": "src/view.js~View#screenSize",
-    "access": null,
-    "description": null,
-    "lineNumber": 8,
-    "undocument": true,
-    "unknown": [
-      {
-        "tagName": "@_undocument",
-        "tagValue": ""
-      }
-    ],
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 62,
-    "kind": "member",
-    "name": "pixi",
-    "memberof": "src/view.js~View",
-    "static": false,
-    "longname": "src/view.js~View#pixi",
     "access": null,
     "description": null,
     "lineNumber": 9,
@@ -1652,7 +2473,30 @@
     }
   },
   {
-    "__docId__": 63,
+    "__docId__": 95,
+    "kind": "member",
+    "name": "pixi",
+    "memberof": "src/view.js~View",
+    "static": false,
+    "longname": "src/view.js~View#pixi",
+    "access": null,
+    "description": null,
+    "lineNumber": 10,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 96,
     "kind": "member",
     "name": "camera",
     "memberof": "src/view.js~View",
@@ -1660,7 +2504,7 @@
     "longname": "src/view.js~View#camera",
     "access": null,
     "description": null,
-    "lineNumber": 15,
+    "lineNumber": 16,
     "undocument": true,
     "unknown": [
       {
@@ -1675,7 +2519,7 @@
     }
   },
   {
-    "__docId__": 64,
+    "__docId__": 97,
     "kind": "member",
     "name": "level",
     "memberof": "src/view.js~View",
@@ -1683,7 +2527,7 @@
     "longname": "src/view.js~View#level",
     "access": null,
     "description": null,
-    "lineNumber": 17,
+    "lineNumber": 18,
     "undocument": true,
     "unknown": [
       {
@@ -1698,7 +2542,7 @@
     }
   },
   {
-    "__docId__": 65,
+    "__docId__": 98,
     "kind": "get",
     "name": "hero",
     "memberof": "src/view.js~View",
@@ -1708,7 +2552,7 @@
     "longname": "src/view.js~View#hero",
     "access": null,
     "description": null,
-    "lineNumber": 26,
+    "lineNumber": 27,
     "undocument": true,
     "unknown": [
       {
@@ -1723,7 +2567,7 @@
     }
   },
   {
-    "__docId__": 66,
+    "__docId__": 99,
     "kind": "method",
     "name": "cameraToHero",
     "memberof": "src/view.js~View",
@@ -1733,7 +2577,7 @@
     "longname": "src/view.js~View#cameraToHero",
     "access": null,
     "description": null,
-    "lineNumber": 29,
+    "lineNumber": 30,
     "undocument": true,
     "unknown": [
       {
@@ -1751,7 +2595,7 @@
     ]
   },
   {
-    "__docId__": 67,
+    "__docId__": 100,
     "kind": "method",
     "name": "onUpdateHero",
     "memberof": "src/view.js~View",
@@ -1761,7 +2605,7 @@
     "longname": "src/view.js~View#onUpdateHero",
     "access": null,
     "description": null,
-    "lineNumber": 33,
+    "lineNumber": 34,
     "undocument": true,
     "unknown": [
       {
@@ -1779,7 +2623,7 @@
     ]
   },
   {
-    "__docId__": 68,
+    "__docId__": 101,
     "kind": "method",
     "name": "_onUpdateHero",
     "memberof": "src/view.js~View",
@@ -1789,7 +2633,7 @@
     "longname": "src/view.js~View#_onUpdateHero",
     "access": null,
     "description": null,
-    "lineNumber": 36,
+    "lineNumber": 37,
     "undocument": true,
     "unknown": [
       {
@@ -1807,7 +2651,7 @@
     ]
   },
   {
-    "__docId__": 69,
+    "__docId__": 102,
     "kind": "method",
     "name": "onCreateHero",
     "memberof": "src/view.js~View",
@@ -1817,7 +2661,7 @@
     "longname": "src/view.js~View#onCreateHero",
     "access": null,
     "description": null,
-    "lineNumber": 44,
+    "lineNumber": 45,
     "undocument": true,
     "unknown": [
       {
@@ -1835,7 +2679,7 @@
     ]
   },
   {
-    "__docId__": 70,
+    "__docId__": 103,
     "kind": "method",
     "name": "_onCreateHero",
     "memberof": "src/view.js~View",
@@ -1845,7 +2689,7 @@
     "longname": "src/view.js~View#_onCreateHero",
     "access": null,
     "description": null,
-    "lineNumber": 48,
+    "lineNumber": 49,
     "undocument": true,
     "unknown": [
       {
@@ -1863,7 +2707,7 @@
     ]
   },
   {
-    "__docId__": 71,
+    "__docId__": 104,
     "kind": "method",
     "name": "onRemoveHero",
     "memberof": "src/view.js~View",
@@ -1873,7 +2717,7 @@
     "longname": "src/view.js~View#onRemoveHero",
     "access": null,
     "description": null,
-    "lineNumber": 58,
+    "lineNumber": 59,
     "undocument": true,
     "unknown": [
       {
@@ -1891,7 +2735,7 @@
     ]
   },
   {
-    "__docId__": 72,
+    "__docId__": 105,
     "kind": "method",
     "name": "_onRemoveHero",
     "memberof": "src/view.js~View",
@@ -1901,7 +2745,7 @@
     "longname": "src/view.js~View#_onRemoveHero",
     "access": null,
     "description": null,
-    "lineNumber": 61,
+    "lineNumber": 62,
     "undocument": true,
     "unknown": [
       {
@@ -1919,7 +2763,7 @@
     ]
   },
   {
-    "__docId__": 73,
+    "__docId__": 106,
     "kind": "method",
     "name": "onResize",
     "memberof": "src/view.js~View",
@@ -1927,25 +2771,6 @@
     "async": false,
     "static": false,
     "longname": "src/view.js~View#onResize",
-    "access": null,
-    "description": null,
-    "lineNumber": 67,
-    "undocument": true,
-    "unknown": [
-      {
-        "tagName": "@_undocument",
-        "tagValue": ""
-      }
-    ],
-    "params": []
-  },
-  {
-    "__docId__": 74,
-    "kind": "member",
-    "name": "scale",
-    "memberof": "src/view.js~View",
-    "static": false,
-    "longname": "src/view.js~View#scale",
     "access": null,
     "description": null,
     "lineNumber": 68,
@@ -1956,6 +2781,25 @@
         "tagValue": ""
       }
     ],
+    "params": []
+  },
+  {
+    "__docId__": 107,
+    "kind": "member",
+    "name": "scale",
+    "memberof": "src/view.js~View",
+    "static": false,
+    "longname": "src/view.js~View#scale",
+    "access": null,
+    "description": null,
+    "lineNumber": 69,
+    "undocument": true,
+    "unknown": [
+      {
+        "tagName": "@_undocument",
+        "tagValue": ""
+      }
+    ],
     "type": {
       "types": [
         "*"
@@ -1963,7 +2807,7 @@
     }
   },
   {
-    "__docId__": 75,
+    "__docId__": 108,
     "kind": "method",
     "name": "getScale",
     "memberof": "src/view.js~View",
@@ -1973,7 +2817,7 @@
     "longname": "src/view.js~View#getScale",
     "access": null,
     "description": null,
-    "lineNumber": 72,
+    "lineNumber": 73,
     "undocument": true,
     "unknown": [
       {
@@ -1989,7 +2833,7 @@
     }
   },
   {
-    "__docId__": 76,
+    "__docId__": 109,
     "kind": "method",
     "name": "getTexture",
     "memberof": "src/view.js~View",
@@ -1999,7 +2843,7 @@
     "longname": "src/view.js~View#getTexture",
     "access": null,
     "description": null,
-    "lineNumber": 75,
+    "lineNumber": 76,
     "undocument": true,
     "unknown": [
       {
@@ -2022,7 +2866,7 @@
     }
   },
   {
-    "__docId__": 77,
+    "__docId__": 110,
     "kind": "method",
     "name": "createSprite",
     "memberof": "src/view.js~View",
@@ -2032,7 +2876,7 @@
     "longname": "src/view.js~View#createSprite",
     "access": null,
     "description": null,
-    "lineNumber": 89,
+    "lineNumber": 90,
     "undocument": true,
     "unknown": [
       {
@@ -2062,7 +2906,7 @@
     }
   },
   {
-    "__docId__": 78,
+    "__docId__": 111,
     "kind": "method",
     "name": "addBlock",
     "memberof": "src/view.js~View",
@@ -2072,7 +2916,7 @@
     "longname": "src/view.js~View#addBlock",
     "access": null,
     "description": null,
-    "lineNumber": 99,
+    "lineNumber": 100,
     "undocument": true,
     "unknown": [
       {
@@ -2116,7 +2960,7 @@
     ]
   },
   {
-    "__docId__": 79,
+    "__docId__": 112,
     "kind": "method",
     "name": "addBlocks",
     "memberof": "src/view.js~View",
@@ -2126,7 +2970,7 @@
     "longname": "src/view.js~View#addBlocks",
     "access": null,
     "description": null,
-    "lineNumber": 106,
+    "lineNumber": 107,
     "undocument": true,
     "unknown": [
       {
@@ -2137,7 +2981,7 @@
     "params": []
   },
   {
-    "__docId__": 80,
+    "__docId__": 113,
     "kind": "method",
     "name": "createLevel",
     "memberof": "src/view.js~View",
@@ -2147,7 +2991,7 @@
     "longname": "src/view.js~View#createLevel",
     "access": null,
     "description": null,
-    "lineNumber": 120,
+    "lineNumber": 121,
     "undocument": true,
     "unknown": [
       {
@@ -2165,7 +3009,7 @@
     ]
   },
   {
-    "__docId__": 81,
+    "__docId__": 114,
     "kind": "member",
     "name": "textureCache",
     "memberof": "src/view.js~View",
@@ -2173,7 +3017,7 @@
     "longname": "src/view.js~View#textureCache",
     "access": null,
     "description": null,
-    "lineNumber": 121,
+    "lineNumber": 122,
     "undocument": true,
     "unknown": [
       {
@@ -2188,7 +3032,7 @@
     }
   },
   {
-    "__docId__": 82,
+    "__docId__": 115,
     "kind": "member",
     "name": "layers",
     "memberof": "src/view.js~View",
@@ -2196,7 +3040,7 @@
     "longname": "src/view.js~View#layers",
     "access": null,
     "description": null,
-    "lineNumber": 122,
+    "lineNumber": 123,
     "undocument": true,
     "unknown": [
       {
@@ -2211,7 +3055,7 @@
     }
   },
   {
-    "__docId__": 83,
+    "__docId__": 116,
     "kind": "member",
     "name": "tileset",
     "memberof": "src/view.js~View",
@@ -2219,7 +3063,7 @@
     "longname": "src/view.js~View#tileset",
     "access": null,
     "description": null,
-    "lineNumber": 126,
+    "lineNumber": 127,
     "undocument": true,
     "unknown": [
       {
@@ -2234,7 +3078,7 @@
     }
   },
   {
-    "__docId__": 84,
+    "__docId__": 117,
     "kind": "method",
     "name": "_onMouseMove",
     "memberof": "src/view.js~View",
@@ -2244,7 +3088,7 @@
     "longname": "src/view.js~View#_onMouseMove",
     "access": null,
     "description": null,
-    "lineNumber": 132,
+    "lineNumber": 133,
     "undocument": true,
     "unknown": [
       {
@@ -2262,7 +3106,7 @@
     ]
   },
   {
-    "__docId__": 85,
+    "__docId__": 118,
     "kind": "member",
     "name": "mouse",
     "memberof": "src/view.js~View",
@@ -2270,7 +3114,7 @@
     "longname": "src/view.js~View#mouse",
     "access": null,
     "description": null,
-    "lineNumber": 134,
+    "lineNumber": 135,
     "undocument": true,
     "unknown": [
       {
@@ -2285,7 +3129,7 @@
     }
   },
   {
-    "__docId__": 86,
+    "__docId__": 119,
     "kind": "method",
     "name": "useMouse",
     "memberof": "src/view.js~View",
@@ -2295,7 +3139,7 @@
     "longname": "src/view.js~View#useMouse",
     "access": null,
     "description": null,
-    "lineNumber": 142,
+    "lineNumber": 143,
     "undocument": true,
     "unknown": [
       {
@@ -2306,7 +3150,7 @@
     "params": []
   },
   {
-    "__docId__": 88,
+    "__docId__": 121,
     "kind": "external",
     "name": "Infinity",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
@@ -2318,7 +3162,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 89,
+    "__docId__": 122,
     "kind": "external",
     "name": "NaN",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
@@ -2330,7 +3174,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 90,
+    "__docId__": 123,
     "kind": "external",
     "name": "undefined",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
@@ -2342,7 +3186,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 91,
+    "__docId__": 124,
     "kind": "external",
     "name": "null",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
@@ -2354,7 +3198,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 92,
+    "__docId__": 125,
     "kind": "external",
     "name": "Object",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
@@ -2366,7 +3210,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 93,
+    "__docId__": 126,
     "kind": "external",
     "name": "object",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
@@ -2378,7 +3222,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 94,
+    "__docId__": 127,
     "kind": "external",
     "name": "Function",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
@@ -2390,7 +3234,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 95,
+    "__docId__": 128,
     "kind": "external",
     "name": "function",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
@@ -2402,7 +3246,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 96,
+    "__docId__": 129,
     "kind": "external",
     "name": "Boolean",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
@@ -2414,7 +3258,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 97,
+    "__docId__": 130,
     "kind": "external",
     "name": "boolean",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
@@ -2426,7 +3270,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 98,
+    "__docId__": 131,
     "kind": "external",
     "name": "Symbol",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
@@ -2438,7 +3282,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 99,
+    "__docId__": 132,
     "kind": "external",
     "name": "Error",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
@@ -2450,7 +3294,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 100,
+    "__docId__": 133,
     "kind": "external",
     "name": "EvalError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
@@ -2462,7 +3306,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 101,
+    "__docId__": 134,
     "kind": "external",
     "name": "InternalError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
@@ -2474,7 +3318,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 102,
+    "__docId__": 135,
     "kind": "external",
     "name": "RangeError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
@@ -2486,7 +3330,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 103,
+    "__docId__": 136,
     "kind": "external",
     "name": "ReferenceError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
@@ -2498,7 +3342,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 104,
+    "__docId__": 137,
     "kind": "external",
     "name": "SyntaxError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
@@ -2510,7 +3354,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 105,
+    "__docId__": 138,
     "kind": "external",
     "name": "TypeError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
@@ -2522,7 +3366,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 106,
+    "__docId__": 139,
     "kind": "external",
     "name": "URIError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
@@ -2534,7 +3378,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 107,
+    "__docId__": 140,
     "kind": "external",
     "name": "Number",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
@@ -2546,7 +3390,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 108,
+    "__docId__": 141,
     "kind": "external",
     "name": "number",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
@@ -2558,7 +3402,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 109,
+    "__docId__": 142,
     "kind": "external",
     "name": "Date",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
@@ -2570,7 +3414,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 110,
+    "__docId__": 143,
     "kind": "external",
     "name": "String",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
@@ -2582,7 +3426,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 111,
+    "__docId__": 144,
     "kind": "external",
     "name": "string",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
@@ -2594,7 +3438,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 112,
+    "__docId__": 145,
     "kind": "external",
     "name": "RegExp",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
@@ -2606,7 +3450,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 113,
+    "__docId__": 146,
     "kind": "external",
     "name": "Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
@@ -2618,7 +3462,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 114,
+    "__docId__": 147,
     "kind": "external",
     "name": "Int8Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
@@ -2630,7 +3474,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 115,
+    "__docId__": 148,
     "kind": "external",
     "name": "Uint8Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
@@ -2642,7 +3486,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 116,
+    "__docId__": 149,
     "kind": "external",
     "name": "Uint8ClampedArray",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
@@ -2654,7 +3498,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 117,
+    "__docId__": 150,
     "kind": "external",
     "name": "Int16Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
@@ -2666,7 +3510,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 118,
+    "__docId__": 151,
     "kind": "external",
     "name": "Uint16Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
@@ -2678,7 +3522,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 119,
+    "__docId__": 152,
     "kind": "external",
     "name": "Int32Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
@@ -2690,7 +3534,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 120,
+    "__docId__": 153,
     "kind": "external",
     "name": "Uint32Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
@@ -2702,7 +3546,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 121,
+    "__docId__": 154,
     "kind": "external",
     "name": "Float32Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
@@ -2714,7 +3558,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 122,
+    "__docId__": 155,
     "kind": "external",
     "name": "Float64Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
@@ -2726,7 +3570,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 123,
+    "__docId__": 156,
     "kind": "external",
     "name": "Map",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
@@ -2738,7 +3582,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 124,
+    "__docId__": 157,
     "kind": "external",
     "name": "Set",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
@@ -2750,7 +3594,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 125,
+    "__docId__": 158,
     "kind": "external",
     "name": "WeakMap",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
@@ -2762,7 +3606,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 126,
+    "__docId__": 159,
     "kind": "external",
     "name": "WeakSet",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
@@ -2774,7 +3618,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 127,
+    "__docId__": 160,
     "kind": "external",
     "name": "ArrayBuffer",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
@@ -2786,7 +3630,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 128,
+    "__docId__": 161,
     "kind": "external",
     "name": "DataView",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
@@ -2798,7 +3642,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 129,
+    "__docId__": 162,
     "kind": "external",
     "name": "JSON",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
@@ -2810,7 +3654,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 130,
+    "__docId__": 163,
     "kind": "external",
     "name": "Promise",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
@@ -2822,7 +3666,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 131,
+    "__docId__": 164,
     "kind": "external",
     "name": "Generator",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
@@ -2834,7 +3678,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 132,
+    "__docId__": 165,
     "kind": "external",
     "name": "GeneratorFunction",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
@@ -2846,7 +3690,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 133,
+    "__docId__": 166,
     "kind": "external",
     "name": "Reflect",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
@@ -2858,7 +3702,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 134,
+    "__docId__": 167,
     "kind": "external",
     "name": "Proxy",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
@@ -2871,7 +3715,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 136,
+    "__docId__": 169,
     "kind": "external",
     "name": "CanvasRenderingContext2D",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D",
@@ -2883,7 +3727,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 137,
+    "__docId__": 170,
     "kind": "external",
     "name": "DocumentFragment",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment",
@@ -2895,7 +3739,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 138,
+    "__docId__": 171,
     "kind": "external",
     "name": "Element",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Element",
@@ -2907,7 +3751,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 139,
+    "__docId__": 172,
     "kind": "external",
     "name": "Event",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Event",
@@ -2919,7 +3763,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 140,
+    "__docId__": 173,
     "kind": "external",
     "name": "Node",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Node",
@@ -2931,7 +3775,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 141,
+    "__docId__": 174,
     "kind": "external",
     "name": "NodeList",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/NodeList",
@@ -2943,7 +3787,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 142,
+    "__docId__": 175,
     "kind": "external",
     "name": "XMLHttpRequest",
     "externalLink": "https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest",
@@ -2955,7 +3799,7 @@
     "builtinExternal": true
   },
   {
-    "__docId__": 143,
+    "__docId__": 176,
     "kind": "external",
     "name": "AudioContext",
     "externalLink": "https://developer.mozilla.org/en/docs/Web/API/AudioContext",

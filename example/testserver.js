@@ -3,23 +3,12 @@
 const { Game, Level, Hero } = require('..');
 
 class MyGame extends Game {
-	constructor (interval = null) {
-		super(interval);
-
-		console.log('test Hero()');
-		const heros = {};
-		for (let x = 0; x < 99; x++) {
-			const hero = new Hero({
-				x: Math.random() * 64,
-				y: Math.random() * 48,
-			});
-			heros[hero.id] = hero;
+	constructor () {
+		super(20);
+		this.levels.push(new Level());
+		for (let x = 0; x < 10; x++) {
+			this.levels[0].addHero([null, Math.random() * 48 + 5, Math.random() * 24 + 5]);
 		}
-
-		console.log('test Level()');
-		const level = new Level({ heros });
-		this.levels.push(level);
-
 		// start game
 		this.loop();
 	}
@@ -29,11 +18,11 @@ class MyGame extends Game {
 		level.eachHero((hero) => {
 			if (Math.random() < 0.1) {
 				hero.goto({
-					x: Math.random() - 0.5,
-					y: Math.random() - 0.5,
+					x: (Math.random() - 0.499) * 10,
+					y: (Math.random() - 0.499) * 10,
 				});
 			}
-		});		
+		});
 	}
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "gameframework",
-  "version": "1.0.31",
+  "version": "1.0.33",
   "description": "game framework for 2d games and physics",
   "main": "index.js",
   "scripts": {
@@ -12,6 +12,7 @@
   "author": "Jacek Pietal <prozi85@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "box2dweb": "^2.1.0-b",
     "fmath": "^1.0.1",
     "md5": "^2.2.1",
     "pixi.js": "^4.4.3"

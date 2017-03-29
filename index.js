@@ -1,11 +1,14 @@
+(function () {
 'use strict';
 
-const md5 = require('md5');
+const { Physics, Body, b2Vec2 } = require('./physics');
 const FMath = require('fmath');
+const md5 = require('md5');
+
 const fmath = new FMath();
 
 // function constants
-const DEFER = (typeof process !== 'undefined') ? process.nextTick : setTimeout;
+const DEFER = (typeof process !== 'undefined') ? process.nextTick.bind(process) : setTimeout;
 const NOW = (typeof performance !== 'undefined') ? performance.now.bind(performance) : Date.now.bind(Date);
 
 // just constants
@@ -33,42 +36,28 @@ class Game {
 	}
 	tick () {
 		const now = NOW();
-		this.delta = (now - this.now) / 10;
+		this.delta = (now - this.now) / 1000;
 		this.now = now;
 		this.levels.forEach((map) => {
-			DEFER(map.tick.bind(map, this));
+			DEFER(map.tick.bind(map, this.delta));
 		});
 	}
 }
 
 class Level {
 	constructor (props = {}) {		
+		const options = {};
+		if (props.gravity) {
+			options.gravity = props.gravity;
+		}
+		this.physics = new Physics(props);
 		this.heros = props.heros || {};
 		this.blocks = props.blocks || {};
-		// defaults
 		this.accuracy = 10;
-		this.gravity = 0;
 	}
 	spawn ({ body }) {
 		body.x = Math.random() * this.width;
 		body.y = 0;
-	}
-	isFreeCell (x, y) {
-		// use override since
-		// map not compatible
-		if (!this.stops) {
-			return true;
-		}
-		if (x < 0 || y < 0 || x + 1 > this.width || y + 1 > this.height) {
-			return false;
-		}
-		// map imported fromTiled()
-		// and it has stop there
-		if (this.stops[`${x}:${y}`]) {
-			return false;
-		}
-		// otherwise its ok
-		return true;
 	}
 	eachHero (callback) {
 		for (let hero in this.heros) {
@@ -77,47 +66,8 @@ class Level {
 			}
 		}
 	}
-	tick ({ delta }) {
-		this.eachHero((hero) => DEFER(hero.tick.bind(hero, { level: this, delta })));
-		this.physics();
-	}
-	physics () {
-		this.distances = {};
-		this.eachHero((hero1) => {
-			this.eachHero((hero2) => {
-				if (hero1.id !== hero2.id) {
-					const key = [hero1.id, hero2.id].sort().join(':');
-					if (!this.distances[key]) {
-						this.distances[key] = distance(
-							hero1.body.x - hero2.body.x, 
-							hero1.body.y - hero2.body.y
-						);
-					}
-				}
-			});
-		});
-		// spread heros
-		for (let key in this.distances) {
-			if (this.distances.hasOwnProperty(key)) {
-				const dist = this.distances[key];
-				if (dist < SPREAD_HEROS) {
-					const split = key.split(':');
-					const hero1 = this.heros[split[0]];
-					const hero2 = this.heros[split[1]];
-					if (hero1 && hero2) {
-						const r = Math.atan2(
-							hero1.body.y - hero2.body.y, 
-							hero1.body.x - hero2.body.x
-						);
-						const diff = (dist - SPREAD_HEROS) / 2;
-						const cos = diff * fmath.cos(r);
-						const sin = diff * fmath.sin(r);
-						hero1.move({ level: this, x: hero1.body.x - cos, y: hero1.body.y - sin, d: 1 });
-						hero2.move({ level: this, x: hero2.body.x + cos, y: hero2.body.y + sin, d: 1 });
-					}
-				}
-			}
-		}
+	tick (delta) {
+		this.physics.step(delta);
 	}
 	toArray () {
 		const array = [[]];
@@ -136,18 +86,30 @@ class Level {
 		array[0].forEach((heroArray) => {
 			const id = heroArray[HERO_ID];
 			if (this.heros[id]) {
-				this.heros[id].fromArray(heroArray);
-				if (this.onUpdateHero) {
-					this.onUpdateHero(this.heros[id]);
-				}
+				this.updateHero(id, heroArray);
 			} else {
-				this.heros[id] = new Hero({}, id);
-				this.heros[id].fromArray(heroArray);
-				if (this.onCreateHero) {
-					this.onCreateHero(this.heros[id]);
-				}
+				this.addHero(heroArray);
 			}
 		});
+	}
+	updateHero (id, heroArray = []) {
+		this.heros[id].fromArray(heroArray);
+		if (this.onUpdateHero) {
+			this.onUpdateHero(this.heros[id]);
+		}
+	}
+	addHero (heroArray = []) {
+		const id = heroArray[HERO_ID] || randomId();
+		this.heros[id] = new Hero({}, id);
+		this.heros[id].addBody(this.physics, { 
+			x: heroArray[HERO_X],
+			y: heroArray[HERO_Y],
+		});
+		this.heros[id].fromArray(heroArray);
+		if (this.onCreateHero) {
+			this.onCreateHero(this.heros[id]);
+		}
+		return this.heros[id];
 	}
 	fromTiled (tiled = {}) {
 		this.width  = tiled.width;
@@ -176,24 +138,23 @@ class Level {
 class Hero {
 	constructor (props = {}, id = randomId()) {
 		this.id = id;
-		// for moving
-		this.body = Object.assign({
-			// position
-			x: undefined,
-			y: undefined,
-			// acceleration
-			vx: 0,
-			vy: 0,
-		// extend with props
-		}, props);
 		// for drawing
 		this.sprite = null;
+	}
+	get x () {
+		return this.body ? this.body.GetPosition().x : undefined;
+	}
+	get y () {
+		return this.body ? this.body.GetPosition().y : undefined;
+	}
+	addBody (physics, details = {}) {
+		this.body = new Body(physics, details);
 	}
 	toArray () {
 		return [
 			this.id,
-			this.body.x,
-			this.body.y,
+			this.x,
+			this.y,
 		];
 	}
 	fromArray (array = [], force = false) {
@@ -201,44 +162,16 @@ class Hero {
 			this.id = array[HERO_ID];
 		}
 		if (force || (this.id === array[HERO_ID])) {
-			this.body.x = array[HERO_X];
-			this.body.y = array[HERO_Y];
-		}
-		return this;
-	}
-	tick ({ level, delta }) {
-		if (this.onTick) {
-			this.onTick();
-		}
-		const d = delta / level.accuracy;
-		const x = this.body.x + this.body.vx * d;
-		const y = this.body.y + this.body.vy * d;
-		const fall = this.move({ level, x, y });
-		if (level.gravity && fall) {
-			this.body.vy += level.gravity * d;
-		} else {
-			this.body.vy = 0;
+			this.move(array[HERO_X], array[HERO_Y]);
 		}
 	}
-	move ({ level, x, y }) {
-		if (level.isFreeCell(Math.round(x), Math.floor(y))) {
-			// exact
-			this.body.x = x;
-			this.body.y = y;
-			return true;
-		} else if (level.isFreeCell(Math.round(this.body.x), Math.floor(y))) {
-			// vertical
-			this.body.y = y;
-			return true;
-		} else if (level.isFreeCell(Math.round(x), Math.floor(this.body.y))) {
-			// horizontal
-			this.body.x = x;
+	move (x, y) {
+		if (this.body) {
+			this.body.SetPosition(new b2Vec2(x, y));
 		}
 	}
 	goto ({ x, y }) {
-		const r = atan2(y, x);
-		this.body.vx = Math.min(distance(x, 0), fmath.cos(r));
-		this.body.vy = fmath.sin(r);
+		this.body.ApplyImpulse({ x, y }, this.body.GetWorldCenter());
 	}
 }
 
@@ -273,7 +206,7 @@ function distance (dx, dy) {
 	return Math.sqrt(dx * dx + dy * dy);
 }
 
-if (typeof module !== 'undefined') {	
+if (typeof module !== 'undefined') {
 	module.exports = {
 		DEFER,
 		Game,
@@ -284,3 +217,5 @@ if (typeof module !== 'undefined') {
 		distance,
 	};
 }
+
+})();

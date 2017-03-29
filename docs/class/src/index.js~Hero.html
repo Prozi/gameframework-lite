@@ -35,6 +35,8 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~Game.html">Game</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~Hero.html">Hero</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~Level.html">Level</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/physics.js~Body.html">Body</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/physics.js~Physics.html">Physics</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/view.js~View.html">View</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-atan2">atan2</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-distance">distance</a></span></span></li>
@@ -47,9 +49,26 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HERO_X">HERO_X</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HERO_Y">HERO_Y</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-NOW">NOW</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Physics">Physics</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SPREAD_HEROS">SPREAD_HEROS</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-fmath">fmath</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-md5">md5</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-BODIES_SLEEP">BODIES_SLEEP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-BODY_DEFAULTS">BODY_DEFAULTS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-BODY_DEFINITION_DEFAULTS">BODY_DEFINITION_DEFAULTS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-BODY_FIXTURE_DEFAULTS">BODY_FIXTURE_DEFAULTS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Box2D">Box2D</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-GRAVITY">GRAVITY</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-b2Body">b2Body</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-b2BodyDef">b2BodyDef</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-b2CircleShape">b2CircleShape</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-b2DebugDraw">b2DebugDraw</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-b2Fixture">b2Fixture</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-b2FixtureDef">b2FixtureDef</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-b2MassData">b2MassData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-b2PolygonShape">b2PolygonShape</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-b2Vec2">b2Vec2</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-b2World">b2World</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Level">Level</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-PIXI">PIXI</a></span></span></li>
 </ul>
@@ -63,7 +82,7 @@
   
   
   
-  <span data-ice="source">| <span><a href="file/src/index.js.html#lineNumber176">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/index.js.html#lineNumber138">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -216,6 +235,60 @@
       
     </td>
   </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      <span class="kind" data-ice="kind">get</span>
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="class/src/index.js~Hero.html#instance-get-x">x</a></span></span><span data-ice="signature">: <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      <span class="kind" data-ice="kind">get</span>
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="class/src/index.js~Hero.html#instance-get-y">y</a></span></span><span data-ice="signature">: <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
 </tbody>
 </table>
 </div>
@@ -236,7 +309,34 @@
         <p>
           
           
-          <span data-ice="name"><span><a href="class/src/index.js~Hero.html#instance-method-fromArray">fromArray</a></span></span><span data-ice="signature">(array: <span><span>*</span><span>[]</span></span>, force: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span>): <span>*</span></span>
+          <span data-ice="name"><span><a href="class/src/index.js~Hero.html#instance-method-addBody">addBody</a></span></span><span data-ice="signature">(physics: <span>*</span>, details: {})</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          <span data-ice="name"><span><a href="class/src/index.js~Hero.html#instance-method-fromArray">fromArray</a></span></span><span data-ice="signature">(array: <span><span>*</span><span>[]</span></span>, force: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span>)</span>
         </p>
       </div>
       <div>
@@ -290,34 +390,7 @@
         <p>
           
           
-          <span data-ice="name"><span><a href="class/src/index.js~Hero.html#instance-method-move">move</a></span></span><span data-ice="signature">(objectPattern: {&quot;level&quot;: <span>*</span>, &quot;x&quot;: <span>*</span>, &quot;y&quot;: <span>*</span>, &quot;d&quot;: <span>*</span>})</span>
-        </p>
-      </div>
-      <div>
-        
-        
-        
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          <span data-ice="name"><span><a href="class/src/index.js~Hero.html#instance-method-tick">tick</a></span></span><span data-ice="signature">(objectPattern: {&quot;level&quot;: <span>*</span>, &quot;delta&quot;: <span>*</span>})</span>
+          <span data-ice="name"><span><a href="class/src/index.js~Hero.html#instance-method-move">move</a></span></span><span data-ice="signature">(x: <span>*</span>, y: <span>*</span>)</span>
         </p>
       </div>
       <div>
@@ -380,7 +453,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/index.js.html#lineNumber177">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/index.js.html#lineNumber139">source</a></span></span>
     </span>
   </h3>
 
@@ -449,7 +522,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/index.js.html#lineNumber180">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/index.js.html#lineNumber151">source</a></span></span>
     </span>
   </h3>
 
@@ -492,7 +565,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/index.js.html#lineNumber178">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/index.js.html#lineNumber140">source</a></span></span>
     </span>
   </h3>
 
@@ -535,7 +608,93 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/index.js.html#lineNumber190">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/index.js.html#lineNumber142">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-get-x">
+    <span class="access" data-ice="access">public</span>
+    
+    <span class="kind" data-ice="kind">get</span>
+    
+    
+    
+    <span data-ice="name">x</span><span data-ice="signature">: <span>*</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/index.js.html#lineNumber144">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-get-y">
+    <span class="access" data-ice="access">public</span>
+    
+    <span class="kind" data-ice="kind">get</span>
+    
+    
+    
+    <span data-ice="name">y</span><span data-ice="signature">: <span>*</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/index.js.html#lineNumber147">source</a></span></span>
     </span>
   </h3>
 
@@ -570,6 +729,72 @@
 <div data-ice="methodDetails"><h2 data-ice="title">Public Methods</h2>
 
 <div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-addBody">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span data-ice="name">addBody</span><span data-ice="signature">(physics: <span>*</span>, details: {})</span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/index.js.html#lineNumber150">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" data-depth="0">physics</td>
+      <td data-ice="type"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" data-depth="0">details</td>
+      <td data-ice="type">{}</td>
+      <td data-ice="appendix"><ul><li>optional</li>
+<li>default: {}</li></ul></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="instance-method-fromArray">
     <span class="access" data-ice="access">public</span>
     
@@ -577,11 +802,11 @@
     
     
     
-    <span data-ice="name">fromArray</span><span data-ice="signature">(array: <span><span>*</span><span>[]</span></span>, force: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span>): <span>*</span></span>
+    <span data-ice="name">fromArray</span><span data-ice="signature">(array: <span><span>*</span><span>[]</span></span>, force: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></span>)</span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/index.js.html#lineNumber199">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/index.js.html#lineNumber160">source</a></span></span>
     </span>
   </h3>
 
@@ -619,19 +844,7 @@
 </div>
 </div>
 
-  <div class="return-params" data-ice="returnParams">
-    <h4>Return:</h4>
-    <table>
-      <tbody>
-        <tr>
-          <td class="return-type" data-ice="returnType"><span>*</span></td>
-          
-        </tr>
-      </tbody>
-    </table>
-    <div data-ice="returnProperties">
-</div>
-  </div>
+  
 
   
 
@@ -660,7 +873,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/index.js.html#lineNumber240">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/index.js.html#lineNumber173">source</a></span></span>
     </span>
   </h3>
 
@@ -715,11 +928,11 @@
     
     
     
-    <span data-ice="name">move</span><span data-ice="signature">(objectPattern: {&quot;level&quot;: <span>*</span>, &quot;x&quot;: <span>*</span>, &quot;y&quot;: <span>*</span>, &quot;d&quot;: <span>*</span>})</span>
+    <span data-ice="name">move</span><span data-ice="signature">(x: <span>*</span>, y: <span>*</span>)</span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/index.js.html#lineNumber218">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/index.js.html#lineNumber168">source</a></span></span>
     </span>
   </h3>
 
@@ -739,68 +952,15 @@
     <tbody>
     
     <tr data-ice="property" data-depth="0">
-      <td data-ice="name" data-depth="0">objectPattern</td>
-      <td data-ice="type">{&quot;level&quot;: <span>*</span>, &quot;x&quot;: <span>*</span>, &quot;y&quot;: <span>*</span>, &quot;d&quot;: <span>*</span>}</td>
-      <td data-ice="appendix"><ul><li>default: {&quot;level&quot;:null,&quot;x&quot;:null,&quot;y&quot;:null,&quot;d&quot;:null}</li></ul></td>
+      <td data-ice="name" data-depth="0">x</td>
+      <td data-ice="type"><span>*</span></td>
+      <td data-ice="appendix"></td>
       <td data-ice="description"></td>
     </tr>
-</tbody>
-  </table>
-</div>
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-tick">
-    <span class="access" data-ice="access">public</span>
-    
-    
-    
-    
-    
-    <span data-ice="name">tick</span><span data-ice="signature">(objectPattern: {&quot;level&quot;: <span>*</span>, &quot;delta&quot;: <span>*</span>})</span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/index.js.html#lineNumber209">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  
-
-  
-
-  <div data-ice="properties"><div data-ice="properties">
-  <h4 data-ice="title">Params:</h4>
-  <table class="params">
-    <thead>
-    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-    
-    <tr data-ice="property" data-depth="0">
-      <td data-ice="name" data-depth="0">objectPattern</td>
-      <td data-ice="type">{&quot;level&quot;: <span>*</span>, &quot;delta&quot;: <span>*</span>}</td>
-      <td data-ice="appendix"><ul><li>default: {&quot;level&quot;:null,&quot;delta&quot;:null}</li></ul></td>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" data-depth="0">y</td>
+      <td data-ice="type"><span>*</span></td>
+      <td data-ice="appendix"></td>
       <td data-ice="description"></td>
     </tr>
 </tbody>
@@ -837,7 +997,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/index.js.html#lineNumber192">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/index.js.html#lineNumber153">source</a></span></span>
     </span>
   </h3>
 

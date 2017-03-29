@@ -35,6 +35,8 @@
   <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~Game.html">Game</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~Hero.html">Hero</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/index.js~Level.html">Level</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/physics.js~Body.html">Body</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/physics.js~Physics.html">Physics</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/view.js~View.html">View</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-atan2">atan2</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-distance">distance</a></span></span></li>
@@ -47,9 +49,26 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HERO_X">HERO_X</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HERO_Y">HERO_Y</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-NOW">NOW</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Physics">Physics</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SPREAD_HEROS">SPREAD_HEROS</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-fmath">fmath</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-md5">md5</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-BODIES_SLEEP">BODIES_SLEEP</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-BODY_DEFAULTS">BODY_DEFAULTS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-BODY_DEFINITION_DEFAULTS">BODY_DEFINITION_DEFAULTS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-BODY_FIXTURE_DEFAULTS">BODY_FIXTURE_DEFAULTS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Box2D">Box2D</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-GRAVITY">GRAVITY</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-b2Body">b2Body</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-b2BodyDef">b2BodyDef</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-b2CircleShape">b2CircleShape</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-b2DebugDraw">b2DebugDraw</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-b2Fixture">b2Fixture</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-b2FixtureDef">b2FixtureDef</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-b2MassData">b2MassData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-b2PolygonShape">b2PolygonShape</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-b2Vec2">b2Vec2</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-b2World">b2World</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Level">Level</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-PIXI">PIXI</a></span></span></li>
 </ul>
@@ -57,14 +76,17 @@
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/index.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">// (function () {
+&apos;use strict&apos;;
 
-const md5 = require(&apos;md5&apos;);
+const { Physics, Body, b2Vec2 } = require(&apos;./physics&apos;);
 const FMath = require(&apos;fmath&apos;);
+const md5 = require(&apos;md5&apos;);
+
 const fmath = new FMath();
 
 // function constants
-const DEFER = (typeof process !== &apos;undefined&apos;) ? process.nextTick : setTimeout;
+const DEFER = (typeof process !== &apos;undefined&apos;) ? process.nextTick.bind(process) : setTimeout;
 const NOW = (typeof performance !== &apos;undefined&apos;) ? performance.now.bind(performance) : Date.now.bind(Date);
 
 // just constants
@@ -92,42 +114,28 @@ class Game {
 	}
 	tick () {
 		const now = NOW();
-		this.delta = (now - this.now) / 10;
+		this.delta = (now - this.now) / 1000;
 		this.now = now;
 		this.levels.forEach((map) =&gt; {
-			DEFER(map.tick.bind(map, this));
+			DEFER(map.tick.bind(map, this.delta));
 		});
 	}
 }
 
 class Level {
 	constructor (props = {}) {		
+		const options = {};
+		if (props.gravity) {
+			options.gravity = props.gravity;
+		}
+		this.physics = new Physics(props);
 		this.heros = props.heros || {};
 		this.blocks = props.blocks || {};
-		// defaults
 		this.accuracy = 10;
-		this.gravity = 0;
 	}
 	spawn ({ body }) {
 		body.x = Math.random() * this.width;
 		body.y = 0;
-	}
-	isFreeCell (x, y) {
-		// use override since
-		// map not compatible
-		if (!this.stops) {
-			return true;
-		}
-		if (x &lt; 0 || y &lt; 0 || x + 1 &gt; this.width || y + 1 &gt; this.height) {
-			return false;
-		}
-		// map imported fromTiled()
-		// and it has stop there
-		if (this.stops[`${x}:${y}`]) {
-			return false;
-		}
-		// otherwise its ok
-		return true;
 	}
 	eachHero (callback) {
 		for (let hero in this.heros) {
@@ -136,47 +144,8 @@ class Level {
 			}
 		}
 	}
-	tick ({ delta }) {
-		this.eachHero((hero) =&gt; DEFER(hero.tick.bind(hero, { level: this, delta })));
-		this.physics();
-	}
-	physics () {
-		this.distances = {};
-		this.eachHero((hero1) =&gt; {
-			this.eachHero((hero2) =&gt; {
-				if (hero1.id !== hero2.id) {
-					const key = [hero1.id, hero2.id].sort().join(&apos;:&apos;);
-					if (!this.distances[key]) {
-						this.distances[key] = distance(
-							hero1.body.x - hero2.body.x, 
-							hero1.body.y - hero2.body.y
-						);
-					}
-				}
-			});
-		});
-		// spread heros
-		for (let key in this.distances) {
-			if (this.distances.hasOwnProperty(key)) {
-				const dist = this.distances[key];
-				if (dist &lt; SPREAD_HEROS) {
-					const split = key.split(&apos;:&apos;);
-					const hero1 = this.heros[split[0]];
-					const hero2 = this.heros[split[1]];
-					if (hero1 &amp;&amp; hero2) {
-						const r = Math.atan2(
-							hero1.body.y - hero2.body.y, 
-							hero1.body.x - hero2.body.x
-						);
-						const diff = (dist - SPREAD_HEROS) / 2;
-						const cos = diff * fmath.cos(r);
-						const sin = diff * fmath.sin(r);
-						hero1.move({ level: this, x: hero1.body.x - cos, y: hero1.body.y - sin, d: 1 });
-						hero2.move({ level: this, x: hero2.body.x + cos, y: hero2.body.y + sin, d: 1 });
-					}
-				}
-			}
-		}
+	tick (delta) {
+		this.physics.step(delta);
 	}
 	toArray () {
 		const array = [[]];
@@ -195,18 +164,30 @@ class Level {
 		array[0].forEach((heroArray) =&gt; {
 			const id = heroArray[HERO_ID];
 			if (this.heros[id]) {
-				this.heros[id].fromArray(heroArray);
-				if (this.onUpdateHero) {
-					this.onUpdateHero(this.heros[id]);
-				}
+				this.updateHero(id, heroArray);
 			} else {
-				this.heros[id] = new Hero({}, id);
-				this.heros[id].fromArray(heroArray);
-				if (this.onCreateHero) {
-					this.onCreateHero(this.heros[id]);
-				}
+				this.addHero(heroArray);
 			}
 		});
+	}
+	updateHero (id, heroArray = []) {
+		this.heros[id].fromArray(heroArray);
+		if (this.onUpdateHero) {
+			this.onUpdateHero(this.heros[id]);
+		}
+	}
+	addHero (heroArray = []) {
+		const id = heroArray[HERO_ID] || randomId();
+		this.heros[id] = new Hero({}, id);
+		this.heros[id].addBody(this.physics, { 
+			x: heroArray[HERO_X],
+			y: heroArray[HERO_Y],
+		});
+		this.heros[id].fromArray(heroArray);
+		if (this.onCreateHero) {
+			this.onCreateHero(this.heros[id]);
+		}
+		return this.heros[id];
 	}
 	fromTiled (tiled = {}) {
 		this.width  = tiled.width;
@@ -235,24 +216,23 @@ class Level {
 class Hero {
 	constructor (props = {}, id = randomId()) {
 		this.id = id;
-		// for moving
-		this.body = Object.assign({
-			// position
-			x: undefined,
-			y: undefined,
-			// acceleration
-			vx: 0,
-			vy: 0,
-		// extend with props
-		}, props);
 		// for drawing
 		this.sprite = null;
+	}
+	get x () {
+		return this.body ? this.body.GetPosition().x : undefined;
+	}
+	get y () {
+		return this.body ? this.body.GetPosition().y : undefined;
+	}
+	addBody (physics, details = {}) {
+		this.body = new Body(physics, details);
 	}
 	toArray () {
 		return [
 			this.id,
-			this.body.x,
-			this.body.y,
+			this.x,
+			this.y,
 		];
 	}
 	fromArray (array = [], force = false) {
@@ -260,46 +240,16 @@ class Hero {
 			this.id = array[HERO_ID];
 		}
 		if (force || (this.id === array[HERO_ID])) {
-			this.body.x = array[HERO_X];
-			this.body.y = array[HERO_Y];
+			this.move(array[HERO_X], array[HERO_Y]);
 		}
-		return this;
 	}
-	tick ({ level, delta }) {
-		if (this.onTick) {
-			this.onTick();
+	move (x, y) {
+		if (this.body) {
+			this.body.SetPosition(new b2Vec2(x, y));
 		}
-		const d = delta / level.accuracy;
-		const x = this.body.x + this.body.vx * d;
-		const y = this.body.y + this.body.vy * d;
-		this.move({ level, x, y, d });
-	}
-	move ({ level, x, y, d }) {
-		let fall = true;
-		if (level.isFreeCell(Math.floor(x), Math.floor(y))) {
-			// exact
-			this.body.x = x;
-			this.body.y = y;
-		} else if (level.isFreeCell(Math.floor(this.body.x), Math.floor(y))) {
-			// vertical
-			this.body.y = y;
-		} else if (level.isFreeCell(Math.floor(x), Math.floor(this.body.y))) {
-			// horizontal
-			this.body.x = x;
-			fall = false;
-		} else {
-			fall = false;
-		}
-		if (fall &amp;&amp; level.gravity) {
-			this.body.vy += level.gravity * d;
-		} else {
-			this.body.vy = 0;
-		}		
 	}
 	goto ({ x, y }) {
-		const r = atan2(y, x);
-		this.body.vx = Math.min(distance(x, 0), fmath.cos(r));
-		this.body.vy = fmath.sin(r);
+		this.body.ApplyImpulse({ x, y }, this.body.GetWorldCenter());
 	}
 }
 
@@ -334,7 +284,7 @@ function distance (dx, dy) {
 	return Math.sqrt(dx * dx + dy * dy);
 }
 
-if (typeof module !== &apos;undefined&apos;) {	
+if (typeof module !== &apos;undefined&apos;) {
 	module.exports = {
 		DEFER,
 		Game,
@@ -345,6 +295,8 @@ if (typeof module !== &apos;undefined&apos;) {
 		distance,
 	};
 }
+
+// })();
 </code></pre>
 
 </div>

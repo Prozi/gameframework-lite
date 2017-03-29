@@ -1,8 +1,44 @@
 window.esdocSearchIndex = [
   [
+    "gameframework/src/physics.js~bodies_sleep",
+    "variable/index.html#static-variable-BODIES_SLEEP",
+    "<span>BODIES_SLEEP</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "variable"
+  ],
+  [
+    "gameframework/src/physics.js~body_defaults",
+    "variable/index.html#static-variable-BODY_DEFAULTS",
+    "<span>BODY_DEFAULTS</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "variable"
+  ],
+  [
+    "gameframework/src/physics.js~body_definition_defaults",
+    "variable/index.html#static-variable-BODY_DEFINITION_DEFAULTS",
+    "<span>BODY_DEFINITION_DEFAULTS</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "variable"
+  ],
+  [
+    "gameframework/src/physics.js~body_fixture_defaults",
+    "variable/index.html#static-variable-BODY_FIXTURE_DEFAULTS",
+    "<span>BODY_FIXTURE_DEFAULTS</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "variable"
+  ],
+  [
     "gameframework/src/index.js~bottom",
     "variable/index.html#static-variable-BOTTOM",
     "<span>BOTTOM</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
+    "variable"
+  ],
+  [
+    "gameframework/src/physics.js~body",
+    "class/src/physics.js~Body.html",
+    "<span>Body</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "class"
+  ],
+  [
+    "gameframework/src/physics.js~box2d",
+    "variable/index.html#static-variable-Box2D",
+    "<span>Box2D</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
     "variable"
   ],
   [
@@ -15,6 +51,12 @@ window.esdocSearchIndex = [
     "gameframework/src/index.js~fmath",
     "variable/index.html#static-variable-FMath",
     "<span>FMath</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
+    "variable"
+  ],
+  [
+    "gameframework/src/physics.js~gravity",
+    "variable/index.html#static-variable-GRAVITY",
+    "<span>GRAVITY</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
     "variable"
   ],
   [
@@ -78,6 +120,18 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "gameframework/src/index.js~physics",
+    "variable/index.html#static-variable-Physics",
+    "<span>Physics</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
+    "variable"
+  ],
+  [
+    "gameframework/src/physics.js~physics",
+    "class/src/physics.js~Physics.html",
+    "<span>Physics</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "class"
+  ],
+  [
     "gameframework/src/index.js~spread_heros",
     "variable/index.html#static-variable-SPREAD_HEROS",
     "<span>SPREAD_HEROS</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
@@ -94,6 +148,66 @@ window.esdocSearchIndex = [
     "function/index.html#static-function-atan2",
     "<span>atan2</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
     "function"
+  ],
+  [
+    "gameframework/src/physics.js~b2body",
+    "variable/index.html#static-variable-b2Body",
+    "<span>b2Body</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "variable"
+  ],
+  [
+    "gameframework/src/physics.js~b2bodydef",
+    "variable/index.html#static-variable-b2BodyDef",
+    "<span>b2BodyDef</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "variable"
+  ],
+  [
+    "gameframework/src/physics.js~b2circleshape",
+    "variable/index.html#static-variable-b2CircleShape",
+    "<span>b2CircleShape</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "variable"
+  ],
+  [
+    "gameframework/src/physics.js~b2debugdraw",
+    "variable/index.html#static-variable-b2DebugDraw",
+    "<span>b2DebugDraw</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "variable"
+  ],
+  [
+    "gameframework/src/physics.js~b2fixture",
+    "variable/index.html#static-variable-b2Fixture",
+    "<span>b2Fixture</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "variable"
+  ],
+  [
+    "gameframework/src/physics.js~b2fixturedef",
+    "variable/index.html#static-variable-b2FixtureDef",
+    "<span>b2FixtureDef</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "variable"
+  ],
+  [
+    "gameframework/src/physics.js~b2massdata",
+    "variable/index.html#static-variable-b2MassData",
+    "<span>b2MassData</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "variable"
+  ],
+  [
+    "gameframework/src/physics.js~b2polygonshape",
+    "variable/index.html#static-variable-b2PolygonShape",
+    "<span>b2PolygonShape</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "variable"
+  ],
+  [
+    "gameframework/src/physics.js~b2vec2",
+    "variable/index.html#static-variable-b2Vec2",
+    "<span>b2Vec2</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "variable"
+  ],
+  [
+    "gameframework/src/physics.js~b2world",
+    "variable/index.html#static-variable-b2World",
+    "<span>b2World</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "variable"
   ],
   [
     "gameframework/src/index.js~distance",
@@ -498,6 +612,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/index.js~hero#addbody",
+    "class/src/index.js~Hero.html#instance-method-addBody",
+    "src/index.js~Hero#addBody",
+    "method"
+  ],
+  [
     "src/index.js~hero#body",
     "class/src/index.js~Hero.html#instance-member-body",
     "src/index.js~Hero#body",
@@ -540,22 +660,34 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/index.js~hero#tick",
-    "class/src/index.js~Hero.html#instance-method-tick",
-    "src/index.js~Hero#tick",
-    "method"
-  ],
-  [
     "src/index.js~hero#toarray",
     "class/src/index.js~Hero.html#instance-method-toArray",
     "src/index.js~Hero#toArray",
     "method"
   ],
   [
+    "src/index.js~hero#x",
+    "class/src/index.js~Hero.html#instance-get-x",
+    "src/index.js~Hero#x",
+    "member"
+  ],
+  [
+    "src/index.js~hero#y",
+    "class/src/index.js~Hero.html#instance-get-y",
+    "src/index.js~Hero#y",
+    "member"
+  ],
+  [
     "src/index.js~level#accuracy",
     "class/src/index.js~Level.html#instance-member-accuracy",
     "src/index.js~Level#accuracy",
     "member"
+  ],
+  [
+    "src/index.js~level#addhero",
+    "class/src/index.js~Level.html#instance-method-addHero",
+    "src/index.js~Level#addHero",
+    "method"
   ],
   [
     "src/index.js~level#blocks",
@@ -568,12 +700,6 @@ window.esdocSearchIndex = [
     "class/src/index.js~Level.html#instance-constructor-constructor",
     "src/index.js~Level#constructor",
     "method"
-  ],
-  [
-    "src/index.js~level#distances",
-    "class/src/index.js~Level.html#instance-member-distances",
-    "src/index.js~Level#distances",
-    "member"
   ],
   [
     "src/index.js~level#eachhero",
@@ -594,12 +720,6 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/index.js~level#gravity",
-    "class/src/index.js~Level.html#instance-member-gravity",
-    "src/index.js~Level#gravity",
-    "member"
-  ],
-  [
     "src/index.js~level#height",
     "class/src/index.js~Level.html#instance-member-height",
     "src/index.js~Level#height",
@@ -612,16 +732,10 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/index.js~level#isfreecell",
-    "class/src/index.js~Level.html#instance-method-isFreeCell",
-    "src/index.js~Level#isFreeCell",
-    "method"
-  ],
-  [
     "src/index.js~level#physics",
-    "class/src/index.js~Level.html#instance-method-physics",
+    "class/src/index.js~Level.html#instance-member-physics",
     "src/index.js~Level#physics",
-    "method"
+    "member"
   ],
   [
     "src/index.js~level#spawn",
@@ -654,9 +768,81 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/index.js~level#updatehero",
+    "class/src/index.js~Level.html#instance-method-updateHero",
+    "src/index.js~Level#updateHero",
+    "method"
+  ],
+  [
     "src/index.js~level#width",
     "class/src/index.js~Level.html#instance-member-width",
     "src/index.js~Level#width",
+    "member"
+  ],
+  [
+    "src/physics.js",
+    "file/src/physics.js.html",
+    "src/physics.js",
+    "file"
+  ],
+  [
+    "src/physics.js~body#constructor",
+    "class/src/physics.js~Body.html#instance-constructor-constructor",
+    "src/physics.js~Body#constructor",
+    "method"
+  ],
+  [
+    "src/physics.js~physics#constructor",
+    "class/src/physics.js~Physics.html#instance-constructor-constructor",
+    "src/physics.js~Physics#constructor",
+    "method"
+  ],
+  [
+    "src/physics.js~physics#debug",
+    "class/src/physics.js~Physics.html#instance-method-debug",
+    "src/physics.js~Physics#debug",
+    "method"
+  ],
+  [
+    "src/physics.js~physics#debugdraw",
+    "class/src/physics.js~Physics.html#instance-member-debugDraw",
+    "src/physics.js~Physics#debugDraw",
+    "member"
+  ],
+  [
+    "src/physics.js~physics#dtremaining",
+    "class/src/physics.js~Physics.html#instance-member-dtRemaining",
+    "src/physics.js~Physics#dtRemaining",
+    "member"
+  ],
+  [
+    "src/physics.js~physics#gravity",
+    "class/src/physics.js~Physics.html#instance-member-gravity",
+    "src/physics.js~Physics#gravity",
+    "member"
+  ],
+  [
+    "src/physics.js~physics#scale",
+    "class/src/physics.js~Physics.html#instance-member-scale",
+    "src/physics.js~Physics#scale",
+    "member"
+  ],
+  [
+    "src/physics.js~physics#step",
+    "class/src/physics.js~Physics.html#instance-method-step",
+    "src/physics.js~Physics#step",
+    "method"
+  ],
+  [
+    "src/physics.js~physics#stepamount",
+    "class/src/physics.js~Physics.html#instance-member-stepAmount",
+    "src/physics.js~Physics#stepAmount",
+    "member"
+  ],
+  [
+    "src/physics.js~physics#world",
+    "class/src/physics.js~Physics.html#instance-member-world",
+    "src/physics.js~Physics#world",
     "member"
   ],
   [

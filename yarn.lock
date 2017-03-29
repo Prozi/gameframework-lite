@@ -584,6 +584,10 @@ boom@2.x.x:
   dependencies:
     hoek "2.x.x"
 
+box2dweb@^2.1.0-b:
+  version "2.1.0-b"
+  resolved "https://registry.yarnpkg.com/box2dweb/-/box2dweb-2.1.0-b.tgz#a7b5699a27b210f5c5479145dfad3132a6f5478d"
+
 brace-expansion@^1.0.0:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/brace-expansion/-/brace-expansion-1.1.6.tgz#7197d7eaa9b87e648390ea61fc66c84427420df9"
