@@ -213,29 +213,27 @@ class Hero {
 		const d = delta / level.accuracy;
 		const x = this.body.x + this.body.vx * d;
 		const y = this.body.y + this.body.vy * d;
-		this.move({ level, x, y, d });
-	}
-	move ({ level, x, y, d }) {
-		let fall = true;
-		if (level.isFreeCell(Math.floor(x), Math.floor(y))) {
-			// exact
-			this.body.x = x;
-			this.body.y = y;
-		} else if (level.isFreeCell(Math.floor(this.body.x), Math.floor(y))) {
-			// vertical
-			this.body.y = y;
-		} else if (level.isFreeCell(Math.floor(x), Math.floor(this.body.y))) {
-			// horizontal
-			this.body.x = x;
-			fall = false;
-		} else {
-			fall = false;
-		}
-		if (fall && level.gravity) {
+		const fall = this.move({ level, x, y });
+		if (level.gravity && fall) {
 			this.body.vy += level.gravity * d;
 		} else {
 			this.body.vy = 0;
-		}		
+		}
+	}
+	move ({ level, x, y }) {
+		if (level.isFreeCell(Math.round(x), Math.floor(y))) {
+			// exact
+			this.body.x = x;
+			this.body.y = y;
+			return true;
+		} else if (level.isFreeCell(Math.round(this.body.x), Math.floor(y))) {
+			// vertical
+			this.body.y = y;
+			return true;
+		} else if (level.isFreeCell(Math.round(x), Math.floor(this.body.y))) {
+			// horizontal
+			this.body.x = x;
+		}
 	}
 	goto ({ x, y }) {
 		const r = atan2(y, x);
