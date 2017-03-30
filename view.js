@@ -103,6 +103,7 @@ class View {
 		sprite.width = sprite.height = this.level.tileset.tilewidth;
 		sprite.x = Math.floor(this.level.tileset.tilewidth * x);
 		sprite.y = Math.floor(this.level.tileset.tilewidth * y);
+		sprite.anchor.set(0.5);
 		layer.addChild(sprite);
 	}
 	addBlocks () {

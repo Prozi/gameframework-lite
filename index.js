@@ -150,6 +150,7 @@ class Level {
 class Hero {
 	constructor (props = {}, id = randomId()) {
 		this.id = id;
+		this.speed = 10;
 		// for drawing
 		this.sprite = null;
 	}
@@ -183,7 +184,12 @@ class Hero {
 		}
 	}
 	goto ({ x, y }) {
-		this.body.ApplyImpulse({ x, y }, this.body.GetWorldCenter(), true);
+		const distance = Math.sqrt(x * x + y * y);
+		const d = this.speed / distance;
+		this.body.ApplyForce({ 
+			x: x * d, 
+			y: y * d 
+		}, this.body.GetWorldCenter(), true);
 	}
 }
 
