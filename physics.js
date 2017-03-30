@@ -5,7 +5,6 @@
 // http://buildnewgames.com/box2dweb/
 // wrapped up by me Jacek Pietal <prozi85@gmail.com>
 
-
 const Box2D = require('box2dweb');
 
 // box2d
@@ -31,7 +30,7 @@ class Physics {
 		this.dtRemaining = 0;
 		this.stepAmount = 1 / 60;
 	}
-	step (dt = 0.01) {
+	step (dt = 0) {
 		this.dtRemaining += dt;
 		while (this.dtRemaining > this.stepAmount) {
 			this.dtRemaining -= this.stepAmount;

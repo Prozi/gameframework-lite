@@ -142,8 +142,21 @@ class View {
 			this.onMouseMove();
 		}
 	}
-	useMouse () {
-		window.addEventListener('mousemove', this._onMouseMove.bind(this));
+	_onMouseClick (event) {
+		this._onMouseMove(event);
+		if (this.onMouseClick) {
+			this.onMouseClick();
+		}
+	}
+	useMouse (disableContextMenu = false) {
+		window.addEventListener('mousemove', this._onMouseMove.bind(this), false);
+		window.addEventListener('mousedown', this._onMouseClick.bind(this), false);
+		if (disableContextMenu) {
+			this.disableContextMenu();
+		}
+	}
+	disableContextMenu () {
+		document.body.addEventListener('contextmenu', (event) => event.preventDefault(), false);
 	}
 }
 

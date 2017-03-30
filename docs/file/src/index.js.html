@@ -41,7 +41,6 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-atan2">atan2</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-distance">distance</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomId">randomId</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-BOTTOM">BOTTOM</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-DEFER">DEFER</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-FMath">FMath</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HALF_PI">HALF_PI</a></span></span></li>
@@ -50,7 +49,6 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HERO_Y">HERO_Y</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-NOW">NOW</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-Physics">Physics</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SPREAD_HEROS">SPREAD_HEROS</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-fmath">fmath</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-md5">md5</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-BODIES_SLEEP">BODIES_SLEEP</a></span></span></li>
@@ -94,9 +92,6 @@ const HALF_PI = Math.PI / 2;
 const HERO_ID = 0;
 const HERO_X = 1;
 const HERO_Y = 2;
-
-const BOTTOM = atan2(10, 0);
-const SPREAD_HEROS = 2;
 
 class Game {
 	constructor (interval = 10) {
@@ -225,8 +220,13 @@ class Level {
 }
 
 class Hero {
-	constructor (props = { id: randomId(), speed: 1 }) {
-		Object.assign(this, props);
+	constructor ({ id = randomId(), maxSpeed = 10, jumpHeight = 25, jumpInterval = 1000, sprite = null }) {
+		this.id = id;
+		this.maxSpeed = maxSpeed;
+		this.jumpHeight = jumpHeight;
+		this.jumpInterval = jumpInterval;
+		this.sprite = sprite;
+		this.lastJump = 0;
 	}
 	get x () {
 		return this.body ? this.body.GetPosition().x : undefined;
@@ -236,6 +236,8 @@ class Hero {
 	}
 	addBody (physics, details = {}) {
 		this.body = new Body(physics, details);
+		this.body.SetFixedRotation(true);
+		this.gravity = !!physics.gravity.y;
 	}
 	toArray () {
 		return [
@@ -257,13 +259,39 @@ class Hero {
 			this.body.SetPosition(new b2Vec2(x, y));
 		}
 	}
+	speedLimit (x) {
+		if (x &lt; 0) {
+			return Math.max(x, -this.maxSpeed);
+		} else {
+			return Math.min(x, this.maxSpeed);
+		}
+	}
 	goto ({ x, y }) {
-		const distance = Math.sqrt(x * x + y * y);
-		const d = this.speed / distance;
-		this.body.ApplyForce({ 
-			x: x * d, 
-			y: y * d 
+		const d = this.maxSpeed / distance(x, y);
+		let newx = 0;
+		let newy = 0;
+		if (!this.gravity) {
+			this.body.m_force.SetZero();
+			newx = x * d;
+			newy = y * d;
+		} else {
+			newx = this.speedLimit(x);
+		}
+		this.body.ApplyImpulse({ 
+			x: newx, 
+			y: newy,
 		}, this.body.GetWorldCenter(), true);
+	}
+	jump (x = 0) {
+		const now = NOW();
+		// (this.body.m_force.y &gt; 0) &amp;&amp; 
+		if (this.gravity &amp;&amp; (now &gt; this.lastJump + this.jumpInterval)) {
+			this.lastJump = now;
+			this.body.ApplyImpulse({ 
+				x: x ? (this.gravity ? this.speedLimit(x) : x) : 0, 
+				y: -this.jumpHeight 
+			}, this.body.GetWorldCenter(), true);
+		}
 	}
 }
 

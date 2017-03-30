@@ -18,9 +18,6 @@ const HERO_ID = 0;
 const HERO_X = 1;
 const HERO_Y = 2;
 
-const BOTTOM = atan2(10, 0);
-const SPREAD_HEROS = 2;
-
 class Game {
 	constructor (interval = 10) {
 		this.levels = [];
@@ -148,8 +145,13 @@ class Level {
 }
 
 class Hero {
-	constructor (props = { id: randomId(), speed: 1 }) {
-		Object.assign(this, props);
+	constructor ({ id = randomId(), maxSpeed = 10, jumpHeight = 25, jumpInterval = 1000, sprite = null }) {
+		this.id = id;
+		this.maxSpeed = maxSpeed;
+		this.jumpHeight = jumpHeight;
+		this.jumpInterval = jumpInterval;
+		this.sprite = sprite;
+		this.lastJump = 0;
 	}
 	get x () {
 		return this.body ? this.body.GetPosition().x : undefined;
@@ -159,6 +161,8 @@ class Hero {
 	}
 	addBody (physics, details = {}) {
 		this.body = new Body(physics, details);
+		this.body.SetFixedRotation(true);
+		this.gravity = !!physics.gravity.y;
 	}
 	toArray () {
 		return [
@@ -180,13 +184,39 @@ class Hero {
 			this.body.SetPosition(new b2Vec2(x, y));
 		}
 	}
+	speedLimit (x) {
+		if (x < 0) {
+			return Math.max(x, -this.maxSpeed);
+		} else {
+			return Math.min(x, this.maxSpeed);
+		}
+	}
 	goto ({ x, y }) {
-		const distance = Math.sqrt(x * x + y * y);
-		const d = this.speed / distance;
-		this.body.ApplyForce({ 
-			x: x * d, 
-			y: y * d 
+		const d = this.maxSpeed / distance(x, y);
+		let newx = 0;
+		let newy = 0;
+		if (!this.gravity) {
+			this.body.m_force.SetZero();
+			newx = x * d;
+			newy = y * d;
+		} else {
+			newx = this.speedLimit(x);
+		}
+		this.body.ApplyImpulse({ 
+			x: newx, 
+			y: newy,
 		}, this.body.GetWorldCenter(), true);
+	}
+	jump (x = 0) {
+		const now = NOW();
+		// (this.body.m_force.y > 0) && 
+		if (this.gravity && (now > this.lastJump + this.jumpInterval)) {
+			this.lastJump = now;
+			this.body.ApplyImpulse({ 
+				x: x ? (this.gravity ? this.speedLimit(x) : x) : 0, 
+				y: -this.jumpHeight 
+			}, this.body.GetWorldCenter(), true);
+		}
 	}
 }
 

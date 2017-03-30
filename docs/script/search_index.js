@@ -24,12 +24,6 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
-    "gameframework/src/index.js~bottom",
-    "variable/index.html#static-variable-BOTTOM",
-    "<span>BOTTOM</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
-    "variable"
-  ],
-  [
     "gameframework/src/physics.js~body",
     "class/src/physics.js~Body.html",
     "<span>Body</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
@@ -130,12 +124,6 @@ window.esdocSearchIndex = [
     "class/src/physics.js~Physics.html",
     "<span>Physics</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
     "class"
-  ],
-  [
-    "gameframework/src/index.js~spread_heros",
-    "variable/index.html#static-variable-SPREAD_HEROS",
-    "<span>SPREAD_HEROS</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
-    "variable"
   ],
   [
     "gameframework/src/view.js~view",
@@ -642,9 +630,45 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/index.js~hero#gravity",
+    "class/src/index.js~Hero.html#instance-member-gravity",
+    "src/index.js~Hero#gravity",
+    "member"
+  ],
+  [
     "src/index.js~hero#id",
     "class/src/index.js~Hero.html#instance-member-id",
     "src/index.js~Hero#id",
+    "member"
+  ],
+  [
+    "src/index.js~hero#jump",
+    "class/src/index.js~Hero.html#instance-method-jump",
+    "src/index.js~Hero#jump",
+    "method"
+  ],
+  [
+    "src/index.js~hero#jumpheight",
+    "class/src/index.js~Hero.html#instance-member-jumpHeight",
+    "src/index.js~Hero#jumpHeight",
+    "member"
+  ],
+  [
+    "src/index.js~hero#jumpinterval",
+    "class/src/index.js~Hero.html#instance-member-jumpInterval",
+    "src/index.js~Hero#jumpInterval",
+    "member"
+  ],
+  [
+    "src/index.js~hero#lastjump",
+    "class/src/index.js~Hero.html#instance-member-lastJump",
+    "src/index.js~Hero#lastJump",
+    "member"
+  ],
+  [
+    "src/index.js~hero#maxspeed",
+    "class/src/index.js~Hero.html#instance-member-maxSpeed",
+    "src/index.js~Hero#maxSpeed",
     "member"
   ],
   [
@@ -652,6 +676,18 @@ window.esdocSearchIndex = [
     "class/src/index.js~Hero.html#instance-method-move",
     "src/index.js~Hero#move",
     "method"
+  ],
+  [
+    "src/index.js~hero#speedlimit",
+    "class/src/index.js~Hero.html#instance-method-speedLimit",
+    "src/index.js~Hero#speedLimit",
+    "method"
+  ],
+  [
+    "src/index.js~hero#sprite",
+    "class/src/index.js~Hero.html#instance-member-sprite",
+    "src/index.js~Hero#sprite",
+    "member"
   ],
   [
     "src/index.js~hero#toarray",
@@ -852,6 +888,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/view.js~view#_onmouseclick",
+    "class/src/view.js~View.html#instance-method-_onMouseClick",
+    "src/view.js~View#_onMouseClick",
+    "method"
+  ],
+  [
     "src/view.js~view#_onmousemove",
     "class/src/view.js~View.html#instance-method-_onMouseMove",
     "src/view.js~View#_onMouseMove",
@@ -909,6 +951,12 @@ window.esdocSearchIndex = [
     "src/view.js~view#createsprite",
     "class/src/view.js~View.html#instance-method-createSprite",
     "src/view.js~View#createSprite",
+    "method"
+  ],
+  [
+    "src/view.js~view#disablecontextmenu",
+    "class/src/view.js~View.html#instance-method-disableContextMenu",
+    "src/view.js~View#disableContextMenu",
     "method"
   ],
   [
