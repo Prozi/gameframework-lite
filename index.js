@@ -133,7 +133,7 @@ class Level {
 				];
 				this.stops[offset] = tiled.layers[2].data[pos];
 				if (this.stops[offset]) {
-					new Body(this.physics, { type: 'static', x, y, width: 1, height: 1 });
+					new Body(this.physics, { shape: 'circle', x, y, radius: 0.5 });
 				}
 			}
 		}
