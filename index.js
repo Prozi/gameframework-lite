@@ -105,6 +105,8 @@ class Level {
 			x: heroArray[HERO_X],
 			y: heroArray[HERO_Y],
 		});
+		heroArray[HERO_X] = heroArray[HERO_X] || this.width * Math.random();
+		heroArray[HERO_Y] = heroArray[HERO_Y] || 0;
 		this.heros[id].fromArray(heroArray);
 		if (this.onCreateHero) {
 			this.onCreateHero(this.heros[id]);
@@ -130,8 +132,16 @@ class Level {
 					tiled.layers[1].data[pos]
 				];
 				this.stops[offset] = tiled.layers[2].data[pos];
+				if (this.stops[offset]) {
+					new Body(this.physics, { type: 'static', x, y, width: 1, height: 1 });
+				}
 			}
 		}
+		// boundaries
+		new Body(this.physics, { type: 'static', x: 0, y: 0, height: this.height, width: 0.5 });
+		new Body(this.physics, { type: 'static', x: this.width, y: 0, height: this.height, width: 0.5});
+		new Body(this.physics, { type: 'static', x: 0, y: 0, height: 0.5, width: this.width });
+		new Body(this.physics, { type: 'static', x: 0, y: this.height, height: 0.5, width: this.width });
 	}
 }
 
