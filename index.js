@@ -102,7 +102,7 @@ class Level {
 		const id = heroArray[HERO_ID] || randomId();
 		heroArray[HERO_X] = heroArray[HERO_X] || this.width * Math.random();
 		heroArray[HERO_Y] = heroArray[HERO_Y] || 0;
-		this.heros[id] = new Hero({}, id);
+		this.heros[id] = new Hero({ id });
 		this.heros[id].addBody(this.physics, Object.assign({
 			shape: 'circle',
 			x: heroArray[HERO_X],
@@ -148,11 +148,8 @@ class Level {
 }
 
 class Hero {
-	constructor (props = {}, id = randomId()) {
-		this.id = id;
-		this.speed = 10;
-		// for drawing
-		this.sprite = null;
+	constructor (props = { id: randomId(), speed: 1 }) {
+		Object.assign(this, props);
 	}
 	get x () {
 		return this.body ? this.body.GetPosition().x : undefined;
