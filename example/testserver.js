@@ -15,14 +15,14 @@ class MyGame extends Game {
 	onUpdate () {
 		const level = this.levels[0];
 		postMessage(level.toArray());
-		level.eachHero((hero) => {
-			if (Math.random() < 0.1) {
-				hero.goto({
-					x: (Math.random() - 0.499) * 10,
-					y: (Math.random() - 0.499) * 10,
-				});
-			}
-		});
+		// level.eachHero((hero) => {
+		// 	if (Math.random() < 0.1) {
+		// 		hero.goto({
+		// 			x: (Math.random() - 0.499) * 10,
+		// 			y: (Math.random() - 0.499) * 10,
+		// 		});
+		// 	}
+		// });
 	}
 }
 

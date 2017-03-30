@@ -1,9 +1,10 @@
+(function () {
+'use strict';
+
 // special thanks to
 // http://buildnewgames.com/box2dweb/
 // wrapped up by me Jacek Pietal <prozi85@gmail.com>
 
-(function () {
-'use strict';
 
 const Box2D = require('box2dweb');
 

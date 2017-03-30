@@ -76,8 +76,7 @@
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/index.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">// (function () {
-&apos;use strict&apos;;
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
 
 const { Physics, Body, b2Vec2 } = require(&apos;./physics&apos;);
 const FMath = require(&apos;fmath&apos;);
@@ -176,13 +175,17 @@ class Level {
 			this.onUpdateHero(this.heros[id]);
 		}
 	}
-	addHero (heroArray = []) {
+	addHero (heroArray = [], bodyProperties = {}) {
 		const id = heroArray[HERO_ID] || randomId();
-		this.heros[id] = new Hero({}, id);
-		this.heros[id].addBody(this.physics, { 
+		heroArray[HERO_X] = heroArray[HERO_X] || this.width * Math.random();
+		heroArray[HERO_Y] = heroArray[HERO_Y] || 0;
+		this.heros[id] = new Hero({ id });
+		this.heros[id].addBody(this.physics, Object.assign({
+			shape: &apos;circle&apos;,
 			x: heroArray[HERO_X],
 			y: heroArray[HERO_Y],
-		});
+			radius: 0.5,
+		}, bodyProperties));
 		this.heros[id].fromArray(heroArray);
 		if (this.onCreateHero) {
 			this.onCreateHero(this.heros[id]);
@@ -208,16 +211,22 @@ class Level {
 					tiled.layers[1].data[pos]
 				];
 				this.stops[offset] = tiled.layers[2].data[pos];
+				if (this.stops[offset]) {
+					new Body(this.physics, { type: &apos;static&apos;, x, y, width: 1, height: 1 });
+				}
 			}
 		}
+		// boundaries
+		new Body(this.physics, { type: &apos;static&apos;, x: -1, y: -1, height: this.height + 1, width: 1 });
+		new Body(this.physics, { type: &apos;static&apos;, x: this.width + 1, y: -1, height: this.height + 1, width: 1 });
+		new Body(this.physics, { type: &apos;static&apos;, x: -1, y: -1, height: 1, width: this.width + 1 });
+		new Body(this.physics, { type: &apos;static&apos;, x: -1, y: this.height + 1, height: 1, width: this.width + 1 });
 	}
 }
 
 class Hero {
-	constructor (props = {}, id = randomId()) {
-		this.id = id;
-		// for drawing
-		this.sprite = null;
+	constructor (props = { id: randomId(), speed: 1 }) {
+		Object.assign(this, props);
 	}
 	get x () {
 		return this.body ? this.body.GetPosition().x : undefined;
@@ -249,7 +258,12 @@ class Hero {
 		}
 	}
 	goto ({ x, y }) {
-		this.body.ApplyImpulse({ x, y }, this.body.GetWorldCenter());
+		const distance = Math.sqrt(x * x + y * y);
+		const d = this.speed / distance;
+		this.body.ApplyForce({ 
+			x: x * d, 
+			y: y * d 
+		}, this.body.GetWorldCenter(), true);
 	}
 }
 
@@ -296,7 +310,6 @@ if (typeof module !== &apos;undefined&apos;) {
 	};
 }
 
-// })();
 </code></pre>
 
 </div>

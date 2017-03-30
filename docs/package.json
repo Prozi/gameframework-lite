@@ -1,10 +1,11 @@
 {
   "name": "gameframework",
-  "version": "1.0.33",
+  "version": "1.0.42",
   "description": "game framework for 2d games and physics",
   "main": "index.js",
   "scripts": {
-    "prep": "esdoc && yarn build",
+    "prep4esdoc": "./prep4esdoc.sh index.js && ./prep4esdoc.sh view.js && ./prep4esdoc.sh physics.js",
+    "docs": "yarn prep4esdoc && esdoc && yarn build",
     "build": "PRODUCTION=true webpack",
     "build:dev": "PRODUCTION= webpack",
     "test": "node test"

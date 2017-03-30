@@ -654,12 +654,6 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/index.js~hero#sprite",
-    "class/src/index.js~Hero.html#instance-member-sprite",
-    "src/index.js~Hero#sprite",
-    "member"
-  ],
-  [
     "src/index.js~hero#toarray",
     "class/src/index.js~Hero.html#instance-method-toArray",
     "src/index.js~Hero#toArray",

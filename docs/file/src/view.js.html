@@ -76,8 +76,7 @@
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/view.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">// (function () {
-&apos;use strict&apos;;
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
 
 const PIXI = require(&apos;pixi.js&apos;);
 const Level = require(&apos;.&apos;).Level;
@@ -123,6 +122,7 @@ class View {
 	onCreateHero (hero) {
 		hero.sprite = PIXI.Sprite.fromImage(&apos;bunny.png&apos;);
 		hero.sprite.anchor.set(0.5);		
+		hero.sprite.texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
 	}
 	_onCreateHero (hero) {
 		if (!hero.sprite) {
@@ -180,6 +180,7 @@ class View {
 		sprite.width = sprite.height = this.level.tileset.tilewidth;
 		sprite.x = Math.floor(this.level.tileset.tilewidth * x);
 		sprite.y = Math.floor(this.level.tileset.tilewidth * y);
+		sprite.anchor.set(0.5);
 		layer.addChild(sprite);
 	}
 	addBlocks () {
@@ -227,7 +228,6 @@ if (typeof module !== &apos;undefined&apos;) {
 	module.exports = View;
 }
 
-// })();
 </code></pre>
 
 </div>
