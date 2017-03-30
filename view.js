@@ -45,6 +45,7 @@ class View {
 	onCreateHero (hero) {
 		hero.sprite = PIXI.Sprite.fromImage('bunny.png');
 		hero.sprite.anchor.set(0.5);		
+		hero.sprite.texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
 	}
 	_onCreateHero (hero) {
 		if (!hero.sprite) {

@@ -100,13 +100,15 @@ class Level {
 	}
 	addHero (heroArray = []) {
 		const id = heroArray[HERO_ID] || randomId();
-		this.heros[id] = new Hero({}, id);
-		this.heros[id].addBody(this.physics, { 
-			x: heroArray[HERO_X],
-			y: heroArray[HERO_Y],
-		});
 		heroArray[HERO_X] = heroArray[HERO_X] || this.width * Math.random();
 		heroArray[HERO_Y] = heroArray[HERO_Y] || 0;
+		this.heros[id] = new Hero({}, id);
+		this.heros[id].addBody(this.physics, {
+			shape: 'circle',
+			x: heroArray[HERO_X],
+			y: heroArray[HERO_Y],
+			radius: 0.5,
+		});
 		this.heros[id].fromArray(heroArray);
 		if (this.onCreateHero) {
 			this.onCreateHero(this.heros[id]);
@@ -133,15 +135,15 @@ class Level {
 				];
 				this.stops[offset] = tiled.layers[2].data[pos];
 				if (this.stops[offset]) {
-					new Body(this.physics, { shape: 'circle', x, y, radius: 0.5 });
+					new Body(this.physics, { type: 'static', x, y, width: 1, height: 1 });
 				}
 			}
 		}
 		// boundaries
-		new Body(this.physics, { type: 'static', x: 0, y: 0, height: this.height, width: 0.5 });
-		new Body(this.physics, { type: 'static', x: this.width, y: 0, height: this.height, width: 0.5});
-		new Body(this.physics, { type: 'static', x: 0, y: 0, height: 0.5, width: this.width });
-		new Body(this.physics, { type: 'static', x: 0, y: this.height, height: 0.5, width: this.width });
+		new Body(this.physics, { type: 'static', x: -0.5, y: -0.5, height: this.height + 1, width: 0.5 });
+		new Body(this.physics, { type: 'static', x: this.width + 1, y: -0.5, height: this.height + 1, width: 0.5 });
+		new Body(this.physics, { type: 'static', x: -0.5, y: -0.5, height: 0.5, width: this.width + 1 });
+		new Body(this.physics, { type: 'static', x: -0.5, y: this.height + 1, height: 0.5, width: this.width + 1 });
 	}
 }
 
@@ -181,7 +183,7 @@ class Hero {
 		}
 	}
 	goto ({ x, y }) {
-		this.body.ApplyImpulse({ x, y }, this.body.GetWorldCenter());
+		this.body.ApplyImpulse({ x, y }, this.body.GetWorldCenter(), true);
 	}
 }
 
