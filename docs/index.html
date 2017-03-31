@@ -75,6 +75,8 @@
 </nav>
 
 <div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><h2 id="gameframework">gameframework</h2>
+<p>This is still under development.</p>
+<p>I use it with success tho, feel free to open any issues/pull requests.</p>
 <h3 id="documentation">documentation</h3>
 <p><a href="https://prozi.github.io/gameframework/">https://prozi.github.io/gameframework/</a></p>
 <h3 id="installation">installation</h3>
@@ -92,13 +94,20 @@
 <li>Block,</li>
 <li>Hero,</li>
 <li>atan2</li>
+<li>random</li>
 </ul>
 <p>require &apos;gameframework/view&apos; for:</p>
 <ul>
 <li>View</li>
 </ul>
+<p>require &apos;gameframework/physics&apos; for:</p>
+<ul>
+<li>Body</li>
+<li>Physics</li>
+</ul>
 <h3 id="examples">examples</h3>
 <pre><code class="lang-javascript"><code class="source-code prettyprint">const View = require(&apos;gameframework/view&apos;);
+const PIXI = window.PIXI || require(&apos;pixi.js&apos;);
 
 // this is how you should use View
 class MyView extends View {

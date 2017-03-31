@@ -126,13 +126,14 @@ class View {
 			blocks: new PIXI.Container(),
 			heros: new PIXI.Container(),
 		};
-		this.tileset = PIXI.Texture.fromImage('assets/img/MagicCloud/tileset.png', false, PIXI.SCALE_MODES.NEAREST);
+		this.tileset = PIXI.Texture.fromImage(tiled.tilesets[0].image, false, PIXI.SCALE_MODES.NEAREST);
 		this.camera.addChild(this.layers.blocks);
 		this.camera.addChild(this.layers.heros);
 		this.level.fromTiled(tiled);
 		this.addBlocks();
 	}
 	_onMouseMove (event) {
+		event.stopPropagation();
 		const e = event.touches ? event.touches[0] : event;
 		this.mouse = {
 			x: e.clientX,
@@ -149,6 +150,8 @@ class View {
 		}
 	}
 	useMouse (disableContextMenu = false) {
+		window.addEventListener('touchmove', this._onMouseMove.bind(this), false);
+		window.addEventListener('touchstart', this._onMouseClick.bind(this), false);
 		window.addEventListener('mousemove', this._onMouseMove.bind(this), false);
 		window.addEventListener('mousedown', this._onMouseClick.bind(this), false);
 		if (disableContextMenu) {

@@ -53,7 +53,7 @@ class Level {
 		this.accuracy = 10;
 	}
 	spawn ({ body }) {
-		body.x = Math.random() * this.width;
+		body.x = random() * this.width;
 		body.y = 0;
 	}
 	eachHero (callback) {
@@ -100,7 +100,7 @@ class Level {
 	}
 	addHero (heroArray = [], bodyProperties = {}, HeroClass = Hero) {
 		const id = heroArray[HERO_ID] || randomId();
-		heroArray[HERO_X] = heroArray[HERO_X] || this.width * Math.random();
+		heroArray[HERO_X] = heroArray[HERO_X] || this.width * random();
 		heroArray[HERO_Y] = heroArray[HERO_Y] || 0;
 		this.heros[id] = new HeroClass({ id });
 		this.heros[id].addBody(this.physics, Object.assign({
@@ -249,7 +249,7 @@ function atan2 (y, x) {
 }
 
 function randomId () {
-	return md5(Math.random()).slice(0, 7);
+	return md5(random()).slice(0, 7);
 }
 
 function distance (dx, dy) {
