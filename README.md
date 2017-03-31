@@ -1,5 +1,9 @@
 ## gameframework
 
+This is still under development.
+
+I use it with success tho, feel free to open any issues/pull requests.
+
 ### documentation
 
 [https://prozi.github.io/gameframework/](https://prozi.github.io/gameframework/)
@@ -26,16 +30,22 @@ require 'gameframework' for:
 - Block,
 - Hero,
 - atan2
-
+- random
 
 require 'gameframework/view' for:
 
 - View
 
+require 'gameframework/physics' for:
+
+- Body
+- Physics
+
 ### examples
 
 ```javascript
 const View = require('gameframework/view');
+const PIXI = window.PIXI || require('pixi.js');
 
 // this is how you should use View
 class MyView extends View {

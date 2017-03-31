@@ -1,6 +1,6 @@
 {
   "name": "gameframework",
-  "version": "1.0.49",
+  "version": "1.0.50",
   "description": "game framework for 2d html5 games with physics isomorphic",
   "main": "index.js",
   "scripts": {

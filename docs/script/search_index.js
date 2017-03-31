@@ -216,6 +216,12 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "gameframework/src/index.js~random",
+    "function/index.html#static-function-random",
+    "<span>random</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
+    "function"
+  ],
+  [
     "gameframework/src/index.js~randomid",
     "function/index.html#static-function-randomId",
     "<span>randomId</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",

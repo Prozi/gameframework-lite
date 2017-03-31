@@ -256,6 +256,10 @@ function distance (dx, dy) {
 	return Math.sqrt(dx * dx + dy * dy);
 }
 
+function random () {
+	return Math.floor(Math.random() * 1001) / 1000;
+}
+
 if (typeof module !== 'undefined') {
 	module.exports = {
 		DEFER,
@@ -265,6 +269,7 @@ if (typeof module !== 'undefined') {
 		atan2,
 		randomId,
 		distance,
+		random,
 	};
 }
 
