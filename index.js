@@ -140,10 +140,10 @@ class Level {
 			}
 		}
 		// boundaries
-		new Body(this.physics, { type: 'static', x: -1, y: -1, height: this.height + 1, width: 1 });
-		new Body(this.physics, { type: 'static', x: this.width + 1, y: -1, height: this.height + 1, width: 1 });
-		new Body(this.physics, { type: 'static', x: -1, y: -1, height: 1, width: this.width + 1 });
-		new Body(this.physics, { type: 'static', x: -1, y: this.height + 1, height: 1, width: this.width + 1 });
+		new Body(this.physics, { type: 'static', x: -1, y: this.height / 2, height: this.height, width: 1 });
+		new Body(this.physics, { type: 'static', x: this.width, y: this.height / 2, height: this.height, width: 1 });
+		new Body(this.physics, { type: 'static', x: this.width / 2, y: -1, height: 1, width: this.width });
+		new Body(this.physics, { type: 'static', x: this.width / 2, y: this.height, height: 1, width: this.width });
 	}
 }
 
