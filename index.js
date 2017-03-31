@@ -98,11 +98,11 @@ class Level {
 			this.onUpdateHero(this.heros[id]);
 		}
 	}
-	addHero (heroArray = [], bodyProperties = {}) {
+	addHero (heroArray = [], bodyProperties = {}, HeroClass = Hero) {
 		const id = heroArray[HERO_ID] || randomId();
 		heroArray[HERO_X] = heroArray[HERO_X] || this.width * Math.random();
 		heroArray[HERO_Y] = heroArray[HERO_Y] || 0;
-		this.heros[id] = new Hero({ id });
+		this.heros[id] = new HeroClass({ id });
 		this.heros[id].addBody(this.physics, Object.assign({
 			shape: 'circle',
 			x: heroArray[HERO_X],
