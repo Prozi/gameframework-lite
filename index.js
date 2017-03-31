@@ -216,6 +216,8 @@ class Hero {
 				x: x ? (this.gravity ? this.speedLimit(x) : x) : 0, 
 				y: -this.jumpHeight 
 			}, this.body.GetWorldCenter(), true);
+		} else {
+			this.goto({ x, y: 0 });
 		}
 	}
 }
