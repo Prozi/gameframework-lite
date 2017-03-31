@@ -71,7 +71,7 @@ class Level {
 		this.eachHero((hero) => array[0].push(hero.toArray()));
 		return array;
 	}
-	fromArray (array = []) {
+	fromArray (array = [], HeroClass = Hero) {
 		this.eachHero((hero) => {
 			if (!array[0].find((heroArray) => heroArray[HERO_ID] === hero.id)) {
 				if (this.onRemoveHero) {
@@ -85,7 +85,7 @@ class Level {
 			if (this.heros[id]) {
 				this.updateHero(id, heroArray);
 			} else {
-				this.addHero(heroArray);
+				this.addHero(heroArray, {}, HeroClass);
 			}
 		});
 		if (this.fromArrayExtension) {
