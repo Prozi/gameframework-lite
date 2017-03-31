@@ -47,7 +47,7 @@ class Level {
 		if (props.gravity) {
 			options.gravity = props.gravity;
 		}
-		this.physics = new Physics(props);
+		this.physics = new Physics(options);
 		this.heros = props.heros || {};
 		this.blocks = props.blocks || {};
 		this.accuracy = 10;
@@ -88,6 +88,9 @@ class Level {
 				this.addHero(heroArray);
 			}
 		});
+		if (this.fromArrayExtension) {
+			this.fromArrayExtension(array);
+		}
 	}
 	updateHero (id, heroArray = []) {
 		this.heros[id].fromArray(heroArray);
