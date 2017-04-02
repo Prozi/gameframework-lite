@@ -71,13 +71,17 @@ class Level {
 		this.eachHero((hero) => array[0].push(hero.toArray()));
 		return array;
 	}
+	removeHero (hero) {
+		if (this.onRemoveHero) {
+			this.onRemoveHero(hero);
+		}
+		this.heros[hero.id] = null;
+		delete this.heros[hero.id];		
+	}
 	fromArray (array = [], HeroClass = Hero) {
 		this.eachHero((hero) => {
 			if (!array[0].find((heroArray) => heroArray[HERO_ID] === hero.id)) {
-				if (this.onRemoveHero) {
-					this.onRemoveHero(hero);
-				}
-				delete this.heros[hero.id];
+				this.removeHero(hero);
 			}
 		});
 		array[0].forEach((heroArray) => {

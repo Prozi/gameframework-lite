@@ -774,6 +774,12 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/index.js~level#removehero",
+    "class/src/index.js~Level.html#instance-method-removeHero",
+    "src/index.js~Level#removeHero",
+    "method"
+  ],
+  [
     "src/index.js~level#spawn",
     "class/src/index.js~Level.html#instance-method-spawn",
     "src/index.js~Level#spawn",
