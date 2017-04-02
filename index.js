@@ -199,20 +199,23 @@ class Hero {
 		}
 	}
 	goto ({ x, y }) {
-		const d = this.maxSpeed / distance(x, y);
-		let newx = 0;
-		let newy = 0;
-		if (!this.gravity) {
-			this.body.m_force.SetZero();
-			newx = x * d;
-			newy = y * d;
-		} else {
-			newx = this.speedLimit(x);
+		const r = distance(x, y);
+		if (r) {
+			const d = this.maxSpeed / r;
+			let newx = 0;
+			let newy = 0;
+			if (!this.gravity) {
+				this.body.m_force.SetZero();
+				newx = x * d;
+				newy = y * d;
+			} else {
+				newx = this.speedLimit(x * d);
+			}
+			this.body.ApplyImpulse({ 
+				x: newx, 
+				y: newy,
+			}, this.body.GetWorldCenter(), true);
 		}
-		this.body.ApplyImpulse({ 
-			x: newx, 
-			y: newy,
-		}, this.body.GetWorldCenter(), true);
 	}
 	jump (x = 0) {
 		const now = NOW();
