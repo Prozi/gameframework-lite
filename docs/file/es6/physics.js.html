@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">es6/physics.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <a data-ice="repoURL" href="https://github.com/Prozi/gameframework.git" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  </ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">es6/physics.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">(function () {
+&apos;use strict&apos;;
+
+// special thanks to
+// http://buildnewgames.com/box2dweb/
+// wrapped up by me Jacek Pietal &lt;prozi85@gmail.com&gt;
+
+const Box2D = require(&apos;box2dweb&apos;);
+
+// box2d
+const b2Vec2 = Box2D.Common.Math.b2Vec2;
+const b2BodyDef = Box2D.Dynamics.b2BodyDef;
+const b2Body = Box2D.Dynamics.b2Body;
+const b2FixtureDef = Box2D.Dynamics.b2FixtureDef;
+const b2Fixture = Box2D.Dynamics.b2Fixture;
+const b2World = Box2D.Dynamics.b2World;
+const b2MassData = Box2D.Collision.Shapes.b2MassData;
+const b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape;
+const b2CircleShape = Box2D.Collision.Shapes.b2CircleShape;
+const b2DebugDraw = Box2D.Dynamics.b2DebugDraw;	
+
+const GRAVITY = 9.8;
+const BODIES_SLEEP = true;
+
+class Physics {
+	constructor ({ scale = 30, gravity = GRAVITY }) {
+		this.gravity = new b2Vec2(0, gravity);
+		this.world = new b2World(this.gravity, BODIES_SLEEP);
+		this.scale = scale;
+		this.dtRemaining = 0;
+		this.stepAmount = 1 / 60;
+	}
+	step (dt = 0) {
+		this.dtRemaining += dt;
+		while (this.dtRemaining &gt; this.stepAmount) {
+			this.dtRemaining -= this.stepAmount;
+			this.world.Step(this.stepAmount,
+			8, // velocity iterations
+			3); // position iterations
+		}
+		if (this.debugDraw) {
+			this.world.DrawDebugData();
+		}
+	}
+	debug (context) {
+		if (context) {
+			this.debugDraw = new b2DebugDraw();
+			this.debugDraw.SetSprite(context);
+			this.debugDraw.SetDrawScale(this.scale);
+			this.debugDraw.SetFillAlpha(0.3);
+			this.debugDraw.SetLineThickness(1.0);
+			this.debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
+			this.world.SetDebugDraw(this.debugDraw);
+		}
+	};
+};
+
+const BODY_DEFAULTS = {
+	shape: &quot;block&quot;,
+	width: 1,
+	height: 1,
+	radius: 0.5
+};
+
+const BODY_FIXTURE_DEFAULTS = {
+	density: 2,
+	friction: 1,
+	restitution: 0.2
+};
+
+const BODY_DEFINITION_DEFAULTS = {
+	active: true,
+	allowSleep: true,
+	angle: 0,
+	angularVelocity: 0,
+	awake: true,
+	bullet: false,
+	fixedRotation: false
+};
+
+class Body {
+	constructor (physics, details = {}) {
+
+		// Create the definition
+		const definition = new b2BodyDef();
+
+		// Set up the definition
+		for (let k in BODY_DEFINITION_DEFAULTS) {
+			definition[k] = details[k] || BODY_DEFINITION_DEFAULTS[k];
+		}
+		definition.position = new b2Vec2(details.x || 0, details.y || 0);
+		definition.linearVelocity = new b2Vec2(details.vx || 0, details.vy || 0);
+		definition.userData = {};
+		definition.type = details.type == &quot;static&quot; ? b2Body.b2_staticBody : b2Body.b2_dynamicBody;
+
+		// Create the Body
+		const body = physics.world.CreateBody(definition);
+
+		// Create the fixture
+		const fixtureDef = new b2FixtureDef();
+		for (let l in BODY_FIXTURE_DEFAULTS) {
+			fixtureDef[l] = details[l] || BODY_FIXTURE_DEFAULTS[l];
+		}
+
+		details.shape = details.shape || BODY_DEFAULTS.shape;
+
+		switch (details.shape) {
+			case &quot;circle&quot;:
+				details.radius = details.radius || BODY_DEFAULTS.radius;
+				fixtureDef.shape = new b2CircleShape(details.radius);
+				break;
+			case &quot;polygon&quot;:
+				fixtureDef.shape = new b2PolygonShape();
+				fixtureDef.shape.SetAsArray(details.points, details.points.length);
+				break;
+			case &quot;block&quot;:
+			default:
+				details.width = details.width || BODY_DEFAULTS.width;
+				details.height = details.height || BODY_DEFAULTS.height;
+
+				fixtureDef.shape = new b2PolygonShape();
+				fixtureDef.shape.SetAsBox(
+					details.width / 2,
+					details.height / 2
+				);
+				break;
+		}
+
+		body.CreateFixture(fixtureDef);
+
+		return body;
+	}
+};
+
+if (typeof module !== &apos;undefined&apos;) {
+	module.exports = {
+		Physics,
+		Body,
+		b2Vec2
+	};
+}
+
+})();
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.5.2)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

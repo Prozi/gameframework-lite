@@ -1,5 +1,5 @@
 {
-  "source": "./src",
+  "source": "./docs-src",
   "destination": "./docs",
   "access": ["public", "protected", "private"],
   "unexportIdentifier": true,

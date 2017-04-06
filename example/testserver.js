@@ -1,6 +1,6 @@
 'use strict';
 
-const { Game, Level, Hero } = require('..');
+const { Game, Level, Hero } = require('../es6');
 
 class MyGame extends Game {
 	constructor () {

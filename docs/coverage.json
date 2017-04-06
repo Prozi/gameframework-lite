@@ -3,7 +3,7 @@
   "expectCount": 120,
   "actualCount": 0,
   "files": {
-    "src/physics.js": {
+    "docs-src/physics.js": {
       "expectCount": 28,
       "actualCount": 0,
       "undocumentLines": [
@@ -37,7 +37,7 @@
         27
       ]
     },
-    "src/index.js": {
+    "docs-src/index.js": {
       "expectCount": 60,
       "actualCount": 0,
       "undocumentLines": [
@@ -55,14 +55,14 @@
         52,
         168,
         104,
-        231,
+        234,
         51,
         169,
         44,
         154,
         21,
         35,
-        258,
+        261,
         58,
         7,
         80,
@@ -74,7 +74,7 @@
         50,
         155,
         23,
-        216,
+        219,
         157,
         158,
         160,
@@ -85,8 +85,8 @@
         188,
         24,
         49,
-        262,
-        254,
+        265,
+        257,
         73,
         54,
         193,
@@ -103,7 +103,7 @@
         165
       ]
     },
-    "src/view.js": {
+    "docs-src/view.js": {
       "expectCount": 32,
       "actualCount": 0,
       "undocumentLines": [

@@ -1,6 +1,6 @@
 'use strict';
 
-const View = require('../view');
+const View = require('../es6/view');
 
 // this is how you should use View
 class MyView extends View {

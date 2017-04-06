@@ -1,230 +1,230 @@
 window.esdocSearchIndex = [
   [
-    "gameframework/src/physics.js~bodies_sleep",
+    "gameframework/docs-src/physics.js~bodies_sleep",
     "variable/index.html#static-variable-BODIES_SLEEP",
-    "<span>BODIES_SLEEP</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "<span>BODIES_SLEEP</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
     "variable"
   ],
   [
-    "gameframework/src/physics.js~body_defaults",
+    "gameframework/docs-src/physics.js~body_defaults",
     "variable/index.html#static-variable-BODY_DEFAULTS",
-    "<span>BODY_DEFAULTS</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "<span>BODY_DEFAULTS</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
     "variable"
   ],
   [
-    "gameframework/src/physics.js~body_definition_defaults",
+    "gameframework/docs-src/physics.js~body_definition_defaults",
     "variable/index.html#static-variable-BODY_DEFINITION_DEFAULTS",
-    "<span>BODY_DEFINITION_DEFAULTS</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "<span>BODY_DEFINITION_DEFAULTS</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
     "variable"
   ],
   [
-    "gameframework/src/physics.js~body_fixture_defaults",
+    "gameframework/docs-src/physics.js~body_fixture_defaults",
     "variable/index.html#static-variable-BODY_FIXTURE_DEFAULTS",
-    "<span>BODY_FIXTURE_DEFAULTS</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "<span>BODY_FIXTURE_DEFAULTS</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
     "variable"
   ],
   [
-    "gameframework/src/physics.js~body",
-    "class/src/physics.js~Body.html",
-    "<span>Body</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "gameframework/docs-src/physics.js~body",
+    "class/docs-src/physics.js~Body.html",
+    "<span>Body</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
     "class"
   ],
   [
-    "gameframework/src/physics.js~box2d",
+    "gameframework/docs-src/physics.js~box2d",
     "variable/index.html#static-variable-Box2D",
-    "<span>Box2D</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "<span>Box2D</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
     "variable"
   ],
   [
-    "gameframework/src/index.js~defer",
+    "gameframework/docs-src/index.js~defer",
     "variable/index.html#static-variable-DEFER",
-    "<span>DEFER</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
+    "<span>DEFER</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
     "variable"
   ],
   [
-    "gameframework/src/index.js~fmath",
+    "gameframework/docs-src/index.js~fmath",
     "variable/index.html#static-variable-FMath",
-    "<span>FMath</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
+    "<span>FMath</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
     "variable"
   ],
   [
-    "gameframework/src/physics.js~gravity",
+    "gameframework/docs-src/physics.js~gravity",
     "variable/index.html#static-variable-GRAVITY",
-    "<span>GRAVITY</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "<span>GRAVITY</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
     "variable"
   ],
   [
-    "gameframework/src/index.js~game",
-    "class/src/index.js~Game.html",
-    "<span>Game</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
+    "gameframework/docs-src/index.js~game",
+    "class/docs-src/index.js~Game.html",
+    "<span>Game</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
     "class"
   ],
   [
-    "gameframework/src/index.js~half_pi",
+    "gameframework/docs-src/index.js~half_pi",
     "variable/index.html#static-variable-HALF_PI",
-    "<span>HALF_PI</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
+    "<span>HALF_PI</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
     "variable"
   ],
   [
-    "gameframework/src/index.js~hero_id",
+    "gameframework/docs-src/index.js~hero_id",
     "variable/index.html#static-variable-HERO_ID",
-    "<span>HERO_ID</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
+    "<span>HERO_ID</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
     "variable"
   ],
   [
-    "gameframework/src/index.js~hero_x",
+    "gameframework/docs-src/index.js~hero_x",
     "variable/index.html#static-variable-HERO_X",
-    "<span>HERO_X</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
+    "<span>HERO_X</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
     "variable"
   ],
   [
-    "gameframework/src/index.js~hero_y",
+    "gameframework/docs-src/index.js~hero_y",
     "variable/index.html#static-variable-HERO_Y",
-    "<span>HERO_Y</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
+    "<span>HERO_Y</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
     "variable"
   ],
   [
-    "gameframework/src/index.js~hero",
-    "class/src/index.js~Hero.html",
-    "<span>Hero</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
+    "gameframework/docs-src/index.js~hero",
+    "class/docs-src/index.js~Hero.html",
+    "<span>Hero</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
     "class"
   ],
   [
-    "gameframework/src/index.js~level",
-    "class/src/index.js~Level.html",
-    "<span>Level</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
+    "gameframework/docs-src/index.js~level",
+    "class/docs-src/index.js~Level.html",
+    "<span>Level</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
     "class"
   ],
   [
-    "gameframework/src/view.js~level",
+    "gameframework/docs-src/view.js~level",
     "variable/index.html#static-variable-Level",
-    "<span>Level</span> <span class=\"search-result-import-path\">gameframework/src/view.js</span>",
+    "<span>Level</span> <span class=\"search-result-import-path\">gameframework/docs-src/view.js</span>",
     "variable"
   ],
   [
-    "gameframework/src/index.js~now",
+    "gameframework/docs-src/index.js~now",
     "variable/index.html#static-variable-NOW",
-    "<span>NOW</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
+    "<span>NOW</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
     "variable"
   ],
   [
-    "gameframework/src/view.js~pixi",
+    "gameframework/docs-src/view.js~pixi",
     "variable/index.html#static-variable-PIXI",
-    "<span>PIXI</span> <span class=\"search-result-import-path\">gameframework/src/view.js</span>",
+    "<span>PIXI</span> <span class=\"search-result-import-path\">gameframework/docs-src/view.js</span>",
     "variable"
   ],
   [
-    "gameframework/src/index.js~physics",
+    "gameframework/docs-src/index.js~physics",
     "variable/index.html#static-variable-Physics",
-    "<span>Physics</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
+    "<span>Physics</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
     "variable"
   ],
   [
-    "gameframework/src/physics.js~physics",
-    "class/src/physics.js~Physics.html",
-    "<span>Physics</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "gameframework/docs-src/physics.js~physics",
+    "class/docs-src/physics.js~Physics.html",
+    "<span>Physics</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
     "class"
   ],
   [
-    "gameframework/src/view.js~view",
-    "class/src/view.js~View.html",
-    "<span>View</span> <span class=\"search-result-import-path\">gameframework/src/view.js</span>",
+    "gameframework/docs-src/view.js~view",
+    "class/docs-src/view.js~View.html",
+    "<span>View</span> <span class=\"search-result-import-path\">gameframework/docs-src/view.js</span>",
     "class"
   ],
   [
-    "gameframework/src/index.js~atan2",
+    "gameframework/docs-src/index.js~atan2",
     "function/index.html#static-function-atan2",
-    "<span>atan2</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
+    "<span>atan2</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
     "function"
   ],
   [
-    "gameframework/src/physics.js~b2body",
+    "gameframework/docs-src/physics.js~b2body",
     "variable/index.html#static-variable-b2Body",
-    "<span>b2Body</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "<span>b2Body</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
     "variable"
   ],
   [
-    "gameframework/src/physics.js~b2bodydef",
+    "gameframework/docs-src/physics.js~b2bodydef",
     "variable/index.html#static-variable-b2BodyDef",
-    "<span>b2BodyDef</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "<span>b2BodyDef</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
     "variable"
   ],
   [
-    "gameframework/src/physics.js~b2circleshape",
+    "gameframework/docs-src/physics.js~b2circleshape",
     "variable/index.html#static-variable-b2CircleShape",
-    "<span>b2CircleShape</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "<span>b2CircleShape</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
     "variable"
   ],
   [
-    "gameframework/src/physics.js~b2debugdraw",
+    "gameframework/docs-src/physics.js~b2debugdraw",
     "variable/index.html#static-variable-b2DebugDraw",
-    "<span>b2DebugDraw</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "<span>b2DebugDraw</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
     "variable"
   ],
   [
-    "gameframework/src/physics.js~b2fixture",
+    "gameframework/docs-src/physics.js~b2fixture",
     "variable/index.html#static-variable-b2Fixture",
-    "<span>b2Fixture</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "<span>b2Fixture</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
     "variable"
   ],
   [
-    "gameframework/src/physics.js~b2fixturedef",
+    "gameframework/docs-src/physics.js~b2fixturedef",
     "variable/index.html#static-variable-b2FixtureDef",
-    "<span>b2FixtureDef</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "<span>b2FixtureDef</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
     "variable"
   ],
   [
-    "gameframework/src/physics.js~b2massdata",
+    "gameframework/docs-src/physics.js~b2massdata",
     "variable/index.html#static-variable-b2MassData",
-    "<span>b2MassData</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "<span>b2MassData</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
     "variable"
   ],
   [
-    "gameframework/src/physics.js~b2polygonshape",
+    "gameframework/docs-src/physics.js~b2polygonshape",
     "variable/index.html#static-variable-b2PolygonShape",
-    "<span>b2PolygonShape</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "<span>b2PolygonShape</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
     "variable"
   ],
   [
-    "gameframework/src/physics.js~b2vec2",
+    "gameframework/docs-src/physics.js~b2vec2",
     "variable/index.html#static-variable-b2Vec2",
-    "<span>b2Vec2</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "<span>b2Vec2</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
     "variable"
   ],
   [
-    "gameframework/src/physics.js~b2world",
+    "gameframework/docs-src/physics.js~b2world",
     "variable/index.html#static-variable-b2World",
-    "<span>b2World</span> <span class=\"search-result-import-path\">gameframework/src/physics.js</span>",
+    "<span>b2World</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
     "variable"
   ],
   [
-    "gameframework/src/index.js~distance",
+    "gameframework/docs-src/index.js~distance",
     "function/index.html#static-function-distance",
-    "<span>distance</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
+    "<span>distance</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
     "function"
   ],
   [
-    "gameframework/src/index.js~fmath",
+    "gameframework/docs-src/index.js~fmath",
     "variable/index.html#static-variable-fmath",
-    "<span>fmath</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
+    "<span>fmath</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
     "variable"
   ],
   [
-    "gameframework/src/index.js~md5",
+    "gameframework/docs-src/index.js~md5",
     "variable/index.html#static-variable-md5",
-    "<span>md5</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
+    "<span>md5</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
     "variable"
   ],
   [
-    "gameframework/src/index.js~random",
+    "gameframework/docs-src/index.js~random",
     "function/index.html#static-function-random",
-    "<span>random</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
+    "<span>random</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
     "function"
   ],
   [
-    "gameframework/src/index.js~randomid",
+    "gameframework/docs-src/index.js~randomid",
     "function/index.html#static-function-randomId",
-    "<span>randomId</span> <span class=\"search-result-import-path\">gameframework/src/index.js</span>",
+    "<span>randomId</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
     "function"
   ],
   [
@@ -558,513 +558,513 @@ window.esdocSearchIndex = [
     "external"
   ],
   [
-    "src/index.js",
-    "file/src/index.js.html",
-    "src/index.js",
+    "docs-src/index.js",
+    "file/docs-src/index.js.html",
+    "docs-src/index.js",
     "file"
   ],
   [
-    "src/index.js~game#constructor",
-    "class/src/index.js~Game.html#instance-constructor-constructor",
-    "src/index.js~Game#constructor",
+    "docs-src/index.js~game#constructor",
+    "class/docs-src/index.js~Game.html#instance-constructor-constructor",
+    "docs-src/index.js~Game#constructor",
     "method"
   ],
   [
-    "src/index.js~game#delta",
-    "class/src/index.js~Game.html#instance-member-delta",
-    "src/index.js~Game#delta",
+    "docs-src/index.js~game#delta",
+    "class/docs-src/index.js~Game.html#instance-member-delta",
+    "docs-src/index.js~Game#delta",
     "member"
   ],
   [
-    "src/index.js~game#interval",
-    "class/src/index.js~Game.html#instance-member-interval",
-    "src/index.js~Game#interval",
+    "docs-src/index.js~game#interval",
+    "class/docs-src/index.js~Game.html#instance-member-interval",
+    "docs-src/index.js~Game#interval",
     "member"
   ],
   [
-    "src/index.js~game#levels",
-    "class/src/index.js~Game.html#instance-member-levels",
-    "src/index.js~Game#levels",
+    "docs-src/index.js~game#levels",
+    "class/docs-src/index.js~Game.html#instance-member-levels",
+    "docs-src/index.js~Game#levels",
     "member"
   ],
   [
-    "src/index.js~game#loop",
-    "class/src/index.js~Game.html#instance-method-loop",
-    "src/index.js~Game#loop",
+    "docs-src/index.js~game#loop",
+    "class/docs-src/index.js~Game.html#instance-method-loop",
+    "docs-src/index.js~Game#loop",
     "method"
   ],
   [
-    "src/index.js~game#now",
-    "class/src/index.js~Game.html#instance-member-now",
-    "src/index.js~Game#now",
+    "docs-src/index.js~game#now",
+    "class/docs-src/index.js~Game.html#instance-member-now",
+    "docs-src/index.js~Game#now",
     "member"
   ],
   [
-    "src/index.js~game#tick",
-    "class/src/index.js~Game.html#instance-method-tick",
-    "src/index.js~Game#tick",
+    "docs-src/index.js~game#tick",
+    "class/docs-src/index.js~Game.html#instance-method-tick",
+    "docs-src/index.js~Game#tick",
     "method"
   ],
   [
-    "src/index.js~hero#addbody",
-    "class/src/index.js~Hero.html#instance-method-addBody",
-    "src/index.js~Hero#addBody",
+    "docs-src/index.js~hero#addbody",
+    "class/docs-src/index.js~Hero.html#instance-method-addBody",
+    "docs-src/index.js~Hero#addBody",
     "method"
   ],
   [
-    "src/index.js~hero#body",
-    "class/src/index.js~Hero.html#instance-member-body",
-    "src/index.js~Hero#body",
+    "docs-src/index.js~hero#body",
+    "class/docs-src/index.js~Hero.html#instance-member-body",
+    "docs-src/index.js~Hero#body",
     "member"
   ],
   [
-    "src/index.js~hero#constructor",
-    "class/src/index.js~Hero.html#instance-constructor-constructor",
-    "src/index.js~Hero#constructor",
+    "docs-src/index.js~hero#constructor",
+    "class/docs-src/index.js~Hero.html#instance-constructor-constructor",
+    "docs-src/index.js~Hero#constructor",
     "method"
   ],
   [
-    "src/index.js~hero#fromarray",
-    "class/src/index.js~Hero.html#instance-method-fromArray",
-    "src/index.js~Hero#fromArray",
+    "docs-src/index.js~hero#fromarray",
+    "class/docs-src/index.js~Hero.html#instance-method-fromArray",
+    "docs-src/index.js~Hero#fromArray",
     "method"
   ],
   [
-    "src/index.js~hero#goto",
-    "class/src/index.js~Hero.html#instance-method-goto",
-    "src/index.js~Hero#goto",
+    "docs-src/index.js~hero#goto",
+    "class/docs-src/index.js~Hero.html#instance-method-goto",
+    "docs-src/index.js~Hero#goto",
     "method"
   ],
   [
-    "src/index.js~hero#gravity",
-    "class/src/index.js~Hero.html#instance-member-gravity",
-    "src/index.js~Hero#gravity",
+    "docs-src/index.js~hero#gravity",
+    "class/docs-src/index.js~Hero.html#instance-member-gravity",
+    "docs-src/index.js~Hero#gravity",
     "member"
   ],
   [
-    "src/index.js~hero#id",
-    "class/src/index.js~Hero.html#instance-member-id",
-    "src/index.js~Hero#id",
+    "docs-src/index.js~hero#id",
+    "class/docs-src/index.js~Hero.html#instance-member-id",
+    "docs-src/index.js~Hero#id",
     "member"
   ],
   [
-    "src/index.js~hero#jump",
-    "class/src/index.js~Hero.html#instance-method-jump",
-    "src/index.js~Hero#jump",
+    "docs-src/index.js~hero#jump",
+    "class/docs-src/index.js~Hero.html#instance-method-jump",
+    "docs-src/index.js~Hero#jump",
     "method"
   ],
   [
-    "src/index.js~hero#jumpheight",
-    "class/src/index.js~Hero.html#instance-member-jumpHeight",
-    "src/index.js~Hero#jumpHeight",
+    "docs-src/index.js~hero#jumpheight",
+    "class/docs-src/index.js~Hero.html#instance-member-jumpHeight",
+    "docs-src/index.js~Hero#jumpHeight",
     "member"
   ],
   [
-    "src/index.js~hero#jumpinterval",
-    "class/src/index.js~Hero.html#instance-member-jumpInterval",
-    "src/index.js~Hero#jumpInterval",
+    "docs-src/index.js~hero#jumpinterval",
+    "class/docs-src/index.js~Hero.html#instance-member-jumpInterval",
+    "docs-src/index.js~Hero#jumpInterval",
     "member"
   ],
   [
-    "src/index.js~hero#lastjump",
-    "class/src/index.js~Hero.html#instance-member-lastJump",
-    "src/index.js~Hero#lastJump",
+    "docs-src/index.js~hero#lastjump",
+    "class/docs-src/index.js~Hero.html#instance-member-lastJump",
+    "docs-src/index.js~Hero#lastJump",
     "member"
   ],
   [
-    "src/index.js~hero#maxspeed",
-    "class/src/index.js~Hero.html#instance-member-maxSpeed",
-    "src/index.js~Hero#maxSpeed",
+    "docs-src/index.js~hero#maxspeed",
+    "class/docs-src/index.js~Hero.html#instance-member-maxSpeed",
+    "docs-src/index.js~Hero#maxSpeed",
     "member"
   ],
   [
-    "src/index.js~hero#move",
-    "class/src/index.js~Hero.html#instance-method-move",
-    "src/index.js~Hero#move",
+    "docs-src/index.js~hero#move",
+    "class/docs-src/index.js~Hero.html#instance-method-move",
+    "docs-src/index.js~Hero#move",
     "method"
   ],
   [
-    "src/index.js~hero#speedlimit",
-    "class/src/index.js~Hero.html#instance-method-speedLimit",
-    "src/index.js~Hero#speedLimit",
+    "docs-src/index.js~hero#speedlimit",
+    "class/docs-src/index.js~Hero.html#instance-method-speedLimit",
+    "docs-src/index.js~Hero#speedLimit",
     "method"
   ],
   [
-    "src/index.js~hero#sprite",
-    "class/src/index.js~Hero.html#instance-member-sprite",
-    "src/index.js~Hero#sprite",
+    "docs-src/index.js~hero#sprite",
+    "class/docs-src/index.js~Hero.html#instance-member-sprite",
+    "docs-src/index.js~Hero#sprite",
     "member"
   ],
   [
-    "src/index.js~hero#toarray",
-    "class/src/index.js~Hero.html#instance-method-toArray",
-    "src/index.js~Hero#toArray",
+    "docs-src/index.js~hero#toarray",
+    "class/docs-src/index.js~Hero.html#instance-method-toArray",
+    "docs-src/index.js~Hero#toArray",
     "method"
   ],
   [
-    "src/index.js~hero#x",
-    "class/src/index.js~Hero.html#instance-get-x",
-    "src/index.js~Hero#x",
+    "docs-src/index.js~hero#x",
+    "class/docs-src/index.js~Hero.html#instance-get-x",
+    "docs-src/index.js~Hero#x",
     "member"
   ],
   [
-    "src/index.js~hero#y",
-    "class/src/index.js~Hero.html#instance-get-y",
-    "src/index.js~Hero#y",
+    "docs-src/index.js~hero#y",
+    "class/docs-src/index.js~Hero.html#instance-get-y",
+    "docs-src/index.js~Hero#y",
     "member"
   ],
   [
-    "src/index.js~level#accuracy",
-    "class/src/index.js~Level.html#instance-member-accuracy",
-    "src/index.js~Level#accuracy",
+    "docs-src/index.js~level#accuracy",
+    "class/docs-src/index.js~Level.html#instance-member-accuracy",
+    "docs-src/index.js~Level#accuracy",
     "member"
   ],
   [
-    "src/index.js~level#addhero",
-    "class/src/index.js~Level.html#instance-method-addHero",
-    "src/index.js~Level#addHero",
+    "docs-src/index.js~level#addhero",
+    "class/docs-src/index.js~Level.html#instance-method-addHero",
+    "docs-src/index.js~Level#addHero",
     "method"
   ],
   [
-    "src/index.js~level#blocks",
-    "class/src/index.js~Level.html#instance-member-blocks",
-    "src/index.js~Level#blocks",
+    "docs-src/index.js~level#blocks",
+    "class/docs-src/index.js~Level.html#instance-member-blocks",
+    "docs-src/index.js~Level#blocks",
     "member"
   ],
   [
-    "src/index.js~level#constructor",
-    "class/src/index.js~Level.html#instance-constructor-constructor",
-    "src/index.js~Level#constructor",
+    "docs-src/index.js~level#constructor",
+    "class/docs-src/index.js~Level.html#instance-constructor-constructor",
+    "docs-src/index.js~Level#constructor",
     "method"
   ],
   [
-    "src/index.js~level#eachhero",
-    "class/src/index.js~Level.html#instance-method-eachHero",
-    "src/index.js~Level#eachHero",
+    "docs-src/index.js~level#eachhero",
+    "class/docs-src/index.js~Level.html#instance-method-eachHero",
+    "docs-src/index.js~Level#eachHero",
     "method"
   ],
   [
-    "src/index.js~level#fromarray",
-    "class/src/index.js~Level.html#instance-method-fromArray",
-    "src/index.js~Level#fromArray",
+    "docs-src/index.js~level#fromarray",
+    "class/docs-src/index.js~Level.html#instance-method-fromArray",
+    "docs-src/index.js~Level#fromArray",
     "method"
   ],
   [
-    "src/index.js~level#fromtiled",
-    "class/src/index.js~Level.html#instance-method-fromTiled",
-    "src/index.js~Level#fromTiled",
+    "docs-src/index.js~level#fromtiled",
+    "class/docs-src/index.js~Level.html#instance-method-fromTiled",
+    "docs-src/index.js~Level#fromTiled",
     "method"
   ],
   [
-    "src/index.js~level#height",
-    "class/src/index.js~Level.html#instance-member-height",
-    "src/index.js~Level#height",
+    "docs-src/index.js~level#height",
+    "class/docs-src/index.js~Level.html#instance-member-height",
+    "docs-src/index.js~Level#height",
     "member"
   ],
   [
-    "src/index.js~level#heros",
-    "class/src/index.js~Level.html#instance-member-heros",
-    "src/index.js~Level#heros",
+    "docs-src/index.js~level#heros",
+    "class/docs-src/index.js~Level.html#instance-member-heros",
+    "docs-src/index.js~Level#heros",
     "member"
   ],
   [
-    "src/index.js~level#physics",
-    "class/src/index.js~Level.html#instance-member-physics",
-    "src/index.js~Level#physics",
+    "docs-src/index.js~level#physics",
+    "class/docs-src/index.js~Level.html#instance-member-physics",
+    "docs-src/index.js~Level#physics",
     "member"
   ],
   [
-    "src/index.js~level#removehero",
-    "class/src/index.js~Level.html#instance-method-removeHero",
-    "src/index.js~Level#removeHero",
+    "docs-src/index.js~level#removehero",
+    "class/docs-src/index.js~Level.html#instance-method-removeHero",
+    "docs-src/index.js~Level#removeHero",
     "method"
   ],
   [
-    "src/index.js~level#spawn",
-    "class/src/index.js~Level.html#instance-method-spawn",
-    "src/index.js~Level#spawn",
+    "docs-src/index.js~level#spawn",
+    "class/docs-src/index.js~Level.html#instance-method-spawn",
+    "docs-src/index.js~Level#spawn",
     "method"
   ],
   [
-    "src/index.js~level#stops",
-    "class/src/index.js~Level.html#instance-member-stops",
-    "src/index.js~Level#stops",
+    "docs-src/index.js~level#stops",
+    "class/docs-src/index.js~Level.html#instance-member-stops",
+    "docs-src/index.js~Level#stops",
     "member"
   ],
   [
-    "src/index.js~level#tick",
-    "class/src/index.js~Level.html#instance-method-tick",
-    "src/index.js~Level#tick",
+    "docs-src/index.js~level#tick",
+    "class/docs-src/index.js~Level.html#instance-method-tick",
+    "docs-src/index.js~Level#tick",
     "method"
   ],
   [
-    "src/index.js~level#tileset",
-    "class/src/index.js~Level.html#instance-member-tileset",
-    "src/index.js~Level#tileset",
+    "docs-src/index.js~level#tileset",
+    "class/docs-src/index.js~Level.html#instance-member-tileset",
+    "docs-src/index.js~Level#tileset",
     "member"
   ],
   [
-    "src/index.js~level#toarray",
-    "class/src/index.js~Level.html#instance-method-toArray",
-    "src/index.js~Level#toArray",
+    "docs-src/index.js~level#toarray",
+    "class/docs-src/index.js~Level.html#instance-method-toArray",
+    "docs-src/index.js~Level#toArray",
     "method"
   ],
   [
-    "src/index.js~level#updatehero",
-    "class/src/index.js~Level.html#instance-method-updateHero",
-    "src/index.js~Level#updateHero",
+    "docs-src/index.js~level#updatehero",
+    "class/docs-src/index.js~Level.html#instance-method-updateHero",
+    "docs-src/index.js~Level#updateHero",
     "method"
   ],
   [
-    "src/index.js~level#width",
-    "class/src/index.js~Level.html#instance-member-width",
-    "src/index.js~Level#width",
+    "docs-src/index.js~level#width",
+    "class/docs-src/index.js~Level.html#instance-member-width",
+    "docs-src/index.js~Level#width",
     "member"
   ],
   [
-    "src/physics.js",
-    "file/src/physics.js.html",
-    "src/physics.js",
+    "docs-src/physics.js",
+    "file/docs-src/physics.js.html",
+    "docs-src/physics.js",
     "file"
   ],
   [
-    "src/physics.js~body#constructor",
-    "class/src/physics.js~Body.html#instance-constructor-constructor",
-    "src/physics.js~Body#constructor",
+    "docs-src/physics.js~body#constructor",
+    "class/docs-src/physics.js~Body.html#instance-constructor-constructor",
+    "docs-src/physics.js~Body#constructor",
     "method"
   ],
   [
-    "src/physics.js~physics#constructor",
-    "class/src/physics.js~Physics.html#instance-constructor-constructor",
-    "src/physics.js~Physics#constructor",
+    "docs-src/physics.js~physics#constructor",
+    "class/docs-src/physics.js~Physics.html#instance-constructor-constructor",
+    "docs-src/physics.js~Physics#constructor",
     "method"
   ],
   [
-    "src/physics.js~physics#debug",
-    "class/src/physics.js~Physics.html#instance-method-debug",
-    "src/physics.js~Physics#debug",
+    "docs-src/physics.js~physics#debug",
+    "class/docs-src/physics.js~Physics.html#instance-method-debug",
+    "docs-src/physics.js~Physics#debug",
     "method"
   ],
   [
-    "src/physics.js~physics#debugdraw",
-    "class/src/physics.js~Physics.html#instance-member-debugDraw",
-    "src/physics.js~Physics#debugDraw",
+    "docs-src/physics.js~physics#debugdraw",
+    "class/docs-src/physics.js~Physics.html#instance-member-debugDraw",
+    "docs-src/physics.js~Physics#debugDraw",
     "member"
   ],
   [
-    "src/physics.js~physics#dtremaining",
-    "class/src/physics.js~Physics.html#instance-member-dtRemaining",
-    "src/physics.js~Physics#dtRemaining",
+    "docs-src/physics.js~physics#dtremaining",
+    "class/docs-src/physics.js~Physics.html#instance-member-dtRemaining",
+    "docs-src/physics.js~Physics#dtRemaining",
     "member"
   ],
   [
-    "src/physics.js~physics#gravity",
-    "class/src/physics.js~Physics.html#instance-member-gravity",
-    "src/physics.js~Physics#gravity",
+    "docs-src/physics.js~physics#gravity",
+    "class/docs-src/physics.js~Physics.html#instance-member-gravity",
+    "docs-src/physics.js~Physics#gravity",
     "member"
   ],
   [
-    "src/physics.js~physics#scale",
-    "class/src/physics.js~Physics.html#instance-member-scale",
-    "src/physics.js~Physics#scale",
+    "docs-src/physics.js~physics#scale",
+    "class/docs-src/physics.js~Physics.html#instance-member-scale",
+    "docs-src/physics.js~Physics#scale",
     "member"
   ],
   [
-    "src/physics.js~physics#step",
-    "class/src/physics.js~Physics.html#instance-method-step",
-    "src/physics.js~Physics#step",
+    "docs-src/physics.js~physics#step",
+    "class/docs-src/physics.js~Physics.html#instance-method-step",
+    "docs-src/physics.js~Physics#step",
     "method"
   ],
   [
-    "src/physics.js~physics#stepamount",
-    "class/src/physics.js~Physics.html#instance-member-stepAmount",
-    "src/physics.js~Physics#stepAmount",
+    "docs-src/physics.js~physics#stepamount",
+    "class/docs-src/physics.js~Physics.html#instance-member-stepAmount",
+    "docs-src/physics.js~Physics#stepAmount",
     "member"
   ],
   [
-    "src/physics.js~physics#world",
-    "class/src/physics.js~Physics.html#instance-member-world",
-    "src/physics.js~Physics#world",
+    "docs-src/physics.js~physics#world",
+    "class/docs-src/physics.js~Physics.html#instance-member-world",
+    "docs-src/physics.js~Physics#world",
     "member"
   ],
   [
-    "src/view.js",
-    "file/src/view.js.html",
-    "src/view.js",
+    "docs-src/view.js",
+    "file/docs-src/view.js.html",
+    "docs-src/view.js",
     "file"
   ],
   [
-    "src/view.js~view#_oncreatehero",
-    "class/src/view.js~View.html#instance-method-_onCreateHero",
-    "src/view.js~View#_onCreateHero",
+    "docs-src/view.js~view#_oncreatehero",
+    "class/docs-src/view.js~View.html#instance-method-_onCreateHero",
+    "docs-src/view.js~View#_onCreateHero",
     "method"
   ],
   [
-    "src/view.js~view#_onmouseclick",
-    "class/src/view.js~View.html#instance-method-_onMouseClick",
-    "src/view.js~View#_onMouseClick",
+    "docs-src/view.js~view#_onmouseclick",
+    "class/docs-src/view.js~View.html#instance-method-_onMouseClick",
+    "docs-src/view.js~View#_onMouseClick",
     "method"
   ],
   [
-    "src/view.js~view#_onmousemove",
-    "class/src/view.js~View.html#instance-method-_onMouseMove",
-    "src/view.js~View#_onMouseMove",
+    "docs-src/view.js~view#_onmousemove",
+    "class/docs-src/view.js~View.html#instance-method-_onMouseMove",
+    "docs-src/view.js~View#_onMouseMove",
     "method"
   ],
   [
-    "src/view.js~view#_onremovehero",
-    "class/src/view.js~View.html#instance-method-_onRemoveHero",
-    "src/view.js~View#_onRemoveHero",
+    "docs-src/view.js~view#_onremovehero",
+    "class/docs-src/view.js~View.html#instance-method-_onRemoveHero",
+    "docs-src/view.js~View#_onRemoveHero",
     "method"
   ],
   [
-    "src/view.js~view#_onupdatehero",
-    "class/src/view.js~View.html#instance-method-_onUpdateHero",
-    "src/view.js~View#_onUpdateHero",
+    "docs-src/view.js~view#_onupdatehero",
+    "class/docs-src/view.js~View.html#instance-method-_onUpdateHero",
+    "docs-src/view.js~View#_onUpdateHero",
     "method"
   ],
   [
-    "src/view.js~view#addblock",
-    "class/src/view.js~View.html#instance-method-addBlock",
-    "src/view.js~View#addBlock",
+    "docs-src/view.js~view#addblock",
+    "class/docs-src/view.js~View.html#instance-method-addBlock",
+    "docs-src/view.js~View#addBlock",
     "method"
   ],
   [
-    "src/view.js~view#addblocks",
-    "class/src/view.js~View.html#instance-method-addBlocks",
-    "src/view.js~View#addBlocks",
+    "docs-src/view.js~view#addblocks",
+    "class/docs-src/view.js~View.html#instance-method-addBlocks",
+    "docs-src/view.js~View#addBlocks",
     "method"
   ],
   [
-    "src/view.js~view#camera",
-    "class/src/view.js~View.html#instance-member-camera",
-    "src/view.js~View#camera",
+    "docs-src/view.js~view#camera",
+    "class/docs-src/view.js~View.html#instance-member-camera",
+    "docs-src/view.js~View#camera",
     "member"
   ],
   [
-    "src/view.js~view#cameratohero",
-    "class/src/view.js~View.html#instance-method-cameraToHero",
-    "src/view.js~View#cameraToHero",
+    "docs-src/view.js~view#cameratohero",
+    "class/docs-src/view.js~View.html#instance-method-cameraToHero",
+    "docs-src/view.js~View#cameraToHero",
     "method"
   ],
   [
-    "src/view.js~view#constructor",
-    "class/src/view.js~View.html#instance-constructor-constructor",
-    "src/view.js~View#constructor",
+    "docs-src/view.js~view#constructor",
+    "class/docs-src/view.js~View.html#instance-constructor-constructor",
+    "docs-src/view.js~View#constructor",
     "method"
   ],
   [
-    "src/view.js~view#createlevel",
-    "class/src/view.js~View.html#instance-method-createLevel",
-    "src/view.js~View#createLevel",
+    "docs-src/view.js~view#createlevel",
+    "class/docs-src/view.js~View.html#instance-method-createLevel",
+    "docs-src/view.js~View#createLevel",
     "method"
   ],
   [
-    "src/view.js~view#createsprite",
-    "class/src/view.js~View.html#instance-method-createSprite",
-    "src/view.js~View#createSprite",
+    "docs-src/view.js~view#createsprite",
+    "class/docs-src/view.js~View.html#instance-method-createSprite",
+    "docs-src/view.js~View#createSprite",
     "method"
   ],
   [
-    "src/view.js~view#disablecontextmenu",
-    "class/src/view.js~View.html#instance-method-disableContextMenu",
-    "src/view.js~View#disableContextMenu",
+    "docs-src/view.js~view#disablecontextmenu",
+    "class/docs-src/view.js~View.html#instance-method-disableContextMenu",
+    "docs-src/view.js~View#disableContextMenu",
     "method"
   ],
   [
-    "src/view.js~view#getscale",
-    "class/src/view.js~View.html#instance-method-getScale",
-    "src/view.js~View#getScale",
+    "docs-src/view.js~view#getscale",
+    "class/docs-src/view.js~View.html#instance-method-getScale",
+    "docs-src/view.js~View#getScale",
     "method"
   ],
   [
-    "src/view.js~view#gettexture",
-    "class/src/view.js~View.html#instance-method-getTexture",
-    "src/view.js~View#getTexture",
+    "docs-src/view.js~view#gettexture",
+    "class/docs-src/view.js~View.html#instance-method-getTexture",
+    "docs-src/view.js~View#getTexture",
     "method"
   ],
   [
-    "src/view.js~view#hero",
-    "class/src/view.js~View.html#instance-get-hero",
-    "src/view.js~View#hero",
+    "docs-src/view.js~view#hero",
+    "class/docs-src/view.js~View.html#instance-get-hero",
+    "docs-src/view.js~View#hero",
     "member"
   ],
   [
-    "src/view.js~view#layers",
-    "class/src/view.js~View.html#instance-member-layers",
-    "src/view.js~View#layers",
+    "docs-src/view.js~view#layers",
+    "class/docs-src/view.js~View.html#instance-member-layers",
+    "docs-src/view.js~View#layers",
     "member"
   ],
   [
-    "src/view.js~view#level",
-    "class/src/view.js~View.html#instance-member-level",
-    "src/view.js~View#level",
+    "docs-src/view.js~view#level",
+    "class/docs-src/view.js~View.html#instance-member-level",
+    "docs-src/view.js~View#level",
     "member"
   ],
   [
-    "src/view.js~view#mouse",
-    "class/src/view.js~View.html#instance-member-mouse",
-    "src/view.js~View#mouse",
+    "docs-src/view.js~view#mouse",
+    "class/docs-src/view.js~View.html#instance-member-mouse",
+    "docs-src/view.js~View#mouse",
     "member"
   ],
   [
-    "src/view.js~view#oncreatehero",
-    "class/src/view.js~View.html#instance-method-onCreateHero",
-    "src/view.js~View#onCreateHero",
+    "docs-src/view.js~view#oncreatehero",
+    "class/docs-src/view.js~View.html#instance-method-onCreateHero",
+    "docs-src/view.js~View#onCreateHero",
     "method"
   ],
   [
-    "src/view.js~view#onremovehero",
-    "class/src/view.js~View.html#instance-method-onRemoveHero",
-    "src/view.js~View#onRemoveHero",
+    "docs-src/view.js~view#onremovehero",
+    "class/docs-src/view.js~View.html#instance-method-onRemoveHero",
+    "docs-src/view.js~View#onRemoveHero",
     "method"
   ],
   [
-    "src/view.js~view#onresize",
-    "class/src/view.js~View.html#instance-method-onResize",
-    "src/view.js~View#onResize",
+    "docs-src/view.js~view#onresize",
+    "class/docs-src/view.js~View.html#instance-method-onResize",
+    "docs-src/view.js~View#onResize",
     "method"
   ],
   [
-    "src/view.js~view#onupdatehero",
-    "class/src/view.js~View.html#instance-method-onUpdateHero",
-    "src/view.js~View#onUpdateHero",
+    "docs-src/view.js~view#onupdatehero",
+    "class/docs-src/view.js~View.html#instance-method-onUpdateHero",
+    "docs-src/view.js~View#onUpdateHero",
     "method"
   ],
   [
-    "src/view.js~view#pixi",
-    "class/src/view.js~View.html#instance-member-pixi",
-    "src/view.js~View#pixi",
+    "docs-src/view.js~view#pixi",
+    "class/docs-src/view.js~View.html#instance-member-pixi",
+    "docs-src/view.js~View#pixi",
     "member"
   ],
   [
-    "src/view.js~view#scale",
-    "class/src/view.js~View.html#instance-member-scale",
-    "src/view.js~View#scale",
+    "docs-src/view.js~view#scale",
+    "class/docs-src/view.js~View.html#instance-member-scale",
+    "docs-src/view.js~View#scale",
     "member"
   ],
   [
-    "src/view.js~view#screensize",
-    "class/src/view.js~View.html#instance-member-screenSize",
-    "src/view.js~View#screenSize",
+    "docs-src/view.js~view#screensize",
+    "class/docs-src/view.js~View.html#instance-member-screenSize",
+    "docs-src/view.js~View#screenSize",
     "member"
   ],
   [
-    "src/view.js~view#texturecache",
-    "class/src/view.js~View.html#instance-member-textureCache",
-    "src/view.js~View#textureCache",
+    "docs-src/view.js~view#texturecache",
+    "class/docs-src/view.js~View.html#instance-member-textureCache",
+    "docs-src/view.js~View#textureCache",
     "member"
   ],
   [
-    "src/view.js~view#tileset",
-    "class/src/view.js~View.html#instance-member-tileset",
-    "src/view.js~View#tileset",
+    "docs-src/view.js~view#tileset",
+    "class/docs-src/view.js~View.html#instance-member-tileset",
+    "docs-src/view.js~View#tileset",
     "member"
   ],
   [
-    "src/view.js~view#usemouse",
-    "class/src/view.js~View.html#instance-method-useMouse",
-    "src/view.js~View#useMouse",
+    "docs-src/view.js~view#usemouse",
+    "class/docs-src/view.js~View.html#instance-method-useMouse",
+    "docs-src/view.js~View#useMouse",
     "method"
   ]
 ]

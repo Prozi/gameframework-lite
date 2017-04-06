@@ -1,31 +1,23 @@
 'use strict';
 
-require('babel-polyfill');
-
 const path = require('path');
 const webpack = require('webpack');
 
-let plugins = [
-  new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false },
-      comments: false,
-      sourceMap: false
-  })
-];
+const entries = {};
 
-let entries = {};
-['view', 'example/game', 'example/testserver'].forEach((file) => {
-  entries[file] = ['babel-polyfill', path.join(__dirname, `${file}.js`)]
+['physics', 'index', 'view'].forEach((file) => {
+  entries[file] = path.join(__dirname, 'es6', `${file}.js`);
 });
 
-if (!process.env.PRODUCTION) {
-  plugins = [];
-}
+['example/game', 'example/testserver'].forEach((file) => {
+  entries[file] = path.join(__dirname, `${file}.js`);
+});
 
 module.exports = {
+  target: 'web',
   entry: entries,
   output: {
-    filename: 'dist/[name].js'
+    filename: 'es5/[name].js'
   },
   stats: {
     colors: true,
@@ -43,5 +35,4 @@ module.exports = {
       exclude: /node_modules/
     }]
   },
-  plugins,
 };
