@@ -1,7 +1,6 @@
 (function () {
 'use strict';
 
-const { Physics, Body, b2Vec2 } = require('./physics');
 const FMath = require('fmath');
 const md5 = require('md5');
 
@@ -47,7 +46,6 @@ class Level {
 		if (props.gravity) {
 			options.gravity = props.gravity;
 		}
-		this.physics = new Physics(options);
 		this.heros = props.heros || {};
 		this.blocks = props.blocks || {};
 		this.accuracy = 10;
@@ -64,7 +62,7 @@ class Level {
 		}
 	}
 	tick (delta) {
-		this.physics.step(delta);
+		console.log(delta);
 	}
 	toArray () {
 		const array = [[]];
@@ -89,7 +87,7 @@ class Level {
 			if (this.heros[id]) {
 				this.updateHero(id, heroArray);
 			} else {
-				this.addHero(heroArray, {}, HeroClass);
+				this.addHero(heroArray, HeroClass);
 			}
 		});
 		if (this.fromArrayExtension) {
@@ -102,17 +100,11 @@ class Level {
 			this.onUpdateHero(this.heros[id]);
 		}
 	}
-	addHero (heroArray = [], bodyProperties = {}, HeroClass = Hero) {
+	addHero (heroArray = [], HeroClass = Hero) {
 		const id = heroArray[HERO_ID] || randomId();
-		heroArray[HERO_X] = heroArray[HERO_X] || this.width * random();
-		heroArray[HERO_Y] = heroArray[HERO_Y] || 0;
 		this.heros[id] = new HeroClass({ id });
-		this.heros[id].addBody(this.physics, Object.assign({
-			shape: 'circle',
-			x: heroArray[HERO_X],
-			y: heroArray[HERO_Y],
-			radius: 0.5,
-		}, bodyProperties));
+		this.heros[id].x = heroArray[HERO_X] || this.width * random();
+		this.heros[id].y = heroArray[HERO_Y] || 0;
 		this.heros[id].fromArray(heroArray);
 		if (this.onCreateHero) {
 			this.onCreateHero(this.heros[id]);
@@ -138,38 +130,17 @@ class Level {
 					tiled.layers[1].data[pos]
 				];
 				this.stops[offset] = tiled.layers[2].data[pos];
-				if (this.stops[offset]) {
-					new Body(this.physics, { type: 'static', x, y, width: 1, height: 1 });
-				}
 			}
 		}
-		// boundaries
-		new Body(this.physics, { type: 'static', x: -1, y: this.height / 2, height: this.height, width: 1 });
-		new Body(this.physics, { type: 'static', x: this.width, y: this.height / 2, height: this.height, width: 1 });
-		new Body(this.physics, { type: 'static', x: this.width / 2, y: -1, height: 1, width: this.width });
-		new Body(this.physics, { type: 'static', x: this.width / 2, y: this.height, height: 1, width: this.width });
 	}
 }
 
 class Hero {
-	constructor ({ id = randomId(), maxSpeed = 10, jumpHeight = 25, jumpInterval = 1000, sprite = null }) {
+	constructor ({ id = randomId(), sprite = null }) {
 		this.id = id;
-		this.maxSpeed = maxSpeed;
-		this.jumpHeight = jumpHeight;
-		this.jumpInterval = jumpInterval;
 		this.sprite = sprite;
-		this.lastJump = 0;
-	}
-	get x () {
-		return this.body ? this.body.GetPosition().x : undefined;
-	}
-	get y () {
-		return this.body ? this.body.GetPosition().y : undefined;
-	}
-	addBody (physics, details = {}) {
-		this.body = new Body(physics, details);
-		this.body.SetFixedRotation(true);
-		this.gravity = !!physics.gravity.y;
+		this.x = undefined;
+		this.y = undefined;
 	}
 	toArray () {
 		return [
@@ -187,48 +158,8 @@ class Hero {
 		}
 	}
 	move (x, y) {
-		if (this.body) {
-			this.body.SetPosition(new b2Vec2(x, y));
-		}
-	}
-	speedLimit (x) {
-		if (x < 0) {
-			return Math.max(x, -this.maxSpeed);
-		} else {
-			return Math.min(x, this.maxSpeed);
-		}
-	}
-	goto ({ x, y }) {
-		const r = distance(x, y);
-		if (r) {
-			const d = this.maxSpeed / r;
-			let newx = 0;
-			let newy = 0;
-			if (!this.gravity) {
-				this.body.m_force.SetZero();
-				newx = x * d;
-				newy = y * d;
-			} else {
-				newx = this.speedLimit(x * d);
-			}
-			this.body.ApplyImpulse({ 
-				x: newx, 
-				y: newy,
-			}, this.body.GetWorldCenter(), true);
-		}
-	}
-	jump (x = 0) {
-		const now = NOW();
-		// (this.body.m_force.y > 0) && 
-		if (this.gravity && (now > this.lastJump + this.jumpInterval)) {
-			this.lastJump = now;
-			this.body.ApplyImpulse({ 
-				x: x ? (this.gravity ? this.speedLimit(x) : x) : 0, 
-				y: -this.jumpHeight 
-			}, this.body.GetWorldCenter(), true);
-		} else {
-			this.goto({ x, y: 0 });
-		}
+		this.x = x;
+		this.y = y;
 	}
 }
 
