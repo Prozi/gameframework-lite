@@ -15,7 +15,6 @@
   "dependencies": {
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-stage-2": "^6.22.0",
-    "box2dweb": "git+https://github.com/Prozi/box2dweb.git",
     "fmath": "^1.0.1",
     "md5": "^2.2.1",
     "pixi.js": "^4.4.3"
