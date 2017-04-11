@@ -4,6 +4,14 @@ This is still under development.
 
 I use it with success tho, feel free to open any issues/pull requests.
 
+## examples (non-MIT)
+
+Few games made on it:
+
+* [http://www.mini.ninja/vikings/](http://www.mini.ninja/vikings/)
+
+* [http://www.mini.ninja/ctf/](http://www.mini.ninja/ctf/)
+
 ### documentation
 
 [https://prozi.github.io/gameframework/](https://prozi.github.io/gameframework/)
