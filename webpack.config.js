@@ -5,7 +5,7 @@ const webpack = require('webpack');
 
 const entries = {};
 
-['physics', 'index', 'view'].forEach((file) => {
+['index', 'view'].forEach((file) => {
   entries[file] = path.join(__dirname, 'es6', `${file}.js`);
 });
 

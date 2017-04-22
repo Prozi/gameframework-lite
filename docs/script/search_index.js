@@ -1,230 +1,116 @@
 window.esdocSearchIndex = [
   [
-    "gameframework/docs-src/physics.js~bodies_sleep",
-    "variable/index.html#static-variable-BODIES_SLEEP",
-    "<span>BODIES_SLEEP</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
-    "variable"
-  ],
-  [
-    "gameframework/docs-src/physics.js~body_defaults",
-    "variable/index.html#static-variable-BODY_DEFAULTS",
-    "<span>BODY_DEFAULTS</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
-    "variable"
-  ],
-  [
-    "gameframework/docs-src/physics.js~body_definition_defaults",
-    "variable/index.html#static-variable-BODY_DEFINITION_DEFAULTS",
-    "<span>BODY_DEFINITION_DEFAULTS</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
-    "variable"
-  ],
-  [
-    "gameframework/docs-src/physics.js~body_fixture_defaults",
-    "variable/index.html#static-variable-BODY_FIXTURE_DEFAULTS",
-    "<span>BODY_FIXTURE_DEFAULTS</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
-    "variable"
-  ],
-  [
-    "gameframework/docs-src/physics.js~body",
-    "class/docs-src/physics.js~Body.html",
-    "<span>Body</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
-    "class"
-  ],
-  [
-    "gameframework/docs-src/physics.js~box2d",
-    "variable/index.html#static-variable-Box2D",
-    "<span>Box2D</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
-    "variable"
-  ],
-  [
-    "gameframework/docs-src/index.js~defer",
+    "gameframework-lite/docs-src/index.js~defer",
     "variable/index.html#static-variable-DEFER",
-    "<span>DEFER</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
+    "<span>DEFER</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
     "variable"
   ],
   [
-    "gameframework/docs-src/index.js~fmath",
+    "gameframework-lite/docs-src/index.js~fmath",
     "variable/index.html#static-variable-FMath",
-    "<span>FMath</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
+    "<span>FMath</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
     "variable"
   ],
   [
-    "gameframework/docs-src/physics.js~gravity",
-    "variable/index.html#static-variable-GRAVITY",
-    "<span>GRAVITY</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
-    "variable"
-  ],
-  [
-    "gameframework/docs-src/index.js~game",
+    "gameframework-lite/docs-src/index.js~game",
     "class/docs-src/index.js~Game.html",
-    "<span>Game</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
+    "<span>Game</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
     "class"
   ],
   [
-    "gameframework/docs-src/index.js~half_pi",
+    "gameframework-lite/docs-src/index.js~half_pi",
     "variable/index.html#static-variable-HALF_PI",
-    "<span>HALF_PI</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
+    "<span>HALF_PI</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
     "variable"
   ],
   [
-    "gameframework/docs-src/index.js~hero_id",
+    "gameframework-lite/docs-src/index.js~hero_id",
     "variable/index.html#static-variable-HERO_ID",
-    "<span>HERO_ID</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
+    "<span>HERO_ID</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
     "variable"
   ],
   [
-    "gameframework/docs-src/index.js~hero_x",
+    "gameframework-lite/docs-src/index.js~hero_x",
     "variable/index.html#static-variable-HERO_X",
-    "<span>HERO_X</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
+    "<span>HERO_X</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
     "variable"
   ],
   [
-    "gameframework/docs-src/index.js~hero_y",
+    "gameframework-lite/docs-src/index.js~hero_y",
     "variable/index.html#static-variable-HERO_Y",
-    "<span>HERO_Y</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
+    "<span>HERO_Y</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
     "variable"
   ],
   [
-    "gameframework/docs-src/index.js~hero",
+    "gameframework-lite/docs-src/index.js~hero",
     "class/docs-src/index.js~Hero.html",
-    "<span>Hero</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
+    "<span>Hero</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
     "class"
   ],
   [
-    "gameframework/docs-src/index.js~level",
+    "gameframework-lite/docs-src/index.js~level",
     "class/docs-src/index.js~Level.html",
-    "<span>Level</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
+    "<span>Level</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
     "class"
   ],
   [
-    "gameframework/docs-src/view.js~level",
+    "gameframework-lite/docs-src/view.js~level",
     "variable/index.html#static-variable-Level",
-    "<span>Level</span> <span class=\"search-result-import-path\">gameframework/docs-src/view.js</span>",
+    "<span>Level</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/view.js</span>",
     "variable"
   ],
   [
-    "gameframework/docs-src/index.js~now",
+    "gameframework-lite/docs-src/index.js~now",
     "variable/index.html#static-variable-NOW",
-    "<span>NOW</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
+    "<span>NOW</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
     "variable"
   ],
   [
-    "gameframework/docs-src/view.js~pixi",
+    "gameframework-lite/docs-src/view.js~pixi",
     "variable/index.html#static-variable-PIXI",
-    "<span>PIXI</span> <span class=\"search-result-import-path\">gameframework/docs-src/view.js</span>",
+    "<span>PIXI</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/view.js</span>",
     "variable"
   ],
   [
-    "gameframework/docs-src/index.js~physics",
-    "variable/index.html#static-variable-Physics",
-    "<span>Physics</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
-    "variable"
-  ],
-  [
-    "gameframework/docs-src/physics.js~physics",
-    "class/docs-src/physics.js~Physics.html",
-    "<span>Physics</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
-    "class"
-  ],
-  [
-    "gameframework/docs-src/view.js~view",
+    "gameframework-lite/docs-src/view.js~view",
     "class/docs-src/view.js~View.html",
-    "<span>View</span> <span class=\"search-result-import-path\">gameframework/docs-src/view.js</span>",
+    "<span>View</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/view.js</span>",
     "class"
   ],
   [
-    "gameframework/docs-src/index.js~atan2",
+    "gameframework-lite/docs-src/index.js~atan2",
     "function/index.html#static-function-atan2",
-    "<span>atan2</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
+    "<span>atan2</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
     "function"
   ],
   [
-    "gameframework/docs-src/physics.js~b2body",
-    "variable/index.html#static-variable-b2Body",
-    "<span>b2Body</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
-    "variable"
-  ],
-  [
-    "gameframework/docs-src/physics.js~b2bodydef",
-    "variable/index.html#static-variable-b2BodyDef",
-    "<span>b2BodyDef</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
-    "variable"
-  ],
-  [
-    "gameframework/docs-src/physics.js~b2circleshape",
-    "variable/index.html#static-variable-b2CircleShape",
-    "<span>b2CircleShape</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
-    "variable"
-  ],
-  [
-    "gameframework/docs-src/physics.js~b2debugdraw",
-    "variable/index.html#static-variable-b2DebugDraw",
-    "<span>b2DebugDraw</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
-    "variable"
-  ],
-  [
-    "gameframework/docs-src/physics.js~b2fixture",
-    "variable/index.html#static-variable-b2Fixture",
-    "<span>b2Fixture</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
-    "variable"
-  ],
-  [
-    "gameframework/docs-src/physics.js~b2fixturedef",
-    "variable/index.html#static-variable-b2FixtureDef",
-    "<span>b2FixtureDef</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
-    "variable"
-  ],
-  [
-    "gameframework/docs-src/physics.js~b2massdata",
-    "variable/index.html#static-variable-b2MassData",
-    "<span>b2MassData</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
-    "variable"
-  ],
-  [
-    "gameframework/docs-src/physics.js~b2polygonshape",
-    "variable/index.html#static-variable-b2PolygonShape",
-    "<span>b2PolygonShape</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
-    "variable"
-  ],
-  [
-    "gameframework/docs-src/physics.js~b2vec2",
-    "variable/index.html#static-variable-b2Vec2",
-    "<span>b2Vec2</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
-    "variable"
-  ],
-  [
-    "gameframework/docs-src/physics.js~b2world",
-    "variable/index.html#static-variable-b2World",
-    "<span>b2World</span> <span class=\"search-result-import-path\">gameframework/docs-src/physics.js</span>",
-    "variable"
-  ],
-  [
-    "gameframework/docs-src/index.js~distance",
+    "gameframework-lite/docs-src/index.js~distance",
     "function/index.html#static-function-distance",
-    "<span>distance</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
+    "<span>distance</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
     "function"
   ],
   [
-    "gameframework/docs-src/index.js~fmath",
+    "gameframework-lite/docs-src/index.js~fmath",
     "variable/index.html#static-variable-fmath",
-    "<span>fmath</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
+    "<span>fmath</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
     "variable"
   ],
   [
-    "gameframework/docs-src/index.js~md5",
+    "gameframework-lite/docs-src/index.js~md5",
     "variable/index.html#static-variable-md5",
-    "<span>md5</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
+    "<span>md5</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
     "variable"
   ],
   [
-    "gameframework/docs-src/index.js~random",
+    "gameframework-lite/docs-src/index.js~random",
     "function/index.html#static-function-random",
-    "<span>random</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
+    "<span>random</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
     "function"
   ],
   [
-    "gameframework/docs-src/index.js~randomid",
+    "gameframework-lite/docs-src/index.js~randomid",
     "function/index.html#static-function-randomId",
-    "<span>randomId</span> <span class=\"search-result-import-path\">gameframework/docs-src/index.js</span>",
+    "<span>randomId</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
     "function"
   ],
   [
@@ -606,18 +492,6 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "docs-src/index.js~hero#addbody",
-    "class/docs-src/index.js~Hero.html#instance-method-addBody",
-    "docs-src/index.js~Hero#addBody",
-    "method"
-  ],
-  [
-    "docs-src/index.js~hero#body",
-    "class/docs-src/index.js~Hero.html#instance-member-body",
-    "docs-src/index.js~Hero#body",
-    "member"
-  ],
-  [
     "docs-src/index.js~hero#constructor",
     "class/docs-src/index.js~Hero.html#instance-constructor-constructor",
     "docs-src/index.js~Hero#constructor",
@@ -630,63 +504,15 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "docs-src/index.js~hero#goto",
-    "class/docs-src/index.js~Hero.html#instance-method-goto",
-    "docs-src/index.js~Hero#goto",
-    "method"
-  ],
-  [
-    "docs-src/index.js~hero#gravity",
-    "class/docs-src/index.js~Hero.html#instance-member-gravity",
-    "docs-src/index.js~Hero#gravity",
-    "member"
-  ],
-  [
     "docs-src/index.js~hero#id",
     "class/docs-src/index.js~Hero.html#instance-member-id",
     "docs-src/index.js~Hero#id",
     "member"
   ],
   [
-    "docs-src/index.js~hero#jump",
-    "class/docs-src/index.js~Hero.html#instance-method-jump",
-    "docs-src/index.js~Hero#jump",
-    "method"
-  ],
-  [
-    "docs-src/index.js~hero#jumpheight",
-    "class/docs-src/index.js~Hero.html#instance-member-jumpHeight",
-    "docs-src/index.js~Hero#jumpHeight",
-    "member"
-  ],
-  [
-    "docs-src/index.js~hero#jumpinterval",
-    "class/docs-src/index.js~Hero.html#instance-member-jumpInterval",
-    "docs-src/index.js~Hero#jumpInterval",
-    "member"
-  ],
-  [
-    "docs-src/index.js~hero#lastjump",
-    "class/docs-src/index.js~Hero.html#instance-member-lastJump",
-    "docs-src/index.js~Hero#lastJump",
-    "member"
-  ],
-  [
-    "docs-src/index.js~hero#maxspeed",
-    "class/docs-src/index.js~Hero.html#instance-member-maxSpeed",
-    "docs-src/index.js~Hero#maxSpeed",
-    "member"
-  ],
-  [
     "docs-src/index.js~hero#move",
     "class/docs-src/index.js~Hero.html#instance-method-move",
     "docs-src/index.js~Hero#move",
-    "method"
-  ],
-  [
-    "docs-src/index.js~hero#speedlimit",
-    "class/docs-src/index.js~Hero.html#instance-method-speedLimit",
-    "docs-src/index.js~Hero#speedLimit",
     "method"
   ],
   [
@@ -703,13 +529,13 @@ window.esdocSearchIndex = [
   ],
   [
     "docs-src/index.js~hero#x",
-    "class/docs-src/index.js~Hero.html#instance-get-x",
+    "class/docs-src/index.js~Hero.html#instance-member-x",
     "docs-src/index.js~Hero#x",
     "member"
   ],
   [
     "docs-src/index.js~hero#y",
-    "class/docs-src/index.js~Hero.html#instance-get-y",
+    "class/docs-src/index.js~Hero.html#instance-member-y",
     "docs-src/index.js~Hero#y",
     "member"
   ],
@@ -768,12 +594,6 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "docs-src/index.js~level#physics",
-    "class/docs-src/index.js~Level.html#instance-member-physics",
-    "docs-src/index.js~Level#physics",
-    "member"
-  ],
-  [
     "docs-src/index.js~level#removehero",
     "class/docs-src/index.js~Level.html#instance-method-removeHero",
     "docs-src/index.js~Level#removeHero",
@@ -826,66 +646,6 @@ window.esdocSearchIndex = [
     "file/docs-src/physics.js.html",
     "docs-src/physics.js",
     "file"
-  ],
-  [
-    "docs-src/physics.js~body#constructor",
-    "class/docs-src/physics.js~Body.html#instance-constructor-constructor",
-    "docs-src/physics.js~Body#constructor",
-    "method"
-  ],
-  [
-    "docs-src/physics.js~physics#constructor",
-    "class/docs-src/physics.js~Physics.html#instance-constructor-constructor",
-    "docs-src/physics.js~Physics#constructor",
-    "method"
-  ],
-  [
-    "docs-src/physics.js~physics#debug",
-    "class/docs-src/physics.js~Physics.html#instance-method-debug",
-    "docs-src/physics.js~Physics#debug",
-    "method"
-  ],
-  [
-    "docs-src/physics.js~physics#debugdraw",
-    "class/docs-src/physics.js~Physics.html#instance-member-debugDraw",
-    "docs-src/physics.js~Physics#debugDraw",
-    "member"
-  ],
-  [
-    "docs-src/physics.js~physics#dtremaining",
-    "class/docs-src/physics.js~Physics.html#instance-member-dtRemaining",
-    "docs-src/physics.js~Physics#dtRemaining",
-    "member"
-  ],
-  [
-    "docs-src/physics.js~physics#gravity",
-    "class/docs-src/physics.js~Physics.html#instance-member-gravity",
-    "docs-src/physics.js~Physics#gravity",
-    "member"
-  ],
-  [
-    "docs-src/physics.js~physics#scale",
-    "class/docs-src/physics.js~Physics.html#instance-member-scale",
-    "docs-src/physics.js~Physics#scale",
-    "member"
-  ],
-  [
-    "docs-src/physics.js~physics#step",
-    "class/docs-src/physics.js~Physics.html#instance-method-step",
-    "docs-src/physics.js~Physics#step",
-    "method"
-  ],
-  [
-    "docs-src/physics.js~physics#stepamount",
-    "class/docs-src/physics.js~Physics.html#instance-member-stepAmount",
-    "docs-src/physics.js~Physics#stepAmount",
-    "member"
-  ],
-  [
-    "docs-src/physics.js~physics#world",
-    "class/docs-src/physics.js~Physics.html#instance-member-world",
-    "docs-src/physics.js~Physics#world",
-    "member"
   ],
   [
     "docs-src/view.js",
