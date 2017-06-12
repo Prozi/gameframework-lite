@@ -4,7 +4,7 @@
   "description": "game framework for 2d html5 games with physics isomorphic",
   "main": "es6/index.js",
   "scripts": {
-    "prep4esdoc": "./prep4esdoc.sh index.js && ./prep4esdoc.sh view.js && ./prep4esdoc.sh physics.js",
+    "prep4esdoc": "./prep4esdoc.sh index.js && ./prep4esdoc.sh view.js",
     "docs": "yarn prep4esdoc && esdoc && yarn build",
     "build": "PRODUCTION=true webpack",
     "build:dev": "PRODUCTION= webpack",
