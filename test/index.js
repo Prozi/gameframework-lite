@@ -2,6 +2,15 @@
 
 console.log('require');
 const { Game, Level, Hero } = require('../es6');
+const express = require('express');
+const app = express();
+
+app.use(express.static('example'));
+app.listen(3000);
+
+class MyLevel extends Level {
+	tick() {}
+}
 
 console.log('test Game()');
 const game = new Game();
@@ -10,9 +19,10 @@ console.log('test Hero()');
 for (let l = 0; l < 99; l++) {
 	const heros = {};
 	const hero = new Hero({});
-	hero.goto(0, 0);
+	hero.x = 0;
+	hero.y = 0;
 	heros[hero.id] = hero;
-	const level = new Level({ heros });
+	const level = new MyLevel({ heros });
 	game.levels.push(level);
 }
 

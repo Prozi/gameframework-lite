@@ -17,7 +17,7 @@ class MyView extends View {
 if (typeof Worker !== 'undefined') {
 	if (!window.server) {
 		window.server = true;
-		window.server = new Worker('../es5/example/testserver.js');
+		window.server = new Worker('es5/testserver.js');
 		window.server.onmessage = (event) => {
 			view.level.fromArray(event.data);
 		};

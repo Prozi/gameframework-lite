@@ -24,7 +24,9 @@ or
 
 ### testing
 
-`use yarn test to test`
+* `yarn test`
+
+* open `http://localhost:3000`
 
 ### usage
 

@@ -6,9 +6,9 @@
 /******/ 	function __webpack_require__(moduleId) {
 /******/
 /******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId])
+/******/ 		if(installedModules[moduleId]) {
 /******/ 			return installedModules[moduleId].exports;
-/******/
+/******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 196);
+/******/ 	return __webpack_require__(__webpack_require__.s = 197);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -281,6 +281,10 @@ process.off = noop;
 process.removeListener = noop;
 process.removeAllListeners = noop;
 process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
 
 process.binding = function (name) {
     throw new Error('process.binding is not supported');
@@ -295,7 +299,7 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
-/***/ 196:
+/***/ 197:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -314,36 +318,50 @@ var _require = __webpack_require__(22),
     Level = _require.Level,
     Hero = _require.Hero;
 
+var MyLevel = function (_Level) {
+	_inherits(MyLevel, _Level);
+
+	function MyLevel() {
+		_classCallCheck(this, MyLevel);
+
+		return _possibleConstructorReturn(this, (MyLevel.__proto__ || Object.getPrototypeOf(MyLevel)).apply(this, arguments));
+	}
+
+	_createClass(MyLevel, [{
+		key: 'tick',
+		value: function tick() {}
+	}]);
+
+	return MyLevel;
+}(Level);
+
 var MyGame = function (_Game) {
 	_inherits(MyGame, _Game);
 
 	function MyGame() {
 		_classCallCheck(this, MyGame);
 
-		var _this = _possibleConstructorReturn(this, (MyGame.__proto__ || Object.getPrototypeOf(MyGame)).call(this, 20));
+		var _this2 = _possibleConstructorReturn(this, (MyGame.__proto__ || Object.getPrototypeOf(MyGame)).call(this, 20));
 
-		_this.levels.push(new Level());
+		_this2.levels.push(new MyLevel());
 		for (var x = 0; x < 10; x++) {
-			_this.levels[0].addHero([null, Math.random() * 48 + 5, Math.random() * 24 + 5]);
+			_this2.levels[0].addHero([null, Math.random() * 48 + 5, Math.random() * 24 + 5]);
 		}
 		// start game
-		_this.loop();
-		return _this;
+		_this2.loop();
+		return _this2;
 	}
 
 	_createClass(MyGame, [{
 		key: 'onUpdate',
 		value: function onUpdate() {
-			var level = this.levels[0];
-			postMessage(level.toArray());
-			// level.eachHero((hero) => {
-			// 	if (Math.random() < 0.1) {
-			// 		hero.goto({
-			// 			x: (Math.random() - 0.499) * 10,
-			// 			y: (Math.random() - 0.499) * 10,
-			// 		});
-			// 	}
-			// });
+			this.levels[0].eachHero(function (hero) {
+				if (Math.random() < 0.1) {
+					hero.x += (Math.random() - 0.499) / 10;
+					hero.y += (Math.random() - 0.499) / 10;
+				}
+			});
+			postMessage(this.levels[0].toArray());
 		}
 	}]);
 
