@@ -6,23 +6,21 @@ I use it with success tho, feel free to open any issues/pull requests.
 
 ## examples (non-MIT)
 
-Few games made on it:
+Game made on it:
 
 * [http://www.mini.ninja/vikings/](http://www.mini.ninja/vikings/)
 
-* [http://www.mini.ninja/ctf/](http://www.mini.ninja/ctf/)
-
 ### documentation
 
-[https://prozi.github.io/gameframework/](https://prozi.github.io/gameframework/)
+[https://prozi.github.io/gameframework-lite/](https://prozi.github.io/gameframework-lite/)
 
 ### installation
 
-`npm install gameframework@latest --save`
+`npm install gameframework-lite@latest --save`
 
 or
 
-`yarn add gameframework@latest --save`
+`yarn add gameframework-lite@latest --save`
 
 ### testing
 
@@ -30,7 +28,7 @@ or
 
 ### usage
 
-require 'gameframework' for:
+require 'gameframework/es6' for:
 
 - DEFER,
 - Game,
@@ -40,19 +38,14 @@ require 'gameframework' for:
 - atan2
 - random
 
-require 'gameframework/view' for:
+require 'gameframework/es6/view' for:
 
 - View
-
-require 'gameframework/physics' for:
-
-- Body
-- Physics
 
 ### examples
 
 ```javascript
-const View = require('gameframework/view');
+const View = require('gameframework-lite/es6/view');
 const PIXI = window.PIXI || require('pixi.js');
 
 // this is how you should use View
@@ -69,7 +62,7 @@ new MyView();
 ```
 
 ```javascript
-const { Level, Game } = require('gameframework');
+const { Level, Game } = require('gameframework-lite/es6');
 
 // this is how you should use Game
 class MyGame extends Game {
