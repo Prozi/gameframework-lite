@@ -1,6 +1,6 @@
 {
   "name": "gameframework-lite",
-  "version": "1.1.9",
+  "version": "1.2.0",
   "description": "game framework for 2d html5 games with physics isomorphic",
   "main": "es2015/index.js",
   "scripts": {
@@ -27,6 +27,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Prozi/gameframework.git#lite"
+    "url": "https://github.com/Prozi/gameframework-lite.git"
   }
 }
