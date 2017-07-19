@@ -32,7 +32,8 @@
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
-  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/docs-src/index.js~Game.html">Game</a></span></span></li>
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/docs-src/extract.js~TextureExtractor.html">TextureExtractor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/docs-src/index.js~Game.html">Game</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/docs-src/index.js~Hero.html">Hero</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/docs-src/index.js~Level.html">Level</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/docs-src/view.js~View.html">View</a></span></span></li>
@@ -40,6 +41,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-distance">distance</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-random">random</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomId">randomId</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-PIXI">PIXI</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-DEFER">DEFER</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-FMath">FMath</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-HALF_PI">HALF_PI</a></span></span></li>
@@ -58,11 +60,11 @@
 <div class="content" data-ice="content"><h1 data-ice="title">docs-src/view.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
 
-const PIXI = require(&apos;pixi.js&apos;);
+const PIXI = PIXI || require(&apos;pixi.js&apos;);
 const Level = require(&apos;.&apos;).Level;
 
 class View {
-	constructor (screenSize = 480) {
+	constructor (screenSize = 480, anchor = document.body) {
 		this.screenSize = screenSize;
 		this.pixi = new PIXI.Application(window.innerWidth, window.innerHeight, {
 			autoResize: false,
@@ -76,7 +78,7 @@ class View {
 		this.level.onUpdateHero = this._onUpdateHero.bind(this);
 		this.level.onCreateHero = this._onCreateHero.bind(this);
 		this.level.onRemoveHero = this._onRemoveHero.bind(this);
-		document.body.appendChild(this.pixi.view);
+		anchor.appendChild(this.pixi.view);
 		window.addEventListener(&apos;resize&apos;, this.onResize.bind(this), true);
 		this.onResize();
 		this.pixi.start();
@@ -220,7 +222,7 @@ class View {
 	}
 }
 
-if (typeof module !== &apos;undefined&apos;) {	
+if (typeof module !== &apos;undefined&apos;) {
 	module.exports = View;
 }
 

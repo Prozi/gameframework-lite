@@ -1,11 +1,11 @@
 (function () {
 'use strict';
 
-const PIXI = require('pixi.js');
+const PIXI = PIXI || require('pixi.js');
 const Level = require('.').Level;
 
 class View {
-	constructor (screenSize = 480) {
+	constructor (screenSize = 480, anchor = document.body) {
 		this.screenSize = screenSize;
 		this.pixi = new PIXI.Application(window.innerWidth, window.innerHeight, {
 			autoResize: false,
@@ -19,7 +19,7 @@ class View {
 		this.level.onUpdateHero = this._onUpdateHero.bind(this);
 		this.level.onCreateHero = this._onCreateHero.bind(this);
 		this.level.onRemoveHero = this._onRemoveHero.bind(this);
-		document.body.appendChild(this.pixi.view);
+		anchor.appendChild(this.pixi.view);
 		window.addEventListener('resize', this.onResize.bind(this), true);
 		this.onResize();
 		this.pixi.start();
@@ -163,7 +163,7 @@ class View {
 	}
 }
 
-if (typeof module !== 'undefined') {	
+if (typeof module !== 'undefined') {
 	module.exports = View;
 }
 

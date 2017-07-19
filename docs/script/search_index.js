@@ -66,10 +66,22 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "gameframework-lite/docs-src/extract.js~pixi",
+    "variable/index.html#static-variable-PIXI",
+    "<span>PIXI</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/extract.js</span>",
+    "variable"
+  ],
+  [
     "gameframework-lite/docs-src/view.js~pixi",
     "variable/index.html#static-variable-PIXI",
     "<span>PIXI</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/view.js</span>",
     "variable"
+  ],
+  [
+    "gameframework-lite/docs-src/extract.js~textureextractor",
+    "class/docs-src/extract.js~TextureExtractor.html",
+    "<span>TextureExtractor</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/extract.js</span>",
+    "class"
   ],
   [
     "gameframework-lite/docs-src/view.js~view",
@@ -444,6 +456,78 @@ window.esdocSearchIndex = [
     "external"
   ],
   [
+    "docs-src/extract.js",
+    "file/docs-src/extract.js.html",
+    "docs-src/extract.js",
+    "file"
+  ],
+  [
+    "docs-src/extract.js~textureextractor#constructor",
+    "class/docs-src/extract.js~TextureExtractor.html#instance-constructor-constructor",
+    "docs-src/extract.js~TextureExtractor#constructor",
+    "method"
+  ],
+  [
+    "docs-src/extract.js~textureextractor#getframe",
+    "class/docs-src/extract.js~TextureExtractor.html#instance-method-getFrame",
+    "docs-src/extract.js~TextureExtractor#getFrame",
+    "method"
+  ],
+  [
+    "docs-src/extract.js~textureextractor#height",
+    "class/docs-src/extract.js~TextureExtractor.html#instance-member-height",
+    "docs-src/extract.js~TextureExtractor#height",
+    "member"
+  ],
+  [
+    "docs-src/extract.js~textureextractor#offset",
+    "class/docs-src/extract.js~TextureExtractor.html#instance-member-offset",
+    "docs-src/extract.js~TextureExtractor#offset",
+    "member"
+  ],
+  [
+    "docs-src/extract.js~textureextractor#preparetexture",
+    "class/docs-src/extract.js~TextureExtractor.html#instance-method-prepareTexture",
+    "docs-src/extract.js~TextureExtractor#prepareTexture",
+    "method"
+  ],
+  [
+    "docs-src/extract.js~textureextractor#scalemode",
+    "class/docs-src/extract.js~TextureExtractor.html#instance-member-scaleMode",
+    "docs-src/extract.js~TextureExtractor#scaleMode",
+    "member"
+  ],
+  [
+    "docs-src/extract.js~textureextractor#texturecache",
+    "class/docs-src/extract.js~TextureExtractor.html#instance-member-textureCache",
+    "docs-src/extract.js~TextureExtractor#textureCache",
+    "member"
+  ],
+  [
+    "docs-src/extract.js~textureextractor#tileheight",
+    "class/docs-src/extract.js~TextureExtractor.html#instance-member-tileheight",
+    "docs-src/extract.js~TextureExtractor#tileheight",
+    "member"
+  ],
+  [
+    "docs-src/extract.js~textureextractor#tileset",
+    "class/docs-src/extract.js~TextureExtractor.html#instance-member-tileset",
+    "docs-src/extract.js~TextureExtractor#tileset",
+    "member"
+  ],
+  [
+    "docs-src/extract.js~textureextractor#tilewidth",
+    "class/docs-src/extract.js~TextureExtractor.html#instance-member-tilewidth",
+    "docs-src/extract.js~TextureExtractor#tilewidth",
+    "member"
+  ],
+  [
+    "docs-src/extract.js~textureextractor#width",
+    "class/docs-src/extract.js~TextureExtractor.html#instance-member-width",
+    "docs-src/extract.js~TextureExtractor#width",
+    "member"
+  ],
+  [
     "docs-src/index.js",
     "file/docs-src/index.js.html",
     "docs-src/index.js",
@@ -640,12 +724,6 @@ window.esdocSearchIndex = [
     "class/docs-src/index.js~Level.html#instance-member-width",
     "docs-src/index.js~Level#width",
     "member"
-  ],
-  [
-    "docs-src/physics.js",
-    "file/docs-src/physics.js.html",
-    "docs-src/physics.js",
-    "file"
   ],
   [
     "docs-src/view.js",

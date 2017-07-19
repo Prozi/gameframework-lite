@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../">
-  <title data-ice="title">docs-src/index.js | API Document</title>
+  <title data-ice="title">docs-src/extract.js | API Document</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -57,217 +57,56 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1 data-ice="title">docs-src/index.js</h1>
+<div class="content" data-ice="content"><h1 data-ice="title">docs-src/extract.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
 
-const FMath = require(&apos;fmath&apos;);
-const md5 = require(&apos;md5&apos;);
+const PIXI = PIXI || require(&apos;pixi.js&apos;);
 
-const fmath = new FMath();
-
-// function constants
-const DEFER = (typeof process !== &apos;undefined&apos;) ? process.nextTick.bind(process) : setTimeout;
-const NOW = (typeof performance !== &apos;undefined&apos;) ? performance.now.bind(performance) : Date.now.bind(Date);
-
-// just constants
-const HALF_PI = Math.PI / 2;
-
-const HERO_ID = 0;
-const HERO_X = 1;
-const HERO_Y = 2;
-
-class Game {
-	constructor (interval = 10) {
-		this.levels = [];
-		this.interval = interval;
-		this.now = NOW();
-	}
-	loop () {
-		DEFER(this.tick.bind(this));
-		if (this.onUpdate) {
-			DEFER(this.onUpdate.bind(this));
-		}
-		setTimeout(() =&gt; DEFER(this.loop.bind(this)), this.interval);	
-	}
-	tick () {
-		const now = NOW();
-		this.delta = (now - this.now) / 1000;
-		this.now = now;
-		this.levels.forEach((map) =&gt; {
-			DEFER(map.tick.bind(map, this.delta));
-		});
-	}
-}
-
-class Level {
-	constructor (props = {}) {		
-		const options = {};
-		if (props.gravity) {
-			options.gravity = props.gravity;
-		}
-		this.heros = props.heros || {};
-		this.blocks = props.blocks || {};
-		this.accuracy = 10;
-	}
-	spawn ({ body }) {
-		body.x = random() * this.width;
-		body.y = 0;
-	}
-	eachHero (callback) {
-		for (let hero in this.heros) {
-			if (this.heros.hasOwnProperty(hero)) {
-				callback(this.heros[hero]);
+class TextureExtractor {
+	constructor({
+		width,
+		height,
+		tilewidth,
+		tileheight,
+		tileset,
+		offset,
+		count,
+		scaleMode
+	}, folder = &apos;&apos;) {
+		this.width = width;
+		this.height = height;
+		this.tilewidth = tilewidth;
+		this.tileheight = tileheight;
+		this.tileset = PIXI.Texture.fromFrame(folder ? `${folder}/${tileset}` : tileset);
+		this.offset = offset || 0;
+		this.textureCache = {};
+		this.scaleMode = scaleMode || PIXI.SCALE_MODES.NEAREST;
+		if (count) {
+			for (let i = 0; i &lt; count; i++) {
+				this.prepareTexture(i);
 			}
 		}
 	}
-	tick (delta) {
-		console.log(delta);
-	}
-	toArray () {
-		const array = [[]];
-		this.eachHero((hero) =&gt; array[0].push(hero.toArray()));
-		return array;
-	}
-	removeHero (hero) {
-		if (this.onRemoveHero) {
-			this.onRemoveHero(hero);
-		}
-		this.heros[hero.id] = null;
-		delete this.heros[hero.id];		
-	}
-	fromArray (array = [], HeroClass = Hero) {
-		this.eachHero((hero) =&gt; {
-			if (!array[0].find((heroArray) =&gt; heroArray[HERO_ID] === hero.id)) {
-				this.removeHero(hero);
-			}
-		});
-		array[0].forEach((heroArray) =&gt; {
-			const id = heroArray[HERO_ID];
-			if (this.heros[id]) {
-				this.updateHero(id, heroArray);
-			} else {
-				this.addHero(heroArray, HeroClass);
-			}
-		});
-		if (this.fromArrayExtension) {
-			this.fromArrayExtension(array);
-		}
-	}
-	updateHero (id, heroArray = []) {
-		this.heros[id].fromArray(heroArray);
-		if (this.onUpdateHero) {
-			this.onUpdateHero(this.heros[id]);
-		}
-	}
-	addHero (heroArray = [], HeroClass = Hero) {
-		const id = heroArray[HERO_ID] || randomId();
-		this.heros[id] = new HeroClass({ id });
-		this.heros[id].x = heroArray[HERO_X] || this.width * random();
-		this.heros[id].y = heroArray[HERO_Y] || 0;
-		this.heros[id].fromArray(heroArray);
-		if (this.onCreateHero) {
-			this.onCreateHero(this.heros[id]);
-		}
-		return this.heros[id];
-	}
-	fromTiled (tiled = {}) {
-		this.width  = tiled.width;
-		this.height = tiled.height;
-		this.blocks = {};
-		this.stops  = {};
-		this.tileset = {
-			tilewidth: tiled.tilesets[0].tilewidth,
-			imagewidth: tiled.tilesets[0].imagewidth,
-		};
-		this.accuracy = this.tileset.tilewidth;
-		for (let y = 0; y &lt; this.height; y++) {
-			for (let x = 0; x &lt; this.width; x++) {
-				const pos = y * this.width + x;
-				const offset = `${x}:${y}`;
-				this.blocks[offset] = [
-					tiled.layers[0].data[pos], 
-					tiled.layers[1].data[pos]
-				];
-				this.stops[offset] = tiled.layers[2].data[pos];
-			}
-		}
-	}
-}
+	prepareTexture(frame) {
+		const width = (this.width / this.tilewidth);
+		const x = ((frame - this.offset) % width) * this.tilewidth;
+		const y = Math.floor((frame - this.offset) / width) * this.tileheight;
+		const rect = new PIXI.Rectangle(x, y, this.tilewidth, this.tileheight);
 
-class Hero {
-	constructor ({ id = randomId(), sprite = null }) {
-		this.id = id;
-		this.sprite = sprite;
-		this.x = undefined;
-		this.y = undefined;
+		this.textureCache[frame] = new PIXI.Texture(this.tileset, rect);
+		this.textureCache[frame].baseTexture.scaleMode = this.scaleMode;
+		this.textureCache[frame].cacheAsBitmap = true;
 	}
-	toArray () {
-		return [
-			this.id,
-			this.x,
-			this.y,
-		];
-	}
-	fromArray (array = [], force = false) {
-		if (force) {
-			this.id = array[HERO_ID];
+	getFrame(frame) {
+		if (!this.textureCache[frame]) {
+			this.prepareTexture(frame);
 		}
-		if (force || (this.id === array[HERO_ID])) {
-			this.move(array[HERO_X], array[HERO_Y]);
-		}
+		return this.textureCache[frame];
 	}
-	move (x, y) {
-		this.x = x;
-		this.y = y;
-	}
-}
-
-function atan2 (y, x) {
-	if (x &gt; 0) {
-		return fmath.atan(y / x);
-	}
-	if (x &lt; 0) {
-		if (y &gt;= 0) {
-			return fmath.atan(y / x) + Math.PI;
-		}
-		return fmath.atan(y / x) - Math.PI;
-	}
-	if (x === 0) {
-		if (y === 0) {
-			return undefined;
-		}
-		if (y &gt; 0) {
-			return HALF_PI;
-		}
-		if (y &lt; 0) {
-			return -HALF_PI;
-		}
-	}
-}
-
-function randomId () {
-	return md5(random()).slice(0, 7);
-}
-
-function distance (dx, dy) {
-	return Math.sqrt(dx * dx + dy * dy);
-}
-
-function random () {
-	return Math.floor(Math.random() * 1001) / 1000;
 }
 
 if (typeof module !== &apos;undefined&apos;) {
-	module.exports = {
-		DEFER,
-		Game,
-		Level,
-		Hero,
-		atan2,
-		randomId,
-		distance,
-		random,
-	};
+	module.exports = TextureExtractor;
 }
 
 </code></pre>
