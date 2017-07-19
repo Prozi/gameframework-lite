@@ -60,7 +60,11 @@
 <div class="content" data-ice="content"><h1 data-ice="title">docs-src/view.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
 
-const PIXI = PIXI || require(&apos;pixi.js&apos;);
+const PIXI = (typeof window !== &apos;undefined&apos;) ? 
+	window.PIXI || 
+	require(&apos;pixi.js&apos;) : 
+	require(&apos;pixi.js&apos;);
+
 const Level = require(&apos;.&apos;).Level;
 
 class View {

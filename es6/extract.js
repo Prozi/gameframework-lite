@@ -1,7 +1,10 @@
 (function () {
 'use strict';
 
-const PIXI = PIXI || require('pixi.js');
+const PIXI = (typeof window !== 'undefined') ? 
+	window.PIXI || 
+	require('pixi.js') : 
+	require('pixi.js');
 
 class TextureExtractor {
 	constructor({

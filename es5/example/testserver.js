@@ -79,7 +79,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var _require = __webpack_require__(87),
+var _require = __webpack_require__(88),
     Game = _require.Game,
     Level = _require.Level,
     Hero = _require.Hero;
@@ -369,7 +369,7 @@ module.exports = charenc;
 
 /***/ }),
 
-/***/ 87:
+/***/ 88:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -382,8 +382,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 (function () {
 	'use strict';
 
-	var FMath = __webpack_require__(88);
-	var md5 = __webpack_require__(89);
+	var FMath = __webpack_require__(89);
+	var md5 = __webpack_require__(90);
 
 	var fmath = new FMath();
 
@@ -671,7 +671,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 /***/ }),
 
-/***/ 88:
+/***/ 89:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;(function (root, factory) {
@@ -781,13 +781,13 @@ var __WEBPACK_AMD_DEFINE_RESULT__;(function (root, factory) {
 
 /***/ }),
 
-/***/ 89:
+/***/ 90:
 /***/ (function(module, exports, __webpack_require__) {
 
 (function(){
-  var crypt = __webpack_require__(90),
+  var crypt = __webpack_require__(91),
       utf8 = __webpack_require__(21).utf8,
-      isBuffer = __webpack_require__(91),
+      isBuffer = __webpack_require__(92),
       bin = __webpack_require__(21).bin,
 
   // The core
@@ -948,7 +948,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;(function (root, factory) {
 
 /***/ }),
 
-/***/ 90:
+/***/ 91:
 /***/ (function(module, exports) {
 
 (function() {
@@ -1051,7 +1051,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;(function (root, factory) {
 
 /***/ }),
 
-/***/ 91:
+/***/ 92:
 /***/ (function(module, exports) {
 
 /*!
