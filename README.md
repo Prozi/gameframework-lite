@@ -1,8 +1,8 @@
-## gameframework
+## gameframework-lite!
 
-This is quite complete now.
+PIXI.js + Game Loop + Level Loop + Character Loop
 
-I use it with success, feel free to open any issues/pull requests.
+Isomorphic, Scalable, Node.js package
 
 ## examples (non-MIT)
 
