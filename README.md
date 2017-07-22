@@ -1,14 +1,16 @@
 ## gameframework
 
-This is still under development.
+This is quite complete now.
 
-I use it with success tho, feel free to open any issues/pull requests.
+I use it with success, feel free to open any issues/pull requests.
 
 ## examples (non-MIT)
 
-Game made on it:
+Games made on it:
 
-* [http://www.mini.ninja/vikings/](http://www.mini.ninja/vikings/)
+* [http://www.stones.mini.ninja/](http://www.stones.mini.ninja/)
+
+* [http://www.vikingsvillage.io/](http://www.vikingsvillage.io/)
 
 ### documentation
 
@@ -43,6 +45,10 @@ require 'gameframework/es6' for:
 require 'gameframework/es6/view' for:
 
 - View
+
+require 'gameframework/es6/extract' for:
+
+- [TextureExtractor](https://prozi.github.io/gameframework-lite/class/docs-src/extract.js~TextureExtractor.html)
 
 ### examples
 
