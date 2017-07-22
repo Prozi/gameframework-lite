@@ -1,7 +1,7 @@
 {
   "name": "gameframework-lite",
   "version": "1.3.2",
-  "description": "game framework for 2d html5 games without physics isomorphic",
+  "description": "PIXI.js + Game Loop + Level Loop + Character Loop. Isomorphic, Scalable, Node.js package. Use with (require es6 versions) babel or without (require es5 versions)",
   "main": "es6/index.js",
   "scripts": {
     "prep4esdoc": "./prep4esdoc.sh index && ./prep4esdoc.sh view && ./prep4esdoc.sh extract",
