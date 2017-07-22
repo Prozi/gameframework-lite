@@ -4,6 +4,8 @@ PIXI.js + Game Loop + Level Loop + Character Loop
 
 Isomorphic, Scalable, Node.js package
 
+Use with (require es6 versions) babel or without (require es5 versions)
+
 ## examples (non-MIT)
 
 Games made on it:
