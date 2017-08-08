@@ -1,20 +1,33 @@
 {
   "name": "gameframework-lite",
-  "version": "1.3.2",
-  "description": "PIXI.js + Game Loop + Level Loop + Character Loop. Isomorphic, Scalable, Node.js package. Use with (require es6 versions) babel or without (require es5 versions)",
-  "main": "es6/index.js",
+  "version": "1.3.3",
+  "description": "game framework for 2d html5 games with physics isomorphic",
+  "main": "es5/index.js",
   "scripts": {
     "prep4esdoc": "./prep4esdoc.sh index && ./prep4esdoc.sh view && ./prep4esdoc.sh extract",
     "docs": "yarn prep4esdoc && esdoc && yarn build",
     "build": "PRODUCTION=true webpack",
     "build:dev": "PRODUCTION= webpack",
-    "test": "node test"
+    "test": "node test",
+    "compile": "babel ./es6 --out-dir ./es5 --presets es2015"
   },
+  "editions": [
+    {
+      "description": "Source + ESNext + Require",
+      "entry": "source/index.js",
+      "syntaxes": ["javascript", "esnext", "require", "arrows", "const", "let", "destructuring"]
+    },
+    {
+      "description": "Compiled + ES5 + Require",
+      "entry": "es5/index.js",
+      "syntaxes": ["javascript", "ES5", "require"]
+    }
+  ],
   "author": "Jacek Pietal <prozi85@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "babel-plugin-add-module-exports": "latest",
-    "express": "^4.15.3",
+    "express": "^4.15.4",
     "fmath": "latest",
     "md5": "latest",
     "pixi.js": "latest"
@@ -24,7 +37,7 @@
     "babel-loader": "^7.1.1",
     "babel-polyfill": "^6.23.0",
     "babel-preset-es2015": "^6.24.1",
-    "webpack": "^3.3.0"
+    "webpack": "^3.5.1"
   },
   "repository": {
     "type": "git",
