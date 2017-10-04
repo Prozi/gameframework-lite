@@ -198,8 +198,8 @@ function random () {
 	return Math.floor(Math.random() * 1001) / 1000;
 }
 
-if (typeof module !== 'undefined') {
-	module.exports = {
+if (typeof exports !== 'undefined') {
+	const props = {
 		DEFER,
 		Game,
 		Level,
@@ -209,6 +209,9 @@ if (typeof module !== 'undefined') {
 		distance,
 		random,
 	};
+	for (let propName in props) {
+		exports[propName] = props[propName]
+	}
 }
 
 })();

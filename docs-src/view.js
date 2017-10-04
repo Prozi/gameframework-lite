@@ -166,7 +166,7 @@ class View {
 	}
 }
 
-if (typeof module !== 'undefined') {
-	module.exports = View;
+if (typeof exports !== 'undefined') {
+	exports.default = View;
 }
 

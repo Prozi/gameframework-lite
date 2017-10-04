@@ -1,18 +1,8 @@
 {
   "source": "./docs-src",
   "destination": "./docs",
-  "access": ["public", "protected", "private"],
-  "unexportIdentifier": true,
-  "undocumentIdentifier": true,
-  "index": "",
-  "experimentalProposal": {
-    "classProperties": true,
-    "objectRestSpread": true,
-    "decorators": true,
-    "doExpressions": true,
-    "functionBind": true,
-    "asyncGenerators": true,
-    "exportExtensions": true,
-    "dynamicImport": true
-  }
+  "includes": ["\\.js$"],
+  "plugins": [
+    {"name": "esdoc-standard-plugin"}
+  ]
 }

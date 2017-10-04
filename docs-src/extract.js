@@ -48,7 +48,7 @@ class TextureExtractor {
 	}
 }
 
-if (typeof module !== 'undefined') {
-	module.exports = TextureExtractor;
+if (typeof exports !== 'undefined') {
+	exports.default = TextureExtractor;
 }
 
