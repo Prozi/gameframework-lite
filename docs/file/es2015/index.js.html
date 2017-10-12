@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">es2015/index.js | gameframework-lite</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="game framework for 2d html5 games with physics isomorphic"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="gameframework-lite"><meta property="twitter:description" content="game framework for 2d html5 games with physics isomorphic"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/Prozi/gameframework-lite.git"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  </ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">es2015/index.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i &lt; props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (&quot;value&quot; in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(&quot;Cannot call a class as a function&quot;); } }
+
+var FMath = require(&apos;fmath&apos;);
+var md5 = require(&apos;md5&apos;);
+
+var fmath = new FMath();
+
+// function constants
+var DEFER = typeof process !== &apos;undefined&apos; ? process.nextTick.bind(process) : setTimeout;
+var NOW = typeof performance !== &apos;undefined&apos; ? performance.now.bind(performance) : Date.now.bind(Date);
+
+// just constants
+var HALF_PI = Math.PI / 2;
+
+var HERO_ID = 0;
+var HERO_X = 1;
+var HERO_Y = 2;
+
+var Game = function () {
+	function Game() {
+		var interval = arguments.length &gt; 0 &amp;&amp; arguments[0] !== undefined ? arguments[0] : 10;
+
+		_classCallCheck(this, Game);
+
+		this.levels = [];
+		this.interval = interval;
+		this.now = NOW();
+	}
+
+	_createClass(Game, [{
+		key: &apos;loop&apos;,
+		value: function loop() {
+			var _this = this;
+
+			DEFER(this.tick.bind(this));
+			if (this.onUpdate) {
+				DEFER(this.onUpdate.bind(this));
+			}
+			setTimeout(function () {
+				return DEFER(_this.loop.bind(_this));
+			}, this.interval);
+		}
+	}, {
+		key: &apos;tick&apos;,
+		value: function tick() {
+			var _this2 = this;
+
+			var now = NOW();
+			this.delta = (now - this.now) / 1000;
+			this.now = now;
+			this.levels.forEach(function (map) {
+				DEFER(map.tick.bind(map, _this2.delta));
+			});
+		}
+	}]);
+
+	return Game;
+}();
+
+module.exports.Level = function () {
+	function Level() {
+		var props = arguments.length &gt; 0 &amp;&amp; arguments[0] !== undefined ? arguments[0] : {};
+
+		_classCallCheck(this, Level);
+
+		var options = {};
+		if (props.gravity) {
+			options.gravity = props.gravity;
+		}
+		this.heros = props.heros || {};
+		this.blocks = props.blocks || {};
+		this.accuracy = 10;
+	}
+
+	_createClass(Level, [{
+		key: &apos;spawn&apos;,
+		value: function spawn(_ref) {
+			var body = _ref.body;
+
+			body.x = random() * this.width;
+			body.y = 0;
+		}
+	}, {
+		key: &apos;eachHero&apos;,
+		value: function eachHero(callback) {
+			for (var hero in this.heros) {
+				if (this.heros.hasOwnProperty(hero)) {
+					callback(this.heros[hero]);
+				}
+			}
+		}
+	}, {
+		key: &apos;tick&apos;,
+		value: function tick(delta) {
+			console.log(delta);
+		}
+	}, {
+		key: &apos;toArray&apos;,
+		value: function toArray() {
+			var array = [[]];
+			this.eachHero(function (hero) {
+				return array[0].push(hero.toArray());
+			});
+			return array;
+		}
+	}, {
+		key: &apos;removeHero&apos;,
+		value: function removeHero(hero) {
+			if (this.onRemoveHero) {
+				this.onRemoveHero(hero);
+			}
+			this.heros[hero.id] = null;
+			delete this.heros[hero.id];
+		}
+	}, {
+		key: &apos;fromArray&apos;,
+		value: function fromArray() {
+			var _this3 = this;
+
+			var array = arguments.length &gt; 0 &amp;&amp; arguments[0] !== undefined ? arguments[0] : [];
+			var HeroClass = arguments.length &gt; 1 &amp;&amp; arguments[1] !== undefined ? arguments[1] : Hero;
+
+			this.eachHero(function (hero) {
+				if (!array[0].find(function (heroArray) {
+					return heroArray[HERO_ID] === hero.id;
+				})) {
+					_this3.removeHero(hero);
+				}
+			});
+			array[0].forEach(function (heroArray) {
+				var id = heroArray[HERO_ID];
+				if (_this3.heros[id]) {
+					_this3.updateHero(id, heroArray);
+				} else {
+					_this3.addHero(heroArray, HeroClass);
+				}
+			});
+			if (this.fromArrayExtension) {
+				this.fromArrayExtension(array);
+			}
+		}
+	}, {
+		key: &apos;updateHero&apos;,
+		value: function updateHero(id) {
+			var heroArray = arguments.length &gt; 1 &amp;&amp; arguments[1] !== undefined ? arguments[1] : [];
+
+			this.heros[id].fromArray(heroArray);
+			if (this.onUpdateHero) {
+				this.onUpdateHero(this.heros[id]);
+			}
+		}
+	}, {
+		key: &apos;addHero&apos;,
+		value: function addHero() {
+			var heroArray = arguments.length &gt; 0 &amp;&amp; arguments[0] !== undefined ? arguments[0] : [];
+			var HeroClass = arguments.length &gt; 1 &amp;&amp; arguments[1] !== undefined ? arguments[1] : Hero;
+
+			var id = heroArray[HERO_ID] || randomId();
+			this.heros[id] = new HeroClass({ id: id });
+			this.heros[id].x = heroArray[HERO_X] || this.width * random();
+			this.heros[id].y = heroArray[HERO_Y] || 0;
+			this.heros[id].fromArray(heroArray);
+			if (this.onCreateHero) {
+				this.onCreateHero(this.heros[id]);
+			}
+			return this.heros[id];
+		}
+	}, {
+		key: &apos;fromTiled&apos;,
+		value: function fromTiled() {
+			var tiled = arguments.length &gt; 0 &amp;&amp; arguments[0] !== undefined ? arguments[0] : {};
+
+			this.width = tiled.width;
+			this.height = tiled.height;
+			this.blocks = {};
+			this.stops = {};
+			this.tileset = {
+				tilewidth: tiled.tilesets[0].tilewidth,
+				imagewidth: tiled.tilesets[0].imagewidth
+			};
+			this.accuracy = this.tileset.tilewidth;
+			for (var y = 0; y &lt; this.height; y++) {
+				for (var x = 0; x &lt; this.width; x++) {
+					var pos = y * this.width + x;
+					var offset = x + &apos;:&apos; + y;
+					this.blocks[offset] = [tiled.layers[0].data[pos], tiled.layers[1].data[pos]];
+					this.stops[offset] = tiled.layers[2].data[pos];
+				}
+			}
+		}
+	}]);
+
+	return Level;
+}();
+
+var Hero = function () {
+	function Hero(_ref2) {
+		var _ref2$id = _ref2.id,
+		    id = _ref2$id === undefined ? randomId() : _ref2$id,
+		    _ref2$sprite = _ref2.sprite,
+		    sprite = _ref2$sprite === undefined ? null : _ref2$sprite;
+
+		_classCallCheck(this, Hero);
+
+		this.id = id;
+		this.sprite = sprite;
+		this.x = undefined;
+		this.y = undefined;
+	}
+
+	_createClass(Hero, [{
+		key: &apos;toArray&apos;,
+		value: function toArray() {
+			return [this.id, this.x, this.y];
+		}
+	}, {
+		key: &apos;fromArray&apos;,
+		value: function fromArray() {
+			var array = arguments.length &gt; 0 &amp;&amp; arguments[0] !== undefined ? arguments[0] : [];
+			var force = arguments.length &gt; 1 &amp;&amp; arguments[1] !== undefined ? arguments[1] : false;
+
+			if (force) {
+				this.id = array[HERO_ID];
+			}
+			if (force || this.id === array[HERO_ID]) {
+				this.move(array[HERO_X], array[HERO_Y]);
+			}
+		}
+	}, {
+		key: &apos;move&apos;,
+		value: function move(x, y) {
+			this.x = x;
+			this.y = y;
+		}
+	}]);
+
+	return Hero;
+}();
+
+function atan2(y, x) {
+	if (x &gt; 0) {
+		return fmath.atan(y / x);
+	}
+	if (x &lt; 0) {
+		if (y &gt;= 0) {
+			return fmath.atan(y / x) + Math.PI;
+		}
+		return fmath.atan(y / x) - Math.PI;
+	}
+	if (x === 0) {
+		if (y === 0) {
+			return undefined;
+		}
+		if (y &gt; 0) {
+			return HALF_PI;
+		}
+		if (y &lt; 0) {
+			return -HALF_PI;
+		}
+	}
+}
+
+function randomId() {
+	return md5(random()).slice(0, 7);
+}
+
+function distance(dx, dy) {
+	return Math.sqrt(dx * dx + dy * dy);
+}
+
+function random() {
+	return Math.floor(Math.random() * 1001) / 1000;
+}
+
+module.exports.Game = Game;
+module.exports.Hero = Hero;
+module.exports.atan2 = atan2;
+module.exports.randomId = randomId;
+module.exports.distance = distance;
+module.exports.random = random;</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.3)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

@@ -1,7 +1,5 @@
-'use strict';
-
-const FMath = require('fmath');
-const md5 = require('md5');
+import FMath from 'fmath';
+import md5 from 'md5';
 
 const fmath = new FMath();
 
@@ -16,7 +14,7 @@ const HERO_ID = 0;
 const HERO_X = 1;
 const HERO_Y = 2;
 
-class Game {
+export class Game {
 	constructor (interval = 10) {
 		this.levels = [];
 		this.interval = interval;
@@ -39,7 +37,7 @@ class Game {
 	}
 }
 
-class Level {
+export class Level {
 	constructor (props = {}) {		
 		const options = {};
 		if (props.gravity) {
@@ -134,7 +132,7 @@ class Level {
 	}
 }
 
-class Hero {
+export class Hero {
 	constructor ({ id = randomId(), sprite = null }) {
 		this.id = id;
 		this.sprite = sprite;
@@ -162,7 +160,7 @@ class Hero {
 	}
 }
 
-function atan2 (y, x) {
+export function atan2 (y, x) {
 	if (x > 0) {
 		return fmath.atan(y / x);
 	}
@@ -185,31 +183,14 @@ function atan2 (y, x) {
 	}
 }
 
-function randomId () {
+export function randomId () {
 	return md5(random()).slice(0, 7);
 }
 
-function distance (dx, dy) {
+export function distance (dx, dy) {
 	return Math.sqrt(dx * dx + dy * dy);
 }
 
-function random () {
+export function random () {
 	return Math.floor(Math.random() * 1001) / 1000;
 }
-
-if (typeof exports !== 'undefined') {
-	const props = {
-		DEFER,
-		Game,
-		Level,
-		Hero,
-		atan2,
-		randomId,
-		distance,
-		random,
-	};
-	for (let propName in props) {
-		exports[propName] = props[propName]
-	}
-}
-

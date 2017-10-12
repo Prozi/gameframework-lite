@@ -1,14 +1,9 @@
-(function () {
 'use strict';
 
-const PIXI = (typeof window !== 'undefined') ? 
-	window.PIXI || 
-	require('pixi.js') : 
-	require('pixi.js');
+const { Level } = require('./index');
+const PIXI = (typeof window !== 'undefined') ? require('pixi.js') : {};
 
-const Level = require('.').Level;
-
-class View {
+export default class View {
 	constructor (screenSize = 480, anchor = document.body) {
 		this.screenSize = screenSize;
 		this.pixi = new PIXI.Application(window.innerWidth, window.innerHeight, {
@@ -166,9 +161,3 @@ class View {
 		document.body.addEventListener('contextmenu', (event) => event.preventDefault(), false);
 	}
 }
-
-if (typeof exports !== 'undefined') {
-	exports.default = View;
-}
-
-})();

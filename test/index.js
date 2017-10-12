@@ -1,7 +1,7 @@
 'use strict';
 
 console.log('require');
-const { Game, Level, Hero } = require('../es6');
+const { Game, Level, Hero } = require('../es2015');
 const express = require('express');
 const app = express();
 

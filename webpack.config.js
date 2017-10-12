@@ -6,14 +6,14 @@ const webpack = require('webpack');
 const entries = {};
 
 ['example/game', 'example/testserver'].forEach((file) => {
-  entries[file] = path.join(__dirname, `${file}.js`);
+  entries[file.split('/')[1]] = path.join(__dirname, `${file}.js`);
 });
 
 module.exports = {
   target: 'web',
   entry: entries,
   output: {
-    filename: 'es5/[name].js'
+    filename: 'example/js/[name].js'
   },
   stats: {
     colors: true,

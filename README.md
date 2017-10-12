@@ -4,8 +4,6 @@ PIXI.js + Game Loop + Level Loop + Character Loop
 
 Isomorphic, Scalable, Node.js package
 
-Use with (require es6 versions) babel or without (require es5 versions)
-
 ## examples (non-MIT)
 
 Games made on it:
@@ -34,7 +32,7 @@ or
 
 ### usage
 
-require 'gameframework/es6' for:
+require 'gameframework-lite' for:
 
 - DEFER,
 - Game,
@@ -44,18 +42,18 @@ require 'gameframework/es6' for:
 - atan2
 - random
 
-require 'gameframework/es6/view' for:
+require 'gameframework-lite/view' for:
 
 - View
 
-require 'gameframework/es6/extract' for:
+require 'gameframework-lite/extract' for:
 
 - [TextureExtractor](https://prozi.github.io/gameframework-lite/class/docs-src/extract.js~TextureExtractor.html)
 
 ### examples
 
 ```javascript
-const View = require('gameframework-lite/es6/view');
+const View = require('gameframework-lite/view');
 const PIXI = window.PIXI || require('pixi.js');
 
 // this is how you should use View
@@ -72,7 +70,7 @@ new MyView();
 ```
 
 ```javascript
-const { Level, Game } = require('gameframework-lite/es6');
+const { Level, Game } = require('gameframework-lite');
 
 // this is how you should use Game
 class MyGame extends Game {

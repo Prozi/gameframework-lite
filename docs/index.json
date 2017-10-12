@@ -4,9 +4,9 @@
     "kind": "external",
     "name": "Infinity",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~Infinity",
+    "longname": "source/.external-ecmascript.js~Infinity",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -16,9 +16,9 @@
     "kind": "external",
     "name": "NaN",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~NaN",
+    "longname": "source/.external-ecmascript.js~NaN",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -28,9 +28,9 @@
     "kind": "external",
     "name": "undefined",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~undefined",
+    "longname": "source/.external-ecmascript.js~undefined",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -40,9 +40,9 @@
     "kind": "external",
     "name": "null",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~null",
+    "longname": "source/.external-ecmascript.js~null",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -52,9 +52,9 @@
     "kind": "external",
     "name": "Object",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~Object",
+    "longname": "source/.external-ecmascript.js~Object",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -64,9 +64,9 @@
     "kind": "external",
     "name": "object",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~object",
+    "longname": "source/.external-ecmascript.js~object",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -76,9 +76,9 @@
     "kind": "external",
     "name": "Function",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~Function",
+    "longname": "source/.external-ecmascript.js~Function",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -88,9 +88,9 @@
     "kind": "external",
     "name": "function",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~function",
+    "longname": "source/.external-ecmascript.js~function",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -100,9 +100,9 @@
     "kind": "external",
     "name": "Boolean",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~Boolean",
+    "longname": "source/.external-ecmascript.js~Boolean",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -112,9 +112,9 @@
     "kind": "external",
     "name": "boolean",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~boolean",
+    "longname": "source/.external-ecmascript.js~boolean",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -124,9 +124,9 @@
     "kind": "external",
     "name": "Symbol",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~Symbol",
+    "longname": "source/.external-ecmascript.js~Symbol",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -136,9 +136,9 @@
     "kind": "external",
     "name": "Error",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~Error",
+    "longname": "source/.external-ecmascript.js~Error",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -148,9 +148,9 @@
     "kind": "external",
     "name": "EvalError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~EvalError",
+    "longname": "source/.external-ecmascript.js~EvalError",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -160,9 +160,9 @@
     "kind": "external",
     "name": "InternalError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~InternalError",
+    "longname": "source/.external-ecmascript.js~InternalError",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -172,9 +172,9 @@
     "kind": "external",
     "name": "RangeError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~RangeError",
+    "longname": "source/.external-ecmascript.js~RangeError",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -184,9 +184,9 @@
     "kind": "external",
     "name": "ReferenceError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~ReferenceError",
+    "longname": "source/.external-ecmascript.js~ReferenceError",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -196,9 +196,9 @@
     "kind": "external",
     "name": "SyntaxError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~SyntaxError",
+    "longname": "source/.external-ecmascript.js~SyntaxError",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -208,9 +208,9 @@
     "kind": "external",
     "name": "TypeError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~TypeError",
+    "longname": "source/.external-ecmascript.js~TypeError",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -220,9 +220,9 @@
     "kind": "external",
     "name": "URIError",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~URIError",
+    "longname": "source/.external-ecmascript.js~URIError",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -232,9 +232,9 @@
     "kind": "external",
     "name": "Number",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~Number",
+    "longname": "source/.external-ecmascript.js~Number",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -244,9 +244,9 @@
     "kind": "external",
     "name": "number",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~number",
+    "longname": "source/.external-ecmascript.js~number",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -256,9 +256,9 @@
     "kind": "external",
     "name": "Date",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~Date",
+    "longname": "source/.external-ecmascript.js~Date",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -268,9 +268,9 @@
     "kind": "external",
     "name": "String",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~String",
+    "longname": "source/.external-ecmascript.js~String",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -280,9 +280,9 @@
     "kind": "external",
     "name": "string",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~string",
+    "longname": "source/.external-ecmascript.js~string",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -292,9 +292,9 @@
     "kind": "external",
     "name": "RegExp",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~RegExp",
+    "longname": "source/.external-ecmascript.js~RegExp",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -304,9 +304,9 @@
     "kind": "external",
     "name": "Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~Array",
+    "longname": "source/.external-ecmascript.js~Array",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -316,9 +316,9 @@
     "kind": "external",
     "name": "Int8Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~Int8Array",
+    "longname": "source/.external-ecmascript.js~Int8Array",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -328,9 +328,9 @@
     "kind": "external",
     "name": "Uint8Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~Uint8Array",
+    "longname": "source/.external-ecmascript.js~Uint8Array",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -340,9 +340,9 @@
     "kind": "external",
     "name": "Uint8ClampedArray",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~Uint8ClampedArray",
+    "longname": "source/.external-ecmascript.js~Uint8ClampedArray",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -352,9 +352,9 @@
     "kind": "external",
     "name": "Int16Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~Int16Array",
+    "longname": "source/.external-ecmascript.js~Int16Array",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -364,9 +364,9 @@
     "kind": "external",
     "name": "Uint16Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~Uint16Array",
+    "longname": "source/.external-ecmascript.js~Uint16Array",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -376,9 +376,9 @@
     "kind": "external",
     "name": "Int32Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~Int32Array",
+    "longname": "source/.external-ecmascript.js~Int32Array",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -388,9 +388,9 @@
     "kind": "external",
     "name": "Uint32Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~Uint32Array",
+    "longname": "source/.external-ecmascript.js~Uint32Array",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -400,9 +400,9 @@
     "kind": "external",
     "name": "Float32Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~Float32Array",
+    "longname": "source/.external-ecmascript.js~Float32Array",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -412,9 +412,9 @@
     "kind": "external",
     "name": "Float64Array",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~Float64Array",
+    "longname": "source/.external-ecmascript.js~Float64Array",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -424,9 +424,9 @@
     "kind": "external",
     "name": "Map",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~Map",
+    "longname": "source/.external-ecmascript.js~Map",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -436,9 +436,9 @@
     "kind": "external",
     "name": "Set",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~Set",
+    "longname": "source/.external-ecmascript.js~Set",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -448,9 +448,9 @@
     "kind": "external",
     "name": "WeakMap",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~WeakMap",
+    "longname": "source/.external-ecmascript.js~WeakMap",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -460,9 +460,9 @@
     "kind": "external",
     "name": "WeakSet",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~WeakSet",
+    "longname": "source/.external-ecmascript.js~WeakSet",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -472,9 +472,9 @@
     "kind": "external",
     "name": "ArrayBuffer",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~ArrayBuffer",
+    "longname": "source/.external-ecmascript.js~ArrayBuffer",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -484,9 +484,9 @@
     "kind": "external",
     "name": "DataView",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~DataView",
+    "longname": "source/.external-ecmascript.js~DataView",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -496,9 +496,9 @@
     "kind": "external",
     "name": "JSON",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~JSON",
+    "longname": "source/.external-ecmascript.js~JSON",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -508,9 +508,9 @@
     "kind": "external",
     "name": "Promise",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~Promise",
+    "longname": "source/.external-ecmascript.js~Promise",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -520,9 +520,9 @@
     "kind": "external",
     "name": "Generator",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~Generator",
+    "longname": "source/.external-ecmascript.js~Generator",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -532,9 +532,9 @@
     "kind": "external",
     "name": "GeneratorFunction",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~GeneratorFunction",
+    "longname": "source/.external-ecmascript.js~GeneratorFunction",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -544,9 +544,9 @@
     "kind": "external",
     "name": "Reflect",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~Reflect",
+    "longname": "source/.external-ecmascript.js~Reflect",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -556,9 +556,9 @@
     "kind": "external",
     "name": "Proxy",
     "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
-    "memberof": "docs-src/.external-ecmascript.js",
+    "memberof": "source/.external-ecmascript.js",
     "static": true,
-    "longname": "docs-src/.external-ecmascript.js~Proxy",
+    "longname": "source/.external-ecmascript.js~Proxy",
     "access": "public",
     "description": "",
     "builtinExternal": true
@@ -566,10 +566,10 @@
   {
     "__docId__": 48,
     "kind": "file",
-    "name": "docs-src/extract.js",
-    "content": "'use strict';\n\nconst PIXI = (typeof window !== 'undefined') ? \n\twindow.PIXI || \n\trequire('pixi.js') : \n\trequire('pixi.js');\n\nclass TextureExtractor {\n\tconstructor({\n\t\twidth,\n\t\theight,\n\t\ttilewidth,\n\t\ttileheight,\n\t\ttileset,\n\t\toffset,\n\t\tcount,\n\t\tscaleMode\n\t}, folder = '') {\n\t\tthis.width = width;\n\t\tthis.height = height;\n\t\tthis.tilewidth = tilewidth;\n\t\tthis.tileheight = tileheight;\n\t\tthis.tileset = PIXI.Texture.fromFrame(folder ? `${folder}/${tileset}` : tileset);\n\t\tthis.offset = offset || 0;\n\t\tthis.textureCache = {};\n\t\tthis.scaleMode = scaleMode || PIXI.SCALE_MODES.NEAREST;\n\t\tif (count) {\n\t\t\tfor (let i = 0; i < count; i++) {\n\t\t\t\tthis.prepareTexture(i);\n\t\t\t}\n\t\t}\n\t}\n\tprepareTexture(frame) {\n\t\tconst width = (this.width / this.tilewidth);\n\t\tconst x = ((frame - this.offset) % width) * this.tilewidth;\n\t\tconst y = Math.floor((frame - this.offset) / width) * this.tileheight;\n\t\tconst rect = new PIXI.Rectangle(x, y, this.tilewidth, this.tileheight);\n\n\t\tthis.textureCache[frame] = new PIXI.Texture(this.tileset, rect);\n\t\tthis.textureCache[frame].baseTexture.scaleMode = this.scaleMode;\n\t\tthis.textureCache[frame].cacheAsBitmap = true;\n\t}\n\tgetFrame(frame) {\n\t\tif (!this.textureCache[frame]) {\n\t\t\tthis.prepareTexture(frame);\n\t\t}\n\t\treturn this.textureCache[frame];\n\t}\n}\n\nif (typeof exports !== 'undefined') {\n\texports.default = TextureExtractor;\n}\n\n",
+    "name": "source/extract.js",
+    "content": "'use strict';\n\nconst PIXI = (typeof window !== 'undefined') ? require('pixi.js') : {};\n\nexport default class TextureExtractor {\n\tconstructor({\n\t\twidth,\n\t\theight,\n\t\ttilewidth,\n\t\ttileheight,\n\t\ttileset,\n\t\toffset,\n\t\tcount,\n\t\tscaleMode\n\t}, folder = '') {\n\t\tthis.width = width;\n\t\tthis.height = height;\n\t\tthis.tilewidth = tilewidth;\n\t\tthis.tileheight = tileheight;\n\t\tthis.tileset = PIXI.Texture.fromFrame(folder ? `${folder}/${tileset}` : tileset);\n\t\tthis.offset = offset || 0;\n\t\tthis.textureCache = {};\n\t\tthis.scaleMode = scaleMode || PIXI.SCALE_MODES.NEAREST;\n\t\tif (count) {\n\t\t\tfor (let i = 0; i < count; i++) {\n\t\t\t\tthis.prepareTexture(i);\n\t\t\t}\n\t\t}\n\t}\n\tprepareTexture(frame) {\n\t\tconst width = (this.width / this.tilewidth);\n\t\tconst x = ((frame - this.offset) % width) * this.tilewidth;\n\t\tconst y = Math.floor((frame - this.offset) / width) * this.tileheight;\n\t\tconst rect = new PIXI.Rectangle(x, y, this.tilewidth, this.tileheight);\n\n\t\tthis.textureCache[frame] = new PIXI.Texture(this.tileset, rect);\n\t\tthis.textureCache[frame].baseTexture.scaleMode = this.scaleMode;\n\t\tthis.textureCache[frame].cacheAsBitmap = true;\n\t}\n\tgetFrame(frame) {\n\t\tif (!this.textureCache[frame]) {\n\t\t\tthis.prepareTexture(frame);\n\t\t}\n\t\treturn this.textureCache[frame];\n\t}\n}\n",
     "static": true,
-    "longname": "C:/Users/lenovo/projects/gameframework-lite/docs-src/extract.js",
+    "longname": "C:/Users/lenovo/projects/gameframework-lite/source/extract.js",
     "access": "public",
     "description": null,
     "lineNumber": 1
@@ -578,12 +578,12 @@
     "__docId__": 49,
     "kind": "variable",
     "name": "PIXI",
-    "memberof": "docs-src/extract.js",
+    "memberof": "source/extract.js",
     "static": true,
-    "longname": "docs-src/extract.js~PIXI",
+    "longname": "source/extract.js~PIXI",
     "access": "public",
     "export": false,
-    "importPath": "gameframework-lite/docs-src/extract.js",
+    "importPath": "gameframework-lite/source/extract.js",
     "importStyle": null,
     "description": null,
     "lineNumber": 3,
@@ -599,43 +599,42 @@
     "__docId__": 50,
     "kind": "class",
     "name": "TextureExtractor",
-    "memberof": "docs-src/extract.js",
+    "memberof": "source/extract.js",
     "static": true,
-    "longname": "docs-src/extract.js~TextureExtractor",
+    "longname": "source/extract.js~TextureExtractor",
     "access": "public",
-    "export": false,
-    "importPath": "gameframework-lite/docs-src/extract.js",
-    "importStyle": null,
+    "export": true,
+    "importPath": "gameframework-lite/source/extract.js",
+    "importStyle": "TextureExtractor",
     "description": null,
-    "lineNumber": 8,
+    "lineNumber": 5,
     "undocument": true,
-    "interface": false,
-    "ignore": true
+    "interface": false
   },
   {
     "__docId__": 51,
     "kind": "constructor",
     "name": "constructor",
-    "memberof": "docs-src/extract.js~TextureExtractor",
+    "memberof": "source/extract.js~TextureExtractor",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/extract.js~TextureExtractor#constructor",
+    "longname": "source/extract.js~TextureExtractor#constructor",
     "access": "public",
     "description": null,
-    "lineNumber": 9,
+    "lineNumber": 6,
     "undocument": true
   },
   {
     "__docId__": 52,
     "kind": "member",
     "name": "width",
-    "memberof": "docs-src/extract.js~TextureExtractor",
+    "memberof": "source/extract.js~TextureExtractor",
     "static": false,
-    "longname": "docs-src/extract.js~TextureExtractor#width",
+    "longname": "source/extract.js~TextureExtractor#width",
     "access": "public",
     "description": null,
-    "lineNumber": 19,
+    "lineNumber": 16,
     "undocument": true,
     "type": {
       "types": [
@@ -647,12 +646,12 @@
     "__docId__": 53,
     "kind": "member",
     "name": "height",
-    "memberof": "docs-src/extract.js~TextureExtractor",
+    "memberof": "source/extract.js~TextureExtractor",
     "static": false,
-    "longname": "docs-src/extract.js~TextureExtractor#height",
+    "longname": "source/extract.js~TextureExtractor#height",
     "access": "public",
     "description": null,
-    "lineNumber": 20,
+    "lineNumber": 17,
     "undocument": true,
     "type": {
       "types": [
@@ -664,12 +663,12 @@
     "__docId__": 54,
     "kind": "member",
     "name": "tilewidth",
-    "memberof": "docs-src/extract.js~TextureExtractor",
+    "memberof": "source/extract.js~TextureExtractor",
     "static": false,
-    "longname": "docs-src/extract.js~TextureExtractor#tilewidth",
+    "longname": "source/extract.js~TextureExtractor#tilewidth",
     "access": "public",
     "description": null,
-    "lineNumber": 21,
+    "lineNumber": 18,
     "undocument": true,
     "type": {
       "types": [
@@ -681,12 +680,12 @@
     "__docId__": 55,
     "kind": "member",
     "name": "tileheight",
-    "memberof": "docs-src/extract.js~TextureExtractor",
+    "memberof": "source/extract.js~TextureExtractor",
     "static": false,
-    "longname": "docs-src/extract.js~TextureExtractor#tileheight",
+    "longname": "source/extract.js~TextureExtractor#tileheight",
     "access": "public",
     "description": null,
-    "lineNumber": 22,
+    "lineNumber": 19,
     "undocument": true,
     "type": {
       "types": [
@@ -698,12 +697,12 @@
     "__docId__": 56,
     "kind": "member",
     "name": "tileset",
-    "memberof": "docs-src/extract.js~TextureExtractor",
+    "memberof": "source/extract.js~TextureExtractor",
     "static": false,
-    "longname": "docs-src/extract.js~TextureExtractor#tileset",
+    "longname": "source/extract.js~TextureExtractor#tileset",
     "access": "public",
     "description": null,
-    "lineNumber": 23,
+    "lineNumber": 20,
     "undocument": true,
     "type": {
       "types": [
@@ -715,12 +714,12 @@
     "__docId__": 57,
     "kind": "member",
     "name": "offset",
-    "memberof": "docs-src/extract.js~TextureExtractor",
+    "memberof": "source/extract.js~TextureExtractor",
     "static": false,
-    "longname": "docs-src/extract.js~TextureExtractor#offset",
+    "longname": "source/extract.js~TextureExtractor#offset",
     "access": "public",
     "description": null,
-    "lineNumber": 24,
+    "lineNumber": 21,
     "undocument": true,
     "type": {
       "types": [
@@ -732,12 +731,12 @@
     "__docId__": 58,
     "kind": "member",
     "name": "textureCache",
-    "memberof": "docs-src/extract.js~TextureExtractor",
+    "memberof": "source/extract.js~TextureExtractor",
     "static": false,
-    "longname": "docs-src/extract.js~TextureExtractor#textureCache",
+    "longname": "source/extract.js~TextureExtractor#textureCache",
     "access": "public",
     "description": null,
-    "lineNumber": 25,
+    "lineNumber": 22,
     "undocument": true,
     "type": {
       "types": [
@@ -749,12 +748,12 @@
     "__docId__": 59,
     "kind": "member",
     "name": "scaleMode",
-    "memberof": "docs-src/extract.js~TextureExtractor",
+    "memberof": "source/extract.js~TextureExtractor",
     "static": false,
-    "longname": "docs-src/extract.js~TextureExtractor#scaleMode",
+    "longname": "source/extract.js~TextureExtractor#scaleMode",
     "access": "public",
     "description": null,
-    "lineNumber": 26,
+    "lineNumber": 23,
     "undocument": true,
     "type": {
       "types": [
@@ -766,14 +765,14 @@
     "__docId__": 60,
     "kind": "method",
     "name": "prepareTexture",
-    "memberof": "docs-src/extract.js~TextureExtractor",
+    "memberof": "source/extract.js~TextureExtractor",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/extract.js~TextureExtractor#prepareTexture",
+    "longname": "source/extract.js~TextureExtractor#prepareTexture",
     "access": "public",
     "description": null,
-    "lineNumber": 33,
+    "lineNumber": 30,
     "undocument": true,
     "params": [
       {
@@ -789,14 +788,14 @@
     "__docId__": 61,
     "kind": "method",
     "name": "getFrame",
-    "memberof": "docs-src/extract.js~TextureExtractor",
+    "memberof": "source/extract.js~TextureExtractor",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/extract.js~TextureExtractor#getFrame",
+    "longname": "source/extract.js~TextureExtractor#getFrame",
     "access": "public",
     "description": null,
-    "lineNumber": 43,
+    "lineNumber": 40,
     "undocument": true,
     "params": [
       {
@@ -815,10 +814,10 @@
   {
     "__docId__": 62,
     "kind": "file",
-    "name": "docs-src/index.js",
-    "content": "'use strict';\n\nconst FMath = require('fmath');\nconst md5 = require('md5');\n\nconst fmath = new FMath();\n\n// function constants\nconst DEFER = (typeof process !== 'undefined') ? process.nextTick.bind(process) : setTimeout;\nconst NOW = (typeof performance !== 'undefined') ? performance.now.bind(performance) : Date.now.bind(Date);\n\n// just constants\nconst HALF_PI = Math.PI / 2;\n\nconst HERO_ID = 0;\nconst HERO_X = 1;\nconst HERO_Y = 2;\n\nclass Game {\n\tconstructor (interval = 10) {\n\t\tthis.levels = [];\n\t\tthis.interval = interval;\n\t\tthis.now = NOW();\n\t}\n\tloop () {\n\t\tDEFER(this.tick.bind(this));\n\t\tif (this.onUpdate) {\n\t\t\tDEFER(this.onUpdate.bind(this));\n\t\t}\n\t\tsetTimeout(() => DEFER(this.loop.bind(this)), this.interval);\t\n\t}\n\ttick () {\n\t\tconst now = NOW();\n\t\tthis.delta = (now - this.now) / 1000;\n\t\tthis.now = now;\n\t\tthis.levels.forEach((map) => {\n\t\t\tDEFER(map.tick.bind(map, this.delta));\n\t\t});\n\t}\n}\n\nclass Level {\n\tconstructor (props = {}) {\t\t\n\t\tconst options = {};\n\t\tif (props.gravity) {\n\t\t\toptions.gravity = props.gravity;\n\t\t}\n\t\tthis.heros = props.heros || {};\n\t\tthis.blocks = props.blocks || {};\n\t\tthis.accuracy = 10;\n\t}\n\tspawn ({ body }) {\n\t\tbody.x = random() * this.width;\n\t\tbody.y = 0;\n\t}\n\teachHero (callback) {\n\t\tfor (let hero in this.heros) {\n\t\t\tif (this.heros.hasOwnProperty(hero)) {\n\t\t\t\tcallback(this.heros[hero]);\n\t\t\t}\n\t\t}\n\t}\n\ttick (delta) {\n\t\tconsole.log(delta);\n\t}\n\ttoArray () {\n\t\tconst array = [[]];\n\t\tthis.eachHero((hero) => array[0].push(hero.toArray()));\n\t\treturn array;\n\t}\n\tremoveHero (hero) {\n\t\tif (this.onRemoveHero) {\n\t\t\tthis.onRemoveHero(hero);\n\t\t}\n\t\tthis.heros[hero.id] = null;\n\t\tdelete this.heros[hero.id];\t\t\n\t}\n\tfromArray (array = [], HeroClass = Hero) {\n\t\tthis.eachHero((hero) => {\n\t\t\tif (!array[0].find((heroArray) => heroArray[HERO_ID] === hero.id)) {\n\t\t\t\tthis.removeHero(hero);\n\t\t\t}\n\t\t});\n\t\tarray[0].forEach((heroArray) => {\n\t\t\tconst id = heroArray[HERO_ID];\n\t\t\tif (this.heros[id]) {\n\t\t\t\tthis.updateHero(id, heroArray);\n\t\t\t} else {\n\t\t\t\tthis.addHero(heroArray, HeroClass);\n\t\t\t}\n\t\t});\n\t\tif (this.fromArrayExtension) {\n\t\t\tthis.fromArrayExtension(array);\n\t\t}\n\t}\n\tupdateHero (id, heroArray = []) {\n\t\tthis.heros[id].fromArray(heroArray);\n\t\tif (this.onUpdateHero) {\n\t\t\tthis.onUpdateHero(this.heros[id]);\n\t\t}\n\t}\n\taddHero (heroArray = [], HeroClass = Hero) {\n\t\tconst id = heroArray[HERO_ID] || randomId();\n\t\tthis.heros[id] = new HeroClass({ id });\n\t\tthis.heros[id].x = heroArray[HERO_X] || this.width * random();\n\t\tthis.heros[id].y = heroArray[HERO_Y] || 0;\n\t\tthis.heros[id].fromArray(heroArray);\n\t\tif (this.onCreateHero) {\n\t\t\tthis.onCreateHero(this.heros[id]);\n\t\t}\n\t\treturn this.heros[id];\n\t}\n\tfromTiled (tiled = {}) {\n\t\tthis.width  = tiled.width;\n\t\tthis.height = tiled.height;\n\t\tthis.blocks = {};\n\t\tthis.stops  = {};\n\t\tthis.tileset = {\n\t\t\ttilewidth: tiled.tilesets[0].tilewidth,\n\t\t\timagewidth: tiled.tilesets[0].imagewidth,\n\t\t};\n\t\tthis.accuracy = this.tileset.tilewidth;\n\t\tfor (let y = 0; y < this.height; y++) {\n\t\t\tfor (let x = 0; x < this.width; x++) {\n\t\t\t\tconst pos = y * this.width + x;\n\t\t\t\tconst offset = `${x}:${y}`;\n\t\t\t\tthis.blocks[offset] = [\n\t\t\t\t\ttiled.layers[0].data[pos], \n\t\t\t\t\ttiled.layers[1].data[pos]\n\t\t\t\t];\n\t\t\t\tthis.stops[offset] = tiled.layers[2].data[pos];\n\t\t\t}\n\t\t}\n\t}\n}\n\nclass Hero {\n\tconstructor ({ id = randomId(), sprite = null }) {\n\t\tthis.id = id;\n\t\tthis.sprite = sprite;\n\t\tthis.x = undefined;\n\t\tthis.y = undefined;\n\t}\n\ttoArray () {\n\t\treturn [\n\t\t\tthis.id,\n\t\t\tthis.x,\n\t\t\tthis.y,\n\t\t];\n\t}\n\tfromArray (array = [], force = false) {\n\t\tif (force) {\n\t\t\tthis.id = array[HERO_ID];\n\t\t}\n\t\tif (force || (this.id === array[HERO_ID])) {\n\t\t\tthis.move(array[HERO_X], array[HERO_Y]);\n\t\t}\n\t}\n\tmove (x, y) {\n\t\tthis.x = x;\n\t\tthis.y = y;\n\t}\n}\n\nfunction atan2 (y, x) {\n\tif (x > 0) {\n\t\treturn fmath.atan(y / x);\n\t}\n\tif (x < 0) {\n\t\tif (y >= 0) {\n\t\t\treturn fmath.atan(y / x) + Math.PI;\n\t\t}\n\t\treturn fmath.atan(y / x) - Math.PI;\n\t}\n\tif (x === 0) {\n\t\tif (y === 0) {\n\t\t\treturn undefined;\n\t\t}\n\t\tif (y > 0) {\n\t\t\treturn HALF_PI;\n\t\t}\n\t\tif (y < 0) {\n\t\t\treturn -HALF_PI;\n\t\t}\n\t}\n}\n\nfunction randomId () {\n\treturn md5(random()).slice(0, 7);\n}\n\nfunction distance (dx, dy) {\n\treturn Math.sqrt(dx * dx + dy * dy);\n}\n\nfunction random () {\n\treturn Math.floor(Math.random() * 1001) / 1000;\n}\n\nif (typeof exports !== 'undefined') {\n\tconst props = {\n\t\tDEFER,\n\t\tGame,\n\t\tLevel,\n\t\tHero,\n\t\tatan2,\n\t\trandomId,\n\t\tdistance,\n\t\trandom,\n\t};\n\tfor (let propName in props) {\n\t\texports[propName] = props[propName]\n\t}\n}\n\n",
+    "name": "source/index.js",
+    "content": "import FMath from 'fmath';\nimport md5 from 'md5';\n\nconst fmath = new FMath();\n\n// function constants\nconst DEFER = (typeof process !== 'undefined') ? process.nextTick.bind(process) : setTimeout;\nconst NOW = (typeof performance !== 'undefined') ? performance.now.bind(performance) : Date.now.bind(Date);\n\n// just constants\nconst HALF_PI = Math.PI / 2;\n\nconst HERO_ID = 0;\nconst HERO_X = 1;\nconst HERO_Y = 2;\n\nexport class Game {\n\tconstructor (interval = 10) {\n\t\tthis.levels = [];\n\t\tthis.interval = interval;\n\t\tthis.now = NOW();\n\t}\n\tloop () {\n\t\tDEFER(this.tick.bind(this));\n\t\tif (this.onUpdate) {\n\t\t\tDEFER(this.onUpdate.bind(this));\n\t\t}\n\t\tsetTimeout(() => DEFER(this.loop.bind(this)), this.interval);\t\n\t}\n\ttick () {\n\t\tconst now = NOW();\n\t\tthis.delta = (now - this.now) / 1000;\n\t\tthis.now = now;\n\t\tthis.levels.forEach((map) => {\n\t\t\tDEFER(map.tick.bind(map, this.delta));\n\t\t});\n\t}\n}\n\nexport class Level {\n\tconstructor (props = {}) {\t\t\n\t\tconst options = {};\n\t\tif (props.gravity) {\n\t\t\toptions.gravity = props.gravity;\n\t\t}\n\t\tthis.heros = props.heros || {};\n\t\tthis.blocks = props.blocks || {};\n\t\tthis.accuracy = 10;\n\t}\n\tspawn ({ body }) {\n\t\tbody.x = random() * this.width;\n\t\tbody.y = 0;\n\t}\n\teachHero (callback) {\n\t\tfor (let hero in this.heros) {\n\t\t\tif (this.heros.hasOwnProperty(hero)) {\n\t\t\t\tcallback(this.heros[hero]);\n\t\t\t}\n\t\t}\n\t}\n\ttick (delta) {\n\t\tconsole.log(delta);\n\t}\n\ttoArray () {\n\t\tconst array = [[]];\n\t\tthis.eachHero((hero) => array[0].push(hero.toArray()));\n\t\treturn array;\n\t}\n\tremoveHero (hero) {\n\t\tif (this.onRemoveHero) {\n\t\t\tthis.onRemoveHero(hero);\n\t\t}\n\t\tthis.heros[hero.id] = null;\n\t\tdelete this.heros[hero.id];\t\t\n\t}\n\tfromArray (array = [], HeroClass = Hero) {\n\t\tthis.eachHero((hero) => {\n\t\t\tif (!array[0].find((heroArray) => heroArray[HERO_ID] === hero.id)) {\n\t\t\t\tthis.removeHero(hero);\n\t\t\t}\n\t\t});\n\t\tarray[0].forEach((heroArray) => {\n\t\t\tconst id = heroArray[HERO_ID];\n\t\t\tif (this.heros[id]) {\n\t\t\t\tthis.updateHero(id, heroArray);\n\t\t\t} else {\n\t\t\t\tthis.addHero(heroArray, HeroClass);\n\t\t\t}\n\t\t});\n\t\tif (this.fromArrayExtension) {\n\t\t\tthis.fromArrayExtension(array);\n\t\t}\n\t}\n\tupdateHero (id, heroArray = []) {\n\t\tthis.heros[id].fromArray(heroArray);\n\t\tif (this.onUpdateHero) {\n\t\t\tthis.onUpdateHero(this.heros[id]);\n\t\t}\n\t}\n\taddHero (heroArray = [], HeroClass = Hero) {\n\t\tconst id = heroArray[HERO_ID] || randomId();\n\t\tthis.heros[id] = new HeroClass({ id });\n\t\tthis.heros[id].x = heroArray[HERO_X] || this.width * random();\n\t\tthis.heros[id].y = heroArray[HERO_Y] || 0;\n\t\tthis.heros[id].fromArray(heroArray);\n\t\tif (this.onCreateHero) {\n\t\t\tthis.onCreateHero(this.heros[id]);\n\t\t}\n\t\treturn this.heros[id];\n\t}\n\tfromTiled (tiled = {}) {\n\t\tthis.width  = tiled.width;\n\t\tthis.height = tiled.height;\n\t\tthis.blocks = {};\n\t\tthis.stops  = {};\n\t\tthis.tileset = {\n\t\t\ttilewidth: tiled.tilesets[0].tilewidth,\n\t\t\timagewidth: tiled.tilesets[0].imagewidth,\n\t\t};\n\t\tthis.accuracy = this.tileset.tilewidth;\n\t\tfor (let y = 0; y < this.height; y++) {\n\t\t\tfor (let x = 0; x < this.width; x++) {\n\t\t\t\tconst pos = y * this.width + x;\n\t\t\t\tconst offset = `${x}:${y}`;\n\t\t\t\tthis.blocks[offset] = [\n\t\t\t\t\ttiled.layers[0].data[pos], \n\t\t\t\t\ttiled.layers[1].data[pos]\n\t\t\t\t];\n\t\t\t\tthis.stops[offset] = tiled.layers[2].data[pos];\n\t\t\t}\n\t\t}\n\t}\n}\n\nexport class Hero {\n\tconstructor ({ id = randomId(), sprite = null }) {\n\t\tthis.id = id;\n\t\tthis.sprite = sprite;\n\t\tthis.x = undefined;\n\t\tthis.y = undefined;\n\t}\n\ttoArray () {\n\t\treturn [\n\t\t\tthis.id,\n\t\t\tthis.x,\n\t\t\tthis.y,\n\t\t];\n\t}\n\tfromArray (array = [], force = false) {\n\t\tif (force) {\n\t\t\tthis.id = array[HERO_ID];\n\t\t}\n\t\tif (force || (this.id === array[HERO_ID])) {\n\t\t\tthis.move(array[HERO_X], array[HERO_Y]);\n\t\t}\n\t}\n\tmove (x, y) {\n\t\tthis.x = x;\n\t\tthis.y = y;\n\t}\n}\n\nexport function atan2 (y, x) {\n\tif (x > 0) {\n\t\treturn fmath.atan(y / x);\n\t}\n\tif (x < 0) {\n\t\tif (y >= 0) {\n\t\t\treturn fmath.atan(y / x) + Math.PI;\n\t\t}\n\t\treturn fmath.atan(y / x) - Math.PI;\n\t}\n\tif (x === 0) {\n\t\tif (y === 0) {\n\t\t\treturn undefined;\n\t\t}\n\t\tif (y > 0) {\n\t\t\treturn HALF_PI;\n\t\t}\n\t\tif (y < 0) {\n\t\t\treturn -HALF_PI;\n\t\t}\n\t}\n}\n\nexport function randomId () {\n\treturn md5(random()).slice(0, 7);\n}\n\nexport function distance (dx, dy) {\n\treturn Math.sqrt(dx * dx + dy * dy);\n}\n\nexport function random () {\n\treturn Math.floor(Math.random() * 1001) / 1000;\n}\n",
     "static": true,
-    "longname": "C:/Users/lenovo/projects/gameframework-lite/docs-src/index.js",
+    "longname": "C:/Users/lenovo/projects/gameframework-lite/source/index.js",
     "access": "public",
     "description": null,
     "lineNumber": 1
@@ -826,34 +825,13 @@
   {
     "__docId__": 63,
     "kind": "variable",
-    "name": "FMath",
-    "memberof": "docs-src/index.js",
+    "name": "fmath",
+    "memberof": "source/index.js",
     "static": true,
-    "longname": "docs-src/index.js~FMath",
+    "longname": "source/index.js~fmath",
     "access": "public",
     "export": false,
-    "importPath": "gameframework-lite/docs-src/index.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 3,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 64,
-    "kind": "variable",
-    "name": "md5",
-    "memberof": "docs-src/index.js",
-    "static": true,
-    "longname": "docs-src/index.js~md5",
-    "access": "public",
-    "export": false,
-    "importPath": "gameframework-lite/docs-src/index.js",
+    "importPath": "gameframework-lite/source/index.js",
     "importStyle": null,
     "description": null,
     "lineNumber": 4,
@@ -866,18 +844,39 @@
     "ignore": true
   },
   {
-    "__docId__": 65,
+    "__docId__": 64,
     "kind": "variable",
-    "name": "fmath",
-    "memberof": "docs-src/index.js",
+    "name": "DEFER",
+    "memberof": "source/index.js",
     "static": true,
-    "longname": "docs-src/index.js~fmath",
+    "longname": "source/index.js~DEFER",
     "access": "public",
     "export": false,
-    "importPath": "gameframework-lite/docs-src/index.js",
+    "importPath": "gameframework-lite/source/index.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 6,
+    "lineNumber": 7,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 65,
+    "kind": "variable",
+    "name": "NOW",
+    "memberof": "source/index.js",
+    "static": true,
+    "longname": "source/index.js~NOW",
+    "access": "public",
+    "export": false,
+    "importPath": "gameframework-lite/source/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 8,
     "undocument": true,
     "type": {
       "types": [
@@ -889,16 +888,16 @@
   {
     "__docId__": 66,
     "kind": "variable",
-    "name": "DEFER",
-    "memberof": "docs-src/index.js",
+    "name": "HALF_PI",
+    "memberof": "source/index.js",
     "static": true,
-    "longname": "docs-src/index.js~DEFER",
+    "longname": "source/index.js~HALF_PI",
     "access": "public",
     "export": false,
-    "importPath": "gameframework-lite/docs-src/index.js",
+    "importPath": "gameframework-lite/source/index.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 9,
+    "lineNumber": 11,
     "undocument": true,
     "type": {
       "types": [
@@ -910,20 +909,20 @@
   {
     "__docId__": 67,
     "kind": "variable",
-    "name": "NOW",
-    "memberof": "docs-src/index.js",
+    "name": "HERO_ID",
+    "memberof": "source/index.js",
     "static": true,
-    "longname": "docs-src/index.js~NOW",
+    "longname": "source/index.js~HERO_ID",
     "access": "public",
     "export": false,
-    "importPath": "gameframework-lite/docs-src/index.js",
+    "importPath": "gameframework-lite/source/index.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 10,
+    "lineNumber": 13,
     "undocument": true,
     "type": {
       "types": [
-        "*"
+        "number"
       ]
     },
     "ignore": true
@@ -931,20 +930,20 @@
   {
     "__docId__": 68,
     "kind": "variable",
-    "name": "HALF_PI",
-    "memberof": "docs-src/index.js",
+    "name": "HERO_X",
+    "memberof": "source/index.js",
     "static": true,
-    "longname": "docs-src/index.js~HALF_PI",
+    "longname": "source/index.js~HERO_X",
     "access": "public",
     "export": false,
-    "importPath": "gameframework-lite/docs-src/index.js",
+    "importPath": "gameframework-lite/source/index.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 13,
+    "lineNumber": 14,
     "undocument": true,
     "type": {
       "types": [
-        "*"
+        "number"
       ]
     },
     "ignore": true
@@ -952,13 +951,13 @@
   {
     "__docId__": 69,
     "kind": "variable",
-    "name": "HERO_ID",
-    "memberof": "docs-src/index.js",
+    "name": "HERO_Y",
+    "memberof": "source/index.js",
     "static": true,
-    "longname": "docs-src/index.js~HERO_ID",
+    "longname": "source/index.js~HERO_Y",
     "access": "public",
     "export": false,
-    "importPath": "gameframework-lite/docs-src/index.js",
+    "importPath": "gameframework-lite/source/index.js",
     "importStyle": null,
     "description": null,
     "lineNumber": 15,
@@ -972,87 +971,44 @@
   },
   {
     "__docId__": 70,
-    "kind": "variable",
-    "name": "HERO_X",
-    "memberof": "docs-src/index.js",
+    "kind": "class",
+    "name": "Game",
+    "memberof": "source/index.js",
     "static": true,
-    "longname": "docs-src/index.js~HERO_X",
+    "longname": "source/index.js~Game",
     "access": "public",
-    "export": false,
-    "importPath": "gameframework-lite/docs-src/index.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 16,
-    "undocument": true,
-    "type": {
-      "types": [
-        "number"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 71,
-    "kind": "variable",
-    "name": "HERO_Y",
-    "memberof": "docs-src/index.js",
-    "static": true,
-    "longname": "docs-src/index.js~HERO_Y",
-    "access": "public",
-    "export": false,
-    "importPath": "gameframework-lite/docs-src/index.js",
-    "importStyle": null,
+    "export": true,
+    "importPath": "gameframework-lite/source/index.js",
+    "importStyle": "{Game}",
     "description": null,
     "lineNumber": 17,
     "undocument": true,
-    "type": {
-      "types": [
-        "number"
-      ]
-    },
-    "ignore": true
+    "interface": false
   },
   {
-    "__docId__": 72,
-    "kind": "class",
-    "name": "Game",
-    "memberof": "docs-src/index.js",
-    "static": true,
-    "longname": "docs-src/index.js~Game",
-    "access": "public",
-    "export": false,
-    "importPath": "gameframework-lite/docs-src/index.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 19,
-    "undocument": true,
-    "interface": false,
-    "ignore": true
-  },
-  {
-    "__docId__": 73,
+    "__docId__": 71,
     "kind": "constructor",
     "name": "constructor",
-    "memberof": "docs-src/index.js~Game",
+    "memberof": "source/index.js~Game",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/index.js~Game#constructor",
+    "longname": "source/index.js~Game#constructor",
     "access": "public",
     "description": null,
-    "lineNumber": 20,
+    "lineNumber": 18,
     "undocument": true
   },
   {
-    "__docId__": 74,
+    "__docId__": 72,
     "kind": "member",
     "name": "levels",
-    "memberof": "docs-src/index.js~Game",
+    "memberof": "source/index.js~Game",
     "static": false,
-    "longname": "docs-src/index.js~Game#levels",
+    "longname": "source/index.js~Game#levels",
     "access": "public",
     "description": null,
-    "lineNumber": 21,
+    "lineNumber": 19,
     "undocument": true,
     "type": {
       "types": [
@@ -1061,15 +1017,15 @@
     }
   },
   {
-    "__docId__": 75,
+    "__docId__": 73,
     "kind": "member",
     "name": "interval",
-    "memberof": "docs-src/index.js~Game",
+    "memberof": "source/index.js~Game",
     "static": false,
-    "longname": "docs-src/index.js~Game#interval",
+    "longname": "source/index.js~Game#interval",
     "access": "public",
     "description": null,
-    "lineNumber": 22,
+    "lineNumber": 20,
     "undocument": true,
     "type": {
       "types": [
@@ -1078,64 +1034,111 @@
     }
   },
   {
-    "__docId__": 76,
+    "__docId__": 74,
     "kind": "member",
     "name": "now",
-    "memberof": "docs-src/index.js~Game",
+    "memberof": "source/index.js~Game",
     "static": false,
-    "longname": "docs-src/index.js~Game#now",
+    "longname": "source/index.js~Game#now",
+    "access": "public",
+    "description": null,
+    "lineNumber": 21,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 75,
+    "kind": "method",
+    "name": "loop",
+    "memberof": "source/index.js~Game",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "source/index.js~Game#loop",
     "access": "public",
     "description": null,
     "lineNumber": 23,
     "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
+    "params": [],
+    "return": null
   },
   {
-    "__docId__": 77,
+    "__docId__": 76,
     "kind": "method",
-    "name": "loop",
-    "memberof": "docs-src/index.js~Game",
+    "name": "tick",
+    "memberof": "source/index.js~Game",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/index.js~Game#loop",
+    "longname": "source/index.js~Game#tick",
     "access": "public",
     "description": null,
-    "lineNumber": 25,
+    "lineNumber": 30,
     "undocument": true,
     "params": [],
     "return": null
   },
   {
-    "__docId__": 78,
-    "kind": "method",
-    "name": "tick",
-    "memberof": "docs-src/index.js~Game",
-    "generator": false,
-    "async": false,
+    "__docId__": 77,
+    "kind": "member",
+    "name": "delta",
+    "memberof": "source/index.js~Game",
     "static": false,
-    "longname": "docs-src/index.js~Game#tick",
+    "longname": "source/index.js~Game#delta",
     "access": "public",
     "description": null,
     "lineNumber": 32,
     "undocument": true,
-    "params": [],
-    "return": null
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
   },
   {
     "__docId__": 79,
-    "kind": "member",
-    "name": "delta",
-    "memberof": "docs-src/index.js~Game",
+    "kind": "class",
+    "name": "Level",
+    "memberof": "source/index.js",
+    "static": true,
+    "longname": "source/index.js~Level",
+    "access": "public",
+    "export": true,
+    "importPath": "gameframework-lite/source/index.js",
+    "importStyle": "{Level}",
+    "description": null,
+    "lineNumber": 40,
+    "undocument": true,
+    "interface": false
+  },
+  {
+    "__docId__": 80,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "source/index.js~Level",
+    "generator": false,
+    "async": false,
     "static": false,
-    "longname": "docs-src/index.js~Game#delta",
+    "longname": "source/index.js~Level#constructor",
     "access": "public",
     "description": null,
-    "lineNumber": 34,
+    "lineNumber": 41,
+    "undocument": true
+  },
+  {
+    "__docId__": 81,
+    "kind": "member",
+    "name": "heros",
+    "memberof": "source/index.js~Level",
+    "static": false,
+    "longname": "source/index.js~Level#heros",
+    "access": "public",
+    "description": null,
+    "lineNumber": 46,
     "undocument": true,
     "type": {
       "types": [
@@ -1144,80 +1147,32 @@
     }
   },
   {
-    "__docId__": 81,
-    "kind": "class",
-    "name": "Level",
-    "memberof": "docs-src/index.js",
-    "static": true,
-    "longname": "docs-src/index.js~Level",
-    "access": "public",
-    "export": false,
-    "importPath": "gameframework-lite/docs-src/index.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 42,
-    "undocument": true,
-    "interface": false,
-    "ignore": true
-  },
-  {
     "__docId__": 82,
-    "kind": "constructor",
-    "name": "constructor",
-    "memberof": "docs-src/index.js~Level",
-    "generator": false,
-    "async": false,
+    "kind": "member",
+    "name": "blocks",
+    "memberof": "source/index.js~Level",
     "static": false,
-    "longname": "docs-src/index.js~Level#constructor",
+    "longname": "source/index.js~Level#blocks",
     "access": "public",
     "description": null,
-    "lineNumber": 43,
-    "undocument": true
+    "lineNumber": 47,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
   },
   {
     "__docId__": 83,
     "kind": "member",
-    "name": "heros",
-    "memberof": "docs-src/index.js~Level",
+    "name": "accuracy",
+    "memberof": "source/index.js~Level",
     "static": false,
-    "longname": "docs-src/index.js~Level#heros",
+    "longname": "source/index.js~Level#accuracy",
     "access": "public",
     "description": null,
     "lineNumber": 48,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 84,
-    "kind": "member",
-    "name": "blocks",
-    "memberof": "docs-src/index.js~Level",
-    "static": false,
-    "longname": "docs-src/index.js~Level#blocks",
-    "access": "public",
-    "description": null,
-    "lineNumber": 49,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 85,
-    "kind": "member",
-    "name": "accuracy",
-    "memberof": "docs-src/index.js~Level",
-    "static": false,
-    "longname": "docs-src/index.js~Level#accuracy",
-    "access": "public",
-    "description": null,
-    "lineNumber": 50,
     "undocument": true,
     "type": {
       "types": [
@@ -1226,17 +1181,17 @@
     }
   },
   {
-    "__docId__": 86,
+    "__docId__": 84,
     "kind": "method",
     "name": "spawn",
-    "memberof": "docs-src/index.js~Level",
+    "memberof": "source/index.js~Level",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/index.js~Level#spawn",
+    "longname": "source/index.js~Level#spawn",
     "access": "public",
     "description": null,
-    "lineNumber": 52,
+    "lineNumber": 50,
     "undocument": true,
     "params": [
       {
@@ -1253,17 +1208,17 @@
     "return": null
   },
   {
-    "__docId__": 87,
+    "__docId__": 85,
     "kind": "method",
     "name": "eachHero",
-    "memberof": "docs-src/index.js~Level",
+    "memberof": "source/index.js~Level",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/index.js~Level#eachHero",
+    "longname": "source/index.js~Level#eachHero",
     "access": "public",
     "description": null,
-    "lineNumber": 56,
+    "lineNumber": 54,
     "undocument": true,
     "params": [
       {
@@ -1276,17 +1231,17 @@
     "return": null
   },
   {
-    "__docId__": 88,
+    "__docId__": 86,
     "kind": "method",
     "name": "tick",
-    "memberof": "docs-src/index.js~Level",
+    "memberof": "source/index.js~Level",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/index.js~Level#tick",
+    "longname": "source/index.js~Level#tick",
     "access": "public",
     "description": null,
-    "lineNumber": 63,
+    "lineNumber": 61,
     "undocument": true,
     "params": [
       {
@@ -1299,17 +1254,17 @@
     "return": null
   },
   {
-    "__docId__": 89,
+    "__docId__": 87,
     "kind": "method",
     "name": "toArray",
-    "memberof": "docs-src/index.js~Level",
+    "memberof": "source/index.js~Level",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/index.js~Level#toArray",
+    "longname": "source/index.js~Level#toArray",
     "access": "public",
     "description": null,
-    "lineNumber": 66,
+    "lineNumber": 64,
     "undocument": true,
     "params": [],
     "return": {
@@ -1319,17 +1274,17 @@
     }
   },
   {
-    "__docId__": 90,
+    "__docId__": 88,
     "kind": "method",
     "name": "removeHero",
-    "memberof": "docs-src/index.js~Level",
+    "memberof": "source/index.js~Level",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/index.js~Level#removeHero",
+    "longname": "source/index.js~Level#removeHero",
     "access": "public",
     "description": null,
-    "lineNumber": 71,
+    "lineNumber": 69,
     "undocument": true,
     "params": [
       {
@@ -1342,17 +1297,17 @@
     "return": null
   },
   {
-    "__docId__": 91,
+    "__docId__": 89,
     "kind": "method",
     "name": "fromArray",
-    "memberof": "docs-src/index.js~Level",
+    "memberof": "source/index.js~Level",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/index.js~Level#fromArray",
+    "longname": "source/index.js~Level#fromArray",
     "access": "public",
     "description": null,
-    "lineNumber": 78,
+    "lineNumber": 76,
     "undocument": true,
     "params": [
       {
@@ -1377,17 +1332,17 @@
     "return": null
   },
   {
-    "__docId__": 92,
+    "__docId__": 90,
     "kind": "method",
     "name": "updateHero",
-    "memberof": "docs-src/index.js~Level",
+    "memberof": "source/index.js~Level",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/index.js~Level#updateHero",
+    "longname": "source/index.js~Level#updateHero",
     "access": "public",
     "description": null,
-    "lineNumber": 96,
+    "lineNumber": 94,
     "undocument": true,
     "params": [
       {
@@ -1409,17 +1364,17 @@
     "return": null
   },
   {
-    "__docId__": 93,
+    "__docId__": 91,
     "kind": "method",
     "name": "addHero",
-    "memberof": "docs-src/index.js~Level",
+    "memberof": "source/index.js~Level",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/index.js~Level#addHero",
+    "longname": "source/index.js~Level#addHero",
     "access": "public",
     "description": null,
-    "lineNumber": 102,
+    "lineNumber": 100,
     "undocument": true,
     "params": [
       {
@@ -1448,17 +1403,17 @@
     }
   },
   {
-    "__docId__": 94,
+    "__docId__": 92,
     "kind": "method",
     "name": "fromTiled",
-    "memberof": "docs-src/index.js~Level",
+    "memberof": "source/index.js~Level",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/index.js~Level#fromTiled",
+    "longname": "source/index.js~Level#fromTiled",
     "access": "public",
     "description": null,
-    "lineNumber": 113,
+    "lineNumber": 111,
     "undocument": true,
     "params": [
       {
@@ -1474,15 +1429,32 @@
     "return": null
   },
   {
-    "__docId__": 95,
+    "__docId__": 93,
     "kind": "member",
     "name": "width",
-    "memberof": "docs-src/index.js~Level",
+    "memberof": "source/index.js~Level",
     "static": false,
-    "longname": "docs-src/index.js~Level#width",
+    "longname": "source/index.js~Level#width",
     "access": "public",
     "description": null,
-    "lineNumber": 114,
+    "lineNumber": 112,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 94,
+    "kind": "member",
+    "name": "height",
+    "memberof": "source/index.js~Level",
+    "static": false,
+    "longname": "source/index.js~Level#height",
+    "access": "public",
+    "description": null,
+    "lineNumber": 113,
     "undocument": true,
     "type": {
       "types": [
@@ -1493,30 +1465,13 @@
   {
     "__docId__": 96,
     "kind": "member",
-    "name": "height",
-    "memberof": "docs-src/index.js~Level",
+    "name": "stops",
+    "memberof": "source/index.js~Level",
     "static": false,
-    "longname": "docs-src/index.js~Level#height",
+    "longname": "source/index.js~Level#stops",
     "access": "public",
     "description": null,
     "lineNumber": 115,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 98,
-    "kind": "member",
-    "name": "stops",
-    "memberof": "docs-src/index.js~Level",
-    "static": false,
-    "longname": "docs-src/index.js~Level#stops",
-    "access": "public",
-    "description": null,
-    "lineNumber": 117,
     "undocument": true,
     "type": {
       "types": [
@@ -1525,15 +1480,15 @@
     }
   },
   {
-    "__docId__": 99,
+    "__docId__": 97,
     "kind": "member",
     "name": "tileset",
-    "memberof": "docs-src/index.js~Level",
+    "memberof": "source/index.js~Level",
     "static": false,
-    "longname": "docs-src/index.js~Level#tileset",
+    "longname": "source/index.js~Level#tileset",
     "access": "public",
     "description": null,
-    "lineNumber": 118,
+    "lineNumber": 116,
     "undocument": true,
     "type": {
       "types": [
@@ -1542,43 +1497,76 @@
     }
   },
   {
-    "__docId__": 101,
+    "__docId__": 99,
     "kind": "class",
     "name": "Hero",
-    "memberof": "docs-src/index.js",
+    "memberof": "source/index.js",
     "static": true,
-    "longname": "docs-src/index.js~Hero",
+    "longname": "source/index.js~Hero",
     "access": "public",
-    "export": false,
-    "importPath": "gameframework-lite/docs-src/index.js",
-    "importStyle": null,
+    "export": true,
+    "importPath": "gameframework-lite/source/index.js",
+    "importStyle": "{Hero}",
     "description": null,
-    "lineNumber": 137,
+    "lineNumber": 135,
     "undocument": true,
-    "interface": false,
-    "ignore": true
+    "interface": false
   },
   {
-    "__docId__": 102,
+    "__docId__": 100,
     "kind": "constructor",
     "name": "constructor",
-    "memberof": "docs-src/index.js~Hero",
+    "memberof": "source/index.js~Hero",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/index.js~Hero#constructor",
+    "longname": "source/index.js~Hero#constructor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 136,
+    "undocument": true
+  },
+  {
+    "__docId__": 101,
+    "kind": "member",
+    "name": "id",
+    "memberof": "source/index.js~Hero",
+    "static": false,
+    "longname": "source/index.js~Hero#id",
+    "access": "public",
+    "description": null,
+    "lineNumber": 137,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 102,
+    "kind": "member",
+    "name": "sprite",
+    "memberof": "source/index.js~Hero",
+    "static": false,
+    "longname": "source/index.js~Hero#sprite",
     "access": "public",
     "description": null,
     "lineNumber": 138,
-    "undocument": true
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
   },
   {
     "__docId__": 103,
     "kind": "member",
-    "name": "id",
-    "memberof": "docs-src/index.js~Hero",
+    "name": "x",
+    "memberof": "source/index.js~Hero",
     "static": false,
-    "longname": "docs-src/index.js~Hero#id",
+    "longname": "source/index.js~Hero#x",
     "access": "public",
     "description": null,
     "lineNumber": 139,
@@ -1592,10 +1580,10 @@
   {
     "__docId__": 104,
     "kind": "member",
-    "name": "sprite",
-    "memberof": "docs-src/index.js~Hero",
+    "name": "y",
+    "memberof": "source/index.js~Hero",
     "static": false,
-    "longname": "docs-src/index.js~Hero#sprite",
+    "longname": "source/index.js~Hero#y",
     "access": "public",
     "description": null,
     "lineNumber": 140,
@@ -1608,50 +1596,16 @@
   },
   {
     "__docId__": 105,
-    "kind": "member",
-    "name": "x",
-    "memberof": "docs-src/index.js~Hero",
-    "static": false,
-    "longname": "docs-src/index.js~Hero#x",
-    "access": "public",
-    "description": null,
-    "lineNumber": 141,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 106,
-    "kind": "member",
-    "name": "y",
-    "memberof": "docs-src/index.js~Hero",
-    "static": false,
-    "longname": "docs-src/index.js~Hero#y",
-    "access": "public",
-    "description": null,
-    "lineNumber": 142,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 107,
     "kind": "method",
     "name": "toArray",
-    "memberof": "docs-src/index.js~Hero",
+    "memberof": "source/index.js~Hero",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/index.js~Hero#toArray",
+    "longname": "source/index.js~Hero#toArray",
     "access": "public",
     "description": null,
-    "lineNumber": 144,
+    "lineNumber": 142,
     "undocument": true,
     "params": [],
     "return": {
@@ -1661,17 +1615,17 @@
     }
   },
   {
-    "__docId__": 108,
+    "__docId__": 106,
     "kind": "method",
     "name": "fromArray",
-    "memberof": "docs-src/index.js~Hero",
+    "memberof": "source/index.js~Hero",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/index.js~Hero#fromArray",
+    "longname": "source/index.js~Hero#fromArray",
     "access": "public",
     "description": null,
-    "lineNumber": 151,
+    "lineNumber": 149,
     "undocument": true,
     "params": [
       {
@@ -1696,17 +1650,17 @@
     "return": null
   },
   {
-    "__docId__": 110,
+    "__docId__": 108,
     "kind": "method",
     "name": "move",
-    "memberof": "docs-src/index.js~Hero",
+    "memberof": "source/index.js~Hero",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/index.js~Hero#move",
+    "longname": "source/index.js~Hero#move",
     "access": "public",
     "description": null,
-    "lineNumber": 159,
+    "lineNumber": 157,
     "undocument": true,
     "params": [
       {
@@ -1725,20 +1679,20 @@
     "return": null
   },
   {
-    "__docId__": 113,
+    "__docId__": 111,
     "kind": "function",
     "name": "atan2",
-    "memberof": "docs-src/index.js",
+    "memberof": "source/index.js",
     "generator": false,
     "async": false,
     "static": true,
-    "longname": "docs-src/index.js~atan2",
+    "longname": "source/index.js~atan2",
     "access": "public",
-    "export": false,
-    "importPath": "gameframework-lite/docs-src/index.js",
-    "importStyle": null,
+    "export": true,
+    "importPath": "gameframework-lite/source/index.js",
+    "importStyle": "{atan2}",
     "description": null,
-    "lineNumber": 165,
+    "lineNumber": 163,
     "undocument": true,
     "params": [
       {
@@ -1758,48 +1712,46 @@
       "types": [
         "*"
       ]
-    },
-    "ignore": true
+    }
   },
   {
-    "__docId__": 114,
+    "__docId__": 112,
     "kind": "function",
     "name": "randomId",
-    "memberof": "docs-src/index.js",
+    "memberof": "source/index.js",
     "generator": false,
     "async": false,
     "static": true,
-    "longname": "docs-src/index.js~randomId",
+    "longname": "source/index.js~randomId",
     "access": "public",
-    "export": false,
-    "importPath": "gameframework-lite/docs-src/index.js",
-    "importStyle": null,
+    "export": true,
+    "importPath": "gameframework-lite/source/index.js",
+    "importStyle": "{randomId}",
     "description": null,
-    "lineNumber": 188,
+    "lineNumber": 186,
     "undocument": true,
     "params": [],
     "return": {
       "types": [
         "*"
       ]
-    },
-    "ignore": true
+    }
   },
   {
-    "__docId__": 115,
+    "__docId__": 113,
     "kind": "function",
     "name": "distance",
-    "memberof": "docs-src/index.js",
+    "memberof": "source/index.js",
     "generator": false,
     "async": false,
     "static": true,
-    "longname": "docs-src/index.js~distance",
+    "longname": "source/index.js~distance",
     "access": "public",
-    "export": false,
-    "importPath": "gameframework-lite/docs-src/index.js",
-    "importStyle": null,
+    "export": true,
+    "importPath": "gameframework-lite/source/index.js",
+    "importStyle": "{distance}",
     "description": null,
-    "lineNumber": 192,
+    "lineNumber": 190,
     "undocument": true,
     "params": [
       {
@@ -1819,54 +1771,52 @@
       "types": [
         "*"
       ]
-    },
-    "ignore": true
+    }
   },
   {
-    "__docId__": 116,
+    "__docId__": 114,
     "kind": "function",
     "name": "random",
-    "memberof": "docs-src/index.js",
+    "memberof": "source/index.js",
     "generator": false,
     "async": false,
     "static": true,
-    "longname": "docs-src/index.js~random",
+    "longname": "source/index.js~random",
     "access": "public",
-    "export": false,
-    "importPath": "gameframework-lite/docs-src/index.js",
-    "importStyle": null,
+    "export": true,
+    "importPath": "gameframework-lite/source/index.js",
+    "importStyle": "{random}",
     "description": null,
-    "lineNumber": 196,
+    "lineNumber": 194,
     "undocument": true,
     "params": [],
     "return": {
       "types": [
         "*"
       ]
-    },
-    "ignore": true
+    }
   },
   {
-    "__docId__": 117,
+    "__docId__": 115,
     "kind": "file",
-    "name": "docs-src/view.js",
-    "content": "'use strict';\n\nconst PIXI = (typeof window !== 'undefined') ? \n\twindow.PIXI || \n\trequire('pixi.js') : \n\trequire('pixi.js');\n\nconst Level = require('.').Level;\n\nclass View {\n\tconstructor (screenSize = 480, anchor = document.body) {\n\t\tthis.screenSize = screenSize;\n\t\tthis.pixi = new PIXI.Application(window.innerWidth, window.innerHeight, {\n\t\t\tautoResize: false,\n\t\t\troundPixels: true,\n\t\t\tclearBeforeRender: false,\n\t\t\tresolution: 1\n\t\t});\n\t\tthis.camera = new PIXI.Container();\n\t\tthis.pixi.stage.addChild(this.camera);\n\t\tthis.level = new Level();\n\t\tthis.level.onUpdateHero = this._onUpdateHero.bind(this);\n\t\tthis.level.onCreateHero = this._onCreateHero.bind(this);\n\t\tthis.level.onRemoveHero = this._onRemoveHero.bind(this);\n\t\tanchor.appendChild(this.pixi.view);\n\t\twindow.addEventListener('resize', this.onResize.bind(this), true);\n\t\tthis.onResize();\n\t\tthis.pixi.start();\n\t}\n\tget hero () {\n\t\treturn this.level.heros[this.id];\n\t}\n\tcameraToHero (hero) {\n\t\tthis.camera.x = Math.floor(-hero.sprite.x + window.innerWidth / 2 / this.scale);\n\t\tthis.camera.y = Math.floor(-hero.sprite.y + window.innerHeight / 2 / this.scale);\n\t}\n\tonUpdateHero (hero) {\n\t\t// this is what you should override\n\t}\n\t_onUpdateHero (hero) {\n\t\tthis.onUpdateHero(hero);\n\t\tif (hero.sprite) {\n\t\t\thero.sprite.x = hero.x * this.level.accuracy;\n\t\t\thero.sprite.y = hero.y * this.level.accuracy;\n\t\t}\n\t}\n\t// this is what you should override\n\tonCreateHero (hero) {\n\t\thero.sprite = PIXI.Sprite.fromImage('bunny.png');\n\t\thero.sprite.anchor.set(0.5);\t\t\n\t\thero.sprite.texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;\n\t}\n\t_onCreateHero (hero) {\n\t\tif (!hero.sprite) {\n\t\t\tthis.onCreateHero(hero);\n\t\t\tif (hero.sprite) {\n\t\t\t\thero.sprite.x = hero.x * this.level.accuracy;\n\t\t\t\thero.sprite.y = hero.y * this.level.accuracy;\n\t\t\t\t(this.layers ? this.layers.heros : this.camera).addChild(hero.sprite);\n\t\t\t}\n\t\t}\n\t}\n\tonRemoveHero (hero) {\n\t\t// this is what you should override\n\t}\n\t_onRemoveHero (hero) {\n\t\tthis.onRemoveHero(hero);\n\t\tif (hero.sprite && hero.sprite.parent) {\n\t\t\thero.sprite.parent.removeChild(hero.sprite);\n\t\t}\n\t}\n\tonResize () {\n\t\tthis.scale = this.getScale();\n\t\tthis.pixi.renderer.resize(window.innerWidth, window.innerHeight);\n\t\tthis.pixi.stage.scale.set(this.scale);\n\t}\n\tgetScale () {\n\t    return +(Math.sqrt(window.innerWidth * window.innerHeight) / this.screenSize).toFixed(2);\n\t}\n\tgetTexture (frame) {\n\t\tif (!this.textureCache[frame]) {\n\t\t\t// <-- tiled firstgid === 1\n\t\t\tconst size = this.level.tileset.tilewidth,\n\t\t\t\twidth = (this.level.tileset.imagewidth / this.level.tileset.tilewidth),\n\t\t\t\tx = ((frame - 1) % width) * size,\n\t\t\t\ty = Math.floor((frame - 1) / width) * size;\n\t\t\tthis.textureCache[frame] = new PIXI.Texture(\n\t\t\t\tthis.tileset, new PIXI.Rectangle(x, y, size, size)\n\t\t\t);\n\t\t\tthis.textureCache[frame].baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;\n\t\t}\n\t\treturn this.textureCache[frame];\n\t}\n\tcreateSprite (frame, nearest = PIXI.SCALE_MODES.NEAREST) {\n\t\tlet sprite;\n\t\tif (isFinite(frame)) {\n\t\t\tsprite = new PIXI.Sprite(this.getTexture(parseInt(frame, 10)));\n\t\t} else {\n\t\t\tsprite = PIXI.Sprite.fromFrame(frame);\n\t\t}\n\t\tsprite.texture.baseTexture.scaleMode = nearest;\n\t\treturn sprite;\n\t}\n\taddBlock (x, y, block, layer = this.layers.blocks, nearest = PIXI.SCALE_MODES.NEAREST) {\n\t\tconst sprite = this.createSprite(block, nearest);\n\t\tsprite.width = sprite.height = this.level.tileset.tilewidth;\n\t\tsprite.x = Math.floor(this.level.tileset.tilewidth * x);\n\t\tsprite.y = Math.floor(this.level.tileset.tilewidth * y);\n\t\tsprite.anchor.set(0.5);\n\t\tlayer.addChild(sprite);\n\t}\n\taddBlocks () {\n\t\tfor (let y = 0; y < this.level.height; y++) {\n\t\t\tfor (let x = 0; x < this.level.width; x++) {\n\t\t\t\tconst block = this.level.blocks[`${x}:${y}`];\n\t\t\t\tif (block && Array.isArray(block)) {\n\t\t\t\t\tfor (let i = 0; i < block.length; i++) {\n\t\t\t\t\t\tif (parseInt(block[i], 10)) {\n\t\t\t\t\t\t\tthis.addBlock(x, y, block[i]);\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\tcreateLevel (tiled) {\n\t\tthis.textureCache = {};\n\t\tthis.layers = {\n\t\t\tblocks: new PIXI.Container(),\n\t\t\theros: new PIXI.Container(),\n\t\t};\n\t\tthis.tileset = PIXI.Texture.fromImage(tiled.tilesets[0].image, false, PIXI.SCALE_MODES.NEAREST);\n\t\tthis.camera.addChild(this.layers.blocks);\n\t\tthis.camera.addChild(this.layers.heros);\n\t\tthis.level.fromTiled(tiled);\n\t\tthis.addBlocks();\n\t}\n\t_onMouseMove (event) {\n\t\tevent.stopPropagation();\n\t\tconst e = event.touches ? event.touches[0] : event;\n\t\tthis.mouse = {\n\t\t\tx: e.clientX,\n\t\t\ty: e.clientY,\n\t\t};\n\t\tif (this.onMouseMove) {\n\t\t\tthis.onMouseMove();\n\t\t}\n\t}\n\t_onMouseClick (event) {\n\t\tthis._onMouseMove(event);\n\t\tif (this.onMouseClick) {\n\t\t\tthis.onMouseClick();\n\t\t}\n\t}\n\tuseMouse (disableContextMenu = false) {\n\t\twindow.addEventListener('touchmove', this._onMouseMove.bind(this), false);\n\t\twindow.addEventListener('touchstart', this._onMouseClick.bind(this), false);\n\t\twindow.addEventListener('mousemove', this._onMouseMove.bind(this), false);\n\t\twindow.addEventListener('mousedown', this._onMouseClick.bind(this), false);\n\t\tif (disableContextMenu) {\n\t\t\tthis.disableContextMenu();\n\t\t}\n\t}\n\tdisableContextMenu () {\n\t\tdocument.body.addEventListener('contextmenu', (event) => event.preventDefault(), false);\n\t}\n}\n\nif (typeof exports !== 'undefined') {\n\texports.default = View;\n}\n\n",
+    "name": "source/view.js",
+    "content": "'use strict';\n\nconst { Level } = require('./index');\nconst PIXI = (typeof window !== 'undefined') ? require('pixi.js') : {};\n\nexport default class View {\n\tconstructor (screenSize = 480, anchor = document.body) {\n\t\tthis.screenSize = screenSize;\n\t\tthis.pixi = new PIXI.Application(window.innerWidth, window.innerHeight, {\n\t\t\tautoResize: false,\n\t\t\troundPixels: true,\n\t\t\tclearBeforeRender: false,\n\t\t\tresolution: 1\n\t\t});\n\t\tthis.camera = new PIXI.Container();\n\t\tthis.pixi.stage.addChild(this.camera);\n\t\tthis.level = new Level();\n\t\tthis.level.onUpdateHero = this._onUpdateHero.bind(this);\n\t\tthis.level.onCreateHero = this._onCreateHero.bind(this);\n\t\tthis.level.onRemoveHero = this._onRemoveHero.bind(this);\n\t\tanchor.appendChild(this.pixi.view);\n\t\twindow.addEventListener('resize', this.onResize.bind(this), true);\n\t\tthis.onResize();\n\t\tthis.pixi.start();\n\t}\n\tget hero () {\n\t\treturn this.level.heros[this.id];\n\t}\n\tcameraToHero (hero) {\n\t\tthis.camera.x = Math.floor(-hero.sprite.x + window.innerWidth / 2 / this.scale);\n\t\tthis.camera.y = Math.floor(-hero.sprite.y + window.innerHeight / 2 / this.scale);\n\t}\n\tonUpdateHero (hero) {\n\t\t// this is what you should override\n\t}\n\t_onUpdateHero (hero) {\n\t\tthis.onUpdateHero(hero);\n\t\tif (hero.sprite) {\n\t\t\thero.sprite.x = hero.x * this.level.accuracy;\n\t\t\thero.sprite.y = hero.y * this.level.accuracy;\n\t\t}\n\t}\n\t// this is what you should override\n\tonCreateHero (hero) {\n\t\thero.sprite = PIXI.Sprite.fromImage('bunny.png');\n\t\thero.sprite.anchor.set(0.5);\t\t\n\t\thero.sprite.texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;\n\t}\n\t_onCreateHero (hero) {\n\t\tif (!hero.sprite) {\n\t\t\tthis.onCreateHero(hero);\n\t\t\tif (hero.sprite) {\n\t\t\t\thero.sprite.x = hero.x * this.level.accuracy;\n\t\t\t\thero.sprite.y = hero.y * this.level.accuracy;\n\t\t\t\t(this.layers ? this.layers.heros : this.camera).addChild(hero.sprite);\n\t\t\t}\n\t\t}\n\t}\n\tonRemoveHero (hero) {\n\t\t// this is what you should override\n\t}\n\t_onRemoveHero (hero) {\n\t\tthis.onRemoveHero(hero);\n\t\tif (hero.sprite && hero.sprite.parent) {\n\t\t\thero.sprite.parent.removeChild(hero.sprite);\n\t\t}\n\t}\n\tonResize () {\n\t\tthis.scale = this.getScale();\n\t\tthis.pixi.renderer.resize(window.innerWidth, window.innerHeight);\n\t\tthis.pixi.stage.scale.set(this.scale);\n\t}\n\tgetScale () {\n\t    return +(Math.sqrt(window.innerWidth * window.innerHeight) / this.screenSize).toFixed(2);\n\t}\n\tgetTexture (frame) {\n\t\tif (!this.textureCache[frame]) {\n\t\t\t// <-- tiled firstgid === 1\n\t\t\tconst size = this.level.tileset.tilewidth,\n\t\t\t\twidth = (this.level.tileset.imagewidth / this.level.tileset.tilewidth),\n\t\t\t\tx = ((frame - 1) % width) * size,\n\t\t\t\ty = Math.floor((frame - 1) / width) * size;\n\t\t\tthis.textureCache[frame] = new PIXI.Texture(\n\t\t\t\tthis.tileset, new PIXI.Rectangle(x, y, size, size)\n\t\t\t);\n\t\t\tthis.textureCache[frame].baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;\n\t\t}\n\t\treturn this.textureCache[frame];\n\t}\n\tcreateSprite (frame, nearest = PIXI.SCALE_MODES.NEAREST) {\n\t\tlet sprite;\n\t\tif (isFinite(frame)) {\n\t\t\tsprite = new PIXI.Sprite(this.getTexture(parseInt(frame, 10)));\n\t\t} else {\n\t\t\tsprite = PIXI.Sprite.fromFrame(frame);\n\t\t}\n\t\tsprite.texture.baseTexture.scaleMode = nearest;\n\t\treturn sprite;\n\t}\n\taddBlock (x, y, block, layer = this.layers.blocks, nearest = PIXI.SCALE_MODES.NEAREST) {\n\t\tconst sprite = this.createSprite(block, nearest);\n\t\tsprite.width = sprite.height = this.level.tileset.tilewidth;\n\t\tsprite.x = Math.floor(this.level.tileset.tilewidth * x);\n\t\tsprite.y = Math.floor(this.level.tileset.tilewidth * y);\n\t\tsprite.anchor.set(0.5);\n\t\tlayer.addChild(sprite);\n\t}\n\taddBlocks () {\n\t\tfor (let y = 0; y < this.level.height; y++) {\n\t\t\tfor (let x = 0; x < this.level.width; x++) {\n\t\t\t\tconst block = this.level.blocks[`${x}:${y}`];\n\t\t\t\tif (block && Array.isArray(block)) {\n\t\t\t\t\tfor (let i = 0; i < block.length; i++) {\n\t\t\t\t\t\tif (parseInt(block[i], 10)) {\n\t\t\t\t\t\t\tthis.addBlock(x, y, block[i]);\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\tcreateLevel (tiled) {\n\t\tthis.textureCache = {};\n\t\tthis.layers = {\n\t\t\tblocks: new PIXI.Container(),\n\t\t\theros: new PIXI.Container(),\n\t\t};\n\t\tthis.tileset = PIXI.Texture.fromImage(tiled.tilesets[0].image, false, PIXI.SCALE_MODES.NEAREST);\n\t\tthis.camera.addChild(this.layers.blocks);\n\t\tthis.camera.addChild(this.layers.heros);\n\t\tthis.level.fromTiled(tiled);\n\t\tthis.addBlocks();\n\t}\n\t_onMouseMove (event) {\n\t\tevent.stopPropagation();\n\t\tconst e = event.touches ? event.touches[0] : event;\n\t\tthis.mouse = {\n\t\t\tx: e.clientX,\n\t\t\ty: e.clientY,\n\t\t};\n\t\tif (this.onMouseMove) {\n\t\t\tthis.onMouseMove();\n\t\t}\n\t}\n\t_onMouseClick (event) {\n\t\tthis._onMouseMove(event);\n\t\tif (this.onMouseClick) {\n\t\t\tthis.onMouseClick();\n\t\t}\n\t}\n\tuseMouse (disableContextMenu = false) {\n\t\twindow.addEventListener('touchmove', this._onMouseMove.bind(this), false);\n\t\twindow.addEventListener('touchstart', this._onMouseClick.bind(this), false);\n\t\twindow.addEventListener('mousemove', this._onMouseMove.bind(this), false);\n\t\twindow.addEventListener('mousedown', this._onMouseClick.bind(this), false);\n\t\tif (disableContextMenu) {\n\t\t\tthis.disableContextMenu();\n\t\t}\n\t}\n\tdisableContextMenu () {\n\t\tdocument.body.addEventListener('contextmenu', (event) => event.preventDefault(), false);\n\t}\n}\n",
     "static": true,
-    "longname": "C:/Users/lenovo/projects/gameframework-lite/docs-src/view.js",
+    "longname": "C:/Users/lenovo/projects/gameframework-lite/source/view.js",
     "access": "public",
     "description": null,
     "lineNumber": 1
   },
   {
-    "__docId__": 118,
+    "__docId__": 116,
     "kind": "variable",
-    "name": "PIXI",
-    "memberof": "docs-src/view.js",
+    "name": "Level",
+    "memberof": "source/view.js",
     "static": true,
-    "longname": "docs-src/view.js~PIXI",
+    "longname": "source/view.js~Level",
     "access": "public",
     "export": false,
-    "importPath": "gameframework-lite/docs-src/view.js",
+    "importPath": "gameframework-lite/source/view.js",
     "importStyle": null,
     "description": null,
     "lineNumber": 3,
@@ -1879,18 +1829,18 @@
     "ignore": true
   },
   {
-    "__docId__": 119,
+    "__docId__": 117,
     "kind": "variable",
-    "name": "Level",
-    "memberof": "docs-src/view.js",
+    "name": "PIXI",
+    "memberof": "source/view.js",
     "static": true,
-    "longname": "docs-src/view.js~Level",
+    "longname": "source/view.js~PIXI",
     "access": "public",
     "export": false,
-    "importPath": "gameframework-lite/docs-src/view.js",
+    "importPath": "gameframework-lite/source/view.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 8,
+    "lineNumber": 4,
     "undocument": true,
     "type": {
       "types": [
@@ -1900,46 +1850,79 @@
     "ignore": true
   },
   {
-    "__docId__": 120,
+    "__docId__": 118,
     "kind": "class",
     "name": "View",
-    "memberof": "docs-src/view.js",
+    "memberof": "source/view.js",
     "static": true,
-    "longname": "docs-src/view.js~View",
+    "longname": "source/view.js~View",
     "access": "public",
-    "export": false,
-    "importPath": "gameframework-lite/docs-src/view.js",
-    "importStyle": null,
+    "export": true,
+    "importPath": "gameframework-lite/source/view.js",
+    "importStyle": "View",
     "description": null,
-    "lineNumber": 10,
+    "lineNumber": 6,
     "undocument": true,
-    "interface": false,
-    "ignore": true
+    "interface": false
   },
   {
-    "__docId__": 121,
+    "__docId__": 119,
     "kind": "constructor",
     "name": "constructor",
-    "memberof": "docs-src/view.js~View",
+    "memberof": "source/view.js~View",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/view.js~View#constructor",
+    "longname": "source/view.js~View#constructor",
     "access": "public",
     "description": null,
-    "lineNumber": 11,
+    "lineNumber": 7,
     "undocument": true
+  },
+  {
+    "__docId__": 120,
+    "kind": "member",
+    "name": "screenSize",
+    "memberof": "source/view.js~View",
+    "static": false,
+    "longname": "source/view.js~View#screenSize",
+    "access": "public",
+    "description": null,
+    "lineNumber": 8,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 121,
+    "kind": "member",
+    "name": "pixi",
+    "memberof": "source/view.js~View",
+    "static": false,
+    "longname": "source/view.js~View#pixi",
+    "access": "public",
+    "description": null,
+    "lineNumber": 9,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
   },
   {
     "__docId__": 122,
     "kind": "member",
-    "name": "screenSize",
-    "memberof": "docs-src/view.js~View",
+    "name": "camera",
+    "memberof": "source/view.js~View",
     "static": false,
-    "longname": "docs-src/view.js~View#screenSize",
+    "longname": "source/view.js~View#camera",
     "access": "public",
     "description": null,
-    "lineNumber": 12,
+    "lineNumber": 15,
     "undocument": true,
     "type": {
       "types": [
@@ -1950,13 +1933,13 @@
   {
     "__docId__": 123,
     "kind": "member",
-    "name": "pixi",
-    "memberof": "docs-src/view.js~View",
+    "name": "level",
+    "memberof": "source/view.js~View",
     "static": false,
-    "longname": "docs-src/view.js~View#pixi",
+    "longname": "source/view.js~View#level",
     "access": "public",
     "description": null,
-    "lineNumber": 13,
+    "lineNumber": 17,
     "undocument": true,
     "type": {
       "types": [
@@ -1966,14 +1949,16 @@
   },
   {
     "__docId__": 124,
-    "kind": "member",
-    "name": "camera",
-    "memberof": "docs-src/view.js~View",
+    "kind": "get",
+    "name": "hero",
+    "memberof": "source/view.js~View",
+    "generator": false,
+    "async": false,
     "static": false,
-    "longname": "docs-src/view.js~View#camera",
+    "longname": "source/view.js~View#hero",
     "access": "public",
     "description": null,
-    "lineNumber": 19,
+    "lineNumber": 26,
     "undocument": true,
     "type": {
       "types": [
@@ -1983,49 +1968,36 @@
   },
   {
     "__docId__": 125,
-    "kind": "member",
-    "name": "level",
-    "memberof": "docs-src/view.js~View",
+    "kind": "method",
+    "name": "cameraToHero",
+    "memberof": "source/view.js~View",
+    "generator": false,
+    "async": false,
     "static": false,
-    "longname": "docs-src/view.js~View#level",
+    "longname": "source/view.js~View#cameraToHero",
     "access": "public",
     "description": null,
-    "lineNumber": 21,
+    "lineNumber": 29,
     "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
+    "params": [
+      {
+        "name": "hero",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
   },
   {
     "__docId__": 126,
-    "kind": "get",
-    "name": "hero",
-    "memberof": "docs-src/view.js~View",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "docs-src/view.js~View#hero",
-    "access": "public",
-    "description": null,
-    "lineNumber": 30,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 127,
     "kind": "method",
-    "name": "cameraToHero",
-    "memberof": "docs-src/view.js~View",
+    "name": "onUpdateHero",
+    "memberof": "source/view.js~View",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/view.js~View#cameraToHero",
+    "longname": "source/view.js~View#onUpdateHero",
     "access": "public",
     "description": null,
     "lineNumber": 33,
@@ -2041,17 +2013,40 @@
     "return": null
   },
   {
-    "__docId__": 128,
+    "__docId__": 127,
     "kind": "method",
-    "name": "onUpdateHero",
-    "memberof": "docs-src/view.js~View",
+    "name": "_onUpdateHero",
+    "memberof": "source/view.js~View",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/view.js~View#onUpdateHero",
+    "longname": "source/view.js~View#_onUpdateHero",
+    "access": "private",
+    "description": null,
+    "lineNumber": 36,
+    "undocument": true,
+    "params": [
+      {
+        "name": "hero",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 128,
+    "kind": "method",
+    "name": "onCreateHero",
+    "memberof": "source/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "source/view.js~View#onCreateHero",
     "access": "public",
     "description": null,
-    "lineNumber": 37,
+    "lineNumber": 44,
     "undocument": true,
     "params": [
       {
@@ -2066,15 +2061,15 @@
   {
     "__docId__": 129,
     "kind": "method",
-    "name": "_onUpdateHero",
-    "memberof": "docs-src/view.js~View",
+    "name": "_onCreateHero",
+    "memberof": "source/view.js~View",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/view.js~View#_onUpdateHero",
+    "longname": "source/view.js~View#_onCreateHero",
     "access": "private",
     "description": null,
-    "lineNumber": 40,
+    "lineNumber": 49,
     "undocument": true,
     "params": [
       {
@@ -2089,15 +2084,15 @@
   {
     "__docId__": 130,
     "kind": "method",
-    "name": "onCreateHero",
-    "memberof": "docs-src/view.js~View",
+    "name": "onRemoveHero",
+    "memberof": "source/view.js~View",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/view.js~View#onCreateHero",
+    "longname": "source/view.js~View#onRemoveHero",
     "access": "public",
     "description": null,
-    "lineNumber": 48,
+    "lineNumber": 59,
     "undocument": true,
     "params": [
       {
@@ -2112,15 +2107,15 @@
   {
     "__docId__": 131,
     "kind": "method",
-    "name": "_onCreateHero",
-    "memberof": "docs-src/view.js~View",
+    "name": "_onRemoveHero",
+    "memberof": "source/view.js~View",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/view.js~View#_onCreateHero",
+    "longname": "source/view.js~View#_onRemoveHero",
     "access": "private",
     "description": null,
-    "lineNumber": 53,
+    "lineNumber": 62,
     "undocument": true,
     "params": [
       {
@@ -2135,75 +2130,29 @@
   {
     "__docId__": 132,
     "kind": "method",
-    "name": "onRemoveHero",
-    "memberof": "docs-src/view.js~View",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "docs-src/view.js~View#onRemoveHero",
-    "access": "public",
-    "description": null,
-    "lineNumber": 63,
-    "undocument": true,
-    "params": [
-      {
-        "name": "hero",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": null
-  },
-  {
-    "__docId__": 133,
-    "kind": "method",
-    "name": "_onRemoveHero",
-    "memberof": "docs-src/view.js~View",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "docs-src/view.js~View#_onRemoveHero",
-    "access": "private",
-    "description": null,
-    "lineNumber": 66,
-    "undocument": true,
-    "params": [
-      {
-        "name": "hero",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": null
-  },
-  {
-    "__docId__": 134,
-    "kind": "method",
     "name": "onResize",
-    "memberof": "docs-src/view.js~View",
+    "memberof": "source/view.js~View",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/view.js~View#onResize",
+    "longname": "source/view.js~View#onResize",
     "access": "public",
     "description": null,
-    "lineNumber": 72,
+    "lineNumber": 68,
     "undocument": true,
     "params": [],
     "return": null
   },
   {
-    "__docId__": 135,
+    "__docId__": 133,
     "kind": "member",
     "name": "scale",
-    "memberof": "docs-src/view.js~View",
+    "memberof": "source/view.js~View",
     "static": false,
-    "longname": "docs-src/view.js~View#scale",
+    "longname": "source/view.js~View#scale",
     "access": "public",
     "description": null,
-    "lineNumber": 73,
+    "lineNumber": 69,
     "undocument": true,
     "type": {
       "types": [
@@ -2212,17 +2161,17 @@
     }
   },
   {
-    "__docId__": 136,
+    "__docId__": 134,
     "kind": "method",
     "name": "getScale",
-    "memberof": "docs-src/view.js~View",
+    "memberof": "source/view.js~View",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/view.js~View#getScale",
+    "longname": "source/view.js~View#getScale",
     "access": "public",
     "description": null,
-    "lineNumber": 77,
+    "lineNumber": 73,
     "undocument": true,
     "params": [],
     "return": {
@@ -2232,17 +2181,17 @@
     }
   },
   {
-    "__docId__": 137,
+    "__docId__": 135,
     "kind": "method",
     "name": "getTexture",
-    "memberof": "docs-src/view.js~View",
+    "memberof": "source/view.js~View",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/view.js~View#getTexture",
+    "longname": "source/view.js~View#getTexture",
     "access": "public",
     "description": null,
-    "lineNumber": 80,
+    "lineNumber": 76,
     "undocument": true,
     "params": [
       {
@@ -2259,17 +2208,17 @@
     }
   },
   {
-    "__docId__": 138,
+    "__docId__": 136,
     "kind": "method",
     "name": "createSprite",
-    "memberof": "docs-src/view.js~View",
+    "memberof": "source/view.js~View",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/view.js~View#createSprite",
+    "longname": "source/view.js~View#createSprite",
     "access": "public",
     "description": null,
-    "lineNumber": 94,
+    "lineNumber": 90,
     "undocument": true,
     "params": [
       {
@@ -2293,17 +2242,17 @@
     }
   },
   {
-    "__docId__": 139,
+    "__docId__": 137,
     "kind": "method",
     "name": "addBlock",
-    "memberof": "docs-src/view.js~View",
+    "memberof": "source/view.js~View",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/view.js~View#addBlock",
+    "longname": "source/view.js~View#addBlock",
     "access": "public",
     "description": null,
-    "lineNumber": 104,
+    "lineNumber": 100,
     "undocument": true,
     "params": [
       {
@@ -2342,33 +2291,33 @@
     "return": null
   },
   {
-    "__docId__": 140,
+    "__docId__": 138,
     "kind": "method",
     "name": "addBlocks",
-    "memberof": "docs-src/view.js~View",
+    "memberof": "source/view.js~View",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/view.js~View#addBlocks",
+    "longname": "source/view.js~View#addBlocks",
     "access": "public",
     "description": null,
-    "lineNumber": 112,
+    "lineNumber": 108,
     "undocument": true,
     "params": [],
     "return": null
   },
   {
-    "__docId__": 141,
+    "__docId__": 139,
     "kind": "method",
     "name": "createLevel",
-    "memberof": "docs-src/view.js~View",
+    "memberof": "source/view.js~View",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/view.js~View#createLevel",
+    "longname": "source/view.js~View#createLevel",
     "access": "public",
     "description": null,
-    "lineNumber": 126,
+    "lineNumber": 122,
     "undocument": true,
     "params": [
       {
@@ -2381,15 +2330,15 @@
     "return": null
   },
   {
-    "__docId__": 142,
+    "__docId__": 140,
     "kind": "member",
     "name": "textureCache",
-    "memberof": "docs-src/view.js~View",
+    "memberof": "source/view.js~View",
     "static": false,
-    "longname": "docs-src/view.js~View#textureCache",
+    "longname": "source/view.js~View#textureCache",
     "access": "public",
     "description": null,
-    "lineNumber": 127,
+    "lineNumber": 123,
     "undocument": true,
     "type": {
       "types": [
@@ -2398,15 +2347,15 @@
     }
   },
   {
-    "__docId__": 143,
+    "__docId__": 141,
     "kind": "member",
     "name": "layers",
-    "memberof": "docs-src/view.js~View",
+    "memberof": "source/view.js~View",
     "static": false,
-    "longname": "docs-src/view.js~View#layers",
+    "longname": "source/view.js~View#layers",
     "access": "public",
     "description": null,
-    "lineNumber": 128,
+    "lineNumber": 124,
     "undocument": true,
     "type": {
       "types": [
@@ -2415,15 +2364,15 @@
     }
   },
   {
-    "__docId__": 144,
+    "__docId__": 142,
     "kind": "member",
     "name": "tileset",
-    "memberof": "docs-src/view.js~View",
+    "memberof": "source/view.js~View",
     "static": false,
-    "longname": "docs-src/view.js~View#tileset",
+    "longname": "source/view.js~View#tileset",
     "access": "public",
     "description": null,
-    "lineNumber": 132,
+    "lineNumber": 128,
     "undocument": true,
     "type": {
       "types": [
@@ -2432,17 +2381,57 @@
     }
   },
   {
-    "__docId__": 145,
+    "__docId__": 143,
     "kind": "method",
     "name": "_onMouseMove",
-    "memberof": "docs-src/view.js~View",
+    "memberof": "source/view.js~View",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/view.js~View#_onMouseMove",
+    "longname": "source/view.js~View#_onMouseMove",
     "access": "private",
     "description": null,
-    "lineNumber": 138,
+    "lineNumber": 134,
+    "undocument": true,
+    "params": [
+      {
+        "name": "event",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 144,
+    "kind": "member",
+    "name": "mouse",
+    "memberof": "source/view.js~View",
+    "static": false,
+    "longname": "source/view.js~View#mouse",
+    "access": "public",
+    "description": null,
+    "lineNumber": 137,
+    "undocument": true,
+    "type": {
+      "types": [
+        "{\"x\": *, \"y\": *}"
+      ]
+    }
+  },
+  {
+    "__docId__": 145,
+    "kind": "method",
+    "name": "_onMouseClick",
+    "memberof": "source/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "source/view.js~View#_onMouseClick",
+    "access": "private",
+    "description": null,
+    "lineNumber": 145,
     "undocument": true,
     "params": [
       {
@@ -2456,56 +2445,16 @@
   },
   {
     "__docId__": 146,
-    "kind": "member",
-    "name": "mouse",
-    "memberof": "docs-src/view.js~View",
-    "static": false,
-    "longname": "docs-src/view.js~View#mouse",
-    "access": "public",
-    "description": null,
-    "lineNumber": 141,
-    "undocument": true,
-    "type": {
-      "types": [
-        "{\"x\": *, \"y\": *}"
-      ]
-    }
-  },
-  {
-    "__docId__": 147,
-    "kind": "method",
-    "name": "_onMouseClick",
-    "memberof": "docs-src/view.js~View",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "docs-src/view.js~View#_onMouseClick",
-    "access": "private",
-    "description": null,
-    "lineNumber": 149,
-    "undocument": true,
-    "params": [
-      {
-        "name": "event",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": null
-  },
-  {
-    "__docId__": 148,
     "kind": "method",
     "name": "useMouse",
-    "memberof": "docs-src/view.js~View",
+    "memberof": "source/view.js~View",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/view.js~View#useMouse",
+    "longname": "source/view.js~View#useMouse",
     "access": "public",
     "description": null,
-    "lineNumber": 155,
+    "lineNumber": 151,
     "undocument": true,
     "params": [
       {
@@ -2521,24 +2470,24 @@
     "return": null
   },
   {
-    "__docId__": 149,
+    "__docId__": 147,
     "kind": "method",
     "name": "disableContextMenu",
-    "memberof": "docs-src/view.js~View",
+    "memberof": "source/view.js~View",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "docs-src/view.js~View#disableContextMenu",
+    "longname": "source/view.js~View#disableContextMenu",
     "access": "public",
     "description": null,
-    "lineNumber": 164,
+    "lineNumber": 160,
     "undocument": true,
     "params": [],
     "return": null
   },
   {
     "kind": "index",
-    "content": "## gameframework-lite!\n\nPIXI.js + Game Loop + Level Loop + Character Loop\n\nIsomorphic, Scalable, Node.js package\n\nUse with (require es6 versions) babel or without (require es5 versions)\n\n## examples (non-MIT)\n\nGames made on it:\n\n* [http://www.stones.mini.ninja/](http://www.stones.mini.ninja/)\n\n* [http://www.vikingsvillage.io/](http://www.vikingsvillage.io/)\n\n### documentation\n\n[https://prozi.github.io/gameframework-lite/](https://prozi.github.io/gameframework-lite/)\n\n### installation\n\n`npm install gameframework-lite@latest --save`\n\nor\n\n`yarn add gameframework-lite@latest --save`\n\n### testing\n\n* `yarn test`\n\n* open `http://localhost:3000`\n\n### usage\n\nrequire 'gameframework/es6' for:\n\n- DEFER,\n- Game,\n- Level,\n- Block,\n- Hero,\n- atan2\n- random\n\nrequire 'gameframework/es6/view' for:\n\n- View\n\nrequire 'gameframework/es6/extract' for:\n\n- [TextureExtractor](https://prozi.github.io/gameframework-lite/class/docs-src/extract.js~TextureExtractor.html)\n\n### examples\n\n```javascript\nconst View = require('gameframework-lite/es6/view');\nconst PIXI = window.PIXI || require('pixi.js');\n\n// this is how you should use View\nclass MyView extends View {\n\t// override example\n\tonCreateHero (hero) {\n\t\thero.sprite = PIXI.Sprite.fromImage('bunny.png');\n\t\thero.sprite.anchor.set(0.5);\n\t\thero.sprite.scale.set(3);\n\t}\n}\n\nnew MyView();\n```\n\n```javascript\nconst { Level, Game } = require('gameframework-lite/es6');\n\n// this is how you should use Game\nclass MyGame extends Game {\n\t// one room game example\n\tconstructor () {\n\t\tsuper();\n\t\tthis.levels.push(new Level());\n\t}\n\t// override what you need\n\tonUpdate () {\n\t\tconsole.log('tick');\n\t}\n}\n\nnew MyGame();\n```\n\n\n`view example/index.html to see benchmark/test`\n\n\nLicense MIT\n\nmade by me - Jacek Pietal (prozi85@gmail.com)\n\n",
+    "content": "## gameframework-lite!\n\nPIXI.js + Game Loop + Level Loop + Character Loop\n\nIsomorphic, Scalable, Node.js package\n\n## examples (non-MIT)\n\nGames made on it:\n\n* [http://www.stones.mini.ninja/](http://www.stones.mini.ninja/)\n\n* [http://www.vikingsvillage.io/](http://www.vikingsvillage.io/)\n\n### documentation\n\n[https://prozi.github.io/gameframework-lite/](https://prozi.github.io/gameframework-lite/)\n\n### installation\n\n`npm install gameframework-lite@latest --save`\n\nor\n\n`yarn add gameframework-lite@latest --save`\n\n### testing\n\n* `yarn test`\n\n* open `http://localhost:3000`\n\n### usage\n\nrequire 'gameframework-lite' for:\n\n- DEFER,\n- Game,\n- Level,\n- Block,\n- Hero,\n- atan2\n- random\n\nrequire 'gameframework-lite/view' for:\n\n- View\n\nrequire 'gameframework-lite/extract' for:\n\n- [TextureExtractor](https://prozi.github.io/gameframework-lite/class/docs-src/extract.js~TextureExtractor.html)\n\n### examples\n\n```javascript\nconst View = require('gameframework-lite/view');\nconst PIXI = window.PIXI || require('pixi.js');\n\n// this is how you should use View\nclass MyView extends View {\n\t// override example\n\tonCreateHero (hero) {\n\t\thero.sprite = PIXI.Sprite.fromImage('bunny.png');\n\t\thero.sprite.anchor.set(0.5);\n\t\thero.sprite.scale.set(3);\n\t}\n}\n\nnew MyView();\n```\n\n```javascript\nconst { Level, Game } = require('gameframework-lite');\n\n// this is how you should use Game\nclass MyGame extends Game {\n\t// one room game example\n\tconstructor () {\n\t\tsuper();\n\t\tthis.levels.push(new Level());\n\t}\n\t// override what you need\n\tonUpdate () {\n\t\tconsole.log('tick');\n\t}\n}\n\nnew MyGame();\n```\n\n\n`view example/index.html to see benchmark/test`\n\n\nLicense MIT\n\nmade by me - Jacek Pietal (prozi85@gmail.com)\n\n",
     "longname": "C:\\Users\\lenovo\\projects\\gameframework-lite\\README.md",
     "name": "./README.md",
     "static": true,
@@ -2546,7 +2495,7 @@
   },
   {
     "kind": "packageJSON",
-    "content": "{\n  \"name\": \"gameframework-lite\",\n  \"version\": \"1.3.3\",\n  \"description\": \"game framework for 2d html5 games with physics isomorphic\",\n  \"main\": \"es5/index.js\",\n  \"scripts\": {\n    \"prep4esdoc\": \"./prep4esdoc.sh index && ./prep4esdoc.sh view && ./prep4esdoc.sh extract\",\n    \"docs\": \"yarn prep4esdoc && esdoc && yarn build\",\n    \"build\": \"PRODUCTION=true webpack\",\n    \"build:dev\": \"PRODUCTION= webpack\",\n    \"test\": \"node test\",\n    \"compile\": \"babel ./es6 --out-dir ./es5 --presets es2015\"\n  },\n  \"editions\": [\n    {\n      \"description\": \"Source + ESNext + Require\",\n      \"entry\": \"source/index.js\",\n      \"syntaxes\": [\n        \"javascript\",\n        \"esnext\",\n        \"require\",\n        \"arrows\",\n        \"const\",\n        \"let\",\n        \"destructuring\"\n      ]\n    },\n    {\n      \"description\": \"Compiled + ES5 + Require\",\n      \"entry\": \"es5/index.js\",\n      \"syntaxes\": [\n        \"javascript\",\n        \"ES5\",\n        \"require\"\n      ]\n    }\n  ],\n  \"author\": \"Jacek Pietal <prozi85@gmail.com>\",\n  \"license\": \"MIT\",\n  \"dependencies\": {\n    \"babel-plugin-add-module-exports\": \"latest\",\n    \"esdoc\": \"^1.0.3\",\n    \"esdoc-ecmascript-proposal-plugin\": \"^1.0.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"express\": \"^4.15.4\",\n    \"fmath\": \"latest\",\n    \"md5\": \"latest\",\n    \"pixi.js\": \"latest\"\n  },\n  \"devDependencies\": {\n    \"babel-core\": \"^6.25.0\",\n    \"babel-loader\": \"^7.1.1\",\n    \"babel-polyfill\": \"^6.23.0\",\n    \"babel-preset-es2015\": \"^6.24.1\",\n    \"webpack\": \"^3.5.1\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"https://github.com/Prozi/gameframework-lite.git\"\n  }\n}\n",
+    "content": "{\n  \"name\": \"gameframework-lite\",\n  \"version\": \"1.5.0\",\n  \"description\": \"game framework for 2d html5 games with physics isomorphic\",\n  \"main\": \"index.js\",\n  \"scripts\": {\n    \"docs\": \"esdoc\",\n    \"build\": \"PRODUCTION=true webpack\",\n    \"build:dev\": \"PRODUCTION= webpack\",\n    \"test\": \"yarn compile && webpack && node test\",\n    \"compile\": \"babel ./source --out-dir ./es2015 --presets es2015\"\n  },\n  \"editions\": [\n    {\n      \"description\": \"Source + ESNext + Require\",\n      \"entry\": \"source/index.js\",\n      \"syntaxes\": [\n        \"javascript\",\n        \"esnext\",\n        \"require\",\n        \"arrows\",\n        \"const\",\n        \"let\",\n        \"destructuring\"\n      ]\n    },\n    {\n      \"description\": \"Compiled + ES5 + Require\",\n      \"entry\": \"es5/index.js\",\n      \"syntaxes\": [\n        \"javascript\",\n        \"ES5\",\n        \"require\"\n      ]\n    }\n  ],\n  \"author\": \"Jacek Pietal <prozi85@gmail.com>\",\n  \"license\": \"MIT\",\n  \"dependencies\": {\n    \"babel-loader\": \"^7.1.2\",\n    \"editions\": \"^1.3.3\",\n    \"esdoc\": \"^1.0.3\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"express\": \"^4.16.2\",\n    \"fmath\": \"latest\",\n    \"md5\": \"latest\",\n    \"pixi.js\": \"latest\"\n  },\n  \"devDependencies\": {\n    \"babel-cli\": \"^6.26.0\",\n    \"babel-preset-es2015\": \"^6.24.1\",\n    \"webpack\": \"^3.7.1\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"https://github.com/Prozi/gameframework-lite.git\"\n  }\n}\n",
     "longname": "C:\\Users\\lenovo\\projects\\gameframework-lite\\package.json",
     "name": "package.json",
     "static": true,

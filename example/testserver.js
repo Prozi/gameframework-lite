@@ -1,6 +1,6 @@
 'use strict';
 
-const { Game, Level, Hero } = require('../es6');
+const { Game, Level, Hero } = require('../es2015');
 
 class MyLevel extends Level {
 	tick () {}

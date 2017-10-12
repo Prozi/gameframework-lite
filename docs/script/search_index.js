@@ -1,908 +1,788 @@
 window.esdocSearchIndex = [
   [
-    "gameframework-lite/docs-src/index.js~defer",
-    "variable/index.html#static-variable-DEFER",
-    "<span>DEFER</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
-    "variable"
-  ],
-  [
-    "gameframework-lite/docs-src/index.js~fmath",
-    "variable/index.html#static-variable-FMath",
-    "<span>FMath</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
-    "variable"
-  ],
-  [
-    "gameframework-lite/docs-src/index.js~game",
-    "class/docs-src/index.js~Game.html",
-    "<span>Game</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
+    "gameframework-lite/source/index.js~game",
+    "class/source/index.js~Game.html",
+    "<span>Game</span> <span class=\"search-result-import-path\">gameframework-lite/source/index.js</span>",
     "class"
   ],
   [
-    "gameframework-lite/docs-src/index.js~half_pi",
-    "variable/index.html#static-variable-HALF_PI",
-    "<span>HALF_PI</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
-    "variable"
-  ],
-  [
-    "gameframework-lite/docs-src/index.js~hero_id",
-    "variable/index.html#static-variable-HERO_ID",
-    "<span>HERO_ID</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
-    "variable"
-  ],
-  [
-    "gameframework-lite/docs-src/index.js~hero_x",
-    "variable/index.html#static-variable-HERO_X",
-    "<span>HERO_X</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
-    "variable"
-  ],
-  [
-    "gameframework-lite/docs-src/index.js~hero_y",
-    "variable/index.html#static-variable-HERO_Y",
-    "<span>HERO_Y</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
-    "variable"
-  ],
-  [
-    "gameframework-lite/docs-src/index.js~hero",
-    "class/docs-src/index.js~Hero.html",
-    "<span>Hero</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
+    "gameframework-lite/source/index.js~hero",
+    "class/source/index.js~Hero.html",
+    "<span>Hero</span> <span class=\"search-result-import-path\">gameframework-lite/source/index.js</span>",
     "class"
   ],
   [
-    "gameframework-lite/docs-src/index.js~level",
-    "class/docs-src/index.js~Level.html",
-    "<span>Level</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
+    "gameframework-lite/source/index.js~level",
+    "class/source/index.js~Level.html",
+    "<span>Level</span> <span class=\"search-result-import-path\">gameframework-lite/source/index.js</span>",
     "class"
   ],
   [
-    "gameframework-lite/docs-src/view.js~level",
-    "variable/index.html#static-variable-Level",
-    "<span>Level</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/view.js</span>",
-    "variable"
-  ],
-  [
-    "gameframework-lite/docs-src/index.js~now",
-    "variable/index.html#static-variable-NOW",
-    "<span>NOW</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
-    "variable"
-  ],
-  [
-    "gameframework-lite/docs-src/extract.js~pixi",
-    "variable/index.html#static-variable-PIXI",
-    "<span>PIXI</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/extract.js</span>",
-    "variable"
-  ],
-  [
-    "gameframework-lite/docs-src/view.js~pixi",
-    "variable/index.html#static-variable-PIXI",
-    "<span>PIXI</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/view.js</span>",
-    "variable"
-  ],
-  [
-    "gameframework-lite/docs-src/extract.js~textureextractor",
-    "class/docs-src/extract.js~TextureExtractor.html",
-    "<span>TextureExtractor</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/extract.js</span>",
+    "gameframework-lite/source/extract.js~textureextractor",
+    "class/source/extract.js~TextureExtractor.html",
+    "<span>TextureExtractor</span> <span class=\"search-result-import-path\">gameframework-lite/source/extract.js</span>",
     "class"
   ],
   [
-    "gameframework-lite/docs-src/view.js~view",
-    "class/docs-src/view.js~View.html",
-    "<span>View</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/view.js</span>",
+    "gameframework-lite/source/view.js~view",
+    "class/source/view.js~View.html",
+    "<span>View</span> <span class=\"search-result-import-path\">gameframework-lite/source/view.js</span>",
     "class"
   ],
   [
-    "gameframework-lite/docs-src/index.js~atan2",
+    "gameframework-lite/source/index.js~atan2",
     "function/index.html#static-function-atan2",
-    "<span>atan2</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
+    "<span>atan2</span> <span class=\"search-result-import-path\">gameframework-lite/source/index.js</span>",
     "function"
   ],
   [
-    "gameframework-lite/docs-src/index.js~distance",
+    "gameframework-lite/source/index.js~distance",
     "function/index.html#static-function-distance",
-    "<span>distance</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
+    "<span>distance</span> <span class=\"search-result-import-path\">gameframework-lite/source/index.js</span>",
     "function"
   ],
   [
-    "gameframework-lite/docs-src/index.js~fmath",
-    "variable/index.html#static-variable-fmath",
-    "<span>fmath</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
-    "variable"
-  ],
-  [
-    "gameframework-lite/docs-src/index.js~md5",
-    "variable/index.html#static-variable-md5",
-    "<span>md5</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
-    "variable"
-  ],
-  [
-    "gameframework-lite/docs-src/index.js~random",
+    "gameframework-lite/source/index.js~random",
     "function/index.html#static-function-random",
-    "<span>random</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
+    "<span>random</span> <span class=\"search-result-import-path\">gameframework-lite/source/index.js</span>",
     "function"
   ],
   [
-    "gameframework-lite/docs-src/index.js~randomid",
+    "gameframework-lite/source/index.js~randomid",
     "function/index.html#static-function-randomId",
-    "<span>randomId</span> <span class=\"search-result-import-path\">gameframework-lite/docs-src/index.js</span>",
+    "<span>randomId</span> <span class=\"search-result-import-path\">gameframework-lite/source/index.js</span>",
     "function"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~array",
+    "source/.external-ecmascript.js~array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
-    "BuiltinExternal/ECMAScriptExternal.js~Array",
+    "source/.external-ecmascript.js~Array",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~arraybuffer",
+    "source/.external-ecmascript.js~arraybuffer",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
-    "BuiltinExternal/ECMAScriptExternal.js~ArrayBuffer",
+    "source/.external-ecmascript.js~ArrayBuffer",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~boolean",
+    "source/.external-ecmascript.js~boolean",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
-    "BuiltinExternal/ECMAScriptExternal.js~Boolean",
+    "source/.external-ecmascript.js~Boolean",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~dataview",
+    "source/.external-ecmascript.js~dataview",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
-    "BuiltinExternal/ECMAScriptExternal.js~DataView",
+    "source/.external-ecmascript.js~DataView",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~date",
+    "source/.external-ecmascript.js~date",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
-    "BuiltinExternal/ECMAScriptExternal.js~Date",
+    "source/.external-ecmascript.js~Date",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~error",
+    "source/.external-ecmascript.js~error",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
-    "BuiltinExternal/ECMAScriptExternal.js~Error",
+    "source/.external-ecmascript.js~Error",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~evalerror",
+    "source/.external-ecmascript.js~evalerror",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
-    "BuiltinExternal/ECMAScriptExternal.js~EvalError",
+    "source/.external-ecmascript.js~EvalError",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~float32array",
+    "source/.external-ecmascript.js~float32array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
-    "BuiltinExternal/ECMAScriptExternal.js~Float32Array",
+    "source/.external-ecmascript.js~Float32Array",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~float64array",
+    "source/.external-ecmascript.js~float64array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
-    "BuiltinExternal/ECMAScriptExternal.js~Float64Array",
+    "source/.external-ecmascript.js~Float64Array",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~function",
+    "source/.external-ecmascript.js~function",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
-    "BuiltinExternal/ECMAScriptExternal.js~Function",
+    "source/.external-ecmascript.js~Function",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~generator",
+    "source/.external-ecmascript.js~generator",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
-    "BuiltinExternal/ECMAScriptExternal.js~Generator",
+    "source/.external-ecmascript.js~Generator",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~generatorfunction",
+    "source/.external-ecmascript.js~generatorfunction",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
-    "BuiltinExternal/ECMAScriptExternal.js~GeneratorFunction",
+    "source/.external-ecmascript.js~GeneratorFunction",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~infinity",
+    "source/.external-ecmascript.js~infinity",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
-    "BuiltinExternal/ECMAScriptExternal.js~Infinity",
+    "source/.external-ecmascript.js~Infinity",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~int16array",
+    "source/.external-ecmascript.js~int16array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
-    "BuiltinExternal/ECMAScriptExternal.js~Int16Array",
+    "source/.external-ecmascript.js~Int16Array",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~int32array",
+    "source/.external-ecmascript.js~int32array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
-    "BuiltinExternal/ECMAScriptExternal.js~Int32Array",
+    "source/.external-ecmascript.js~Int32Array",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~int8array",
+    "source/.external-ecmascript.js~int8array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
-    "BuiltinExternal/ECMAScriptExternal.js~Int8Array",
+    "source/.external-ecmascript.js~Int8Array",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~internalerror",
+    "source/.external-ecmascript.js~internalerror",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
-    "BuiltinExternal/ECMAScriptExternal.js~InternalError",
+    "source/.external-ecmascript.js~InternalError",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~json",
+    "source/.external-ecmascript.js~json",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
-    "BuiltinExternal/ECMAScriptExternal.js~JSON",
+    "source/.external-ecmascript.js~JSON",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~map",
+    "source/.external-ecmascript.js~map",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
-    "BuiltinExternal/ECMAScriptExternal.js~Map",
+    "source/.external-ecmascript.js~Map",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~nan",
+    "source/.external-ecmascript.js~nan",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
-    "BuiltinExternal/ECMAScriptExternal.js~NaN",
+    "source/.external-ecmascript.js~NaN",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~number",
+    "source/.external-ecmascript.js~number",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
-    "BuiltinExternal/ECMAScriptExternal.js~Number",
+    "source/.external-ecmascript.js~Number",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~object",
+    "source/.external-ecmascript.js~object",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
-    "BuiltinExternal/ECMAScriptExternal.js~Object",
+    "source/.external-ecmascript.js~Object",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~promise",
+    "source/.external-ecmascript.js~promise",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
-    "BuiltinExternal/ECMAScriptExternal.js~Promise",
+    "source/.external-ecmascript.js~Promise",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~proxy",
+    "source/.external-ecmascript.js~proxy",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
-    "BuiltinExternal/ECMAScriptExternal.js~Proxy",
+    "source/.external-ecmascript.js~Proxy",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~rangeerror",
+    "source/.external-ecmascript.js~rangeerror",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
-    "BuiltinExternal/ECMAScriptExternal.js~RangeError",
+    "source/.external-ecmascript.js~RangeError",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~referenceerror",
+    "source/.external-ecmascript.js~referenceerror",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
-    "BuiltinExternal/ECMAScriptExternal.js~ReferenceError",
+    "source/.external-ecmascript.js~ReferenceError",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~reflect",
+    "source/.external-ecmascript.js~reflect",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
-    "BuiltinExternal/ECMAScriptExternal.js~Reflect",
+    "source/.external-ecmascript.js~Reflect",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~regexp",
+    "source/.external-ecmascript.js~regexp",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
-    "BuiltinExternal/ECMAScriptExternal.js~RegExp",
+    "source/.external-ecmascript.js~RegExp",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~set",
+    "source/.external-ecmascript.js~set",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
-    "BuiltinExternal/ECMAScriptExternal.js~Set",
+    "source/.external-ecmascript.js~Set",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~string",
+    "source/.external-ecmascript.js~string",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
-    "BuiltinExternal/ECMAScriptExternal.js~String",
+    "source/.external-ecmascript.js~String",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~symbol",
+    "source/.external-ecmascript.js~symbol",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
-    "BuiltinExternal/ECMAScriptExternal.js~Symbol",
+    "source/.external-ecmascript.js~Symbol",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~syntaxerror",
+    "source/.external-ecmascript.js~syntaxerror",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
-    "BuiltinExternal/ECMAScriptExternal.js~SyntaxError",
+    "source/.external-ecmascript.js~SyntaxError",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~typeerror",
+    "source/.external-ecmascript.js~typeerror",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
-    "BuiltinExternal/ECMAScriptExternal.js~TypeError",
+    "source/.external-ecmascript.js~TypeError",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~urierror",
+    "source/.external-ecmascript.js~urierror",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
-    "BuiltinExternal/ECMAScriptExternal.js~URIError",
+    "source/.external-ecmascript.js~URIError",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~uint16array",
+    "source/.external-ecmascript.js~uint16array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
-    "BuiltinExternal/ECMAScriptExternal.js~Uint16Array",
+    "source/.external-ecmascript.js~Uint16Array",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~uint32array",
+    "source/.external-ecmascript.js~uint32array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
-    "BuiltinExternal/ECMAScriptExternal.js~Uint32Array",
+    "source/.external-ecmascript.js~Uint32Array",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~uint8array",
+    "source/.external-ecmascript.js~uint8array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
-    "BuiltinExternal/ECMAScriptExternal.js~Uint8Array",
+    "source/.external-ecmascript.js~Uint8Array",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~uint8clampedarray",
+    "source/.external-ecmascript.js~uint8clampedarray",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
-    "BuiltinExternal/ECMAScriptExternal.js~Uint8ClampedArray",
+    "source/.external-ecmascript.js~Uint8ClampedArray",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~weakmap",
+    "source/.external-ecmascript.js~weakmap",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
-    "BuiltinExternal/ECMAScriptExternal.js~WeakMap",
+    "source/.external-ecmascript.js~WeakMap",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~weakset",
+    "source/.external-ecmascript.js~weakset",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
-    "BuiltinExternal/ECMAScriptExternal.js~WeakSet",
+    "source/.external-ecmascript.js~WeakSet",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~boolean",
+    "source/.external-ecmascript.js~boolean",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
-    "BuiltinExternal/ECMAScriptExternal.js~boolean",
+    "source/.external-ecmascript.js~boolean",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~function",
+    "source/.external-ecmascript.js~function",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
-    "BuiltinExternal/ECMAScriptExternal.js~function",
+    "source/.external-ecmascript.js~function",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~null",
+    "source/.external-ecmascript.js~null",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
-    "BuiltinExternal/ECMAScriptExternal.js~null",
+    "source/.external-ecmascript.js~null",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~number",
+    "source/.external-ecmascript.js~number",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
-    "BuiltinExternal/ECMAScriptExternal.js~number",
+    "source/.external-ecmascript.js~number",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~object",
+    "source/.external-ecmascript.js~object",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
-    "BuiltinExternal/ECMAScriptExternal.js~object",
+    "source/.external-ecmascript.js~object",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~string",
+    "source/.external-ecmascript.js~string",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
-    "BuiltinExternal/ECMAScriptExternal.js~string",
+    "source/.external-ecmascript.js~string",
     "external"
   ],
   [
-    "builtinexternal/ecmascriptexternal.js~undefined",
+    "source/.external-ecmascript.js~undefined",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
-    "BuiltinExternal/ECMAScriptExternal.js~undefined",
+    "source/.external-ecmascript.js~undefined",
     "external"
   ],
   [
-    "builtinexternal/webapiexternal.js~audiocontext",
-    "https://developer.mozilla.org/en/docs/Web/API/AudioContext",
-    "BuiltinExternal/WebAPIExternal.js~AudioContext",
-    "external"
-  ],
-  [
-    "builtinexternal/webapiexternal.js~canvasrenderingcontext2d",
-    "https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D",
-    "BuiltinExternal/WebAPIExternal.js~CanvasRenderingContext2D",
-    "external"
-  ],
-  [
-    "builtinexternal/webapiexternal.js~documentfragment",
-    "https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment",
-    "BuiltinExternal/WebAPIExternal.js~DocumentFragment",
-    "external"
-  ],
-  [
-    "builtinexternal/webapiexternal.js~element",
-    "https://developer.mozilla.org/en-US/docs/Web/API/Element",
-    "BuiltinExternal/WebAPIExternal.js~Element",
-    "external"
-  ],
-  [
-    "builtinexternal/webapiexternal.js~event",
-    "https://developer.mozilla.org/en-US/docs/Web/API/Event",
-    "BuiltinExternal/WebAPIExternal.js~Event",
-    "external"
-  ],
-  [
-    "builtinexternal/webapiexternal.js~node",
-    "https://developer.mozilla.org/en-US/docs/Web/API/Node",
-    "BuiltinExternal/WebAPIExternal.js~Node",
-    "external"
-  ],
-  [
-    "builtinexternal/webapiexternal.js~nodelist",
-    "https://developer.mozilla.org/en-US/docs/Web/API/NodeList",
-    "BuiltinExternal/WebAPIExternal.js~NodeList",
-    "external"
-  ],
-  [
-    "builtinexternal/webapiexternal.js~xmlhttprequest",
-    "https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest",
-    "BuiltinExternal/WebAPIExternal.js~XMLHttpRequest",
-    "external"
-  ],
-  [
-    "docs-src/extract.js",
-    "file/docs-src/extract.js.html",
-    "docs-src/extract.js",
+    "source/extract.js",
+    "file/source/extract.js.html",
+    "source/extract.js",
     "file"
   ],
   [
-    "docs-src/extract.js~textureextractor#constructor",
-    "class/docs-src/extract.js~TextureExtractor.html#instance-constructor-constructor",
-    "docs-src/extract.js~TextureExtractor#constructor",
+    "source/extract.js~textureextractor#constructor",
+    "class/source/extract.js~TextureExtractor.html#instance-constructor-constructor",
+    "source/extract.js~TextureExtractor#constructor",
     "method"
   ],
   [
-    "docs-src/extract.js~textureextractor#getframe",
-    "class/docs-src/extract.js~TextureExtractor.html#instance-method-getFrame",
-    "docs-src/extract.js~TextureExtractor#getFrame",
+    "source/extract.js~textureextractor#getframe",
+    "class/source/extract.js~TextureExtractor.html#instance-method-getFrame",
+    "source/extract.js~TextureExtractor#getFrame",
     "method"
   ],
   [
-    "docs-src/extract.js~textureextractor#height",
-    "class/docs-src/extract.js~TextureExtractor.html#instance-member-height",
-    "docs-src/extract.js~TextureExtractor#height",
+    "source/extract.js~textureextractor#height",
+    "class/source/extract.js~TextureExtractor.html#instance-member-height",
+    "source/extract.js~TextureExtractor#height",
     "member"
   ],
   [
-    "docs-src/extract.js~textureextractor#offset",
-    "class/docs-src/extract.js~TextureExtractor.html#instance-member-offset",
-    "docs-src/extract.js~TextureExtractor#offset",
+    "source/extract.js~textureextractor#offset",
+    "class/source/extract.js~TextureExtractor.html#instance-member-offset",
+    "source/extract.js~TextureExtractor#offset",
     "member"
   ],
   [
-    "docs-src/extract.js~textureextractor#preparetexture",
-    "class/docs-src/extract.js~TextureExtractor.html#instance-method-prepareTexture",
-    "docs-src/extract.js~TextureExtractor#prepareTexture",
+    "source/extract.js~textureextractor#preparetexture",
+    "class/source/extract.js~TextureExtractor.html#instance-method-prepareTexture",
+    "source/extract.js~TextureExtractor#prepareTexture",
     "method"
   ],
   [
-    "docs-src/extract.js~textureextractor#scalemode",
-    "class/docs-src/extract.js~TextureExtractor.html#instance-member-scaleMode",
-    "docs-src/extract.js~TextureExtractor#scaleMode",
+    "source/extract.js~textureextractor#scalemode",
+    "class/source/extract.js~TextureExtractor.html#instance-member-scaleMode",
+    "source/extract.js~TextureExtractor#scaleMode",
     "member"
   ],
   [
-    "docs-src/extract.js~textureextractor#texturecache",
-    "class/docs-src/extract.js~TextureExtractor.html#instance-member-textureCache",
-    "docs-src/extract.js~TextureExtractor#textureCache",
+    "source/extract.js~textureextractor#texturecache",
+    "class/source/extract.js~TextureExtractor.html#instance-member-textureCache",
+    "source/extract.js~TextureExtractor#textureCache",
     "member"
   ],
   [
-    "docs-src/extract.js~textureextractor#tileheight",
-    "class/docs-src/extract.js~TextureExtractor.html#instance-member-tileheight",
-    "docs-src/extract.js~TextureExtractor#tileheight",
+    "source/extract.js~textureextractor#tileheight",
+    "class/source/extract.js~TextureExtractor.html#instance-member-tileheight",
+    "source/extract.js~TextureExtractor#tileheight",
     "member"
   ],
   [
-    "docs-src/extract.js~textureextractor#tileset",
-    "class/docs-src/extract.js~TextureExtractor.html#instance-member-tileset",
-    "docs-src/extract.js~TextureExtractor#tileset",
+    "source/extract.js~textureextractor#tileset",
+    "class/source/extract.js~TextureExtractor.html#instance-member-tileset",
+    "source/extract.js~TextureExtractor#tileset",
     "member"
   ],
   [
-    "docs-src/extract.js~textureextractor#tilewidth",
-    "class/docs-src/extract.js~TextureExtractor.html#instance-member-tilewidth",
-    "docs-src/extract.js~TextureExtractor#tilewidth",
+    "source/extract.js~textureextractor#tilewidth",
+    "class/source/extract.js~TextureExtractor.html#instance-member-tilewidth",
+    "source/extract.js~TextureExtractor#tilewidth",
     "member"
   ],
   [
-    "docs-src/extract.js~textureextractor#width",
-    "class/docs-src/extract.js~TextureExtractor.html#instance-member-width",
-    "docs-src/extract.js~TextureExtractor#width",
+    "source/extract.js~textureextractor#width",
+    "class/source/extract.js~TextureExtractor.html#instance-member-width",
+    "source/extract.js~TextureExtractor#width",
     "member"
   ],
   [
-    "docs-src/index.js",
-    "file/docs-src/index.js.html",
-    "docs-src/index.js",
+    "source/index.js",
+    "file/source/index.js.html",
+    "source/index.js",
     "file"
   ],
   [
-    "docs-src/index.js~game#constructor",
-    "class/docs-src/index.js~Game.html#instance-constructor-constructor",
-    "docs-src/index.js~Game#constructor",
+    "source/index.js~game#constructor",
+    "class/source/index.js~Game.html#instance-constructor-constructor",
+    "source/index.js~Game#constructor",
     "method"
   ],
   [
-    "docs-src/index.js~game#delta",
-    "class/docs-src/index.js~Game.html#instance-member-delta",
-    "docs-src/index.js~Game#delta",
+    "source/index.js~game#delta",
+    "class/source/index.js~Game.html#instance-member-delta",
+    "source/index.js~Game#delta",
     "member"
   ],
   [
-    "docs-src/index.js~game#interval",
-    "class/docs-src/index.js~Game.html#instance-member-interval",
-    "docs-src/index.js~Game#interval",
+    "source/index.js~game#interval",
+    "class/source/index.js~Game.html#instance-member-interval",
+    "source/index.js~Game#interval",
     "member"
   ],
   [
-    "docs-src/index.js~game#levels",
-    "class/docs-src/index.js~Game.html#instance-member-levels",
-    "docs-src/index.js~Game#levels",
+    "source/index.js~game#levels",
+    "class/source/index.js~Game.html#instance-member-levels",
+    "source/index.js~Game#levels",
     "member"
   ],
   [
-    "docs-src/index.js~game#loop",
-    "class/docs-src/index.js~Game.html#instance-method-loop",
-    "docs-src/index.js~Game#loop",
+    "source/index.js~game#loop",
+    "class/source/index.js~Game.html#instance-method-loop",
+    "source/index.js~Game#loop",
     "method"
   ],
   [
-    "docs-src/index.js~game#now",
-    "class/docs-src/index.js~Game.html#instance-member-now",
-    "docs-src/index.js~Game#now",
+    "source/index.js~game#now",
+    "class/source/index.js~Game.html#instance-member-now",
+    "source/index.js~Game#now",
     "member"
   ],
   [
-    "docs-src/index.js~game#tick",
-    "class/docs-src/index.js~Game.html#instance-method-tick",
-    "docs-src/index.js~Game#tick",
+    "source/index.js~game#tick",
+    "class/source/index.js~Game.html#instance-method-tick",
+    "source/index.js~Game#tick",
     "method"
   ],
   [
-    "docs-src/index.js~hero#constructor",
-    "class/docs-src/index.js~Hero.html#instance-constructor-constructor",
-    "docs-src/index.js~Hero#constructor",
+    "source/index.js~hero#constructor",
+    "class/source/index.js~Hero.html#instance-constructor-constructor",
+    "source/index.js~Hero#constructor",
     "method"
   ],
   [
-    "docs-src/index.js~hero#fromarray",
-    "class/docs-src/index.js~Hero.html#instance-method-fromArray",
-    "docs-src/index.js~Hero#fromArray",
+    "source/index.js~hero#fromarray",
+    "class/source/index.js~Hero.html#instance-method-fromArray",
+    "source/index.js~Hero#fromArray",
     "method"
   ],
   [
-    "docs-src/index.js~hero#id",
-    "class/docs-src/index.js~Hero.html#instance-member-id",
-    "docs-src/index.js~Hero#id",
+    "source/index.js~hero#id",
+    "class/source/index.js~Hero.html#instance-member-id",
+    "source/index.js~Hero#id",
     "member"
   ],
   [
-    "docs-src/index.js~hero#move",
-    "class/docs-src/index.js~Hero.html#instance-method-move",
-    "docs-src/index.js~Hero#move",
+    "source/index.js~hero#move",
+    "class/source/index.js~Hero.html#instance-method-move",
+    "source/index.js~Hero#move",
     "method"
   ],
   [
-    "docs-src/index.js~hero#sprite",
-    "class/docs-src/index.js~Hero.html#instance-member-sprite",
-    "docs-src/index.js~Hero#sprite",
+    "source/index.js~hero#sprite",
+    "class/source/index.js~Hero.html#instance-member-sprite",
+    "source/index.js~Hero#sprite",
     "member"
   ],
   [
-    "docs-src/index.js~hero#toarray",
-    "class/docs-src/index.js~Hero.html#instance-method-toArray",
-    "docs-src/index.js~Hero#toArray",
+    "source/index.js~hero#toarray",
+    "class/source/index.js~Hero.html#instance-method-toArray",
+    "source/index.js~Hero#toArray",
     "method"
   ],
   [
-    "docs-src/index.js~hero#x",
-    "class/docs-src/index.js~Hero.html#instance-member-x",
-    "docs-src/index.js~Hero#x",
+    "source/index.js~hero#x",
+    "class/source/index.js~Hero.html#instance-member-x",
+    "source/index.js~Hero#x",
     "member"
   ],
   [
-    "docs-src/index.js~hero#y",
-    "class/docs-src/index.js~Hero.html#instance-member-y",
-    "docs-src/index.js~Hero#y",
+    "source/index.js~hero#y",
+    "class/source/index.js~Hero.html#instance-member-y",
+    "source/index.js~Hero#y",
     "member"
   ],
   [
-    "docs-src/index.js~level#accuracy",
-    "class/docs-src/index.js~Level.html#instance-member-accuracy",
-    "docs-src/index.js~Level#accuracy",
+    "source/index.js~level#accuracy",
+    "class/source/index.js~Level.html#instance-member-accuracy",
+    "source/index.js~Level#accuracy",
     "member"
   ],
   [
-    "docs-src/index.js~level#addhero",
-    "class/docs-src/index.js~Level.html#instance-method-addHero",
-    "docs-src/index.js~Level#addHero",
+    "source/index.js~level#addhero",
+    "class/source/index.js~Level.html#instance-method-addHero",
+    "source/index.js~Level#addHero",
     "method"
   ],
   [
-    "docs-src/index.js~level#blocks",
-    "class/docs-src/index.js~Level.html#instance-member-blocks",
-    "docs-src/index.js~Level#blocks",
+    "source/index.js~level#blocks",
+    "class/source/index.js~Level.html#instance-member-blocks",
+    "source/index.js~Level#blocks",
     "member"
   ],
   [
-    "docs-src/index.js~level#constructor",
-    "class/docs-src/index.js~Level.html#instance-constructor-constructor",
-    "docs-src/index.js~Level#constructor",
+    "source/index.js~level#constructor",
+    "class/source/index.js~Level.html#instance-constructor-constructor",
+    "source/index.js~Level#constructor",
     "method"
   ],
   [
-    "docs-src/index.js~level#eachhero",
-    "class/docs-src/index.js~Level.html#instance-method-eachHero",
-    "docs-src/index.js~Level#eachHero",
+    "source/index.js~level#eachhero",
+    "class/source/index.js~Level.html#instance-method-eachHero",
+    "source/index.js~Level#eachHero",
     "method"
   ],
   [
-    "docs-src/index.js~level#fromarray",
-    "class/docs-src/index.js~Level.html#instance-method-fromArray",
-    "docs-src/index.js~Level#fromArray",
+    "source/index.js~level#fromarray",
+    "class/source/index.js~Level.html#instance-method-fromArray",
+    "source/index.js~Level#fromArray",
     "method"
   ],
   [
-    "docs-src/index.js~level#fromtiled",
-    "class/docs-src/index.js~Level.html#instance-method-fromTiled",
-    "docs-src/index.js~Level#fromTiled",
+    "source/index.js~level#fromtiled",
+    "class/source/index.js~Level.html#instance-method-fromTiled",
+    "source/index.js~Level#fromTiled",
     "method"
   ],
   [
-    "docs-src/index.js~level#height",
-    "class/docs-src/index.js~Level.html#instance-member-height",
-    "docs-src/index.js~Level#height",
+    "source/index.js~level#height",
+    "class/source/index.js~Level.html#instance-member-height",
+    "source/index.js~Level#height",
     "member"
   ],
   [
-    "docs-src/index.js~level#heros",
-    "class/docs-src/index.js~Level.html#instance-member-heros",
-    "docs-src/index.js~Level#heros",
+    "source/index.js~level#heros",
+    "class/source/index.js~Level.html#instance-member-heros",
+    "source/index.js~Level#heros",
     "member"
   ],
   [
-    "docs-src/index.js~level#removehero",
-    "class/docs-src/index.js~Level.html#instance-method-removeHero",
-    "docs-src/index.js~Level#removeHero",
+    "source/index.js~level#removehero",
+    "class/source/index.js~Level.html#instance-method-removeHero",
+    "source/index.js~Level#removeHero",
     "method"
   ],
   [
-    "docs-src/index.js~level#spawn",
-    "class/docs-src/index.js~Level.html#instance-method-spawn",
-    "docs-src/index.js~Level#spawn",
+    "source/index.js~level#spawn",
+    "class/source/index.js~Level.html#instance-method-spawn",
+    "source/index.js~Level#spawn",
     "method"
   ],
   [
-    "docs-src/index.js~level#stops",
-    "class/docs-src/index.js~Level.html#instance-member-stops",
-    "docs-src/index.js~Level#stops",
+    "source/index.js~level#stops",
+    "class/source/index.js~Level.html#instance-member-stops",
+    "source/index.js~Level#stops",
     "member"
   ],
   [
-    "docs-src/index.js~level#tick",
-    "class/docs-src/index.js~Level.html#instance-method-tick",
-    "docs-src/index.js~Level#tick",
+    "source/index.js~level#tick",
+    "class/source/index.js~Level.html#instance-method-tick",
+    "source/index.js~Level#tick",
     "method"
   ],
   [
-    "docs-src/index.js~level#tileset",
-    "class/docs-src/index.js~Level.html#instance-member-tileset",
-    "docs-src/index.js~Level#tileset",
+    "source/index.js~level#tileset",
+    "class/source/index.js~Level.html#instance-member-tileset",
+    "source/index.js~Level#tileset",
     "member"
   ],
   [
-    "docs-src/index.js~level#toarray",
-    "class/docs-src/index.js~Level.html#instance-method-toArray",
-    "docs-src/index.js~Level#toArray",
+    "source/index.js~level#toarray",
+    "class/source/index.js~Level.html#instance-method-toArray",
+    "source/index.js~Level#toArray",
     "method"
   ],
   [
-    "docs-src/index.js~level#updatehero",
-    "class/docs-src/index.js~Level.html#instance-method-updateHero",
-    "docs-src/index.js~Level#updateHero",
+    "source/index.js~level#updatehero",
+    "class/source/index.js~Level.html#instance-method-updateHero",
+    "source/index.js~Level#updateHero",
     "method"
   ],
   [
-    "docs-src/index.js~level#width",
-    "class/docs-src/index.js~Level.html#instance-member-width",
-    "docs-src/index.js~Level#width",
+    "source/index.js~level#width",
+    "class/source/index.js~Level.html#instance-member-width",
+    "source/index.js~Level#width",
     "member"
   ],
   [
-    "docs-src/view.js",
-    "file/docs-src/view.js.html",
-    "docs-src/view.js",
+    "source/view.js",
+    "file/source/view.js.html",
+    "source/view.js",
     "file"
   ],
   [
-    "docs-src/view.js~view#_oncreatehero",
-    "class/docs-src/view.js~View.html#instance-method-_onCreateHero",
-    "docs-src/view.js~View#_onCreateHero",
+    "source/view.js~view#_oncreatehero",
+    "class/source/view.js~View.html#instance-method-_onCreateHero",
+    "source/view.js~View#_onCreateHero",
     "method"
   ],
   [
-    "docs-src/view.js~view#_onmouseclick",
-    "class/docs-src/view.js~View.html#instance-method-_onMouseClick",
-    "docs-src/view.js~View#_onMouseClick",
+    "source/view.js~view#_onmouseclick",
+    "class/source/view.js~View.html#instance-method-_onMouseClick",
+    "source/view.js~View#_onMouseClick",
     "method"
   ],
   [
-    "docs-src/view.js~view#_onmousemove",
-    "class/docs-src/view.js~View.html#instance-method-_onMouseMove",
-    "docs-src/view.js~View#_onMouseMove",
+    "source/view.js~view#_onmousemove",
+    "class/source/view.js~View.html#instance-method-_onMouseMove",
+    "source/view.js~View#_onMouseMove",
     "method"
   ],
   [
-    "docs-src/view.js~view#_onremovehero",
-    "class/docs-src/view.js~View.html#instance-method-_onRemoveHero",
-    "docs-src/view.js~View#_onRemoveHero",
+    "source/view.js~view#_onremovehero",
+    "class/source/view.js~View.html#instance-method-_onRemoveHero",
+    "source/view.js~View#_onRemoveHero",
     "method"
   ],
   [
-    "docs-src/view.js~view#_onupdatehero",
-    "class/docs-src/view.js~View.html#instance-method-_onUpdateHero",
-    "docs-src/view.js~View#_onUpdateHero",
+    "source/view.js~view#_onupdatehero",
+    "class/source/view.js~View.html#instance-method-_onUpdateHero",
+    "source/view.js~View#_onUpdateHero",
     "method"
   ],
   [
-    "docs-src/view.js~view#addblock",
-    "class/docs-src/view.js~View.html#instance-method-addBlock",
-    "docs-src/view.js~View#addBlock",
+    "source/view.js~view#addblock",
+    "class/source/view.js~View.html#instance-method-addBlock",
+    "source/view.js~View#addBlock",
     "method"
   ],
   [
-    "docs-src/view.js~view#addblocks",
-    "class/docs-src/view.js~View.html#instance-method-addBlocks",
-    "docs-src/view.js~View#addBlocks",
+    "source/view.js~view#addblocks",
+    "class/source/view.js~View.html#instance-method-addBlocks",
+    "source/view.js~View#addBlocks",
     "method"
   ],
   [
-    "docs-src/view.js~view#camera",
-    "class/docs-src/view.js~View.html#instance-member-camera",
-    "docs-src/view.js~View#camera",
+    "source/view.js~view#camera",
+    "class/source/view.js~View.html#instance-member-camera",
+    "source/view.js~View#camera",
     "member"
   ],
   [
-    "docs-src/view.js~view#cameratohero",
-    "class/docs-src/view.js~View.html#instance-method-cameraToHero",
-    "docs-src/view.js~View#cameraToHero",
+    "source/view.js~view#cameratohero",
+    "class/source/view.js~View.html#instance-method-cameraToHero",
+    "source/view.js~View#cameraToHero",
     "method"
   ],
   [
-    "docs-src/view.js~view#constructor",
-    "class/docs-src/view.js~View.html#instance-constructor-constructor",
-    "docs-src/view.js~View#constructor",
+    "source/view.js~view#constructor",
+    "class/source/view.js~View.html#instance-constructor-constructor",
+    "source/view.js~View#constructor",
     "method"
   ],
   [
-    "docs-src/view.js~view#createlevel",
-    "class/docs-src/view.js~View.html#instance-method-createLevel",
-    "docs-src/view.js~View#createLevel",
+    "source/view.js~view#createlevel",
+    "class/source/view.js~View.html#instance-method-createLevel",
+    "source/view.js~View#createLevel",
     "method"
   ],
   [
-    "docs-src/view.js~view#createsprite",
-    "class/docs-src/view.js~View.html#instance-method-createSprite",
-    "docs-src/view.js~View#createSprite",
+    "source/view.js~view#createsprite",
+    "class/source/view.js~View.html#instance-method-createSprite",
+    "source/view.js~View#createSprite",
     "method"
   ],
   [
-    "docs-src/view.js~view#disablecontextmenu",
-    "class/docs-src/view.js~View.html#instance-method-disableContextMenu",
-    "docs-src/view.js~View#disableContextMenu",
+    "source/view.js~view#disablecontextmenu",
+    "class/source/view.js~View.html#instance-method-disableContextMenu",
+    "source/view.js~View#disableContextMenu",
     "method"
   ],
   [
-    "docs-src/view.js~view#getscale",
-    "class/docs-src/view.js~View.html#instance-method-getScale",
-    "docs-src/view.js~View#getScale",
+    "source/view.js~view#getscale",
+    "class/source/view.js~View.html#instance-method-getScale",
+    "source/view.js~View#getScale",
     "method"
   ],
   [
-    "docs-src/view.js~view#gettexture",
-    "class/docs-src/view.js~View.html#instance-method-getTexture",
-    "docs-src/view.js~View#getTexture",
+    "source/view.js~view#gettexture",
+    "class/source/view.js~View.html#instance-method-getTexture",
+    "source/view.js~View#getTexture",
     "method"
   ],
   [
-    "docs-src/view.js~view#hero",
-    "class/docs-src/view.js~View.html#instance-get-hero",
-    "docs-src/view.js~View#hero",
+    "source/view.js~view#hero",
+    "class/source/view.js~View.html#instance-get-hero",
+    "source/view.js~View#hero",
     "member"
   ],
   [
-    "docs-src/view.js~view#layers",
-    "class/docs-src/view.js~View.html#instance-member-layers",
-    "docs-src/view.js~View#layers",
+    "source/view.js~view#layers",
+    "class/source/view.js~View.html#instance-member-layers",
+    "source/view.js~View#layers",
     "member"
   ],
   [
-    "docs-src/view.js~view#level",
-    "class/docs-src/view.js~View.html#instance-member-level",
-    "docs-src/view.js~View#level",
+    "source/view.js~view#level",
+    "class/source/view.js~View.html#instance-member-level",
+    "source/view.js~View#level",
     "member"
   ],
   [
-    "docs-src/view.js~view#mouse",
-    "class/docs-src/view.js~View.html#instance-member-mouse",
-    "docs-src/view.js~View#mouse",
+    "source/view.js~view#mouse",
+    "class/source/view.js~View.html#instance-member-mouse",
+    "source/view.js~View#mouse",
     "member"
   ],
   [
-    "docs-src/view.js~view#oncreatehero",
-    "class/docs-src/view.js~View.html#instance-method-onCreateHero",
-    "docs-src/view.js~View#onCreateHero",
+    "source/view.js~view#oncreatehero",
+    "class/source/view.js~View.html#instance-method-onCreateHero",
+    "source/view.js~View#onCreateHero",
     "method"
   ],
   [
-    "docs-src/view.js~view#onremovehero",
-    "class/docs-src/view.js~View.html#instance-method-onRemoveHero",
-    "docs-src/view.js~View#onRemoveHero",
+    "source/view.js~view#onremovehero",
+    "class/source/view.js~View.html#instance-method-onRemoveHero",
+    "source/view.js~View#onRemoveHero",
     "method"
   ],
   [
-    "docs-src/view.js~view#onresize",
-    "class/docs-src/view.js~View.html#instance-method-onResize",
-    "docs-src/view.js~View#onResize",
+    "source/view.js~view#onresize",
+    "class/source/view.js~View.html#instance-method-onResize",
+    "source/view.js~View#onResize",
     "method"
   ],
   [
-    "docs-src/view.js~view#onupdatehero",
-    "class/docs-src/view.js~View.html#instance-method-onUpdateHero",
-    "docs-src/view.js~View#onUpdateHero",
+    "source/view.js~view#onupdatehero",
+    "class/source/view.js~View.html#instance-method-onUpdateHero",
+    "source/view.js~View#onUpdateHero",
     "method"
   ],
   [
-    "docs-src/view.js~view#pixi",
-    "class/docs-src/view.js~View.html#instance-member-pixi",
-    "docs-src/view.js~View#pixi",
+    "source/view.js~view#pixi",
+    "class/source/view.js~View.html#instance-member-pixi",
+    "source/view.js~View#pixi",
     "member"
   ],
   [
-    "docs-src/view.js~view#scale",
-    "class/docs-src/view.js~View.html#instance-member-scale",
-    "docs-src/view.js~View#scale",
+    "source/view.js~view#scale",
+    "class/source/view.js~View.html#instance-member-scale",
+    "source/view.js~View#scale",
     "member"
   ],
   [
-    "docs-src/view.js~view#screensize",
-    "class/docs-src/view.js~View.html#instance-member-screenSize",
-    "docs-src/view.js~View#screenSize",
+    "source/view.js~view#screensize",
+    "class/source/view.js~View.html#instance-member-screenSize",
+    "source/view.js~View#screenSize",
     "member"
   ],
   [
-    "docs-src/view.js~view#texturecache",
-    "class/docs-src/view.js~View.html#instance-member-textureCache",
-    "docs-src/view.js~View#textureCache",
+    "source/view.js~view#texturecache",
+    "class/source/view.js~View.html#instance-member-textureCache",
+    "source/view.js~View#textureCache",
     "member"
   ],
   [
-    "docs-src/view.js~view#tileset",
-    "class/docs-src/view.js~View.html#instance-member-tileset",
-    "docs-src/view.js~View#tileset",
+    "source/view.js~view#tileset",
+    "class/source/view.js~View.html#instance-member-tileset",
+    "source/view.js~View#tileset",
     "member"
   ],
   [
-    "docs-src/view.js~view#usemouse",
-    "class/docs-src/view.js~View.html#instance-method-useMouse",
-    "docs-src/view.js~View#useMouse",
+    "source/view.js~view#usemouse",
+    "class/source/view.js~View.html#instance-method-useMouse",
+    "source/view.js~View#useMouse",
     "method"
   ]
 ]

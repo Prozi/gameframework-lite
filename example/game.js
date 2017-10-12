@@ -1,6 +1,6 @@
 'use strict';
 
-const View = require('../es6/view');
+const View = require('../es2015/view').default;
 
 // this is how you should use View
 class MyView extends View {
@@ -17,7 +17,7 @@ class MyView extends View {
 if (typeof Worker !== 'undefined') {
 	if (!window.server) {
 		window.server = true;
-		window.server = new Worker('es5/testserver.js');
+		window.server = new Worker('js/testserver.js');
 		window.server.onmessage = (event) => {
 			view.level.fromArray(event.data);
 		};

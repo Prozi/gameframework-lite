@@ -1,11 +1,8 @@
 'use strict';
 
-const PIXI = (typeof window !== 'undefined') ? 
-	window.PIXI || 
-	require('pixi.js') : 
-	require('pixi.js');
+const PIXI = (typeof window !== 'undefined') ? require('pixi.js') : {};
 
-class TextureExtractor {
+export default class TextureExtractor {
 	constructor({
 		width,
 		height,
@@ -47,8 +44,3 @@ class TextureExtractor {
 		return this.textureCache[frame];
 	}
 }
-
-if (typeof exports !== 'undefined') {
-	exports.default = TextureExtractor;
-}
-
