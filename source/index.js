@@ -183,6 +183,10 @@ export function atan2 (y, x) {
 	}
 }
 
+export const sin = fmath.sin.bind(fmath)
+
+export const cos = fmath.cos.bind(fmath)
+
 export function randomId () {
 	return md5(random()).slice(0, 7);
 }
