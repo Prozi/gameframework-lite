@@ -815,7 +815,7 @@
     "__docId__": 62,
     "kind": "file",
     "name": "source/index.js",
-    "content": "import FMath from 'fmath';\nimport md5 from 'md5';\n\nconst fmath = new FMath();\n\n// function constants\nconst DEFER = (typeof process !== 'undefined') ? process.nextTick.bind(process) : setTimeout;\nconst NOW = (typeof performance !== 'undefined') ? performance.now.bind(performance) : Date.now.bind(Date);\n\n// just constants\nconst HALF_PI = Math.PI / 2;\n\nconst HERO_ID = 0;\nconst HERO_X = 1;\nconst HERO_Y = 2;\n\nexport class Game {\n\tconstructor (interval = 10) {\n\t\tthis.levels = [];\n\t\tthis.interval = interval;\n\t\tthis.now = NOW();\n\t}\n\tloop () {\n\t\tDEFER(this.tick.bind(this));\n\t\tif (this.onUpdate) {\n\t\t\tDEFER(this.onUpdate.bind(this));\n\t\t}\n\t\tsetTimeout(() => DEFER(this.loop.bind(this)), this.interval);\t\n\t}\n\ttick () {\n\t\tconst now = NOW();\n\t\tthis.delta = (now - this.now) / 1000;\n\t\tthis.now = now;\n\t\tthis.levels.forEach((map) => {\n\t\t\tDEFER(map.tick.bind(map, this.delta));\n\t\t});\n\t}\n}\n\nexport class Level {\n\tconstructor (props = {}) {\t\t\n\t\tconst options = {};\n\t\tif (props.gravity) {\n\t\t\toptions.gravity = props.gravity;\n\t\t}\n\t\tthis.heros = props.heros || {};\n\t\tthis.blocks = props.blocks || {};\n\t\tthis.accuracy = 10;\n\t}\n\tspawn ({ body }) {\n\t\tbody.x = random() * this.width;\n\t\tbody.y = 0;\n\t}\n\teachHero (callback) {\n\t\tfor (let hero in this.heros) {\n\t\t\tif (this.heros.hasOwnProperty(hero)) {\n\t\t\t\tcallback(this.heros[hero]);\n\t\t\t}\n\t\t}\n\t}\n\ttick (delta) {\n\t\tconsole.log(delta);\n\t}\n\ttoArray () {\n\t\tconst array = [[]];\n\t\tthis.eachHero((hero) => array[0].push(hero.toArray()));\n\t\treturn array;\n\t}\n\tremoveHero (hero) {\n\t\tif (this.onRemoveHero) {\n\t\t\tthis.onRemoveHero(hero);\n\t\t}\n\t\tthis.heros[hero.id] = null;\n\t\tdelete this.heros[hero.id];\t\t\n\t}\n\tfromArray (array = [], HeroClass = Hero) {\n\t\tthis.eachHero((hero) => {\n\t\t\tif (!array[0].find((heroArray) => heroArray[HERO_ID] === hero.id)) {\n\t\t\t\tthis.removeHero(hero);\n\t\t\t}\n\t\t});\n\t\tarray[0].forEach((heroArray) => {\n\t\t\tconst id = heroArray[HERO_ID];\n\t\t\tif (this.heros[id]) {\n\t\t\t\tthis.updateHero(id, heroArray);\n\t\t\t} else {\n\t\t\t\tthis.addHero(heroArray, HeroClass);\n\t\t\t}\n\t\t});\n\t\tif (this.fromArrayExtension) {\n\t\t\tthis.fromArrayExtension(array);\n\t\t}\n\t}\n\tupdateHero (id, heroArray = []) {\n\t\tthis.heros[id].fromArray(heroArray);\n\t\tif (this.onUpdateHero) {\n\t\t\tthis.onUpdateHero(this.heros[id]);\n\t\t}\n\t}\n\taddHero (heroArray = [], HeroClass = Hero) {\n\t\tconst id = heroArray[HERO_ID] || randomId();\n\t\tthis.heros[id] = new HeroClass({ id });\n\t\tthis.heros[id].x = heroArray[HERO_X] || this.width * random();\n\t\tthis.heros[id].y = heroArray[HERO_Y] || 0;\n\t\tthis.heros[id].fromArray(heroArray);\n\t\tif (this.onCreateHero) {\n\t\t\tthis.onCreateHero(this.heros[id]);\n\t\t}\n\t\treturn this.heros[id];\n\t}\n\tfromTiled (tiled = {}) {\n\t\tthis.width  = tiled.width;\n\t\tthis.height = tiled.height;\n\t\tthis.blocks = {};\n\t\tthis.stops  = {};\n\t\tthis.tileset = {\n\t\t\ttilewidth: tiled.tilesets[0].tilewidth,\n\t\t\timagewidth: tiled.tilesets[0].imagewidth,\n\t\t};\n\t\tthis.accuracy = this.tileset.tilewidth;\n\t\tfor (let y = 0; y < this.height; y++) {\n\t\t\tfor (let x = 0; x < this.width; x++) {\n\t\t\t\tconst pos = y * this.width + x;\n\t\t\t\tconst offset = `${x}:${y}`;\n\t\t\t\tthis.blocks[offset] = [\n\t\t\t\t\ttiled.layers[0].data[pos], \n\t\t\t\t\ttiled.layers[1].data[pos]\n\t\t\t\t];\n\t\t\t\tthis.stops[offset] = tiled.layers[2].data[pos];\n\t\t\t}\n\t\t}\n\t}\n}\n\nexport class Hero {\n\tconstructor ({ id = randomId(), sprite = null }) {\n\t\tthis.id = id;\n\t\tthis.sprite = sprite;\n\t\tthis.x = undefined;\n\t\tthis.y = undefined;\n\t}\n\ttoArray () {\n\t\treturn [\n\t\t\tthis.id,\n\t\t\tthis.x,\n\t\t\tthis.y,\n\t\t];\n\t}\n\tfromArray (array = [], force = false) {\n\t\tif (force) {\n\t\t\tthis.id = array[HERO_ID];\n\t\t}\n\t\tif (force || (this.id === array[HERO_ID])) {\n\t\t\tthis.move(array[HERO_X], array[HERO_Y]);\n\t\t}\n\t}\n\tmove (x, y) {\n\t\tthis.x = x;\n\t\tthis.y = y;\n\t}\n}\n\nexport function atan2 (y, x) {\n\tif (x > 0) {\n\t\treturn fmath.atan(y / x);\n\t}\n\tif (x < 0) {\n\t\tif (y >= 0) {\n\t\t\treturn fmath.atan(y / x) + Math.PI;\n\t\t}\n\t\treturn fmath.atan(y / x) - Math.PI;\n\t}\n\tif (x === 0) {\n\t\tif (y === 0) {\n\t\t\treturn undefined;\n\t\t}\n\t\tif (y > 0) {\n\t\t\treturn HALF_PI;\n\t\t}\n\t\tif (y < 0) {\n\t\t\treturn -HALF_PI;\n\t\t}\n\t}\n}\n\nexport function randomId () {\n\treturn md5(random()).slice(0, 7);\n}\n\nexport function distance (dx, dy) {\n\treturn Math.sqrt(dx * dx + dy * dy);\n}\n\nexport function random () {\n\treturn Math.floor(Math.random() * 1001) / 1000;\n}\n",
+    "content": "import FMath from 'fmath';\nimport md5 from 'md5';\n\nconst fmath = new FMath();\n\n// function constants\nconst DEFER = (typeof process !== 'undefined') ? process.nextTick.bind(process) : setTimeout;\nconst NOW = (typeof performance !== 'undefined') ? performance.now.bind(performance) : Date.now.bind(Date);\n\n// just constants\nconst HALF_PI = Math.PI / 2;\n\nconst HERO_ID = 0;\nconst HERO_X = 1;\nconst HERO_Y = 2;\n\nexport class Game {\n\tconstructor (interval = 10) {\n\t\tthis.levels = [];\n\t\tthis.interval = interval;\n\t\tthis.now = NOW();\n\t}\n\tloop () {\n\t\tDEFER(this.tick.bind(this));\n\t\tif (this.onUpdate) {\n\t\t\tDEFER(this.onUpdate.bind(this));\n\t\t}\n\t\tsetTimeout(() => DEFER(this.loop.bind(this)), this.interval);\t\n\t}\n\ttick () {\n\t\tconst now = NOW();\n\t\tthis.delta = (now - this.now) / 1000;\n\t\tthis.now = now;\n\t\tthis.levels.forEach((map) => {\n\t\t\tDEFER(map.tick.bind(map, this.delta));\n\t\t});\n\t}\n}\n\nexport class Level {\n\tconstructor (props = {}) {\t\t\n\t\tconst options = {};\n\t\tif (props.gravity) {\n\t\t\toptions.gravity = props.gravity;\n\t\t}\n\t\tthis.heros = props.heros || {};\n\t\tthis.blocks = props.blocks || {};\n\t\tthis.accuracy = 10;\n\t}\n\tspawn ({ body }) {\n\t\tbody.x = random() * this.width;\n\t\tbody.y = 0;\n\t}\n\teachHero (callback) {\n\t\tfor (let hero in this.heros) {\n\t\t\tif (this.heros.hasOwnProperty(hero)) {\n\t\t\t\tcallback(this.heros[hero]);\n\t\t\t}\n\t\t}\n\t}\n\ttick (delta) {\n\t\tconsole.log(delta);\n\t}\n\ttoArray () {\n\t\tconst array = [[]];\n\t\tthis.eachHero((hero) => array[0].push(hero.toArray()));\n\t\treturn array;\n\t}\n\tremoveHero (hero) {\n\t\tif (this.onRemoveHero) {\n\t\t\tthis.onRemoveHero(hero);\n\t\t}\n\t\tthis.heros[hero.id] = null;\n\t\tdelete this.heros[hero.id];\t\t\n\t}\n\tfromArray (array = [], HeroClass = Hero) {\n\t\tthis.eachHero((hero) => {\n\t\t\tif (!array[0].find((heroArray) => heroArray[HERO_ID] === hero.id)) {\n\t\t\t\tthis.removeHero(hero);\n\t\t\t}\n\t\t});\n\t\tarray[0].forEach((heroArray) => {\n\t\t\tconst id = heroArray[HERO_ID];\n\t\t\tif (this.heros[id]) {\n\t\t\t\tthis.updateHero(id, heroArray);\n\t\t\t} else {\n\t\t\t\tthis.addHero(heroArray, HeroClass);\n\t\t\t}\n\t\t});\n\t\tif (this.fromArrayExtension) {\n\t\t\tthis.fromArrayExtension(array);\n\t\t}\n\t}\n\tupdateHero (id, heroArray = []) {\n\t\tthis.heros[id].fromArray(heroArray);\n\t\tif (this.onUpdateHero) {\n\t\t\tthis.onUpdateHero(this.heros[id]);\n\t\t}\n\t}\n\taddHero (heroArray = [], HeroClass = Hero) {\n\t\tconst id = heroArray[HERO_ID] || randomId();\n\t\tthis.heros[id] = new HeroClass({ id });\n\t\tthis.heros[id].x = heroArray[HERO_X] || this.width * random();\n\t\tthis.heros[id].y = heroArray[HERO_Y] || 0;\n\t\tthis.heros[id].fromArray(heroArray);\n\t\tif (this.onCreateHero) {\n\t\t\tthis.onCreateHero(this.heros[id]);\n\t\t}\n\t\treturn this.heros[id];\n\t}\n\tfromTiled (tiled = {}) {\n\t\tthis.width  = tiled.width;\n\t\tthis.height = tiled.height;\n\t\tthis.blocks = {};\n\t\tthis.stops  = {};\n\t\tthis.tileset = {\n\t\t\ttilewidth: tiled.tilesets[0].tilewidth,\n\t\t\timagewidth: tiled.tilesets[0].imagewidth,\n\t\t};\n\t\tthis.accuracy = this.tileset.tilewidth;\n\t\tfor (let y = 0; y < this.height; y++) {\n\t\t\tfor (let x = 0; x < this.width; x++) {\n\t\t\t\tconst pos = y * this.width + x;\n\t\t\t\tconst offset = `${x}:${y}`;\n\t\t\t\tthis.blocks[offset] = [\n\t\t\t\t\ttiled.layers[0].data[pos], \n\t\t\t\t\ttiled.layers[1].data[pos]\n\t\t\t\t];\n\t\t\t\tthis.stops[offset] = tiled.layers[2].data[pos];\n\t\t\t}\n\t\t}\n\t}\n}\n\nexport class Hero {\n\tconstructor ({ id = randomId(), sprite = null }) {\n\t\tthis.id = id;\n\t\tthis.sprite = sprite;\n\t\tthis.x = undefined;\n\t\tthis.y = undefined;\n\t}\n\ttoArray () {\n\t\treturn [\n\t\t\tthis.id,\n\t\t\tthis.x,\n\t\t\tthis.y,\n\t\t];\n\t}\n\tfromArray (array = [], force = false) {\n\t\tif (force) {\n\t\t\tthis.id = array[HERO_ID];\n\t\t}\n\t\tif (force || (this.id === array[HERO_ID])) {\n\t\t\tthis.move(array[HERO_X], array[HERO_Y]);\n\t\t}\n\t}\n\tmove (x, y) {\n\t\tthis.x = x;\n\t\tthis.y = y;\n\t}\n}\n\nexport function atan2 (y, x) {\n\tif (x > 0) {\n\t\treturn fmath.atan(y / x);\n\t}\n\tif (x < 0) {\n\t\tif (y >= 0) {\n\t\t\treturn fmath.atan(y / x) + Math.PI;\n\t\t}\n\t\treturn fmath.atan(y / x) - Math.PI;\n\t}\n\tif (x === 0) {\n\t\tif (y === 0) {\n\t\t\treturn undefined;\n\t\t}\n\t\tif (y > 0) {\n\t\t\treturn HALF_PI;\n\t\t}\n\t\tif (y < 0) {\n\t\t\treturn -HALF_PI;\n\t\t}\n\t}\n}\n\nexport const sin = fmath.sin.bind(fmath)\n\nexport const cos = fmath.cos.bind(fmath)\n\nexport function randomId () {\n\treturn md5(random()).slice(0, 7);\n}\n\nexport function distance (dx, dy) {\n\treturn Math.sqrt(dx * dx + dy * dy);\n}\n\nexport function random () {\n\treturn Math.floor(Math.random() * 1001) / 1000;\n}\n",
     "static": true,
     "longname": "C:/Users/lenovo/projects/gameframework-lite/source/index.js",
     "access": "public",
@@ -1716,6 +1716,46 @@
   },
   {
     "__docId__": 112,
+    "kind": "variable",
+    "name": "sin",
+    "memberof": "source/index.js",
+    "static": true,
+    "longname": "source/index.js~sin",
+    "access": "public",
+    "export": true,
+    "importPath": "gameframework-lite/source/index.js",
+    "importStyle": "{sin}",
+    "description": null,
+    "lineNumber": 186,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 113,
+    "kind": "variable",
+    "name": "cos",
+    "memberof": "source/index.js",
+    "static": true,
+    "longname": "source/index.js~cos",
+    "access": "public",
+    "export": true,
+    "importPath": "gameframework-lite/source/index.js",
+    "importStyle": "{cos}",
+    "description": null,
+    "lineNumber": 188,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 114,
     "kind": "function",
     "name": "randomId",
     "memberof": "source/index.js",
@@ -1728,7 +1768,7 @@
     "importPath": "gameframework-lite/source/index.js",
     "importStyle": "{randomId}",
     "description": null,
-    "lineNumber": 186,
+    "lineNumber": 190,
     "undocument": true,
     "params": [],
     "return": {
@@ -1738,7 +1778,7 @@
     }
   },
   {
-    "__docId__": 113,
+    "__docId__": 115,
     "kind": "function",
     "name": "distance",
     "memberof": "source/index.js",
@@ -1751,7 +1791,7 @@
     "importPath": "gameframework-lite/source/index.js",
     "importStyle": "{distance}",
     "description": null,
-    "lineNumber": 190,
+    "lineNumber": 194,
     "undocument": true,
     "params": [
       {
@@ -1774,7 +1814,7 @@
     }
   },
   {
-    "__docId__": 114,
+    "__docId__": 116,
     "kind": "function",
     "name": "random",
     "memberof": "source/index.js",
@@ -1787,7 +1827,7 @@
     "importPath": "gameframework-lite/source/index.js",
     "importStyle": "{random}",
     "description": null,
-    "lineNumber": 194,
+    "lineNumber": 198,
     "undocument": true,
     "params": [],
     "return": {
@@ -1797,7 +1837,7 @@
     }
   },
   {
-    "__docId__": 115,
+    "__docId__": 117,
     "kind": "file",
     "name": "source/view.js",
     "content": "'use strict';\n\nconst { Level } = require('./index');\nconst PIXI = (typeof window !== 'undefined') ? require('pixi.js') : {};\n\nexport default class View {\n\tconstructor (screenSize = 480, anchor = document.body) {\n\t\tthis.screenSize = screenSize;\n\t\tthis.pixi = new PIXI.Application(window.innerWidth, window.innerHeight, {\n\t\t\tautoResize: false,\n\t\t\troundPixels: true,\n\t\t\tclearBeforeRender: false,\n\t\t\tresolution: 1\n\t\t});\n\t\tthis.camera = new PIXI.Container();\n\t\tthis.pixi.stage.addChild(this.camera);\n\t\tthis.level = new Level();\n\t\tthis.level.onUpdateHero = this._onUpdateHero.bind(this);\n\t\tthis.level.onCreateHero = this._onCreateHero.bind(this);\n\t\tthis.level.onRemoveHero = this._onRemoveHero.bind(this);\n\t\tanchor.appendChild(this.pixi.view);\n\t\twindow.addEventListener('resize', this.onResize.bind(this), true);\n\t\tthis.onResize();\n\t\tthis.pixi.start();\n\t}\n\tget hero () {\n\t\treturn this.level.heros[this.id];\n\t}\n\tcameraToHero (hero) {\n\t\tthis.camera.x = Math.floor(-hero.sprite.x + window.innerWidth / 2 / this.scale);\n\t\tthis.camera.y = Math.floor(-hero.sprite.y + window.innerHeight / 2 / this.scale);\n\t}\n\tonUpdateHero (hero) {\n\t\t// this is what you should override\n\t}\n\t_onUpdateHero (hero) {\n\t\tthis.onUpdateHero(hero);\n\t\tif (hero.sprite) {\n\t\t\thero.sprite.x = hero.x * this.level.accuracy;\n\t\t\thero.sprite.y = hero.y * this.level.accuracy;\n\t\t}\n\t}\n\t// this is what you should override\n\tonCreateHero (hero) {\n\t\thero.sprite = PIXI.Sprite.fromImage('bunny.png');\n\t\thero.sprite.anchor.set(0.5);\t\t\n\t\thero.sprite.texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;\n\t}\n\t_onCreateHero (hero) {\n\t\tif (!hero.sprite) {\n\t\t\tthis.onCreateHero(hero);\n\t\t\tif (hero.sprite) {\n\t\t\t\thero.sprite.x = hero.x * this.level.accuracy;\n\t\t\t\thero.sprite.y = hero.y * this.level.accuracy;\n\t\t\t\t(this.layers ? this.layers.heros : this.camera).addChild(hero.sprite);\n\t\t\t}\n\t\t}\n\t}\n\tonRemoveHero (hero) {\n\t\t// this is what you should override\n\t}\n\t_onRemoveHero (hero) {\n\t\tthis.onRemoveHero(hero);\n\t\tif (hero.sprite && hero.sprite.parent) {\n\t\t\thero.sprite.parent.removeChild(hero.sprite);\n\t\t}\n\t}\n\tonResize () {\n\t\tthis.scale = this.getScale();\n\t\tthis.pixi.renderer.resize(window.innerWidth, window.innerHeight);\n\t\tthis.pixi.stage.scale.set(this.scale);\n\t}\n\tgetScale () {\n\t    return +(Math.sqrt(window.innerWidth * window.innerHeight) / this.screenSize).toFixed(2);\n\t}\n\tgetTexture (frame) {\n\t\tif (!this.textureCache[frame]) {\n\t\t\t// <-- tiled firstgid === 1\n\t\t\tconst size = this.level.tileset.tilewidth,\n\t\t\t\twidth = (this.level.tileset.imagewidth / this.level.tileset.tilewidth),\n\t\t\t\tx = ((frame - 1) % width) * size,\n\t\t\t\ty = Math.floor((frame - 1) / width) * size;\n\t\t\tthis.textureCache[frame] = new PIXI.Texture(\n\t\t\t\tthis.tileset, new PIXI.Rectangle(x, y, size, size)\n\t\t\t);\n\t\t\tthis.textureCache[frame].baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;\n\t\t}\n\t\treturn this.textureCache[frame];\n\t}\n\tcreateSprite (frame, nearest = PIXI.SCALE_MODES.NEAREST) {\n\t\tlet sprite;\n\t\tif (isFinite(frame)) {\n\t\t\tsprite = new PIXI.Sprite(this.getTexture(parseInt(frame, 10)));\n\t\t} else {\n\t\t\tsprite = PIXI.Sprite.fromFrame(frame);\n\t\t}\n\t\tsprite.texture.baseTexture.scaleMode = nearest;\n\t\treturn sprite;\n\t}\n\taddBlock (x, y, block, layer = this.layers.blocks, nearest = PIXI.SCALE_MODES.NEAREST) {\n\t\tconst sprite = this.createSprite(block, nearest);\n\t\tsprite.width = sprite.height = this.level.tileset.tilewidth;\n\t\tsprite.x = Math.floor(this.level.tileset.tilewidth * x);\n\t\tsprite.y = Math.floor(this.level.tileset.tilewidth * y);\n\t\tsprite.anchor.set(0.5);\n\t\tlayer.addChild(sprite);\n\t}\n\taddBlocks () {\n\t\tfor (let y = 0; y < this.level.height; y++) {\n\t\t\tfor (let x = 0; x < this.level.width; x++) {\n\t\t\t\tconst block = this.level.blocks[`${x}:${y}`];\n\t\t\t\tif (block && Array.isArray(block)) {\n\t\t\t\t\tfor (let i = 0; i < block.length; i++) {\n\t\t\t\t\t\tif (parseInt(block[i], 10)) {\n\t\t\t\t\t\t\tthis.addBlock(x, y, block[i]);\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\tcreateLevel (tiled) {\n\t\tthis.textureCache = {};\n\t\tthis.layers = {\n\t\t\tblocks: new PIXI.Container(),\n\t\t\theros: new PIXI.Container(),\n\t\t};\n\t\tthis.tileset = PIXI.Texture.fromImage(tiled.tilesets[0].image, false, PIXI.SCALE_MODES.NEAREST);\n\t\tthis.camera.addChild(this.layers.blocks);\n\t\tthis.camera.addChild(this.layers.heros);\n\t\tthis.level.fromTiled(tiled);\n\t\tthis.addBlocks();\n\t}\n\t_onMouseMove (event) {\n\t\tevent.stopPropagation();\n\t\tconst e = event.touches ? event.touches[0] : event;\n\t\tthis.mouse = {\n\t\t\tx: e.clientX,\n\t\t\ty: e.clientY,\n\t\t};\n\t\tif (this.onMouseMove) {\n\t\t\tthis.onMouseMove();\n\t\t}\n\t}\n\t_onMouseClick (event) {\n\t\tthis._onMouseMove(event);\n\t\tif (this.onMouseClick) {\n\t\t\tthis.onMouseClick();\n\t\t}\n\t}\n\tuseMouse (disableContextMenu = false) {\n\t\twindow.addEventListener('touchmove', this._onMouseMove.bind(this), false);\n\t\twindow.addEventListener('touchstart', this._onMouseClick.bind(this), false);\n\t\twindow.addEventListener('mousemove', this._onMouseMove.bind(this), false);\n\t\twindow.addEventListener('mousedown', this._onMouseClick.bind(this), false);\n\t\tif (disableContextMenu) {\n\t\t\tthis.disableContextMenu();\n\t\t}\n\t}\n\tdisableContextMenu () {\n\t\tdocument.body.addEventListener('contextmenu', (event) => event.preventDefault(), false);\n\t}\n}\n",
@@ -1808,7 +1848,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 116,
+    "__docId__": 118,
     "kind": "variable",
     "name": "Level",
     "memberof": "source/view.js",
@@ -1829,7 +1869,7 @@
     "ignore": true
   },
   {
-    "__docId__": 117,
+    "__docId__": 119,
     "kind": "variable",
     "name": "PIXI",
     "memberof": "source/view.js",
@@ -1850,7 +1890,7 @@
     "ignore": true
   },
   {
-    "__docId__": 118,
+    "__docId__": 120,
     "kind": "class",
     "name": "View",
     "memberof": "source/view.js",
@@ -1866,7 +1906,7 @@
     "interface": false
   },
   {
-    "__docId__": 119,
+    "__docId__": 121,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "source/view.js~View",
@@ -1880,7 +1920,7 @@
     "undocument": true
   },
   {
-    "__docId__": 120,
+    "__docId__": 122,
     "kind": "member",
     "name": "screenSize",
     "memberof": "source/view.js~View",
@@ -1897,7 +1937,7 @@
     }
   },
   {
-    "__docId__": 121,
+    "__docId__": 123,
     "kind": "member",
     "name": "pixi",
     "memberof": "source/view.js~View",
@@ -1914,7 +1954,7 @@
     }
   },
   {
-    "__docId__": 122,
+    "__docId__": 124,
     "kind": "member",
     "name": "camera",
     "memberof": "source/view.js~View",
@@ -1931,7 +1971,7 @@
     }
   },
   {
-    "__docId__": 123,
+    "__docId__": 125,
     "kind": "member",
     "name": "level",
     "memberof": "source/view.js~View",
@@ -1948,7 +1988,7 @@
     }
   },
   {
-    "__docId__": 124,
+    "__docId__": 126,
     "kind": "get",
     "name": "hero",
     "memberof": "source/view.js~View",
@@ -1967,7 +2007,7 @@
     }
   },
   {
-    "__docId__": 125,
+    "__docId__": 127,
     "kind": "method",
     "name": "cameraToHero",
     "memberof": "source/view.js~View",
@@ -1990,7 +2030,7 @@
     "return": null
   },
   {
-    "__docId__": 126,
+    "__docId__": 128,
     "kind": "method",
     "name": "onUpdateHero",
     "memberof": "source/view.js~View",
@@ -2013,7 +2053,7 @@
     "return": null
   },
   {
-    "__docId__": 127,
+    "__docId__": 129,
     "kind": "method",
     "name": "_onUpdateHero",
     "memberof": "source/view.js~View",
@@ -2036,7 +2076,7 @@
     "return": null
   },
   {
-    "__docId__": 128,
+    "__docId__": 130,
     "kind": "method",
     "name": "onCreateHero",
     "memberof": "source/view.js~View",
@@ -2059,7 +2099,7 @@
     "return": null
   },
   {
-    "__docId__": 129,
+    "__docId__": 131,
     "kind": "method",
     "name": "_onCreateHero",
     "memberof": "source/view.js~View",
@@ -2082,7 +2122,7 @@
     "return": null
   },
   {
-    "__docId__": 130,
+    "__docId__": 132,
     "kind": "method",
     "name": "onRemoveHero",
     "memberof": "source/view.js~View",
@@ -2105,7 +2145,7 @@
     "return": null
   },
   {
-    "__docId__": 131,
+    "__docId__": 133,
     "kind": "method",
     "name": "_onRemoveHero",
     "memberof": "source/view.js~View",
@@ -2128,7 +2168,7 @@
     "return": null
   },
   {
-    "__docId__": 132,
+    "__docId__": 134,
     "kind": "method",
     "name": "onResize",
     "memberof": "source/view.js~View",
@@ -2144,7 +2184,7 @@
     "return": null
   },
   {
-    "__docId__": 133,
+    "__docId__": 135,
     "kind": "member",
     "name": "scale",
     "memberof": "source/view.js~View",
@@ -2161,7 +2201,7 @@
     }
   },
   {
-    "__docId__": 134,
+    "__docId__": 136,
     "kind": "method",
     "name": "getScale",
     "memberof": "source/view.js~View",
@@ -2181,7 +2221,7 @@
     }
   },
   {
-    "__docId__": 135,
+    "__docId__": 137,
     "kind": "method",
     "name": "getTexture",
     "memberof": "source/view.js~View",
@@ -2208,7 +2248,7 @@
     }
   },
   {
-    "__docId__": 136,
+    "__docId__": 138,
     "kind": "method",
     "name": "createSprite",
     "memberof": "source/view.js~View",
@@ -2242,7 +2282,7 @@
     }
   },
   {
-    "__docId__": 137,
+    "__docId__": 139,
     "kind": "method",
     "name": "addBlock",
     "memberof": "source/view.js~View",
@@ -2291,7 +2331,7 @@
     "return": null
   },
   {
-    "__docId__": 138,
+    "__docId__": 140,
     "kind": "method",
     "name": "addBlocks",
     "memberof": "source/view.js~View",
@@ -2307,7 +2347,7 @@
     "return": null
   },
   {
-    "__docId__": 139,
+    "__docId__": 141,
     "kind": "method",
     "name": "createLevel",
     "memberof": "source/view.js~View",
@@ -2330,7 +2370,7 @@
     "return": null
   },
   {
-    "__docId__": 140,
+    "__docId__": 142,
     "kind": "member",
     "name": "textureCache",
     "memberof": "source/view.js~View",
@@ -2347,7 +2387,7 @@
     }
   },
   {
-    "__docId__": 141,
+    "__docId__": 143,
     "kind": "member",
     "name": "layers",
     "memberof": "source/view.js~View",
@@ -2364,7 +2404,7 @@
     }
   },
   {
-    "__docId__": 142,
+    "__docId__": 144,
     "kind": "member",
     "name": "tileset",
     "memberof": "source/view.js~View",
@@ -2381,7 +2421,7 @@
     }
   },
   {
-    "__docId__": 143,
+    "__docId__": 145,
     "kind": "method",
     "name": "_onMouseMove",
     "memberof": "source/view.js~View",
@@ -2404,7 +2444,7 @@
     "return": null
   },
   {
-    "__docId__": 144,
+    "__docId__": 146,
     "kind": "member",
     "name": "mouse",
     "memberof": "source/view.js~View",
@@ -2421,7 +2461,7 @@
     }
   },
   {
-    "__docId__": 145,
+    "__docId__": 147,
     "kind": "method",
     "name": "_onMouseClick",
     "memberof": "source/view.js~View",
@@ -2444,7 +2484,7 @@
     "return": null
   },
   {
-    "__docId__": 146,
+    "__docId__": 148,
     "kind": "method",
     "name": "useMouse",
     "memberof": "source/view.js~View",
@@ -2470,7 +2510,7 @@
     "return": null
   },
   {
-    "__docId__": 147,
+    "__docId__": 149,
     "kind": "method",
     "name": "disableContextMenu",
     "memberof": "source/view.js~View",
@@ -2495,7 +2535,7 @@
   },
   {
     "kind": "packageJSON",
-    "content": "{\n  \"name\": \"gameframework-lite\",\n  \"version\": \"1.5.0\",\n  \"description\": \"game framework for 2d html5 games with physics isomorphic\",\n  \"main\": \"index.js\",\n  \"scripts\": {\n    \"docs\": \"esdoc\",\n    \"build\": \"PRODUCTION=true webpack\",\n    \"build:dev\": \"PRODUCTION= webpack\",\n    \"test\": \"yarn compile && webpack && node test\",\n    \"compile\": \"babel ./source --out-dir ./es2015 --presets es2015\"\n  },\n  \"editions\": [\n    {\n      \"description\": \"Source + ESNext + Require\",\n      \"entry\": \"source/index.js\",\n      \"syntaxes\": [\n        \"javascript\",\n        \"esnext\",\n        \"require\",\n        \"arrows\",\n        \"const\",\n        \"let\",\n        \"destructuring\"\n      ]\n    },\n    {\n      \"description\": \"Compiled + ES5 + Require\",\n      \"entry\": \"es5/index.js\",\n      \"syntaxes\": [\n        \"javascript\",\n        \"ES5\",\n        \"require\"\n      ]\n    }\n  ],\n  \"author\": \"Jacek Pietal <prozi85@gmail.com>\",\n  \"license\": \"MIT\",\n  \"dependencies\": {\n    \"babel-loader\": \"^7.1.2\",\n    \"editions\": \"^1.3.3\",\n    \"esdoc\": \"^1.0.3\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"express\": \"^4.16.2\",\n    \"fmath\": \"latest\",\n    \"md5\": \"latest\",\n    \"pixi.js\": \"latest\"\n  },\n  \"devDependencies\": {\n    \"babel-cli\": \"^6.26.0\",\n    \"babel-preset-es2015\": \"^6.24.1\",\n    \"webpack\": \"^3.7.1\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"https://github.com/Prozi/gameframework-lite.git\"\n  }\n}\n",
+    "content": "{\n  \"name\": \"gameframework-lite\",\n  \"version\": \"1.6.3\",\n  \"description\": \"game framework for 2d html5 games with physics isomorphic\",\n  \"main\": \"index.js\",\n  \"scripts\": {\n    \"docs\": \"esdoc\",\n    \"build\": \"PRODUCTION=true webpack\",\n    \"build:dev\": \"PRODUCTION= webpack\",\n    \"test\": \"yarn compile && webpack && node test\",\n    \"compile\": \"node_modules/.bin/babel ./source --out-dir ./es2015 --presets es2015\",\n    \"postinstall\": \"npm run compile\"\n  },\n  \"editions\": [\n    {\n      \"description\": \"Source + ESNext + Require\",\n      \"entry\": \"source/index.js\",\n      \"syntaxes\": [\n        \"javascript\",\n        \"esnext\",\n        \"require\",\n        \"arrows\",\n        \"const\",\n        \"let\",\n        \"destructuring\"\n      ]\n    },\n    {\n      \"description\": \"Compiled + ES5 + Require\",\n      \"entry\": \"es2015/index.js\",\n      \"syntaxes\": [\n        \"javascript\",\n        \"ES5\",\n        \"require\"\n      ]\n    }\n  ],\n  \"author\": \"Jacek Pietal <prozi85@gmail.com>\",\n  \"license\": \"MIT\",\n  \"dependencies\": {\n    \"babel-loader\": \"^7.1.2\",\n    \"editions\": \"^1.3.3\",\n    \"esdoc\": \"^1.0.3\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"express\": \"^4.16.2\",\n    \"fmath\": \"latest\",\n    \"md5\": \"latest\",\n    \"pixi.js\": \"latest\",\n    \"babel-cli\": \"^6.26.0\",\n    \"babel-preset-es2015\": \"^6.24.1\",\n    \"webpack\": \"^3.8.1\"\n  },\n  \"devDependencies\": {},\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"https://github.com/Prozi/gameframework-lite.git\"\n  }\n}\n",
     "longname": "C:\\Users\\lenovo\\projects\\gameframework-lite\\package.json",
     "name": "package.json",
     "static": true,

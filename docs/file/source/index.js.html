@@ -38,6 +38,8 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-distance">distance</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-random">random</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomId">randomId</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-cos">cos</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-sin">sin</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -227,6 +229,10 @@ export function atan2 (y, x) {
 		}
 	}
 }
+
+export const sin = fmath.sin.bind(fmath)
+
+export const cos = fmath.cos.bind(fmath)
 
 export function randomId () {
 	return md5(random()).slice(0, 7);

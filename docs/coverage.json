@@ -1,6 +1,6 @@
 {
   "coverage": "0%",
-  "expectCount": 91,
+  "expectCount": 93,
   "actualCount": 0,
   "files": {
     "source/extract.js": {
@@ -23,7 +23,7 @@
       ]
     },
     "source/index.js": {
-      "expectCount": 46,
+      "expectCount": 48,
       "actualCount": 0,
       "undocumentLines": [
         4,
@@ -70,8 +70,10 @@
         157,
         163,
         186,
+        188,
         190,
-        194
+        194,
+        198
       ]
     },
     "source/view.js": {

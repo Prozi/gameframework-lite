@@ -36,6 +36,12 @@ window.esdocSearchIndex = [
     "function"
   ],
   [
+    "gameframework-lite/source/index.js~cos",
+    "variable/index.html#static-variable-cos",
+    "<span>cos</span> <span class=\"search-result-import-path\">gameframework-lite/source/index.js</span>",
+    "variable"
+  ],
+  [
     "gameframework-lite/source/index.js~distance",
     "function/index.html#static-function-distance",
     "<span>distance</span> <span class=\"search-result-import-path\">gameframework-lite/source/index.js</span>",
@@ -52,6 +58,12 @@ window.esdocSearchIndex = [
     "function/index.html#static-function-randomId",
     "<span>randomId</span> <span class=\"search-result-import-path\">gameframework-lite/source/index.js</span>",
     "function"
+  ],
+  [
+    "gameframework-lite/source/index.js~sin",
+    "variable/index.html#static-variable-sin",
+    "<span>sin</span> <span class=\"search-result-import-path\">gameframework-lite/source/index.js</span>",
+    "variable"
   ],
   [
     "source/.external-ecmascript.js~array",
