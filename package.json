@@ -1,6 +1,6 @@
 {
   "name": "gameframework-lite",
-  "version": "1.6.3",
+  "version": "1.6.4",
   "description": "game framework for 2d html5 games with physics isomorphic",
   "main": "index.js",
   "scripts": {
@@ -8,9 +8,20 @@
     "build": "PRODUCTION=true webpack",
     "build:dev": "PRODUCTION= webpack",
     "test": "yarn compile && webpack && node test",
-    "compile": "node_modules/.bin/babel ./source --out-dir ./es2015 --presets es2015",
-    "postinstall": "npm run compile"
+    "compile": "node_modules/.bin/babel ./source --out-dir ./es2015"
   },
+  "keywords": [
+    "game framework",
+    "game",
+    "framework",
+    "light",
+    "lite",
+    "es6",
+    "es2015",
+    "nodejs",
+    "working",
+    "ready"
+  ],
   "editions": [
     {
       "description": "Source + ESNext + Require",
@@ -38,16 +49,14 @@
   "author": "Jacek Pietal <prozi85@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "babel-cli": "^6.26.0",
     "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
     "editions": "^1.3.3",
-    "esdoc": "^1.0.3",
-    "esdoc-standard-plugin": "^1.0.0",
     "express": "^4.16.2",
     "fmath": "latest",
     "md5": "latest",
-    "pixi.js": "latest",
-    "babel-cli": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1",
+    "pixi.js": "^4.5.6",
     "webpack": "^3.8.1"
   },
   "devDependencies": {},

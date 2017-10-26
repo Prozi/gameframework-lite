@@ -1,4 +1,8 @@
-## gameframework-lite!
+[![Version](https://img.shields.io/npm/v/gameframework-lite.svg)](https://www.npmjs.com/gameframework-lite)
+
+[![Known Vulnerabilities](https://snyk.io/test/npm/gameframework-lite/badge.svg)](https://snyk.io/test/npm/gameframework-lite)
+
+# gameframework-lite!
 
 PIXI.js + Game Loop + Level Loop + Character Loop
 
@@ -30,7 +34,7 @@ or
 
 * open `http://localhost:3000`
 
-### usage
+## usage
 
 require 'gameframework-lite' for:
 
@@ -48,9 +52,19 @@ require 'gameframework-lite/view' for:
 
 require 'gameframework-lite/extract' for:
 
+### Editions
+
+We're using npm editions here so you can use `gameframework-lite/source/...` for `import/export`
+
+or regular `gameframework-lite/es2015/...` for `require` syntax
+
+or trust editions and just use `gameframework-lite`
+
+### Texture Extractor
+
 - [TextureExtractor](https://prozi.github.io/gameframework-lite/class/docs-src/extract.js~TextureExtractor.html)
 
-### examples
+### Examples
 
 ```javascript
 const View = require('gameframework-lite/view');
@@ -91,8 +105,11 @@ new MyGame();
 
 `view example/index.html to see benchmark/test`
 
+### License
 
 License MIT
+
+### Author
 
 made by me - Jacek Pietal (prozi85@gmail.com)
 
