@@ -1,8 +1,5 @@
-[![Version](https://img.shields.io/npm/v/gameframework-lite.svg)](https://www.npmjs.com/gameframework-lite)
-
+[![Version](https://img.shields.io/npm/v/gameframework-lite.svg)](https://www.npmjs.com/gameframework-lite) 
 [![Known Vulnerabilities](https://snyk.io/test/npm/gameframework-lite/badge.svg)](https://snyk.io/test/npm/gameframework-lite)
-
-# gameframework-lite!
 
 PIXI.js + Game Loop + Level Loop + Character Loop
 
