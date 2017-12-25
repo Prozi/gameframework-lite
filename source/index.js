@@ -25,7 +25,7 @@ export class Game {
 		}
 	}
 	tick (delta) {
-		this.levels.forEach((map) => nextCycle(map.tick.bind(map, delta)))
+		this.levels.forEach((level) => nextCycle(level.tick.bind(level, delta)))
 		if (this.onUpdate) {
 			this.onUpdate()
 		}
@@ -33,25 +33,15 @@ export class Game {
 }
 
 export class Level {
-	constructor (props = {}) {		
-		const options = {}
-		if (props.gravity) {
-			options.gravity = props.gravity
-		}
+	constructor (props = {}) {
 		this.heros = props.heros || {}
 		this.blocks = props.blocks || {}
-		this.accuracy = 10
 	}
-	spawn ({ body }) {
-		body.x = random() * this.width
-		body.y = 0
+	each (set, callback) {
+		Object.keys(set).forEach((id) => callback(set[id]))
 	}
 	eachHero (callback) {
-		for (let hero in this.heros) {
-			if (this.heros.hasOwnProperty(hero)) {
-				callback(this.heros[hero])
-			}
-		}
+		this.each(this.heros, callback)
 	}
 	tick (delta) {
 		console.log(delta)
@@ -112,7 +102,6 @@ export class Level {
 			tilewidth: tiled.tilesets[0].tilewidth,
 			imagewidth: tiled.tilesets[0].imagewidth,
 		}
-		this.accuracy = this.tileset.tilewidth
 		for (let y = 0 y < this.height y++) {
 			for (let x = 0 x < this.width x++) {
 				const pos = y * this.width + x
@@ -128,9 +117,8 @@ export class Level {
 }
 
 export class Hero {
-	constructor ({ id = randomId(), sprite = null }) {
+	constructor ({ id = randomId() }) {
 		this.id = id
-		this.sprite = sprite
 		this.x = undefined
 		this.y = undefined
 	}
@@ -210,7 +198,7 @@ export const sin = fmath.sin.bind(fmath)
 export const cos = fmath.cos.bind(fmath)
 
 export function randomId () {
-	return random().toString(36).slice(2, 7)
+	return Math.random().toString(36).slice(2, 7)
 }
 
 export function distance (dx, dy) {
