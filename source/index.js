@@ -148,7 +148,7 @@ class Hero {
 
 // time specific constants
 const s2nano = 1e9
-const s2ms = 1 / 1e3
+const s2ms = 1e3
 const nano2s = 1 / s2nano
 const ms2nano = 1e6
 
