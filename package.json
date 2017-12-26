@@ -1,6 +1,6 @@
 {
   "name": "gameframework-lite",
-  "version": "1.7.6",
+  "version": "1.7.7",
   "description": "game framework for 2d html5 games with physics isomorphic",
   "main": "index.js",
   "scripts": {
@@ -22,13 +22,13 @@
   ],
   "editions": [
     {
-      "description": "Source + ESNext + Require",
+      "description": "Source + ESNext + Import",
       "entry": "index.js",
       "directory": "source",
       "syntaxes": [
         "javascript",
         "esnext",
-        "require",
+        "import",
         "arrows",
         "getset",
         "const",
