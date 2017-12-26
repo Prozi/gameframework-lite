@@ -3,7 +3,7 @@
 const { Level } = require('./index')
 const PIXI = (typeof window !== 'undefined') ? window.PIXI || require('pixi.js') : {}
 
-export default class View {
+class View {
 	constructor (screenSize = 480, anchor = document.body) {
 		this.screenSize = screenSize
 		this.pixi = new PIXI.Application(window.innerWidth, window.innerHeight, {
@@ -161,3 +161,5 @@ export default class View {
 		document.body.addEventListener('contextmenu', (event) => event.preventDefault(), false)
 	}
 }
+
+exports.default = View

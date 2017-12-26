@@ -1,13 +1,13 @@
-import FMath from 'fmath'
-import md5 from 'md5'
+const FMath = require('fmath')
+const fmath = new FMath()
 
 // next cycle run universal function
-export const nextCycle = IS_BACKEND ? setImmediate : setTimeout
+const nextCycle = IS_BACKEND ? setImmediate : setTimeout
 
 // get current time in nano seconds universal
-export const getTime = IS_BACKEND ? getTimeNode : getTimeBrowser
+const getTime = IS_BACKEND ? getTimeNode : getTimeBrowser
 
-export class Game {
+class Game {
 	constructor (interval = 16) {
 		this.levels = []
 		this.interval = Math.max(16, Math.round(interval))
@@ -32,7 +32,7 @@ export class Game {
 	}
 }
 
-export class Level {
+class Level {
 	constructor (props = {}) {
 		this.heros = props.heros || {}
 		this.blocks = props.blocks || {}
@@ -102,8 +102,8 @@ export class Level {
 			tilewidth: tiled.tilesets[0].tilewidth,
 			imagewidth: tiled.tilesets[0].imagewidth,
 		}
-		for (let y = 0 y < this.height y++) {
-			for (let x = 0 x < this.width x++) {
+		for (let y = 0; y < this.height; y++) {
+			for (let x = 0; x < this.width; x++) {
 				const pos = y * this.width + x
 				const offset = `${x}:${y}`
 				this.blocks[offset] = [
@@ -116,7 +116,7 @@ export class Level {
 	}
 }
 
-export class Hero {
+class Hero {
 	constructor ({ id = randomId() }) {
 		this.id = id
 		this.x = undefined
@@ -155,7 +155,6 @@ const HERO_X = 1
 const HERO_Y = 2
 
 // optimisations
-const fmath = new FMath()
 const HALF_PI = Math.PI / 2
 
 // for universal require
@@ -170,7 +169,7 @@ function getTimeBrowser() {
 	return Date.now()
 }
 
-export function atan2 (y, x) {
+function atan2 (y, x) {
 	if (x > 0) {
 		return fmath.atan(y / x)
 	}
@@ -193,18 +192,21 @@ export function atan2 (y, x) {
 	}
 }
 
-export const sin = fmath.sin.bind(fmath)
+function random () {
+	return Math.floor(Math.random() * 1001) / 1000
+}
 
-export const cos = fmath.cos.bind(fmath)
-
-export function randomId () {
+function randomId () {
 	return Math.random().toString(36).slice(2, 7)
 }
 
-export function distance (dx, dy) {
-	return Math.sqrt(dx * dx + dy * dy)
-}
-
-export function random () {
-	return Math.floor(Math.random() * 1001) / 1000
-}
+exports.getTime = getTime
+exports.nextCycle = nextCycle
+exports.Game = Game
+exports.Level = Level
+exports.Hero = Hero
+exports.sin = fmath.sin.bind(fmath)
+exports.cos = fmath.cos.bind(fmath)
+exports.atan2 = atan2
+exports.random = random
+exports.randomId = randomId
