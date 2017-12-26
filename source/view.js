@@ -1,5 +1,3 @@
-'use strict'
-
 const { Level } = require('./index')
 const PIXI = (typeof window !== 'undefined') ? window.PIXI || require('pixi.js') : {}
 

@@ -1,6 +1,4 @@
-'use strict';
-
-const PIXI = (typeof window !== 'undefined') ? require('pixi.js') : {};
+const PIXI = (typeof window !== 'undefined') ? window.PIXI || require('pixi.js') : {};
 
 class TextureExtractor {
 	constructor({
@@ -12,12 +10,12 @@ class TextureExtractor {
 		offset,
 		count,
 		scaleMode
-	}, folder = '') {
+	}) {
 		this.width = width;
 		this.height = height;
 		this.tilewidth = tilewidth;
 		this.tileheight = tileheight;
-		this.tileset = PIXI.Texture.fromFrame(folder ? `${folder}/${tileset}` : tileset);
+		this.tileset = (typeof tileset === 'string') ? PIXI.Texture.fromFrame(tileset) : tileset;
 		this.offset = offset || 0;
 		this.textureCache = {};
 		this.scaleMode = scaleMode || PIXI.SCALE_MODES.NEAREST;
