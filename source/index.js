@@ -19,10 +19,10 @@ class Game {
 		const time = getTime() 
 		const delta = this.lastRun ? (time - this.lastRun) : 0
 		const remaining = this.interval - delta
-		this.tick(delta * s2ms)
+		this.tick(delta)
 		this.lastRun = time
 		if (remaining > 0) {
-			setTimeout(() => nextCycle(this.loop.bind(this)), remaining)
+			setTimeout(() => nextCycle(this.loop.bind(this)), Math.round(remaining * s2ms))
 		} else {
 			nextCycle(this.loop.bind(this))
 		}
