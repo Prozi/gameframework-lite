@@ -1,13 +1,12 @@
 {
   "name": "gameframework-lite",
-  "version": "1.7.5",
+  "version": "1.7.6",
   "description": "game framework for 2d html5 games with physics isomorphic",
   "main": "index.js",
   "scripts": {
     "docs": "esdoc",
     "test": "yarn compile && webpack && node test",
-    "compile": "babel ./source --out-dir ./es2015",
-    "postinstall": "npm run compile"
+    "compile": "babel ./source --out-dir ./es2015"
   },
   "keywords": [
     "game framework",
@@ -24,24 +23,31 @@
   "editions": [
     {
       "description": "Source + ESNext + Require",
-      "entry": "source/index.js",
+      "entry": "index.js",
+      "directory": "source",
       "syntaxes": [
         "javascript",
         "esnext",
-        "import",
+        "require",
         "arrows",
-        "classes",
+        "getset",
         "const",
         "let",
-        "destructuring"
+        "classes",
+        "defaults",
+        "spread",
+        "rest",
+        "destructuring",
+        "template strings"
       ]
     },
     {
-      "description": "Compiled + ES5 + Require",
-      "entry": "es2015/index.js",
+      "description": "Compiled + ES2015 + Require",
+      "entry": "index.js",
+      "directory": "es2015",
       "syntaxes": [
         "javascript",
-        "ES5",
+        "es2015",
         "require"
       ]
     }
@@ -51,12 +57,12 @@
   "dependencies": {
     "editions": "^1.3.3",
     "pixi.js": "latest",
-    "babel-cli": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.1",
     "fmath": "latest"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
     "express": "^4.16.2",
     "webpack": "^3.8.1"
   },
