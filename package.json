@@ -1,6 +1,6 @@
 {
   "name": "gameframework-lite",
-  "version": "1.7.10",
+  "version": "1.7.11",
   "description": "game framework for 2d html5 games with physics isomorphic",
   "main": "index.js",
   "browser": "es2015/index.js",

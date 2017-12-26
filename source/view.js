@@ -106,11 +106,11 @@ class View {
 		layer.addChild(sprite)
 	}
 	addBlocks () {
-		for (let y = 0 y < this.level.height y++) {
-			for (let x = 0 x < this.level.width x++) {
+		for (let y = 0; y < this.level.height; y++) {
+			for (let x = 0; x < this.level.width; x++) {
 				const block = this.level.blocks[`${x}:${y}`]
 				if (block && Array.isArray(block)) {
-					for (let i = 0 i < block.length i++) {
+					for (let i = 0; i < block.length; i++) {
 						if (parseInt(block[i], 10)) {
 							this.addBlock(x, y, block[i])
 						}
