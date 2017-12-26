@@ -1,12 +1,13 @@
 {
   "name": "gameframework-lite",
-  "version": "1.7.3",
+  "version": "1.7.4",
   "description": "game framework for 2d html5 games with physics isomorphic",
   "main": "index.js",
   "scripts": {
     "docs": "esdoc",
     "test": "yarn compile && webpack && node test",
-    "compile": "babel ./source --out-dir ./es2015"
+    "compile": "babel ./source --out-dir ./es2015",
+    "postinstall": "npm run compile"
   },
   "keywords": [
     "game framework",
