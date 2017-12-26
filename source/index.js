@@ -1,6 +1,9 @@
 const FMath = require('fmath')
 const fmath = new FMath()
 
+// for universal time processing functions
+const IS_BACKEND = (typeof window === 'undefined')
+
 // next cycle run universal function
 const nextCycle = IS_BACKEND ? setImmediate : setTimeout
 
@@ -156,9 +159,6 @@ const HERO_Y = 2
 
 // optimisations
 const HALF_PI = Math.PI / 2
-
-// for universal require
-const IS_BACKEND = (typeof window === 'undefined')
 
 function getTimeNode() {
 	var hrtime = process.hrtime()
