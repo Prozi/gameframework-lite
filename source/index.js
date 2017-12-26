@@ -13,13 +13,15 @@ const getTime = IS_BACKEND ? getTimeNode : getTimeBrowser
 class Game {
 	constructor (interval = 16) {
 		this.levels = []
-		this.interval = Math.max(16, Math.round(interval))
+		this.interval = Math.max(16, Math.round(interval)) * ms2s
 	}
 	loop () {
 		const time = getTime() 
 		const delta = this.lastRun ? (time - this.lastRun) : 0
 		const remaining = this.interval - delta
-		this.tick(delta)
+		if (delta > 0) {
+		  this.tick(delta);
+		}
 		this.lastRun = time
 		if (remaining > 0) {
 			setTimeout(() => nextCycle(this.loop.bind(this)), Math.round(remaining * s2ms))
@@ -149,6 +151,7 @@ class Hero {
 // time specific constants
 const s2nano = 1e9
 const s2ms = 1e3
+const ms2s = 1 / s2ms
 const nano2s = 1 / s2nano
 const ms2nano = 1e6
 
