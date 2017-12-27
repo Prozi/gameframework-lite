@@ -4,6 +4,10 @@ const View = require('../es2015/view').default;
 
 // this is how you should use View
 class MyView extends View {
+	constructor () {
+		super()
+		this.pixi.start()
+	}
 	// override example
 	onCreateHero (hero) {
 		hero.sprite = PIXI.Sprite.fromImage('bunny.png');

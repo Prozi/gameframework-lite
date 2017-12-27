@@ -8,7 +8,8 @@ class View {
 			autoResize: false,
 			roundPixels: true,
 			clearBeforeRender: false,
-			resolution: 1
+			resolution: 1,
+			autoStart: false
 		})
 		this.camera = new PIXI.Container()
 		this.pixi.stage.addChild(this.camera)
@@ -19,7 +20,6 @@ class View {
 		anchor.appendChild(this.pixi.view)
 		window.addEventListener('resize', this.onResize.bind(this), true)
 		this.onResize()
-		this.pixi.start()
 	}
 	get hero () {
 		return this.level.heros[this.id]
