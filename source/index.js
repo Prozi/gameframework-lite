@@ -1,5 +1,6 @@
 const FMath = require('fmath')
 const fmath = new FMath()
+const gameloop = require('node-gameloop')
 
 // for universal time processing functions
 const IS_BACKEND = (typeof window === 'undefined')
@@ -13,27 +14,14 @@ const getTime = IS_BACKEND ? getTimeNode : getTimeBrowser
 class Game {
 	constructor (interval = 16) {
 		this.levels = []
-		this.interval = Math.max(16, Math.round(interval)) * ms2s
+		this.loopId = gameloop.setGameLoop(this.loop.bind(this), interval)
+		this.interval = interval
 	}
-	loop () {
-		const time = getTime() 
-		const delta = this.lastRun ? (time - this.lastRun) : 0
-		const remaining = this.interval - delta
-		if (delta > 0) {
-		  this.tick(delta);
-		}
-		this.lastRun = time
-		if (remaining > 0) {
-			setTimeout(() => nextCycle(this.loop.bind(this)), Math.round(remaining * s2ms))
-		} else {
-			nextCycle(this.loop.bind(this))
-		}
+	tickLevel (level) {
+		level.tick(delta)
 	}
-	tick (delta) {
-		this.levels.forEach((level) => nextCycle(level.tick.bind(level, delta)))
-		if (this.onUpdate) {
-			this.onUpdate()
-		}
+	loop (delta) {
+		this.levels.forEach(this.tickLevel.bind(this))
 	}
 }
 

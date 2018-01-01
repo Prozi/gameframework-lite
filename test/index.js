@@ -23,7 +23,4 @@ for (let l = 0; l < 99; l++) {
 }
 
 console.log('test loop()')
-game.onUpdate = function () {
-	console.log('loop works')
-}
 game.loop()
