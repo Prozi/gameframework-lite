@@ -1,3 +1,5 @@
+'use strict'
+
 const PIXI = (typeof window !== 'undefined') ? window.PIXI || require('pixi.js') : {};
 
 class TextureExtractor {

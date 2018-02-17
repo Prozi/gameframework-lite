@@ -1,6 +1,8 @@
+'use strict'
+
 const FMath = require('fmath')
 const fmath = new FMath()
-const gameloop = require('node-gameloop')
+const gameloop = require('node-gameloop/es2015')
 
 // for universal time processing functions
 const IS_BACKEND = (typeof window === 'undefined')
@@ -18,9 +20,9 @@ class Game {
 		this.interval = interval
 	}
 	tickLevel (level) {
-		level.tick(delta)
+		level.tick()
 	}
-	loop (delta) {
+	loop () {
 		this.levels.forEach(this.tickLevel.bind(this))
 	}
 }
@@ -36,8 +38,8 @@ class Level {
 	eachHero (callback) {
 		this.each(this.heros, callback)
 	}
-	tick (delta) {
-		console.log(delta)
+	tick () {
+		console.log('tick @ level')
 	}
 	toArray () {
 		const array = [[]]
