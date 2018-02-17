@@ -151,11 +151,13 @@ const HERO_Y = 2
 // optimisations
 const HALF_PI = Math.PI / 2
 
+// returns in ms
 function getTimeNode() {
 	var hrtime = process.hrtime()
-	return hrtime[0] + hrtime[1] * nano2s
+	return (hrtime[0] + hrtime[1] * nano2s) * s2ms
 }
 
+// returns in ms
 function getTimeBrowser() {
 	return Date.now()
 }
