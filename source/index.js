@@ -2,7 +2,7 @@
 
 const FMath = require('fmath')
 const fmath = new FMath()
-const gameloop = require('node-gameloop/es2015')
+const gameloop = require('gameloop-compatible')
 
 // for universal time processing functions
 const IS_BACKEND = (typeof window === 'undefined')
@@ -11,7 +11,8 @@ const IS_BACKEND = (typeof window === 'undefined')
 const nextCycle = IS_BACKEND ? setImmediate : setTimeout
 
 // get current time in nano seconds universal
-const getTime = IS_BACKEND ? getTimeNode : getTimeBrowser
+const getTime = IS_BACKEND ? getTimeNode :
+  ((typeof performance !== 'undefined') ? getTimeModernBrowser : getTimeBrowser)
 
 class Game {
   constructor (interval = 16) {
@@ -155,6 +156,11 @@ const HALF_PI = Math.PI / 2
 function getTimeNode () {
   var hrtime = process.hrtime()
   return (hrtime[0] + hrtime[1] * nano2s) * s2ms
+}
+
+// returns in ms
+function getTimeModernBrowser () {
+  return performance.now()
 }
 
 // returns in ms
