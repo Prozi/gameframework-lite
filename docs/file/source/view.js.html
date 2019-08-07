@@ -162,7 +162,8 @@ class View {
       blocks: new PIXI.Container(),
       heros: new PIXI.Container()
     }
-    this.tileset = PIXI.Texture.from(tiled.tilesets[0].image, false, PIXI.SCALE_MODES.NEAREST)
+    this.tileset = PIXI.Texture.from(tiled.tilesets[0].image)
+    this.tileset.scaleMode = PIXI.SCALE_MODES.NEAREST;
     this.camera.addChild(this.layers.blocks)
     this.camera.addChild(this.layers.heros)
     this.level.fromTiled(tiled)
