@@ -294,6 +294,12 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "source/physics.js",
+    "file/source/physics.js.html",
+    "source/physics.js",
+    "file"
+  ],
+  [
     "source/view.js",
     "file/source/view.js.html",
     "source/view.js",
