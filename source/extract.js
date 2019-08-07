@@ -17,7 +17,7 @@ class TextureExtractor {
     this.height = height
     this.tilewidth = tilewidth
     this.tileheight = tileheight
-    this.tileset = (typeof tileset === 'string') ? PIXI.Texture.fromFrame(tileset) : tileset
+    this.tileset = (typeof tileset === 'string') ? PIXI.Texture.from(tileset) : tileset
     this.offset = offset || 0
     this.textureCache = {}
     this.scaleMode = scaleMode || PIXI.SCALE_MODES.NEAREST

@@ -567,9 +567,9 @@
     "__docId__": 48,
     "kind": "file",
     "name": "source/extract.js",
-    "content": "'use strict';\n\nconst PIXI = (typeof window !== 'undefined') ? require('pixi.js') : {};\n\nexport default class TextureExtractor {\n\tconstructor({\n\t\twidth,\n\t\theight,\n\t\ttilewidth,\n\t\ttileheight,\n\t\ttileset,\n\t\toffset,\n\t\tcount,\n\t\tscaleMode\n\t}, folder = '') {\n\t\tthis.width = width;\n\t\tthis.height = height;\n\t\tthis.tilewidth = tilewidth;\n\t\tthis.tileheight = tileheight;\n\t\tthis.tileset = PIXI.Texture.fromFrame(folder ? `${folder}/${tileset}` : tileset);\n\t\tthis.offset = offset || 0;\n\t\tthis.textureCache = {};\n\t\tthis.scaleMode = scaleMode || PIXI.SCALE_MODES.NEAREST;\n\t\tif (count) {\n\t\t\tfor (let i = 0; i < count; i++) {\n\t\t\t\tthis.prepareTexture(i);\n\t\t\t}\n\t\t}\n\t}\n\tprepareTexture(frame) {\n\t\tconst width = (this.width / this.tilewidth);\n\t\tconst x = ((frame - this.offset) % width) * this.tilewidth;\n\t\tconst y = Math.floor((frame - this.offset) / width) * this.tileheight;\n\t\tconst rect = new PIXI.Rectangle(x, y, this.tilewidth, this.tileheight);\n\n\t\tthis.textureCache[frame] = new PIXI.Texture(this.tileset, rect);\n\t\tthis.textureCache[frame].baseTexture.scaleMode = this.scaleMode;\n\t\tthis.textureCache[frame].cacheAsBitmap = true;\n\t}\n\tgetFrame(frame) {\n\t\tif (!this.textureCache[frame]) {\n\t\t\tthis.prepareTexture(frame);\n\t\t}\n\t\treturn this.textureCache[frame];\n\t}\n}\n",
+    "content": "'use strict'\n\nconst PIXI = (typeof window !== 'undefined') ? window.PIXI || require('pixi.js') : {}\n\nclass TextureExtractor {\n  constructor ({\n    width,\n    height,\n    tilewidth,\n    tileheight,\n    tileset,\n    offset,\n    count,\n    scaleMode\n  }) {\n    this.width = width\n    this.height = height\n    this.tilewidth = tilewidth\n    this.tileheight = tileheight\n    this.tileset = (typeof tileset === 'string') ? PIXI.Texture.from(tileset) : tileset\n    this.offset = offset || 0\n    this.textureCache = {}\n    this.scaleMode = scaleMode || PIXI.SCALE_MODES.NEAREST\n    if (count) {\n      for (let i = 0; i < count; i++) {\n        this.prepareTexture(i)\n      }\n    }\n  }\n  prepareTexture (frame) {\n    const width = (this.width / this.tilewidth)\n    const x = ((frame - this.offset) % width) * this.tilewidth\n    const y = Math.floor((frame - this.offset) / width) * this.tileheight\n    const rect = new PIXI.Rectangle(x, y, this.tilewidth, this.tileheight)\n\n    this.textureCache[frame] = new PIXI.Texture(this.tileset, rect)\n    this.textureCache[frame].baseTexture.scaleMode = this.scaleMode\n    this.textureCache[frame].cacheAsBitmap = true\n  }\n  getFrame (frame) {\n    if (!this.textureCache[frame]) {\n      this.prepareTexture(frame)\n    }\n    return this.textureCache[frame]\n  }\n}\n\nexports.default = TextureExtractor\n",
     "static": true,
-    "longname": "C:/Users/lenovo/projects/gameframework-lite/source/extract.js",
+    "longname": "/home/jacek/projects/gameframework-lite/source/extract.js",
     "access": "public",
     "description": null,
     "lineNumber": 1
@@ -603,13 +603,14 @@
     "static": true,
     "longname": "source/extract.js~TextureExtractor",
     "access": "public",
-    "export": true,
+    "export": false,
     "importPath": "gameframework-lite/source/extract.js",
-    "importStyle": "TextureExtractor",
+    "importStyle": null,
     "description": null,
     "lineNumber": 5,
     "undocument": true,
-    "interface": false
+    "interface": false,
+    "ignore": true
   },
   {
     "__docId__": 51,
@@ -815,15 +816,36 @@
     "__docId__": 62,
     "kind": "file",
     "name": "source/index.js",
-    "content": "import FMath from 'fmath';\nimport md5 from 'md5';\n\nconst fmath = new FMath();\n\n// function constants\nconst DEFER = (typeof process !== 'undefined') ? process.nextTick.bind(process) : setTimeout;\nconst NOW = (typeof performance !== 'undefined') ? performance.now.bind(performance) : Date.now.bind(Date);\n\n// just constants\nconst HALF_PI = Math.PI / 2;\n\nconst HERO_ID = 0;\nconst HERO_X = 1;\nconst HERO_Y = 2;\n\nexport class Game {\n\tconstructor (interval = 10) {\n\t\tthis.levels = [];\n\t\tthis.interval = interval;\n\t\tthis.now = NOW();\n\t}\n\tloop () {\n\t\tDEFER(this.tick.bind(this));\n\t\tif (this.onUpdate) {\n\t\t\tDEFER(this.onUpdate.bind(this));\n\t\t}\n\t\tsetTimeout(() => DEFER(this.loop.bind(this)), this.interval);\t\n\t}\n\ttick () {\n\t\tconst now = NOW();\n\t\tthis.delta = (now - this.now) / 1000;\n\t\tthis.now = now;\n\t\tthis.levels.forEach((map) => {\n\t\t\tDEFER(map.tick.bind(map, this.delta));\n\t\t});\n\t}\n}\n\nexport class Level {\n\tconstructor (props = {}) {\t\t\n\t\tconst options = {};\n\t\tif (props.gravity) {\n\t\t\toptions.gravity = props.gravity;\n\t\t}\n\t\tthis.heros = props.heros || {};\n\t\tthis.blocks = props.blocks || {};\n\t\tthis.accuracy = 10;\n\t}\n\tspawn ({ body }) {\n\t\tbody.x = random() * this.width;\n\t\tbody.y = 0;\n\t}\n\teachHero (callback) {\n\t\tfor (let hero in this.heros) {\n\t\t\tif (this.heros.hasOwnProperty(hero)) {\n\t\t\t\tcallback(this.heros[hero]);\n\t\t\t}\n\t\t}\n\t}\n\ttick (delta) {\n\t\tconsole.log(delta);\n\t}\n\ttoArray () {\n\t\tconst array = [[]];\n\t\tthis.eachHero((hero) => array[0].push(hero.toArray()));\n\t\treturn array;\n\t}\n\tremoveHero (hero) {\n\t\tif (this.onRemoveHero) {\n\t\t\tthis.onRemoveHero(hero);\n\t\t}\n\t\tthis.heros[hero.id] = null;\n\t\tdelete this.heros[hero.id];\t\t\n\t}\n\tfromArray (array = [], HeroClass = Hero) {\n\t\tthis.eachHero((hero) => {\n\t\t\tif (!array[0].find((heroArray) => heroArray[HERO_ID] === hero.id)) {\n\t\t\t\tthis.removeHero(hero);\n\t\t\t}\n\t\t});\n\t\tarray[0].forEach((heroArray) => {\n\t\t\tconst id = heroArray[HERO_ID];\n\t\t\tif (this.heros[id]) {\n\t\t\t\tthis.updateHero(id, heroArray);\n\t\t\t} else {\n\t\t\t\tthis.addHero(heroArray, HeroClass);\n\t\t\t}\n\t\t});\n\t\tif (this.fromArrayExtension) {\n\t\t\tthis.fromArrayExtension(array);\n\t\t}\n\t}\n\tupdateHero (id, heroArray = []) {\n\t\tthis.heros[id].fromArray(heroArray);\n\t\tif (this.onUpdateHero) {\n\t\t\tthis.onUpdateHero(this.heros[id]);\n\t\t}\n\t}\n\taddHero (heroArray = [], HeroClass = Hero) {\n\t\tconst id = heroArray[HERO_ID] || randomId();\n\t\tthis.heros[id] = new HeroClass({ id });\n\t\tthis.heros[id].x = heroArray[HERO_X] || this.width * random();\n\t\tthis.heros[id].y = heroArray[HERO_Y] || 0;\n\t\tthis.heros[id].fromArray(heroArray);\n\t\tif (this.onCreateHero) {\n\t\t\tthis.onCreateHero(this.heros[id]);\n\t\t}\n\t\treturn this.heros[id];\n\t}\n\tfromTiled (tiled = {}) {\n\t\tthis.width  = tiled.width;\n\t\tthis.height = tiled.height;\n\t\tthis.blocks = {};\n\t\tthis.stops  = {};\n\t\tthis.tileset = {\n\t\t\ttilewidth: tiled.tilesets[0].tilewidth,\n\t\t\timagewidth: tiled.tilesets[0].imagewidth,\n\t\t};\n\t\tthis.accuracy = this.tileset.tilewidth;\n\t\tfor (let y = 0; y < this.height; y++) {\n\t\t\tfor (let x = 0; x < this.width; x++) {\n\t\t\t\tconst pos = y * this.width + x;\n\t\t\t\tconst offset = `${x}:${y}`;\n\t\t\t\tthis.blocks[offset] = [\n\t\t\t\t\ttiled.layers[0].data[pos], \n\t\t\t\t\ttiled.layers[1].data[pos]\n\t\t\t\t];\n\t\t\t\tthis.stops[offset] = tiled.layers[2].data[pos];\n\t\t\t}\n\t\t}\n\t}\n}\n\nexport class Hero {\n\tconstructor ({ id = randomId(), sprite = null }) {\n\t\tthis.id = id;\n\t\tthis.sprite = sprite;\n\t\tthis.x = undefined;\n\t\tthis.y = undefined;\n\t}\n\ttoArray () {\n\t\treturn [\n\t\t\tthis.id,\n\t\t\tthis.x,\n\t\t\tthis.y,\n\t\t];\n\t}\n\tfromArray (array = [], force = false) {\n\t\tif (force) {\n\t\t\tthis.id = array[HERO_ID];\n\t\t}\n\t\tif (force || (this.id === array[HERO_ID])) {\n\t\t\tthis.move(array[HERO_X], array[HERO_Y]);\n\t\t}\n\t}\n\tmove (x, y) {\n\t\tthis.x = x;\n\t\tthis.y = y;\n\t}\n}\n\nexport function atan2 (y, x) {\n\tif (x > 0) {\n\t\treturn fmath.atan(y / x);\n\t}\n\tif (x < 0) {\n\t\tif (y >= 0) {\n\t\t\treturn fmath.atan(y / x) + Math.PI;\n\t\t}\n\t\treturn fmath.atan(y / x) - Math.PI;\n\t}\n\tif (x === 0) {\n\t\tif (y === 0) {\n\t\t\treturn undefined;\n\t\t}\n\t\tif (y > 0) {\n\t\t\treturn HALF_PI;\n\t\t}\n\t\tif (y < 0) {\n\t\t\treturn -HALF_PI;\n\t\t}\n\t}\n}\n\nexport const sin = fmath.sin.bind(fmath)\n\nexport const cos = fmath.cos.bind(fmath)\n\nexport function randomId () {\n\treturn md5(random()).slice(0, 7);\n}\n\nexport function distance (dx, dy) {\n\treturn Math.sqrt(dx * dx + dy * dy);\n}\n\nexport function random () {\n\treturn Math.floor(Math.random() * 1001) / 1000;\n}\n",
+    "content": "'use strict'\n\nconst FMath = require('fmath')\nconst fmath = new FMath()\nconst gameloop = require('gameloop-compatible')\n\n// for universal time processing functions\nconst IS_BACKEND = (typeof window === 'undefined')\n\n// next cycle run universal function\nconst nextCycle = IS_BACKEND ? setImmediate : setTimeout\n\n// get current time in nano seconds universal\nconst getTime = IS_BACKEND ? getTimeNode :\n  ((typeof performance !== 'undefined') ? getTimeModernBrowser : getTimeBrowser)\n\nclass Game {\n  constructor (interval = 16) {\n    this.levels = []\n    this.loopId = gameloop.setGameLoop(this.loop.bind(this), interval)\n    this.interval = interval\n  }\n  tickLevel (level) {\n    level.tick()\n  }\n  loop () {\n    this.levels.forEach(this.tickLevel.bind(this))\n  }\n}\n\nclass Level {\n  constructor (props = {}) {\n    this.heros = props.heros || {}\n    this.blocks = props.blocks || {}\n  }\n  each (set, callback) {\n    Object.keys(set).forEach((id) => callback(set[id]))\n  }\n  eachHero (callback) {\n    this.each(this.heros, callback)\n  }\n  tick () {\n    console.log('tick @ level')\n  }\n  toArray () {\n    const array = [[]]\n    this.eachHero((hero) => array[0].push(hero.toArray()))\n    return array\n  }\n  removeHero (hero) {\n    if (this.onRemoveHero) {\n      this.onRemoveHero(hero)\n    }\n    this.heros[hero.id] = null\n    delete this.heros[hero.id]\n  }\n  fromArray (array = [], HeroClass = Hero) {\n    this.eachHero((hero) => {\n      if (!array[0].find((heroArray) => heroArray[HERO_ID] === hero.id)) {\n        this.removeHero(hero)\n      }\n    })\n    array[0].forEach((heroArray) => {\n      const id = heroArray[HERO_ID]\n      if (this.heros[id]) {\n        this.updateHero(id, heroArray)\n      } else {\n        this.addHero(heroArray, HeroClass)\n      }\n    })\n    if (this.fromArrayExtension) {\n      this.fromArrayExtension(array)\n    }\n  }\n  updateHero (id, heroArray = []) {\n    this.heros[id].fromArray(heroArray)\n    if (this.onUpdateHero) {\n      this.onUpdateHero(this.heros[id])\n    }\n  }\n  addHero (heroArray = [], HeroClass = Hero) {\n    const id = heroArray[HERO_ID] || randomId()\n    this.heros[id] = new HeroClass({ id })\n    this.heros[id].x = heroArray[HERO_X] || this.width * random()\n    this.heros[id].y = heroArray[HERO_Y] || 0\n    this.heros[id].fromArray(heroArray)\n    if (this.onCreateHero) {\n      this.onCreateHero(this.heros[id])\n    }\n    return this.heros[id]\n  }\n  fromTiled (tiled = {}) {\n    this.width = tiled.width\n    this.height = tiled.height\n    this.blocks = {}\n    this.stops = {}\n    this.tileset = {\n      tilewidth: tiled.tilesets[0].tilewidth,\n      imagewidth: tiled.tilesets[0].imagewidth\n    }\n    for (let y = 0; y < this.height; y++) {\n      for (let x = 0; x < this.width; x++) {\n        const pos = y * this.width + x\n        const offset = `${x}:${y}`\n        this.blocks[offset] = [\n          tiled.layers[0].data[pos],\n          tiled.layers[1].data[pos]\n        ]\n        this.stops[offset] = tiled.layers[2].data[pos]\n      }\n    }\n  }\n}\n\nclass Hero {\n  constructor ({ id = randomId() }) {\n    this.id = id\n    this.x = undefined\n    this.y = undefined\n  }\n  toArray () {\n    return [\n      this.id,\n      this.x,\n      this.y\n    ]\n  }\n  fromArray (array = [], force = false) {\n    if (force) {\n      this.id = array[HERO_ID]\n    }\n    if (force || (this.id === array[HERO_ID])) {\n      this.move(array[HERO_X], array[HERO_Y])\n    }\n  }\n  move (x, y) {\n    this.x = x\n    this.y = y\n  }\n}\n\n// time specific constants\nconst s2nano = 1e9\nconst s2ms = 1e3\nconst nano2s = 1 / s2nano\n\n// gameframework-lite specific\nconst HERO_ID = 0\nconst HERO_X = 1\nconst HERO_Y = 2\n\n// optimisations\nconst HALF_PI = Math.PI / 2\n\n// returns in ms\nfunction getTimeNode () {\n  var hrtime = process.hrtime()\n  return (hrtime[0] + hrtime[1] * nano2s) * s2ms\n}\n\n// returns in ms\nfunction getTimeModernBrowser () {\n  return performance.now()\n}\n\n// returns in ms\nfunction getTimeBrowser () {\n  return Date.now()\n}\n\nfunction atan2 (y, x) {\n  if (x > 0) {\n    return fmath.atan(y / x)\n  }\n  if (x < 0) {\n    if (y >= 0) {\n      return fmath.atan(y / x) + Math.PI\n    }\n    return fmath.atan(y / x) - Math.PI\n  }\n  if (x === 0) {\n    if (y === 0) {\n      return undefined\n    }\n    if (y > 0) {\n      return HALF_PI\n    }\n    if (y < 0) {\n      return -HALF_PI\n    }\n  }\n}\n\nfunction random () {\n  return Math.floor(Math.random() * 1001) / 1000\n}\n\nfunction randomId () {\n  return Math.random().toString(36).slice(2, 7)\n}\n\nexports.getTime = getTime\nexports.nextCycle = nextCycle\nexports.Game = Game\nexports.Level = Level\nexports.Hero = Hero\nexports.sin = fmath.sin.bind(fmath)\nexports.cos = fmath.cos.bind(fmath)\nexports.atan2 = atan2\nexports.random = random\nexports.randomId = randomId\n",
     "static": true,
-    "longname": "C:/Users/lenovo/projects/gameframework-lite/source/index.js",
+    "longname": "/home/jacek/projects/gameframework-lite/source/index.js",
     "access": "public",
     "description": null,
     "lineNumber": 1
   },
   {
     "__docId__": 63,
+    "kind": "variable",
+    "name": "FMath",
+    "memberof": "source/index.js",
+    "static": true,
+    "longname": "source/index.js~FMath",
+    "access": "public",
+    "export": false,
+    "importPath": "gameframework-lite/source/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 64,
     "kind": "variable",
     "name": "fmath",
     "memberof": "source/index.js",
@@ -844,18 +866,18 @@
     "ignore": true
   },
   {
-    "__docId__": 64,
+    "__docId__": 65,
     "kind": "variable",
-    "name": "DEFER",
+    "name": "gameloop",
     "memberof": "source/index.js",
     "static": true,
-    "longname": "source/index.js~DEFER",
+    "longname": "source/index.js~gameloop",
     "access": "public",
     "export": false,
     "importPath": "gameframework-lite/source/index.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 7,
+    "lineNumber": 5,
     "undocument": true,
     "type": {
       "types": [
@@ -865,12 +887,12 @@
     "ignore": true
   },
   {
-    "__docId__": 65,
+    "__docId__": 66,
     "kind": "variable",
-    "name": "NOW",
+    "name": "IS_BACKEND",
     "memberof": "source/index.js",
     "static": true,
-    "longname": "source/index.js~NOW",
+    "longname": "source/index.js~IS_BACKEND",
     "access": "public",
     "export": false,
     "importPath": "gameframework-lite/source/index.js",
@@ -886,12 +908,12 @@
     "ignore": true
   },
   {
-    "__docId__": 66,
+    "__docId__": 67,
     "kind": "variable",
-    "name": "HALF_PI",
+    "name": "nextCycle",
     "memberof": "source/index.js",
     "static": true,
-    "longname": "source/index.js~HALF_PI",
+    "longname": "source/index.js~nextCycle",
     "access": "public",
     "export": false,
     "importPath": "gameframework-lite/source/index.js",
@@ -907,33 +929,12 @@
     "ignore": true
   },
   {
-    "__docId__": 67,
-    "kind": "variable",
-    "name": "HERO_ID",
-    "memberof": "source/index.js",
-    "static": true,
-    "longname": "source/index.js~HERO_ID",
-    "access": "public",
-    "export": false,
-    "importPath": "gameframework-lite/source/index.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 13,
-    "undocument": true,
-    "type": {
-      "types": [
-        "number"
-      ]
-    },
-    "ignore": true
-  },
-  {
     "__docId__": 68,
     "kind": "variable",
-    "name": "HERO_X",
+    "name": "getTime",
     "memberof": "source/index.js",
     "static": true,
-    "longname": "source/index.js~HERO_X",
+    "longname": "source/index.js~getTime",
     "access": "public",
     "export": false,
     "importPath": "gameframework-lite/source/index.js",
@@ -943,50 +944,30 @@
     "undocument": true,
     "type": {
       "types": [
-        "number"
+        "*"
       ]
     },
     "ignore": true
   },
   {
     "__docId__": 69,
-    "kind": "variable",
-    "name": "HERO_Y",
-    "memberof": "source/index.js",
-    "static": true,
-    "longname": "source/index.js~HERO_Y",
-    "access": "public",
-    "export": false,
-    "importPath": "gameframework-lite/source/index.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 15,
-    "undocument": true,
-    "type": {
-      "types": [
-        "number"
-      ]
-    },
-    "ignore": true
-  },
-  {
-    "__docId__": 70,
     "kind": "class",
     "name": "Game",
     "memberof": "source/index.js",
     "static": true,
     "longname": "source/index.js~Game",
     "access": "public",
-    "export": true,
+    "export": false,
     "importPath": "gameframework-lite/source/index.js",
-    "importStyle": "{Game}",
+    "importStyle": null,
     "description": null,
     "lineNumber": 17,
     "undocument": true,
-    "interface": false
+    "interface": false,
+    "ignore": true
   },
   {
-    "__docId__": 71,
+    "__docId__": 70,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "source/index.js~Game",
@@ -1000,7 +981,7 @@
     "undocument": true
   },
   {
-    "__docId__": 72,
+    "__docId__": 71,
     "kind": "member",
     "name": "levels",
     "memberof": "source/index.js~Game",
@@ -1017,12 +998,12 @@
     }
   },
   {
-    "__docId__": 73,
+    "__docId__": 72,
     "kind": "member",
-    "name": "interval",
+    "name": "loopId",
     "memberof": "source/index.js~Game",
     "static": false,
-    "longname": "source/index.js~Game#interval",
+    "longname": "source/index.js~Game#loopId",
     "access": "public",
     "description": null,
     "lineNumber": 20,
@@ -1034,12 +1015,12 @@
     }
   },
   {
-    "__docId__": 74,
+    "__docId__": 73,
     "kind": "member",
-    "name": "now",
+    "name": "interval",
     "memberof": "source/index.js~Game",
     "static": false,
-    "longname": "source/index.js~Game#now",
+    "longname": "source/index.js~Game#interval",
     "access": "public",
     "description": null,
     "lineNumber": 21,
@@ -1049,6 +1030,29 @@
         "*"
       ]
     }
+  },
+  {
+    "__docId__": 74,
+    "kind": "method",
+    "name": "tickLevel",
+    "memberof": "source/index.js~Game",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "source/index.js~Game#tickLevel",
+    "access": "public",
+    "description": null,
+    "lineNumber": 23,
+    "undocument": true,
+    "params": [
+      {
+        "name": "level",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
   },
   {
     "__docId__": 75,
@@ -1061,62 +1065,30 @@
     "longname": "source/index.js~Game#loop",
     "access": "public",
     "description": null,
-    "lineNumber": 23,
+    "lineNumber": 26,
     "undocument": true,
     "params": [],
     "return": null
   },
   {
     "__docId__": 76,
-    "kind": "method",
-    "name": "tick",
-    "memberof": "source/index.js~Game",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "source/index.js~Game#tick",
-    "access": "public",
-    "description": null,
-    "lineNumber": 30,
-    "undocument": true,
-    "params": [],
-    "return": null
-  },
-  {
-    "__docId__": 77,
-    "kind": "member",
-    "name": "delta",
-    "memberof": "source/index.js~Game",
-    "static": false,
-    "longname": "source/index.js~Game#delta",
-    "access": "public",
-    "description": null,
-    "lineNumber": 32,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 79,
     "kind": "class",
     "name": "Level",
     "memberof": "source/index.js",
     "static": true,
     "longname": "source/index.js~Level",
     "access": "public",
-    "export": true,
+    "export": false,
     "importPath": "gameframework-lite/source/index.js",
-    "importStyle": "{Level}",
+    "importStyle": null,
     "description": null,
-    "lineNumber": 40,
+    "lineNumber": 31,
     "undocument": true,
-    "interface": false
+    "interface": false,
+    "ignore": true
   },
   {
-    "__docId__": 80,
+    "__docId__": 77,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "source/index.js~Level",
@@ -1126,11 +1098,11 @@
     "longname": "source/index.js~Level#constructor",
     "access": "public",
     "description": null,
-    "lineNumber": 41,
+    "lineNumber": 32,
     "undocument": true
   },
   {
-    "__docId__": 81,
+    "__docId__": 78,
     "kind": "member",
     "name": "heros",
     "memberof": "source/index.js~Level",
@@ -1138,7 +1110,7 @@
     "longname": "source/index.js~Level#heros",
     "access": "public",
     "description": null,
-    "lineNumber": 46,
+    "lineNumber": 33,
     "undocument": true,
     "type": {
       "types": [
@@ -1147,7 +1119,7 @@
     }
   },
   {
-    "__docId__": 82,
+    "__docId__": 79,
     "kind": "member",
     "name": "blocks",
     "memberof": "source/index.js~Level",
@@ -1155,7 +1127,7 @@
     "longname": "source/index.js~Level#blocks",
     "access": "public",
     "description": null,
-    "lineNumber": 47,
+    "lineNumber": 34,
     "undocument": true,
     "type": {
       "types": [
@@ -1164,51 +1136,36 @@
     }
   },
   {
-    "__docId__": 83,
-    "kind": "member",
-    "name": "accuracy",
-    "memberof": "source/index.js~Level",
-    "static": false,
-    "longname": "source/index.js~Level#accuracy",
-    "access": "public",
-    "description": null,
-    "lineNumber": 48,
-    "undocument": true,
-    "type": {
-      "types": [
-        "number"
-      ]
-    }
-  },
-  {
-    "__docId__": 84,
+    "__docId__": 80,
     "kind": "method",
-    "name": "spawn",
+    "name": "each",
     "memberof": "source/index.js~Level",
     "generator": false,
     "async": false,
     "static": false,
-    "longname": "source/index.js~Level#spawn",
+    "longname": "source/index.js~Level#each",
     "access": "public",
     "description": null,
-    "lineNumber": 50,
+    "lineNumber": 36,
     "undocument": true,
     "params": [
       {
-        "name": "objectPattern",
+        "name": "set",
         "types": [
-          "{\"body\": *}"
-        ],
-        "defaultRaw": {
-          "body": null
-        },
-        "defaultValue": "{\"body\":null}"
+          "*"
+        ]
+      },
+      {
+        "name": "callback",
+        "types": [
+          "*"
+        ]
       }
     ],
     "return": null
   },
   {
-    "__docId__": 85,
+    "__docId__": 81,
     "kind": "method",
     "name": "eachHero",
     "memberof": "source/index.js~Level",
@@ -1218,7 +1175,7 @@
     "longname": "source/index.js~Level#eachHero",
     "access": "public",
     "description": null,
-    "lineNumber": 54,
+    "lineNumber": 39,
     "undocument": true,
     "params": [
       {
@@ -1231,7 +1188,7 @@
     "return": null
   },
   {
-    "__docId__": 86,
+    "__docId__": 82,
     "kind": "method",
     "name": "tick",
     "memberof": "source/index.js~Level",
@@ -1241,20 +1198,13 @@
     "longname": "source/index.js~Level#tick",
     "access": "public",
     "description": null,
-    "lineNumber": 61,
+    "lineNumber": 42,
     "undocument": true,
-    "params": [
-      {
-        "name": "delta",
-        "types": [
-          "*"
-        ]
-      }
-    ],
+    "params": [],
     "return": null
   },
   {
-    "__docId__": 87,
+    "__docId__": 83,
     "kind": "method",
     "name": "toArray",
     "memberof": "source/index.js~Level",
@@ -1264,7 +1214,7 @@
     "longname": "source/index.js~Level#toArray",
     "access": "public",
     "description": null,
-    "lineNumber": 64,
+    "lineNumber": 45,
     "undocument": true,
     "params": [],
     "return": {
@@ -1274,7 +1224,7 @@
     }
   },
   {
-    "__docId__": 88,
+    "__docId__": 84,
     "kind": "method",
     "name": "removeHero",
     "memberof": "source/index.js~Level",
@@ -1284,7 +1234,7 @@
     "longname": "source/index.js~Level#removeHero",
     "access": "public",
     "description": null,
-    "lineNumber": 69,
+    "lineNumber": 50,
     "undocument": true,
     "params": [
       {
@@ -1297,7 +1247,7 @@
     "return": null
   },
   {
-    "__docId__": 89,
+    "__docId__": 85,
     "kind": "method",
     "name": "fromArray",
     "memberof": "source/index.js~Level",
@@ -1307,7 +1257,7 @@
     "longname": "source/index.js~Level#fromArray",
     "access": "public",
     "description": null,
-    "lineNumber": 76,
+    "lineNumber": 57,
     "undocument": true,
     "params": [
       {
@@ -1332,7 +1282,7 @@
     "return": null
   },
   {
-    "__docId__": 90,
+    "__docId__": 86,
     "kind": "method",
     "name": "updateHero",
     "memberof": "source/index.js~Level",
@@ -1342,7 +1292,7 @@
     "longname": "source/index.js~Level#updateHero",
     "access": "public",
     "description": null,
-    "lineNumber": 94,
+    "lineNumber": 75,
     "undocument": true,
     "params": [
       {
@@ -1364,7 +1314,7 @@
     "return": null
   },
   {
-    "__docId__": 91,
+    "__docId__": 87,
     "kind": "method",
     "name": "addHero",
     "memberof": "source/index.js~Level",
@@ -1374,7 +1324,7 @@
     "longname": "source/index.js~Level#addHero",
     "access": "public",
     "description": null,
-    "lineNumber": 100,
+    "lineNumber": 81,
     "undocument": true,
     "params": [
       {
@@ -1403,7 +1353,7 @@
     }
   },
   {
-    "__docId__": 92,
+    "__docId__": 88,
     "kind": "method",
     "name": "fromTiled",
     "memberof": "source/index.js~Level",
@@ -1413,7 +1363,7 @@
     "longname": "source/index.js~Level#fromTiled",
     "access": "public",
     "description": null,
-    "lineNumber": 111,
+    "lineNumber": 92,
     "undocument": true,
     "params": [
       {
@@ -1429,7 +1379,7 @@
     "return": null
   },
   {
-    "__docId__": 93,
+    "__docId__": 89,
     "kind": "member",
     "name": "width",
     "memberof": "source/index.js~Level",
@@ -1437,7 +1387,7 @@
     "longname": "source/index.js~Level#width",
     "access": "public",
     "description": null,
-    "lineNumber": 112,
+    "lineNumber": 93,
     "undocument": true,
     "type": {
       "types": [
@@ -1446,7 +1396,7 @@
     }
   },
   {
-    "__docId__": 94,
+    "__docId__": 90,
     "kind": "member",
     "name": "height",
     "memberof": "source/index.js~Level",
@@ -1454,7 +1404,7 @@
     "longname": "source/index.js~Level#height",
     "access": "public",
     "description": null,
-    "lineNumber": 113,
+    "lineNumber": 94,
     "undocument": true,
     "type": {
       "types": [
@@ -1463,7 +1413,7 @@
     }
   },
   {
-    "__docId__": 96,
+    "__docId__": 92,
     "kind": "member",
     "name": "stops",
     "memberof": "source/index.js~Level",
@@ -1471,7 +1421,7 @@
     "longname": "source/index.js~Level#stops",
     "access": "public",
     "description": null,
-    "lineNumber": 115,
+    "lineNumber": 96,
     "undocument": true,
     "type": {
       "types": [
@@ -1480,7 +1430,7 @@
     }
   },
   {
-    "__docId__": 97,
+    "__docId__": 93,
     "kind": "member",
     "name": "tileset",
     "memberof": "source/index.js~Level",
@@ -1488,7 +1438,7 @@
     "longname": "source/index.js~Level#tileset",
     "access": "public",
     "description": null,
-    "lineNumber": 116,
+    "lineNumber": 97,
     "undocument": true,
     "type": {
       "types": [
@@ -1497,23 +1447,24 @@
     }
   },
   {
-    "__docId__": 99,
+    "__docId__": 94,
     "kind": "class",
     "name": "Hero",
     "memberof": "source/index.js",
     "static": true,
     "longname": "source/index.js~Hero",
     "access": "public",
-    "export": true,
+    "export": false,
     "importPath": "gameframework-lite/source/index.js",
-    "importStyle": "{Hero}",
+    "importStyle": null,
     "description": null,
-    "lineNumber": 135,
+    "lineNumber": 115,
     "undocument": true,
-    "interface": false
+    "interface": false,
+    "ignore": true
   },
   {
-    "__docId__": 100,
+    "__docId__": 95,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "source/index.js~Hero",
@@ -1523,11 +1474,11 @@
     "longname": "source/index.js~Hero#constructor",
     "access": "public",
     "description": null,
-    "lineNumber": 136,
+    "lineNumber": 116,
     "undocument": true
   },
   {
-    "__docId__": 101,
+    "__docId__": 96,
     "kind": "member",
     "name": "id",
     "memberof": "source/index.js~Hero",
@@ -1535,7 +1486,7 @@
     "longname": "source/index.js~Hero#id",
     "access": "public",
     "description": null,
-    "lineNumber": 137,
+    "lineNumber": 117,
     "undocument": true,
     "type": {
       "types": [
@@ -1544,24 +1495,7 @@
     }
   },
   {
-    "__docId__": 102,
-    "kind": "member",
-    "name": "sprite",
-    "memberof": "source/index.js~Hero",
-    "static": false,
-    "longname": "source/index.js~Hero#sprite",
-    "access": "public",
-    "description": null,
-    "lineNumber": 138,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 103,
+    "__docId__": 97,
     "kind": "member",
     "name": "x",
     "memberof": "source/index.js~Hero",
@@ -1569,7 +1503,7 @@
     "longname": "source/index.js~Hero#x",
     "access": "public",
     "description": null,
-    "lineNumber": 139,
+    "lineNumber": 118,
     "undocument": true,
     "type": {
       "types": [
@@ -1578,7 +1512,7 @@
     }
   },
   {
-    "__docId__": 104,
+    "__docId__": 98,
     "kind": "member",
     "name": "y",
     "memberof": "source/index.js~Hero",
@@ -1586,7 +1520,7 @@
     "longname": "source/index.js~Hero#y",
     "access": "public",
     "description": null,
-    "lineNumber": 140,
+    "lineNumber": 119,
     "undocument": true,
     "type": {
       "types": [
@@ -1595,7 +1529,7 @@
     }
   },
   {
-    "__docId__": 105,
+    "__docId__": 99,
     "kind": "method",
     "name": "toArray",
     "memberof": "source/index.js~Hero",
@@ -1605,7 +1539,7 @@
     "longname": "source/index.js~Hero#toArray",
     "access": "public",
     "description": null,
-    "lineNumber": 142,
+    "lineNumber": 121,
     "undocument": true,
     "params": [],
     "return": {
@@ -1615,7 +1549,7 @@
     }
   },
   {
-    "__docId__": 106,
+    "__docId__": 100,
     "kind": "method",
     "name": "fromArray",
     "memberof": "source/index.js~Hero",
@@ -1625,7 +1559,7 @@
     "longname": "source/index.js~Hero#fromArray",
     "access": "public",
     "description": null,
-    "lineNumber": 149,
+    "lineNumber": 128,
     "undocument": true,
     "params": [
       {
@@ -1650,7 +1584,7 @@
     "return": null
   },
   {
-    "__docId__": 108,
+    "__docId__": 102,
     "kind": "method",
     "name": "move",
     "memberof": "source/index.js~Hero",
@@ -1660,7 +1594,7 @@
     "longname": "source/index.js~Hero#move",
     "access": "public",
     "description": null,
-    "lineNumber": 157,
+    "lineNumber": 136,
     "undocument": true,
     "params": [
       {
@@ -1679,7 +1613,226 @@
     "return": null
   },
   {
+    "__docId__": 105,
+    "kind": "variable",
+    "name": "s2nano",
+    "memberof": "source/index.js",
+    "static": true,
+    "longname": "source/index.js~s2nano",
+    "access": "public",
+    "export": false,
+    "importPath": "gameframework-lite/source/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 143,
+    "undocument": true,
+    "type": {
+      "types": [
+        "number"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 106,
+    "kind": "variable",
+    "name": "s2ms",
+    "memberof": "source/index.js",
+    "static": true,
+    "longname": "source/index.js~s2ms",
+    "access": "public",
+    "export": false,
+    "importPath": "gameframework-lite/source/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 144,
+    "undocument": true,
+    "type": {
+      "types": [
+        "number"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 107,
+    "kind": "variable",
+    "name": "nano2s",
+    "memberof": "source/index.js",
+    "static": true,
+    "longname": "source/index.js~nano2s",
+    "access": "public",
+    "export": false,
+    "importPath": "gameframework-lite/source/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 145,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 108,
+    "kind": "variable",
+    "name": "HERO_ID",
+    "memberof": "source/index.js",
+    "static": true,
+    "longname": "source/index.js~HERO_ID",
+    "access": "public",
+    "export": false,
+    "importPath": "gameframework-lite/source/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 148,
+    "undocument": true,
+    "type": {
+      "types": [
+        "number"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 109,
+    "kind": "variable",
+    "name": "HERO_X",
+    "memberof": "source/index.js",
+    "static": true,
+    "longname": "source/index.js~HERO_X",
+    "access": "public",
+    "export": false,
+    "importPath": "gameframework-lite/source/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 149,
+    "undocument": true,
+    "type": {
+      "types": [
+        "number"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 110,
+    "kind": "variable",
+    "name": "HERO_Y",
+    "memberof": "source/index.js",
+    "static": true,
+    "longname": "source/index.js~HERO_Y",
+    "access": "public",
+    "export": false,
+    "importPath": "gameframework-lite/source/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 150,
+    "undocument": true,
+    "type": {
+      "types": [
+        "number"
+      ]
+    },
+    "ignore": true
+  },
+  {
     "__docId__": 111,
+    "kind": "variable",
+    "name": "HALF_PI",
+    "memberof": "source/index.js",
+    "static": true,
+    "longname": "source/index.js~HALF_PI",
+    "access": "public",
+    "export": false,
+    "importPath": "gameframework-lite/source/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 153,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 112,
+    "kind": "function",
+    "name": "getTimeNode",
+    "memberof": "source/index.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "source/index.js~getTimeNode",
+    "access": "public",
+    "export": false,
+    "importPath": "gameframework-lite/source/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 156,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 113,
+    "kind": "function",
+    "name": "getTimeModernBrowser",
+    "memberof": "source/index.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "source/index.js~getTimeModernBrowser",
+    "access": "public",
+    "export": false,
+    "importPath": "gameframework-lite/source/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 162,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 114,
+    "kind": "function",
+    "name": "getTimeBrowser",
+    "memberof": "source/index.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "source/index.js~getTimeBrowser",
+    "access": "public",
+    "export": false,
+    "importPath": "gameframework-lite/source/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 167,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 115,
     "kind": "function",
     "name": "atan2",
     "memberof": "source/index.js",
@@ -1688,11 +1841,11 @@
     "static": true,
     "longname": "source/index.js~atan2",
     "access": "public",
-    "export": true,
+    "export": false,
     "importPath": "gameframework-lite/source/index.js",
-    "importStyle": "{atan2}",
+    "importStyle": null,
     "description": null,
-    "lineNumber": 163,
+    "lineNumber": 171,
     "undocument": true,
     "params": [
       {
@@ -1712,106 +1865,8 @@
       "types": [
         "*"
       ]
-    }
-  },
-  {
-    "__docId__": 112,
-    "kind": "variable",
-    "name": "sin",
-    "memberof": "source/index.js",
-    "static": true,
-    "longname": "source/index.js~sin",
-    "access": "public",
-    "export": true,
-    "importPath": "gameframework-lite/source/index.js",
-    "importStyle": "{sin}",
-    "description": null,
-    "lineNumber": 186,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 113,
-    "kind": "variable",
-    "name": "cos",
-    "memberof": "source/index.js",
-    "static": true,
-    "longname": "source/index.js~cos",
-    "access": "public",
-    "export": true,
-    "importPath": "gameframework-lite/source/index.js",
-    "importStyle": "{cos}",
-    "description": null,
-    "lineNumber": 188,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 114,
-    "kind": "function",
-    "name": "randomId",
-    "memberof": "source/index.js",
-    "generator": false,
-    "async": false,
-    "static": true,
-    "longname": "source/index.js~randomId",
-    "access": "public",
-    "export": true,
-    "importPath": "gameframework-lite/source/index.js",
-    "importStyle": "{randomId}",
-    "description": null,
-    "lineNumber": 190,
-    "undocument": true,
-    "params": [],
-    "return": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 115,
-    "kind": "function",
-    "name": "distance",
-    "memberof": "source/index.js",
-    "generator": false,
-    "async": false,
-    "static": true,
-    "longname": "source/index.js~distance",
-    "access": "public",
-    "export": true,
-    "importPath": "gameframework-lite/source/index.js",
-    "importStyle": "{distance}",
-    "description": null,
-    "lineNumber": 194,
-    "undocument": true,
-    "params": [
-      {
-        "name": "dx",
-        "types": [
-          "*"
-        ]
-      },
-      {
-        "name": "dy",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": {
-      "types": [
-        "*"
-      ]
-    }
+    },
+    "ignore": true
   },
   {
     "__docId__": 116,
@@ -1823,9 +1878,33 @@
     "static": true,
     "longname": "source/index.js~random",
     "access": "public",
-    "export": true,
+    "export": false,
     "importPath": "gameframework-lite/source/index.js",
-    "importStyle": "{random}",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 194,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 117,
+    "kind": "function",
+    "name": "randomId",
+    "memberof": "source/index.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "source/index.js~randomId",
+    "access": "public",
+    "export": false,
+    "importPath": "gameframework-lite/source/index.js",
+    "importStyle": null,
     "description": null,
     "lineNumber": 198,
     "undocument": true,
@@ -1834,21 +1913,22 @@
       "types": [
         "*"
       ]
-    }
+    },
+    "ignore": true
   },
   {
-    "__docId__": 117,
+    "__docId__": 118,
     "kind": "file",
     "name": "source/view.js",
-    "content": "'use strict';\n\nconst { Level } = require('./index');\nconst PIXI = (typeof window !== 'undefined') ? require('pixi.js') : {};\n\nexport default class View {\n\tconstructor (screenSize = 480, anchor = document.body) {\n\t\tthis.screenSize = screenSize;\n\t\tthis.pixi = new PIXI.Application(window.innerWidth, window.innerHeight, {\n\t\t\tautoResize: false,\n\t\t\troundPixels: true,\n\t\t\tclearBeforeRender: false,\n\t\t\tresolution: 1\n\t\t});\n\t\tthis.camera = new PIXI.Container();\n\t\tthis.pixi.stage.addChild(this.camera);\n\t\tthis.level = new Level();\n\t\tthis.level.onUpdateHero = this._onUpdateHero.bind(this);\n\t\tthis.level.onCreateHero = this._onCreateHero.bind(this);\n\t\tthis.level.onRemoveHero = this._onRemoveHero.bind(this);\n\t\tanchor.appendChild(this.pixi.view);\n\t\twindow.addEventListener('resize', this.onResize.bind(this), true);\n\t\tthis.onResize();\n\t\tthis.pixi.start();\n\t}\n\tget hero () {\n\t\treturn this.level.heros[this.id];\n\t}\n\tcameraToHero (hero) {\n\t\tthis.camera.x = Math.floor(-hero.sprite.x + window.innerWidth / 2 / this.scale);\n\t\tthis.camera.y = Math.floor(-hero.sprite.y + window.innerHeight / 2 / this.scale);\n\t}\n\tonUpdateHero (hero) {\n\t\t// this is what you should override\n\t}\n\t_onUpdateHero (hero) {\n\t\tthis.onUpdateHero(hero);\n\t\tif (hero.sprite) {\n\t\t\thero.sprite.x = hero.x * this.level.accuracy;\n\t\t\thero.sprite.y = hero.y * this.level.accuracy;\n\t\t}\n\t}\n\t// this is what you should override\n\tonCreateHero (hero) {\n\t\thero.sprite = PIXI.Sprite.fromImage('bunny.png');\n\t\thero.sprite.anchor.set(0.5);\t\t\n\t\thero.sprite.texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;\n\t}\n\t_onCreateHero (hero) {\n\t\tif (!hero.sprite) {\n\t\t\tthis.onCreateHero(hero);\n\t\t\tif (hero.sprite) {\n\t\t\t\thero.sprite.x = hero.x * this.level.accuracy;\n\t\t\t\thero.sprite.y = hero.y * this.level.accuracy;\n\t\t\t\t(this.layers ? this.layers.heros : this.camera).addChild(hero.sprite);\n\t\t\t}\n\t\t}\n\t}\n\tonRemoveHero (hero) {\n\t\t// this is what you should override\n\t}\n\t_onRemoveHero (hero) {\n\t\tthis.onRemoveHero(hero);\n\t\tif (hero.sprite && hero.sprite.parent) {\n\t\t\thero.sprite.parent.removeChild(hero.sprite);\n\t\t}\n\t}\n\tonResize () {\n\t\tthis.scale = this.getScale();\n\t\tthis.pixi.renderer.resize(window.innerWidth, window.innerHeight);\n\t\tthis.pixi.stage.scale.set(this.scale);\n\t}\n\tgetScale () {\n\t    return +(Math.sqrt(window.innerWidth * window.innerHeight) / this.screenSize).toFixed(2);\n\t}\n\tgetTexture (frame) {\n\t\tif (!this.textureCache[frame]) {\n\t\t\t// <-- tiled firstgid === 1\n\t\t\tconst size = this.level.tileset.tilewidth,\n\t\t\t\twidth = (this.level.tileset.imagewidth / this.level.tileset.tilewidth),\n\t\t\t\tx = ((frame - 1) % width) * size,\n\t\t\t\ty = Math.floor((frame - 1) / width) * size;\n\t\t\tthis.textureCache[frame] = new PIXI.Texture(\n\t\t\t\tthis.tileset, new PIXI.Rectangle(x, y, size, size)\n\t\t\t);\n\t\t\tthis.textureCache[frame].baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;\n\t\t}\n\t\treturn this.textureCache[frame];\n\t}\n\tcreateSprite (frame, nearest = PIXI.SCALE_MODES.NEAREST) {\n\t\tlet sprite;\n\t\tif (isFinite(frame)) {\n\t\t\tsprite = new PIXI.Sprite(this.getTexture(parseInt(frame, 10)));\n\t\t} else {\n\t\t\tsprite = PIXI.Sprite.fromFrame(frame);\n\t\t}\n\t\tsprite.texture.baseTexture.scaleMode = nearest;\n\t\treturn sprite;\n\t}\n\taddBlock (x, y, block, layer = this.layers.blocks, nearest = PIXI.SCALE_MODES.NEAREST) {\n\t\tconst sprite = this.createSprite(block, nearest);\n\t\tsprite.width = sprite.height = this.level.tileset.tilewidth;\n\t\tsprite.x = Math.floor(this.level.tileset.tilewidth * x);\n\t\tsprite.y = Math.floor(this.level.tileset.tilewidth * y);\n\t\tsprite.anchor.set(0.5);\n\t\tlayer.addChild(sprite);\n\t}\n\taddBlocks () {\n\t\tfor (let y = 0; y < this.level.height; y++) {\n\t\t\tfor (let x = 0; x < this.level.width; x++) {\n\t\t\t\tconst block = this.level.blocks[`${x}:${y}`];\n\t\t\t\tif (block && Array.isArray(block)) {\n\t\t\t\t\tfor (let i = 0; i < block.length; i++) {\n\t\t\t\t\t\tif (parseInt(block[i], 10)) {\n\t\t\t\t\t\t\tthis.addBlock(x, y, block[i]);\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\tcreateLevel (tiled) {\n\t\tthis.textureCache = {};\n\t\tthis.layers = {\n\t\t\tblocks: new PIXI.Container(),\n\t\t\theros: new PIXI.Container(),\n\t\t};\n\t\tthis.tileset = PIXI.Texture.fromImage(tiled.tilesets[0].image, false, PIXI.SCALE_MODES.NEAREST);\n\t\tthis.camera.addChild(this.layers.blocks);\n\t\tthis.camera.addChild(this.layers.heros);\n\t\tthis.level.fromTiled(tiled);\n\t\tthis.addBlocks();\n\t}\n\t_onMouseMove (event) {\n\t\tevent.stopPropagation();\n\t\tconst e = event.touches ? event.touches[0] : event;\n\t\tthis.mouse = {\n\t\t\tx: e.clientX,\n\t\t\ty: e.clientY,\n\t\t};\n\t\tif (this.onMouseMove) {\n\t\t\tthis.onMouseMove();\n\t\t}\n\t}\n\t_onMouseClick (event) {\n\t\tthis._onMouseMove(event);\n\t\tif (this.onMouseClick) {\n\t\t\tthis.onMouseClick();\n\t\t}\n\t}\n\tuseMouse (disableContextMenu = false) {\n\t\twindow.addEventListener('touchmove', this._onMouseMove.bind(this), false);\n\t\twindow.addEventListener('touchstart', this._onMouseClick.bind(this), false);\n\t\twindow.addEventListener('mousemove', this._onMouseMove.bind(this), false);\n\t\twindow.addEventListener('mousedown', this._onMouseClick.bind(this), false);\n\t\tif (disableContextMenu) {\n\t\t\tthis.disableContextMenu();\n\t\t}\n\t}\n\tdisableContextMenu () {\n\t\tdocument.body.addEventListener('contextmenu', (event) => event.preventDefault(), false);\n\t}\n}\n",
+    "content": "'use strict'\n\nconst { Level } = require('./index')\nconst PIXI = (typeof window !== 'undefined') ? window.PIXI || require('pixi.js') : {}\n\nclass View {\n  constructor (screenSize = 480, anchor = document.body) {\n    this.screenSize = screenSize\n    this.pixi = new PIXI.Application(window.innerWidth, window.innerHeight, {\n      autoResize: false,\n      roundPixels: true,\n      clearBeforeRender: false,\n      resolution: 1,\n      autoStart: false\n    })\n    this.camera = new PIXI.Container()\n    this.pixi.stage.addChild(this.camera)\n    this.level = new Level()\n    this.level.onUpdateHero = this._onUpdateHero.bind(this)\n    this.level.onCreateHero = this._onCreateHero.bind(this)\n    this.level.onRemoveHero = this._onRemoveHero.bind(this)\n    anchor.appendChild(this.pixi.view)\n    window.addEventListener('resize', this.onResize.bind(this), true)\n    this.onResize()\n  }\n  get hero () {\n    return this.level.heros[this.id]\n  }\n  cameraToHero (hero) {\n    this.camera.x = Math.floor(-hero.sprite.x + window.innerWidth / 2 / this.scale)\n    this.camera.y = Math.floor(-hero.sprite.y + window.innerHeight / 2 / this.scale)\n  }\n  onUpdateHero (hero) {\n    // this is what you should override\n  }\n  _onUpdateHero (hero) {\n    this.onUpdateHero(hero)\n    if (hero.sprite) {\n      hero.sprite.x = hero.x * this.level.accuracy\n      hero.sprite.y = hero.y * this.level.accuracy\n    }\n  }\n  // this is what you should override\n  onCreateHero (hero) {\n    hero.sprite = PIXI.Sprite.from('bunny.png')\n    hero.sprite.anchor.set(0.5)\n    hero.sprite.texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST\n  }\n  _onCreateHero (hero) {\n    if (!hero.sprite) {\n      this.onCreateHero(hero)\n      if (hero.sprite) {\n        const layer = (this.layers ? this.layers.heros : this.camera)\n        hero.sprite.x = hero.x * this.level.accuracy\n        hero.sprite.y = hero.y * this.level.accuracy\n        layer.addChild(hero.sprite)\n      }\n    }\n  }\n  onRemoveHero (hero) {\n    // this is what you should override\n  }\n  _onRemoveHero (hero) {\n    this.onRemoveHero(hero)\n    if (hero.sprite && hero.sprite.parent) {\n      hero.sprite.parent.removeChild(hero.sprite)\n    }\n  }\n  onResize () {\n    this.scale = this.getScale()\n    this.pixi.renderer.resize(window.innerWidth, window.innerHeight)\n    this.pixi.stage.scale.set(this.scale)\n  }\n  getScale () {\n    return +(Math.sqrt(window.innerWidth * window.innerHeight) / this.screenSize).toFixed(2)\n  }\n  getTexture (frame) {\n    if (!this.textureCache[frame]) {\n      // <-- tiled firstgid === 1\n      const size = this.level.tileset.tilewidth\n      const width = (this.level.tileset.imagewidth / this.level.tileset.tilewidth)\n      const x = ((frame - 1) % width) * size\n      const y = Math.floor((frame - 1) / width) * size\n      this.textureCache[frame] = new PIXI.Texture(\n        this.tileset, new PIXI.Rectangle(x, y, size, size)\n      )\n      this.textureCache[frame].baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST\n    }\n    return this.textureCache[frame]\n  }\n  createSprite (frame, nearest = PIXI.SCALE_MODES.NEAREST) {\n    let sprite\n    if (isFinite(frame)) {\n      sprite = new PIXI.Sprite(this.getTexture(parseInt(frame, 10)))\n    } else {\n      sprite = PIXI.Sprite.from(frame)\n    }\n    sprite.texture.baseTexture.scaleMode = nearest\n    return sprite\n  }\n  addBlock (x, y, block, layer = this.layers.blocks, nearest = PIXI.SCALE_MODES.NEAREST) {\n    const sprite = this.createSprite(block, nearest)\n    sprite.width = sprite.height = this.level.tileset.tilewidth\n    sprite.x = Math.floor(this.level.tileset.tilewidth * x)\n    sprite.y = Math.floor(this.level.tileset.tilewidth * y)\n    sprite.anchor.set(0.5)\n    layer.addChild(sprite)\n  }\n  addBlocks () {\n    for (let y = 0; y < this.level.height; y++) {\n      for (let x = 0; x < this.level.width; x++) {\n        const block = this.level.blocks[`${x}:${y}`]\n        if (block && Array.isArray(block)) {\n          for (let i = 0; i < block.length; i++) {\n            if (parseInt(block[i], 10)) {\n              this.addBlock(x, y, block[i])\n            }\n          }\n        }\n      }\n    }\n  }\n  createLevel (tiled) {\n    this.textureCache = {}\n    this.layers = {\n      blocks: new PIXI.Container(),\n      heros: new PIXI.Container()\n    }\n    this.tileset = PIXI.Texture.from(tiled.tilesets[0].image, false, PIXI.SCALE_MODES.NEAREST)\n    this.camera.addChild(this.layers.blocks)\n    this.camera.addChild(this.layers.heros)\n    this.level.fromTiled(tiled)\n    this.addBlocks()\n  }\n  _onMouseMove (event) {\n    event.stopPropagation()\n    const e = event.touches ? event.touches[0] : event\n    this.mouse = {\n      x: e.clientX,\n      y: e.clientY\n    }\n    if (this.onMouseMove) {\n      this.onMouseMove()\n    }\n  }\n  _onMouseClick (event) {\n    this._onMouseMove(event)\n    if (this.onMouseClick) {\n      this.onMouseClick()\n    }\n  }\n  useMouse (disableContextMenu = false) {\n    window.addEventListener('touchmove', this._onMouseMove.bind(this), false)\n    window.addEventListener('touchstart', this._onMouseClick.bind(this), false)\n    window.addEventListener('mousemove', this._onMouseMove.bind(this), false)\n    window.addEventListener('mousedown', this._onMouseClick.bind(this), false)\n    if (disableContextMenu) {\n      this.disableContextMenu()\n    }\n  }\n  disableContextMenu () {\n    document.body.addEventListener('contextmenu', (event) => event.preventDefault(), false)\n  }\n}\n\nexports.default = View\n",
     "static": true,
-    "longname": "C:/Users/lenovo/projects/gameframework-lite/source/view.js",
+    "longname": "/home/jacek/projects/gameframework-lite/source/view.js",
     "access": "public",
     "description": null,
     "lineNumber": 1
   },
   {
-    "__docId__": 118,
+    "__docId__": 119,
     "kind": "variable",
     "name": "Level",
     "memberof": "source/view.js",
@@ -1869,7 +1949,7 @@
     "ignore": true
   },
   {
-    "__docId__": 119,
+    "__docId__": 120,
     "kind": "variable",
     "name": "PIXI",
     "memberof": "source/view.js",
@@ -1890,23 +1970,24 @@
     "ignore": true
   },
   {
-    "__docId__": 120,
+    "__docId__": 121,
     "kind": "class",
     "name": "View",
     "memberof": "source/view.js",
     "static": true,
     "longname": "source/view.js~View",
     "access": "public",
-    "export": true,
+    "export": false,
     "importPath": "gameframework-lite/source/view.js",
-    "importStyle": "View",
+    "importStyle": null,
     "description": null,
     "lineNumber": 6,
     "undocument": true,
-    "interface": false
+    "interface": false,
+    "ignore": true
   },
   {
-    "__docId__": 121,
+    "__docId__": 122,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "source/view.js~View",
@@ -1920,7 +2001,7 @@
     "undocument": true
   },
   {
-    "__docId__": 122,
+    "__docId__": 123,
     "kind": "member",
     "name": "screenSize",
     "memberof": "source/view.js~View",
@@ -1937,7 +2018,7 @@
     }
   },
   {
-    "__docId__": 123,
+    "__docId__": 124,
     "kind": "member",
     "name": "pixi",
     "memberof": "source/view.js~View",
@@ -1954,7 +2035,7 @@
     }
   },
   {
-    "__docId__": 124,
+    "__docId__": 125,
     "kind": "member",
     "name": "camera",
     "memberof": "source/view.js~View",
@@ -1962,24 +2043,7 @@
     "longname": "source/view.js~View#camera",
     "access": "public",
     "description": null,
-    "lineNumber": 15,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "__docId__": 125,
-    "kind": "member",
-    "name": "level",
-    "memberof": "source/view.js~View",
-    "static": false,
-    "longname": "source/view.js~View#level",
-    "access": "public",
-    "description": null,
-    "lineNumber": 17,
+    "lineNumber": 16,
     "undocument": true,
     "type": {
       "types": [
@@ -1989,6 +2053,23 @@
   },
   {
     "__docId__": 126,
+    "kind": "member",
+    "name": "level",
+    "memberof": "source/view.js~View",
+    "static": false,
+    "longname": "source/view.js~View#level",
+    "access": "public",
+    "description": null,
+    "lineNumber": 18,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 127,
     "kind": "get",
     "name": "hero",
     "memberof": "source/view.js~View",
@@ -2007,7 +2088,7 @@
     }
   },
   {
-    "__docId__": 127,
+    "__docId__": 128,
     "kind": "method",
     "name": "cameraToHero",
     "memberof": "source/view.js~View",
@@ -2030,7 +2111,7 @@
     "return": null
   },
   {
-    "__docId__": 128,
+    "__docId__": 129,
     "kind": "method",
     "name": "onUpdateHero",
     "memberof": "source/view.js~View",
@@ -2053,7 +2134,7 @@
     "return": null
   },
   {
-    "__docId__": 129,
+    "__docId__": 130,
     "kind": "method",
     "name": "_onUpdateHero",
     "memberof": "source/view.js~View",
@@ -2076,7 +2157,7 @@
     "return": null
   },
   {
-    "__docId__": 130,
+    "__docId__": 131,
     "kind": "method",
     "name": "onCreateHero",
     "memberof": "source/view.js~View",
@@ -2099,7 +2180,7 @@
     "return": null
   },
   {
-    "__docId__": 131,
+    "__docId__": 132,
     "kind": "method",
     "name": "_onCreateHero",
     "memberof": "source/view.js~View",
@@ -2122,7 +2203,7 @@
     "return": null
   },
   {
-    "__docId__": 132,
+    "__docId__": 133,
     "kind": "method",
     "name": "onRemoveHero",
     "memberof": "source/view.js~View",
@@ -2132,30 +2213,7 @@
     "longname": "source/view.js~View#onRemoveHero",
     "access": "public",
     "description": null,
-    "lineNumber": 59,
-    "undocument": true,
-    "params": [
-      {
-        "name": "hero",
-        "types": [
-          "*"
-        ]
-      }
-    ],
-    "return": null
-  },
-  {
-    "__docId__": 133,
-    "kind": "method",
-    "name": "_onRemoveHero",
-    "memberof": "source/view.js~View",
-    "generator": false,
-    "async": false,
-    "static": false,
-    "longname": "source/view.js~View#_onRemoveHero",
-    "access": "private",
-    "description": null,
-    "lineNumber": 62,
+    "lineNumber": 60,
     "undocument": true,
     "params": [
       {
@@ -2170,6 +2228,29 @@
   {
     "__docId__": 134,
     "kind": "method",
+    "name": "_onRemoveHero",
+    "memberof": "source/view.js~View",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "source/view.js~View#_onRemoveHero",
+    "access": "private",
+    "description": null,
+    "lineNumber": 63,
+    "undocument": true,
+    "params": [
+      {
+        "name": "hero",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 135,
+    "kind": "method",
     "name": "onResize",
     "memberof": "source/view.js~View",
     "generator": false,
@@ -2178,13 +2259,13 @@
     "longname": "source/view.js~View#onResize",
     "access": "public",
     "description": null,
-    "lineNumber": 68,
+    "lineNumber": 69,
     "undocument": true,
     "params": [],
     "return": null
   },
   {
-    "__docId__": 135,
+    "__docId__": 136,
     "kind": "member",
     "name": "scale",
     "memberof": "source/view.js~View",
@@ -2192,7 +2273,7 @@
     "longname": "source/view.js~View#scale",
     "access": "public",
     "description": null,
-    "lineNumber": 69,
+    "lineNumber": 70,
     "undocument": true,
     "type": {
       "types": [
@@ -2201,7 +2282,7 @@
     }
   },
   {
-    "__docId__": 136,
+    "__docId__": 137,
     "kind": "method",
     "name": "getScale",
     "memberof": "source/view.js~View",
@@ -2211,7 +2292,7 @@
     "longname": "source/view.js~View#getScale",
     "access": "public",
     "description": null,
-    "lineNumber": 73,
+    "lineNumber": 74,
     "undocument": true,
     "params": [],
     "return": {
@@ -2221,7 +2302,7 @@
     }
   },
   {
-    "__docId__": 137,
+    "__docId__": 138,
     "kind": "method",
     "name": "getTexture",
     "memberof": "source/view.js~View",
@@ -2231,7 +2312,7 @@
     "longname": "source/view.js~View#getTexture",
     "access": "public",
     "description": null,
-    "lineNumber": 76,
+    "lineNumber": 77,
     "undocument": true,
     "params": [
       {
@@ -2248,7 +2329,7 @@
     }
   },
   {
-    "__docId__": 138,
+    "__docId__": 139,
     "kind": "method",
     "name": "createSprite",
     "memberof": "source/view.js~View",
@@ -2258,7 +2339,7 @@
     "longname": "source/view.js~View#createSprite",
     "access": "public",
     "description": null,
-    "lineNumber": 90,
+    "lineNumber": 91,
     "undocument": true,
     "params": [
       {
@@ -2282,7 +2363,7 @@
     }
   },
   {
-    "__docId__": 139,
+    "__docId__": 140,
     "kind": "method",
     "name": "addBlock",
     "memberof": "source/view.js~View",
@@ -2292,7 +2373,7 @@
     "longname": "source/view.js~View#addBlock",
     "access": "public",
     "description": null,
-    "lineNumber": 100,
+    "lineNumber": 101,
     "undocument": true,
     "params": [
       {
@@ -2331,7 +2412,7 @@
     "return": null
   },
   {
-    "__docId__": 140,
+    "__docId__": 141,
     "kind": "method",
     "name": "addBlocks",
     "memberof": "source/view.js~View",
@@ -2341,13 +2422,13 @@
     "longname": "source/view.js~View#addBlocks",
     "access": "public",
     "description": null,
-    "lineNumber": 108,
+    "lineNumber": 109,
     "undocument": true,
     "params": [],
     "return": null
   },
   {
-    "__docId__": 141,
+    "__docId__": 142,
     "kind": "method",
     "name": "createLevel",
     "memberof": "source/view.js~View",
@@ -2357,7 +2438,7 @@
     "longname": "source/view.js~View#createLevel",
     "access": "public",
     "description": null,
-    "lineNumber": 122,
+    "lineNumber": 123,
     "undocument": true,
     "params": [
       {
@@ -2370,7 +2451,7 @@
     "return": null
   },
   {
-    "__docId__": 142,
+    "__docId__": 143,
     "kind": "member",
     "name": "textureCache",
     "memberof": "source/view.js~View",
@@ -2378,7 +2459,7 @@
     "longname": "source/view.js~View#textureCache",
     "access": "public",
     "description": null,
-    "lineNumber": 123,
+    "lineNumber": 124,
     "undocument": true,
     "type": {
       "types": [
@@ -2387,7 +2468,7 @@
     }
   },
   {
-    "__docId__": 143,
+    "__docId__": 144,
     "kind": "member",
     "name": "layers",
     "memberof": "source/view.js~View",
@@ -2395,7 +2476,7 @@
     "longname": "source/view.js~View#layers",
     "access": "public",
     "description": null,
-    "lineNumber": 124,
+    "lineNumber": 125,
     "undocument": true,
     "type": {
       "types": [
@@ -2404,7 +2485,7 @@
     }
   },
   {
-    "__docId__": 144,
+    "__docId__": 145,
     "kind": "member",
     "name": "tileset",
     "memberof": "source/view.js~View",
@@ -2412,7 +2493,7 @@
     "longname": "source/view.js~View#tileset",
     "access": "public",
     "description": null,
-    "lineNumber": 128,
+    "lineNumber": 129,
     "undocument": true,
     "type": {
       "types": [
@@ -2421,7 +2502,7 @@
     }
   },
   {
-    "__docId__": 145,
+    "__docId__": 146,
     "kind": "method",
     "name": "_onMouseMove",
     "memberof": "source/view.js~View",
@@ -2431,7 +2512,7 @@
     "longname": "source/view.js~View#_onMouseMove",
     "access": "private",
     "description": null,
-    "lineNumber": 134,
+    "lineNumber": 135,
     "undocument": true,
     "params": [
       {
@@ -2444,7 +2525,7 @@
     "return": null
   },
   {
-    "__docId__": 146,
+    "__docId__": 147,
     "kind": "member",
     "name": "mouse",
     "memberof": "source/view.js~View",
@@ -2452,7 +2533,7 @@
     "longname": "source/view.js~View#mouse",
     "access": "public",
     "description": null,
-    "lineNumber": 137,
+    "lineNumber": 138,
     "undocument": true,
     "type": {
       "types": [
@@ -2461,7 +2542,7 @@
     }
   },
   {
-    "__docId__": 147,
+    "__docId__": 148,
     "kind": "method",
     "name": "_onMouseClick",
     "memberof": "source/view.js~View",
@@ -2471,7 +2552,7 @@
     "longname": "source/view.js~View#_onMouseClick",
     "access": "private",
     "description": null,
-    "lineNumber": 145,
+    "lineNumber": 146,
     "undocument": true,
     "params": [
       {
@@ -2484,7 +2565,7 @@
     "return": null
   },
   {
-    "__docId__": 148,
+    "__docId__": 149,
     "kind": "method",
     "name": "useMouse",
     "memberof": "source/view.js~View",
@@ -2494,7 +2575,7 @@
     "longname": "source/view.js~View#useMouse",
     "access": "public",
     "description": null,
-    "lineNumber": 151,
+    "lineNumber": 152,
     "undocument": true,
     "params": [
       {
@@ -2510,7 +2591,7 @@
     "return": null
   },
   {
-    "__docId__": 149,
+    "__docId__": 150,
     "kind": "method",
     "name": "disableContextMenu",
     "memberof": "source/view.js~View",
@@ -2520,23 +2601,23 @@
     "longname": "source/view.js~View#disableContextMenu",
     "access": "public",
     "description": null,
-    "lineNumber": 160,
+    "lineNumber": 161,
     "undocument": true,
     "params": [],
     "return": null
   },
   {
     "kind": "index",
-    "content": "## gameframework-lite!\n\nPIXI.js + Game Loop + Level Loop + Character Loop\n\nIsomorphic, Scalable, Node.js package\n\n## examples (non-MIT)\n\nGames made on it:\n\n* [http://www.stones.mini.ninja/](http://www.stones.mini.ninja/)\n\n* [http://www.vikingsvillage.io/](http://www.vikingsvillage.io/)\n\n### documentation\n\n[https://prozi.github.io/gameframework-lite/](https://prozi.github.io/gameframework-lite/)\n\n### installation\n\n`npm install gameframework-lite@latest --save`\n\nor\n\n`yarn add gameframework-lite@latest --save`\n\n### testing\n\n* `yarn test`\n\n* open `http://localhost:3000`\n\n### usage\n\nrequire 'gameframework-lite' for:\n\n- DEFER,\n- Game,\n- Level,\n- Block,\n- Hero,\n- atan2\n- random\n\nrequire 'gameframework-lite/view' for:\n\n- View\n\nrequire 'gameframework-lite/extract' for:\n\n- [TextureExtractor](https://prozi.github.io/gameframework-lite/class/docs-src/extract.js~TextureExtractor.html)\n\n### examples\n\n```javascript\nconst View = require('gameframework-lite/view');\nconst PIXI = window.PIXI || require('pixi.js');\n\n// this is how you should use View\nclass MyView extends View {\n\t// override example\n\tonCreateHero (hero) {\n\t\thero.sprite = PIXI.Sprite.fromImage('bunny.png');\n\t\thero.sprite.anchor.set(0.5);\n\t\thero.sprite.scale.set(3);\n\t}\n}\n\nnew MyView();\n```\n\n```javascript\nconst { Level, Game } = require('gameframework-lite');\n\n// this is how you should use Game\nclass MyGame extends Game {\n\t// one room game example\n\tconstructor () {\n\t\tsuper();\n\t\tthis.levels.push(new Level());\n\t}\n\t// override what you need\n\tonUpdate () {\n\t\tconsole.log('tick');\n\t}\n}\n\nnew MyGame();\n```\n\n\n`view example/index.html to see benchmark/test`\n\n\nLicense MIT\n\nmade by me - Jacek Pietal (prozi85@gmail.com)\n\n",
-    "longname": "C:\\Users\\lenovo\\projects\\gameframework-lite\\README.md",
+    "content": "[![Version](https://img.shields.io/npm/v/gameframework-lite.svg)](https://www.npmjs.com/gameframework-lite) \n[![Known Vulnerabilities](https://snyk.io/test/npm/gameframework-lite/badge.svg)](https://snyk.io/test/npm/gameframework-lite)\n\nPIXI.js + Game Loop + Level Loop + Character Loop\n\nIsomorphic, Scalable, Node.js package\n\n## examples (non-MIT)\n\nGames made on it:\n\n* [http://www.stones.mini.ninja/](http://www.stones.mini.ninja/)\n\n* [http://www.vikingsvillage.io/](http://www.vikingsvillage.io/)\n\n### documentation\n\n[https://prozi.github.io/gameframework-lite/](https://prozi.github.io/gameframework-lite/)\n\n### installation\n\n`npm install gameframework-lite@latest --save`\n\nor\n\n`yarn add gameframework-lite@latest --save`\n\n### testing\n\n* `yarn test`\n\n* open `http://localhost:3000`\n\n## usage\n\nrequire 'gameframework-lite' for:\n\n- DEFER,\n- Game,\n- Level,\n- Block,\n- Hero,\n- atan2\n- random\n\nrequire 'gameframework-lite/view' for:\n\n- View\n\nrequire 'gameframework-lite/extract' for:\n\n### Editions\n\nWe're using npm editions here so you can use `gameframework-lite/source/...` for `import/export`\n\nor regular `gameframework-lite/es2015/...` for `require` syntax\n\nor trust editions and just use `gameframework-lite`\n\n### Texture Extractor\n\n- [TextureExtractor](https://prozi.github.io/gameframework-lite/class/docs-src/extract.js~TextureExtractor.html)\n\n### Examples\n\n```javascript\nconst View = require('gameframework-lite/view');\nconst PIXI = window.PIXI || require('pixi.js');\n\n// this is how you should use View\nclass MyView extends View {\n\t// override example\n\tonCreateHero (hero) {\n\t\thero.sprite = PIXI.Sprite.from('bunny.png');\n\t\thero.sprite.anchor.set(0.5);\n\t\thero.sprite.scale.set(3);\n\t}\n}\n\nnew MyView();\n```\n\n```javascript\nconst { Level, Game } = require('gameframework-lite');\n\n// this is how you should use Game\nclass MyGame extends Game {\n\t// one room game example\n\tconstructor () {\n\t\tsuper();\n\t\tthis.levels.push(new Level());\n\t}\n\t// override what you need\n\tonUpdate () {\n\t\tconsole.log('tick');\n\t}\n}\n\nnew MyGame();\n```\n\n\n`view example/index.html to see benchmark/test`\n\n### License\n\nLicense MIT\n\n### Author\n\nmade by me - Jacek Pietal (prozi85@gmail.com)\n\n",
+    "longname": "/home/jacek/projects/gameframework-lite/README.md",
     "name": "./README.md",
     "static": true,
     "access": "public"
   },
   {
     "kind": "packageJSON",
-    "content": "{\n  \"name\": \"gameframework-lite\",\n  \"version\": \"1.6.3\",\n  \"description\": \"game framework for 2d html5 games with physics isomorphic\",\n  \"main\": \"index.js\",\n  \"scripts\": {\n    \"docs\": \"esdoc\",\n    \"build\": \"PRODUCTION=true webpack\",\n    \"build:dev\": \"PRODUCTION= webpack\",\n    \"test\": \"yarn compile && webpack && node test\",\n    \"compile\": \"node_modules/.bin/babel ./source --out-dir ./es2015 --presets es2015\",\n    \"postinstall\": \"npm run compile\"\n  },\n  \"editions\": [\n    {\n      \"description\": \"Source + ESNext + Require\",\n      \"entry\": \"source/index.js\",\n      \"syntaxes\": [\n        \"javascript\",\n        \"esnext\",\n        \"require\",\n        \"arrows\",\n        \"const\",\n        \"let\",\n        \"destructuring\"\n      ]\n    },\n    {\n      \"description\": \"Compiled + ES5 + Require\",\n      \"entry\": \"es2015/index.js\",\n      \"syntaxes\": [\n        \"javascript\",\n        \"ES5\",\n        \"require\"\n      ]\n    }\n  ],\n  \"author\": \"Jacek Pietal <prozi85@gmail.com>\",\n  \"license\": \"MIT\",\n  \"dependencies\": {\n    \"babel-loader\": \"^7.1.2\",\n    \"editions\": \"^1.3.3\",\n    \"esdoc\": \"^1.0.3\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"express\": \"^4.16.2\",\n    \"fmath\": \"latest\",\n    \"md5\": \"latest\",\n    \"pixi.js\": \"latest\",\n    \"babel-cli\": \"^6.26.0\",\n    \"babel-preset-es2015\": \"^6.24.1\",\n    \"webpack\": \"^3.8.1\"\n  },\n  \"devDependencies\": {},\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"https://github.com/Prozi/gameframework-lite.git\"\n  }\n}\n",
-    "longname": "C:\\Users\\lenovo\\projects\\gameframework-lite\\package.json",
+    "content": "{\n  \"name\": \"gameframework-lite\",\n  \"version\": \"1.12.0\",\n  \"description\": \"game framework for 2d html5 games with physics isomorphic\",\n  \"main\": \"index.js\",\n  \"browser\": \"es2015/index.js\",\n  \"scripts\": {\n    \"docs\": \"esdoc\",\n    \"test\": \"node --harmony ./test\",\n    \"lint\": \"eslint ./source --fix\",\n    \"compile\": \"babel ./source --out-dir ./es2015\"\n  },\n  \"keywords\": [\n    \"game framework\",\n    \"game\",\n    \"framework\",\n    \"light\",\n    \"lite\",\n    \"es6\",\n    \"es2015\",\n    \"nodejs\",\n    \"working\",\n    \"ready\"\n  ],\n  \"editions\": [\n    {\n      \"description\": \"Source + ESNext + Import\",\n      \"entry\": \"index.js\",\n      \"directory\": \"source\",\n      \"syntaxes\": [\n        \"javascript\",\n        \"esnext\",\n        \"require\",\n        \"arrows\",\n        \"getset\",\n        \"const\",\n        \"let\",\n        \"classes\",\n        \"defaults\",\n        \"spread\",\n        \"rest\",\n        \"destructuring\",\n        \"template strings\"\n      ]\n    },\n    {\n      \"description\": \"Compiled + ES2015 + Require\",\n      \"entry\": \"index.js\",\n      \"directory\": \"es2015\",\n      \"syntaxes\": [\n        \"javascript\",\n        \"es2015\",\n        \"require\"\n      ]\n    }\n  ],\n  \"author\": \"Jacek Pietal <prozi85@gmail.com>\",\n  \"license\": \"MIT\",\n  \"dependencies\": {\n    \"editions\": \"^1.3.3\",\n    \"esdoc\": \"^1.1.0\",\n    \"fmath\": \"latest\",\n    \"gameloop-compatible\": \"latest\",\n    \"pixi.js\": \"latest\"\n  },\n  \"devDependencies\": {\n    \"babel-cli\": \"^6.26.0\",\n    \"babel-loader\": \"^7.1.2\",\n    \"babel-preset-es2015\": \"^6.24.1\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"express\": \"^4.16.2\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"https://github.com/Prozi/gameframework-lite.git\"\n  }\n}\n",
+    "longname": "/home/jacek/projects/gameframework-lite/package.json",
     "name": "package.json",
     "static": true,
     "access": "public"

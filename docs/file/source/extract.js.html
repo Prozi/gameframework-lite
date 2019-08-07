@@ -29,74 +29,65 @@
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
-  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/source/extract.js~TextureExtractor.html">TextureExtractor</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/source/index.js~Game.html">Game</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/source/index.js~Hero.html">Hero</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/source/index.js~Level.html">Level</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/source/view.js~View.html">View</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-atan2">atan2</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-distance">distance</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-random">random</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomId">randomId</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-cos">cos</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-sin">sin</a></span></span></li>
-</ul>
+  </ul>
 </div>
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">source/extract.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;;
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;
 
-const PIXI = (typeof window !== &apos;undefined&apos;) ? require(&apos;pixi.js&apos;) : {};
+const PIXI = (typeof window !== &apos;undefined&apos;) ? window.PIXI || require(&apos;pixi.js&apos;) : {}
 
-export default class TextureExtractor {
-	constructor({
-		width,
-		height,
-		tilewidth,
-		tileheight,
-		tileset,
-		offset,
-		count,
-		scaleMode
-	}, folder = &apos;&apos;) {
-		this.width = width;
-		this.height = height;
-		this.tilewidth = tilewidth;
-		this.tileheight = tileheight;
-		this.tileset = PIXI.Texture.fromFrame(folder ? `${folder}/${tileset}` : tileset);
-		this.offset = offset || 0;
-		this.textureCache = {};
-		this.scaleMode = scaleMode || PIXI.SCALE_MODES.NEAREST;
-		if (count) {
-			for (let i = 0; i &lt; count; i++) {
-				this.prepareTexture(i);
-			}
-		}
-	}
-	prepareTexture(frame) {
-		const width = (this.width / this.tilewidth);
-		const x = ((frame - this.offset) % width) * this.tilewidth;
-		const y = Math.floor((frame - this.offset) / width) * this.tileheight;
-		const rect = new PIXI.Rectangle(x, y, this.tilewidth, this.tileheight);
+class TextureExtractor {
+  constructor ({
+    width,
+    height,
+    tilewidth,
+    tileheight,
+    tileset,
+    offset,
+    count,
+    scaleMode
+  }) {
+    this.width = width
+    this.height = height
+    this.tilewidth = tilewidth
+    this.tileheight = tileheight
+    this.tileset = (typeof tileset === &apos;string&apos;) ? PIXI.Texture.from(tileset) : tileset
+    this.offset = offset || 0
+    this.textureCache = {}
+    this.scaleMode = scaleMode || PIXI.SCALE_MODES.NEAREST
+    if (count) {
+      for (let i = 0; i &lt; count; i++) {
+        this.prepareTexture(i)
+      }
+    }
+  }
+  prepareTexture (frame) {
+    const width = (this.width / this.tilewidth)
+    const x = ((frame - this.offset) % width) * this.tilewidth
+    const y = Math.floor((frame - this.offset) / width) * this.tileheight
+    const rect = new PIXI.Rectangle(x, y, this.tilewidth, this.tileheight)
 
-		this.textureCache[frame] = new PIXI.Texture(this.tileset, rect);
-		this.textureCache[frame].baseTexture.scaleMode = this.scaleMode;
-		this.textureCache[frame].cacheAsBitmap = true;
-	}
-	getFrame(frame) {
-		if (!this.textureCache[frame]) {
-			this.prepareTexture(frame);
-		}
-		return this.textureCache[frame];
-	}
+    this.textureCache[frame] = new PIXI.Texture(this.tileset, rect)
+    this.textureCache[frame].baseTexture.scaleMode = this.scaleMode
+    this.textureCache[frame].cacheAsBitmap = true
+  }
+  getFrame (frame) {
+    if (!this.textureCache[frame]) {
+      this.prepareTexture(frame)
+    }
+    return this.textureCache[frame]
+  }
 }
+
+exports.default = TextureExtractor
 </code></pre>
 
 </div>
 
 <footer class="footer">
-  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.3)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
 </footer>
 
 <script src="script/search_index.js"></script>

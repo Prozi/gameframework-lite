@@ -96,7 +96,7 @@ module.exports = function () {
 	}, {
 		key: &apos;onCreateHero&apos;,
 		value: function onCreateHero(hero) {
-			hero.sprite = PIXI.Sprite.fromImage(&apos;bunny.png&apos;);
+			hero.sprite = PIXI.Sprite.from(&apos;bunny.png&apos;);
 			hero.sprite.anchor.set(0.5);
 			hero.sprite.texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST;
 		}
@@ -160,7 +160,7 @@ module.exports = function () {
 			if (isFinite(frame)) {
 				sprite = new PIXI.Sprite(this.getTexture(parseInt(frame, 10)));
 			} else {
-				sprite = PIXI.Sprite.fromFrame(frame);
+				sprite = PIXI.Sprite.from(frame);
 			}
 			sprite.texture.baseTexture.scaleMode = nearest;
 			return sprite;
@@ -202,7 +202,7 @@ module.exports = function () {
 				blocks: new PIXI.Container(),
 				heros: new PIXI.Container()
 			};
-			this.tileset = PIXI.Texture.fromImage(tiled.tilesets[0].image, false, PIXI.SCALE_MODES.NEAREST);
+			this.tileset = PIXI.Texture.from(tiled.tilesets[0].image, false, PIXI.SCALE_MODES.NEAREST);
 			this.camera.addChild(this.layers.blocks);
 			this.camera.addChild(this.layers.heros);
 			this.level.fromTiled(tiled);

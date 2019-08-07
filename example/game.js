@@ -10,7 +10,7 @@ class MyView extends View {
 	}
 	// override example
 	onCreateHero (hero) {
-		hero.sprite = PIXI.Sprite.fromImage('bunny.png');
+		hero.sprite = PIXI.Sprite.from('bunny.png');
 		hero.sprite.anchor.set(0.5);
 	}
 }

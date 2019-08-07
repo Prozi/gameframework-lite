@@ -29,228 +29,228 @@
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
-  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/source/extract.js~TextureExtractor.html">TextureExtractor</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/source/index.js~Game.html">Game</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/source/index.js~Hero.html">Hero</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/source/index.js~Level.html">Level</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/source/view.js~View.html">View</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-atan2">atan2</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-distance">distance</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-random">random</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomId">randomId</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-cos">cos</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-sin">sin</a></span></span></li>
-</ul>
+  </ul>
 </div>
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">source/index.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import FMath from &apos;fmath&apos;;
-import md5 from &apos;md5&apos;;
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&apos;use strict&apos;
 
-const fmath = new FMath();
+const FMath = require(&apos;fmath&apos;)
+const fmath = new FMath()
+const gameloop = require(&apos;gameloop-compatible&apos;)
 
-// function constants
-const DEFER = (typeof process !== &apos;undefined&apos;) ? process.nextTick.bind(process) : setTimeout;
-const NOW = (typeof performance !== &apos;undefined&apos;) ? performance.now.bind(performance) : Date.now.bind(Date);
+// for universal time processing functions
+const IS_BACKEND = (typeof window === &apos;undefined&apos;)
 
-// just constants
-const HALF_PI = Math.PI / 2;
+// next cycle run universal function
+const nextCycle = IS_BACKEND ? setImmediate : setTimeout
 
-const HERO_ID = 0;
-const HERO_X = 1;
-const HERO_Y = 2;
+// get current time in nano seconds universal
+const getTime = IS_BACKEND ? getTimeNode :
+  ((typeof performance !== &apos;undefined&apos;) ? getTimeModernBrowser : getTimeBrowser)
 
-export class Game {
-	constructor (interval = 10) {
-		this.levels = [];
-		this.interval = interval;
-		this.now = NOW();
-	}
-	loop () {
-		DEFER(this.tick.bind(this));
-		if (this.onUpdate) {
-			DEFER(this.onUpdate.bind(this));
-		}
-		setTimeout(() =&gt; DEFER(this.loop.bind(this)), this.interval);	
-	}
-	tick () {
-		const now = NOW();
-		this.delta = (now - this.now) / 1000;
-		this.now = now;
-		this.levels.forEach((map) =&gt; {
-			DEFER(map.tick.bind(map, this.delta));
-		});
-	}
+class Game {
+  constructor (interval = 16) {
+    this.levels = []
+    this.loopId = gameloop.setGameLoop(this.loop.bind(this), interval)
+    this.interval = interval
+  }
+  tickLevel (level) {
+    level.tick()
+  }
+  loop () {
+    this.levels.forEach(this.tickLevel.bind(this))
+  }
 }
 
-export class Level {
-	constructor (props = {}) {		
-		const options = {};
-		if (props.gravity) {
-			options.gravity = props.gravity;
-		}
-		this.heros = props.heros || {};
-		this.blocks = props.blocks || {};
-		this.accuracy = 10;
-	}
-	spawn ({ body }) {
-		body.x = random() * this.width;
-		body.y = 0;
-	}
-	eachHero (callback) {
-		for (let hero in this.heros) {
-			if (this.heros.hasOwnProperty(hero)) {
-				callback(this.heros[hero]);
-			}
-		}
-	}
-	tick (delta) {
-		console.log(delta);
-	}
-	toArray () {
-		const array = [[]];
-		this.eachHero((hero) =&gt; array[0].push(hero.toArray()));
-		return array;
-	}
-	removeHero (hero) {
-		if (this.onRemoveHero) {
-			this.onRemoveHero(hero);
-		}
-		this.heros[hero.id] = null;
-		delete this.heros[hero.id];		
-	}
-	fromArray (array = [], HeroClass = Hero) {
-		this.eachHero((hero) =&gt; {
-			if (!array[0].find((heroArray) =&gt; heroArray[HERO_ID] === hero.id)) {
-				this.removeHero(hero);
-			}
-		});
-		array[0].forEach((heroArray) =&gt; {
-			const id = heroArray[HERO_ID];
-			if (this.heros[id]) {
-				this.updateHero(id, heroArray);
-			} else {
-				this.addHero(heroArray, HeroClass);
-			}
-		});
-		if (this.fromArrayExtension) {
-			this.fromArrayExtension(array);
-		}
-	}
-	updateHero (id, heroArray = []) {
-		this.heros[id].fromArray(heroArray);
-		if (this.onUpdateHero) {
-			this.onUpdateHero(this.heros[id]);
-		}
-	}
-	addHero (heroArray = [], HeroClass = Hero) {
-		const id = heroArray[HERO_ID] || randomId();
-		this.heros[id] = new HeroClass({ id });
-		this.heros[id].x = heroArray[HERO_X] || this.width * random();
-		this.heros[id].y = heroArray[HERO_Y] || 0;
-		this.heros[id].fromArray(heroArray);
-		if (this.onCreateHero) {
-			this.onCreateHero(this.heros[id]);
-		}
-		return this.heros[id];
-	}
-	fromTiled (tiled = {}) {
-		this.width  = tiled.width;
-		this.height = tiled.height;
-		this.blocks = {};
-		this.stops  = {};
-		this.tileset = {
-			tilewidth: tiled.tilesets[0].tilewidth,
-			imagewidth: tiled.tilesets[0].imagewidth,
-		};
-		this.accuracy = this.tileset.tilewidth;
-		for (let y = 0; y &lt; this.height; y++) {
-			for (let x = 0; x &lt; this.width; x++) {
-				const pos = y * this.width + x;
-				const offset = `${x}:${y}`;
-				this.blocks[offset] = [
-					tiled.layers[0].data[pos], 
-					tiled.layers[1].data[pos]
-				];
-				this.stops[offset] = tiled.layers[2].data[pos];
-			}
-		}
-	}
+class Level {
+  constructor (props = {}) {
+    this.heros = props.heros || {}
+    this.blocks = props.blocks || {}
+  }
+  each (set, callback) {
+    Object.keys(set).forEach((id) =&gt; callback(set[id]))
+  }
+  eachHero (callback) {
+    this.each(this.heros, callback)
+  }
+  tick () {
+    console.log(&apos;tick @ level&apos;)
+  }
+  toArray () {
+    const array = [[]]
+    this.eachHero((hero) =&gt; array[0].push(hero.toArray()))
+    return array
+  }
+  removeHero (hero) {
+    if (this.onRemoveHero) {
+      this.onRemoveHero(hero)
+    }
+    this.heros[hero.id] = null
+    delete this.heros[hero.id]
+  }
+  fromArray (array = [], HeroClass = Hero) {
+    this.eachHero((hero) =&gt; {
+      if (!array[0].find((heroArray) =&gt; heroArray[HERO_ID] === hero.id)) {
+        this.removeHero(hero)
+      }
+    })
+    array[0].forEach((heroArray) =&gt; {
+      const id = heroArray[HERO_ID]
+      if (this.heros[id]) {
+        this.updateHero(id, heroArray)
+      } else {
+        this.addHero(heroArray, HeroClass)
+      }
+    })
+    if (this.fromArrayExtension) {
+      this.fromArrayExtension(array)
+    }
+  }
+  updateHero (id, heroArray = []) {
+    this.heros[id].fromArray(heroArray)
+    if (this.onUpdateHero) {
+      this.onUpdateHero(this.heros[id])
+    }
+  }
+  addHero (heroArray = [], HeroClass = Hero) {
+    const id = heroArray[HERO_ID] || randomId()
+    this.heros[id] = new HeroClass({ id })
+    this.heros[id].x = heroArray[HERO_X] || this.width * random()
+    this.heros[id].y = heroArray[HERO_Y] || 0
+    this.heros[id].fromArray(heroArray)
+    if (this.onCreateHero) {
+      this.onCreateHero(this.heros[id])
+    }
+    return this.heros[id]
+  }
+  fromTiled (tiled = {}) {
+    this.width = tiled.width
+    this.height = tiled.height
+    this.blocks = {}
+    this.stops = {}
+    this.tileset = {
+      tilewidth: tiled.tilesets[0].tilewidth,
+      imagewidth: tiled.tilesets[0].imagewidth
+    }
+    for (let y = 0; y &lt; this.height; y++) {
+      for (let x = 0; x &lt; this.width; x++) {
+        const pos = y * this.width + x
+        const offset = `${x}:${y}`
+        this.blocks[offset] = [
+          tiled.layers[0].data[pos],
+          tiled.layers[1].data[pos]
+        ]
+        this.stops[offset] = tiled.layers[2].data[pos]
+      }
+    }
+  }
 }
 
-export class Hero {
-	constructor ({ id = randomId(), sprite = null }) {
-		this.id = id;
-		this.sprite = sprite;
-		this.x = undefined;
-		this.y = undefined;
-	}
-	toArray () {
-		return [
-			this.id,
-			this.x,
-			this.y,
-		];
-	}
-	fromArray (array = [], force = false) {
-		if (force) {
-			this.id = array[HERO_ID];
-		}
-		if (force || (this.id === array[HERO_ID])) {
-			this.move(array[HERO_X], array[HERO_Y]);
-		}
-	}
-	move (x, y) {
-		this.x = x;
-		this.y = y;
-	}
+class Hero {
+  constructor ({ id = randomId() }) {
+    this.id = id
+    this.x = undefined
+    this.y = undefined
+  }
+  toArray () {
+    return [
+      this.id,
+      this.x,
+      this.y
+    ]
+  }
+  fromArray (array = [], force = false) {
+    if (force) {
+      this.id = array[HERO_ID]
+    }
+    if (force || (this.id === array[HERO_ID])) {
+      this.move(array[HERO_X], array[HERO_Y])
+    }
+  }
+  move (x, y) {
+    this.x = x
+    this.y = y
+  }
 }
 
-export function atan2 (y, x) {
-	if (x &gt; 0) {
-		return fmath.atan(y / x);
-	}
-	if (x &lt; 0) {
-		if (y &gt;= 0) {
-			return fmath.atan(y / x) + Math.PI;
-		}
-		return fmath.atan(y / x) - Math.PI;
-	}
-	if (x === 0) {
-		if (y === 0) {
-			return undefined;
-		}
-		if (y &gt; 0) {
-			return HALF_PI;
-		}
-		if (y &lt; 0) {
-			return -HALF_PI;
-		}
-	}
+// time specific constants
+const s2nano = 1e9
+const s2ms = 1e3
+const nano2s = 1 / s2nano
+
+// gameframework-lite specific
+const HERO_ID = 0
+const HERO_X = 1
+const HERO_Y = 2
+
+// optimisations
+const HALF_PI = Math.PI / 2
+
+// returns in ms
+function getTimeNode () {
+  var hrtime = process.hrtime()
+  return (hrtime[0] + hrtime[1] * nano2s) * s2ms
 }
 
-export const sin = fmath.sin.bind(fmath)
-
-export const cos = fmath.cos.bind(fmath)
-
-export function randomId () {
-	return md5(random()).slice(0, 7);
+// returns in ms
+function getTimeModernBrowser () {
+  return performance.now()
 }
 
-export function distance (dx, dy) {
-	return Math.sqrt(dx * dx + dy * dy);
+// returns in ms
+function getTimeBrowser () {
+  return Date.now()
 }
 
-export function random () {
-	return Math.floor(Math.random() * 1001) / 1000;
+function atan2 (y, x) {
+  if (x &gt; 0) {
+    return fmath.atan(y / x)
+  }
+  if (x &lt; 0) {
+    if (y &gt;= 0) {
+      return fmath.atan(y / x) + Math.PI
+    }
+    return fmath.atan(y / x) - Math.PI
+  }
+  if (x === 0) {
+    if (y === 0) {
+      return undefined
+    }
+    if (y &gt; 0) {
+      return HALF_PI
+    }
+    if (y &lt; 0) {
+      return -HALF_PI
+    }
+  }
 }
+
+function random () {
+  return Math.floor(Math.random() * 1001) / 1000
+}
+
+function randomId () {
+  return Math.random().toString(36).slice(2, 7)
+}
+
+exports.getTime = getTime
+exports.nextCycle = nextCycle
+exports.Game = Game
+exports.Level = Level
+exports.Hero = Hero
+exports.sin = fmath.sin.bind(fmath)
+exports.cos = fmath.cos.bind(fmath)
+exports.atan2 = atan2
+exports.random = random
+exports.randomId = randomId
 </code></pre>
 
 </div>
 
 <footer class="footer">
-  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.3)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
 </footer>
 
 <script src="script/search_index.js"></script>

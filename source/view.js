@@ -42,7 +42,7 @@ class View {
   }
   // this is what you should override
   onCreateHero (hero) {
-    hero.sprite = PIXI.Sprite.fromImage('bunny.png')
+    hero.sprite = PIXI.Sprite.from('bunny.png')
     hero.sprite.anchor.set(0.5)
     hero.sprite.texture.baseTexture.scaleMode = PIXI.SCALE_MODES.NEAREST
   }
@@ -93,7 +93,7 @@ class View {
     if (isFinite(frame)) {
       sprite = new PIXI.Sprite(this.getTexture(parseInt(frame, 10)))
     } else {
-      sprite = PIXI.Sprite.fromFrame(frame)
+      sprite = PIXI.Sprite.from(frame)
     }
     sprite.texture.baseTexture.scaleMode = nearest
     return sprite
@@ -126,7 +126,7 @@ class View {
       blocks: new PIXI.Container(),
       heros: new PIXI.Container()
     }
-    this.tileset = PIXI.Texture.fromImage(tiled.tilesets[0].image, false, PIXI.SCALE_MODES.NEAREST)
+    this.tileset = PIXI.Texture.from(tiled.tilesets[0].image, false, PIXI.SCALE_MODES.NEAREST)
     this.camera.addChild(this.layers.blocks)
     this.camera.addChild(this.layers.heros)
     this.level.fromTiled(tiled)
